@@ -20,8 +20,7 @@
       <th>Dhcp</th>
       <th>Dns</th>
       <th>Ftp</th>
-      <th>Logical</th>
-      <th>Physical</th>
+      <th>email</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -44,8 +43,9 @@
         <td><%= request.dhcp %></td>
         <td><%= request.dns %></td>
         <td><%= request.ftp %></td>
-        <td><%= request.logical %></td>
-        <td><%= request.physical %></td>
+        <td><%= request.email %></td>
+        
+        
         <td><%= link_to 'Show', request %></td>
         <td><%= link_to 'Edit', edit_request_path(request) %></td>
         <td><%= link_to 'Destroy', request, method: :delete, data: { confirm: 'Are you sure?' } %></td>

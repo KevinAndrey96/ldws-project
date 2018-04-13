@@ -68,6 +68,7 @@ ActiveRecord::Schema.define(version: 20180413054427) do
     t.boolean  "dhcp"
     t.boolean  "dns"
     t.boolean  "ftp"
+    t.boolean  "email"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
   end

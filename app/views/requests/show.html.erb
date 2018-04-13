@@ -1,5 +1,6 @@
 <p id="notice"><%= notice %></p>
-
+<br><br><br><br><br><br><br><br>
+<center>
 <p>
   <strong>Title:</strong>
   <%= @request.title %>
@@ -74,9 +75,14 @@
   <strong>Ftp:</strong>
   <%= @request.ftp %>
 </p>
+<p>
+  <strong>Email:</strong>
+  <%= @request.email %>
+</p>
 
 
-<a href="/physicals/new?request_id=<%= @request.id%>">Datos físicos</a>
+<a href="/physicals/new?request_id=<%= @request.id%>" class="btn btn-default">Datos físicos</a>
 <br>
 <%= link_to 'Edit', edit_request_path(@request) %> |
 <%= link_to 'Back', requests_path %>
+</center>

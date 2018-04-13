@@ -17,101 +17,134 @@
           <tbody>
               <tr>
                   <th><p><strong>Título: </strong><%=@request.title%></p></th>
-                  <th><p><strong>Descipción: </strong>      <%=@request.description%></p></th>
+                  <th><p><strong>Descipción: </strong><%=@request.description%></p></th>
               </tr>
               <tr>
-                  <th><p><strong>Observaciones: </strong>      <%=@request.observation%></p></th>
-                  <th>      <p><strong>Misión: </strong>      <%=@company.mision%></p></th>
+                  <th><p><strong>Observaciones: </strong><%=@request.observation%></p></th>
+                  <th>      <p><strong>Misión: </strong><%=@company.mision%></p></th>
               </tr>
               <tr>
-                  <th><p><strong>Visión: </strong>      <%=@company.vision%></p></th>
-                  <th><p><strong>Nit: </strong>      <%=@company.nit%></p></th>
+                  <th><p><strong>Visión: </strong><%=@company.vision%></p></th>
+                  <th><p><strong>Nit: </strong><%=@company.nit%></p></th>
               </tr>
               <tr>
-                  <th><p><strong>Objetivos: </strong>      <%=@request.objective%></p></th>
-                  
+                  <th><p><strong>Objetivos: </strong><%=@request.objective%></p></th>
               </tr>
              
           </tbody>
       </table>
       
-      
-      
-
-      
-      
-      
-      
-
-      
+      <center><h1>Cotización estándar</h1></center>
       
       <h2>Servicios</h2>
       
       <% if @request.web %>  
-      <p>
-        <strong>Web</strong>
-      </p>
+      <p><strong>Web: </strong>Servidor Apache (HTTPd)</p>
       <% end %>
 
       <% if @request.bd %>
-      <p>
-        <strong>Base de datos</strong>
-      </p>
+      <p>        <strong>Base de datos: </strong>MySQL Server</p>
       <% end %>
 
 
       <% if @request.aplications %>
-      <p>
-        <strong>Aplicaciones</strong>
-      </p>
+      <p>        <strong>Aplicaciones: </strong>LAMP</p>
       <% end %>
 
       <% if @request.proxy %>
-      <p>
-        <strong>Proxy</strong>
-        
-      </p>
+      <p>        <strong>Proxy: </strong>Squid 3.5.27</p>
       <% end %>
 
       <% if @request.voip %>
-      <p>
-        <strong>Voip:</strong>
-        
+      <p>        <strong>Voip: </strong>Asterisk 15
       </p>
       <% end %>
+      
+            <% #if @request.correo %>
+      <p>        <strong>Correo: </strong>Exchange</p>
+      <% #end %>
 
 
       <% if @request.video_conference %>
-      <p>
-        <strong>Video conference:</strong>
-      </p>
+      <p>        <strong>Video conference: </strong>LDAP</p>
       <% end %>
 
       <% if @request.active_dir %>
-      <p>
-        <strong>Directorio activo:</strong>
-      </p>
+      <p>        <strong>Directorio activo:</strong>      </p>
       <% end %>
 
       <% if @request.dhcp %>
-      <p>
-        <strong>Dhcp:</strong>
-      </p>
+      <p>        <strong>Dhcp:</strong>      </p>
       <% end %>
 
 
       <% if @request.dns %>
-      <p>
-        <strong>Dns:</strong>
-      </p>
+      <p>        <strong>Dns:</strong>      </p>
       <% end %>
 
       <% if @request.ftp %>
-      <p>
-        <strong>Ftp:</strong>
-        <%= @request.ftp %>
-      </p>
+      <p>        <strong>Ftp:</strong>        <%= @request.ftp %>      </p>
       <% end %>
+      
+      <div class="row">
+        <h2>Aspectos Físicos</h2>
+ 
+<p><strong>NÚMERO DE PISOS: </strong>1</p>
+<p><strong>ALTURA POR PISO: </strong>3.65 m</p>
+<p><strong>ANCHO POR PISO: </strong>34 m</p>
+<p><strong>LARGO POR PISO: </strong>33 m</p>
+<p><strong># EXTENSIONES POR PISO:</strong>8</p> 
+<p><strong>SALA DE JUNTAS: </strong>SI</p>
+<p><strong>ENLACES REDUNDANTES: </strong>NO</p>
+
+      </div>
+      
+      <div class="row">
+        <table class="table table-responsive"  border="1" width= "100%">
+          <thead>
+            <tr>
+              <th>Tipo de dispositivo</th>
+              <th>Cantidad</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Impresoras</td>
+              <td>15</td>
+            </tr>
+            <tr>
+              <td>Equipos</td>
+              <td>200</td>
+            </tr>
+            <tr>
+              <td>Servidores</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td>Routers</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td>Switches de acceso</td>
+              <td>4</td>
+            </tr>
+            <tr>
+              <td>Switches de distribución</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td>Punto de acceso inhalambrico</td>
+              <td>1</td>
+            </tr>
+            
+            <tr>
+              <strong><td>Total</td>
+              <td>10</td></strong>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
       
       
     </div>

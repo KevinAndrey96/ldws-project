@@ -18,25 +18,25 @@
   <input type="hidden" name="request_id" value="<%= params[:request_id]%>">
   <div class="field">
     <%= f.label :height %><br>
-    <%= f.number_field :height %>
+    <%= f.number_field :height, :class => "form-control" %>
   </div>
   <div class="field">
     <%= f.label :width %><br>
-    <%= f.number_field :width %>
+    <%= f.number_field :width, :class => "form-control" %>
   </div>
   <div class="field">
     <%= f.label :large %><br>
-    <%= f.number_field :large %>
+    <%= f.number_field :large , :class => "form-control"%>
   </div>
   <div class="field">
     <%= f.label :computers %><br>
-    <%= f.number_field :computers %>
+    <%= f.number_field :computers, :class => "form-control" %>
   </div>
   <div class="field">
     <%= f.label :conference_hall %><br>
     <%= f.check_box :conference_hall %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <input type="submit" class="btn btn-default" value="Continuar">
   </div>
 <% end %>

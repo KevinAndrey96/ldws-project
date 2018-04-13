@@ -24,11 +24,11 @@
   </div>
   <div class="field">
     <%= f.label :subnets %><br>
-    <%= f.number_field :subnets %>
+    <%= f.number_field :subnets, :class => "form-control" %>
   </div>
   <div class="field">
     <%= f.label :subnet_description %><br>
-    <%= f.text_field :subnet_description %>
+    <%= f.text_field :subnet_description , :class => "form-control"%>
   </div>
   <div class="field">
     <%= f.label :scripts %><br>
@@ -39,6 +39,6 @@
     <%= f.check_box :iptable %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <input type="submit" class="btn btn-default" value="Continuar">
   </div>
 <% end %>

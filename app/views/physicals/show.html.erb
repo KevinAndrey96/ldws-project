@@ -1,5 +1,6 @@
 <p id="notice"><%= notice %></p>
-
+<br><br><br><br><br><br><br><br>
+<center>
 <p>
   <strong>Company:</strong>
   <%= @physical.request %>
@@ -30,9 +31,10 @@
   <%= @physical.conference_hall %>
 </p>
 
-<a href="/physicals/new?request_id=<%= @physical.request.id%>">Agregar piso</a>
+<a href="/physicals/new?request_id=<%= @physical.request.id%>" class="btn btn-default">Otro piso</a>
 <br>
-<a href="/logicals/new?request_id=<%= @physical.request.id%>">Continuar a lógico</a>
+<a href="/logicals/new?request_id=<%= @physical.request.id%>" class="btn btn-default">Continuar a lógico</a>
 <br><br>
 <%= link_to 'Edit', edit_physical_path(@physical) %> |
 <%= link_to 'Back', physicals_path %>
+</center>

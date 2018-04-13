@@ -13,22 +13,22 @@
 
   <div class="field">
     <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= f.text_field :name , :class =>"form-control"%>
   </div>
   
   <div class="field">
     <%= f.label :nit %><br>
-    <%= f.number_field :nit %>
+    <%= f.number_field :nit , :class =>"form-control"%>
   </div>
   <div class="field">
     <%= f.label :mision %><br>
-    <%= f.text_field :mision %>
+    <%= f.text_field :mision, :class =>"form-control" %>
   </div>
   <div class="field">
     <%= f.label :vision %><br>
-    <%= f.text_field :vision %>
+    <%= f.text_field :vision, :class =>"form-control" %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <input type="submit" value="Comenzar" class="btn btn-default">
   </div>
 <% end %>

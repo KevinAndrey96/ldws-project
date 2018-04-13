@@ -1,4 +1,9 @@
 <h1>LDWS</h1>
+
+
+<% if user_signed_in? %>
 <p>Bienvenido, por favor agregué una empresa para continuar o proceda generando el reporte de una ya existente</p>
-<%= link_to 'Empresas', companies_path, :class => "form-control" %>
-<%= link_to 'Solicitudes', requests_path, :class => "form-control" %>
+<%= link_to 'Mis Empresas', companies_path, :class => "btn btn-default" %>
+<%else%>
+<p>Bienvenido, por favor inicie sesión o regístrese para continuar</p>
+<%end%>

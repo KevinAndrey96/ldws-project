@@ -1,5 +1,10 @@
 <p id="notice"><%= notice %></p>
-
+<br>
+<br><br>
+<br><br>
+<br><br>
+<br>
+<center>
 <p>
   <strong>Name:</strong>
   <%= @company.name %>
@@ -24,10 +29,7 @@
   <strong>Vision:</strong>
   <%= @company.vision %>
 </p>
-<%= link_to 'Agregar solicitud', new_request_path(@company) %>
-<a href="/requests/new?company_id=<%= @company.id%>">Solicitud</a>
+<a href="/requests/new?company_id=<%= @company.id%>" class="btn btn-default">Solicitud</a>
 <br>
 <br>
-
-<%= link_to 'Edit', edit_company_path(@company) %> |
-<%= link_to 'Back', companies_path %>
+</center>

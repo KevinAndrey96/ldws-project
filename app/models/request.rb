@@ -18,6 +18,7 @@
 #  dhcp             :boolean
 #  dns              :boolean
 #  ftp              :boolean
+#  email            :boolean
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #

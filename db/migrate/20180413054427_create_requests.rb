@@ -16,6 +16,7 @@ class CreateRequests < ActiveRecord::Migration
       t.boolean :dhcp
       t.boolean :dns
       t.boolean :ftp
+      t.boolean :email
       #t.references :logical, index: true, foreign_key: true
       #t.references :physical, index: true, foreign_key: true
 

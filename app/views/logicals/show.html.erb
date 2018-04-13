@@ -1,5 +1,6 @@
 <p id="notice"><%= notice %></p>
-
+<br><br><br><br><br><br><br><br>
+<center>
 <p>
   <strong>Redundancy:</strong>
   <%= @logical.redundancy %>
@@ -30,7 +31,9 @@
   <%= @logical.iptable %>
 </p>
 
-<%= link_to 'Reporte', report_index_path({:request_id => @logical.request.id}) %>
+<%= link_to 'Reporte', report_index_path({:request_id => @logical.request.id}), :class => "btn btn-default"%>
+<br>
 
 <%= link_to 'Edit', edit_logical_path(@logical) %> |
 <%= link_to 'Back', logicals_path %>
+</center>
