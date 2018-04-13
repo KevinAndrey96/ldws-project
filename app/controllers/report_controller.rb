@@ -6,6 +6,7 @@ class ReportController < ApplicationController
     elsif params[:request_id]
       @company=Company.find(params[:request_id])
       @request=Request.find(params[:request_id])
+      @physical=Physical.where(:request_id => @company.id)
     end
       
   end

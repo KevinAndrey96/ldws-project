@@ -89,13 +89,13 @@
       <div class="row">
         <h2>Aspectos Físicos</h2>
  
-<p><strong>NÚMERO DE PISOS: </strong>1</p>
-<p><strong>ALTURA POR PISO: </strong>3.65 m</p>
-<p><strong>ANCHO POR PISO: </strong>34 m</p>
-<p><strong>LARGO POR PISO: </strong>33 m</p>
-<p><strong># EXTENSIONES POR PISO:</strong>8</p> 
-<p><strong>SALA DE JUNTAS: </strong>SI</p>
-<p><strong>ENLACES REDUNDANTES: </strong>NO</p>
+<p><strong>NÚMERO DE PISOS: </strong><%= @physical.count %></p>
+<p><strong>ALTURA POR PISO: </strong><%= @physical.first.height %> m</p>
+<p><strong>ANCHO POR PISO: </strong><%= @physical.first.width %> m</p>
+<p><strong>LARGO POR PISO: </strong><%= @physical.first.large %> m</p>
+<p><strong># EXTENSIONES POR PISO:</strong>?</p> 
+<p><strong>SALA DE JUNTAS: </strong><%= @physical.first.conference_hall %></p>
+<p><strong>ENLACES REDUNDANTES: </strong>?</p>
 
       </div>
       
@@ -110,11 +110,11 @@
           <tbody>
             <tr>
               <td>Impresoras</td>
-              <td>15</td>
+              <td><%= @physical.first.computers/5 %></td>
             </tr>
             <tr>
               <td>Equipos</td>
-              <td>200</td>
+              <td><%= @physical.first.computers %></td>
             </tr>
             <tr>
               <td>Servidores</td>
@@ -122,29 +122,70 @@
             </tr>
             <tr>
               <td>Routers</td>
-              <td>1</td>
+              <td>
+                <% if @physical.first.width>30 && @physical.first.large>30 %>
+                <% @Var=2 %>
+                <%= @Var %>
+                <%else%>
+                <% @Var=1 %>
+                <%= @Var %>
+                <%end%>
+                
+              </td>
             </tr>
             <tr>
               <td>Switches de acceso</td>
-              <td>4</td>
+              <td>#</td>
             </tr>
             <tr>
               <td>Switches de distribución</td>
-              <td>1</td>
+              <td><%= @physical.count %></td>
             </tr>
             <tr>
               <td>Punto de acceso inhalambrico</td>
-              <td>1</td>
+              <td>
+                <%=@Var%>
+</td>
             </tr>
             
             <tr>
-              <strong><td>Total</td>
-              <td>10</td></strong>
+              <td><strong>Total</strong></td>
+              <td>
+                <% @Total= @physical.first.computers/5+@physical.first.computers+1+@Var+ @physical.count+@Var %>
+                <strong><%= @Total %></strong>
+              </td>
             </tr>
           </tbody>
         </table>
       </div>
       
+      <div class="row">
+        <h2>Direccionamiento</h2>
+        <table class="table table-responsive"  border="1" width= "100%">
+          <thead>
+             <tr>
+               <th>Nombre de Subred</th>
+               <th>Espacio Necesario</th>
+               <th>Espacio Alojado</th>
+               <th>Dirección</th>
+               <th>Máscara</th>
+               <th>Máscara Decimal</th>
+               <th>Rango Asignable</th>
+               <th>Difusión</th>
+             </tr>
+
+
+          </thead>
+          <tbody>
+              <tr><td>Gestión</td></tr>
+              <tr><td>Sala de Juntas</td></tr>
+              <tr><td>Presidencia</td></tr>
+              <tr><td>Varios</td></tr>
+
+            
+          </tbody>
+        </table>
+      </div>
       
       
     </div>
