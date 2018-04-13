@@ -1,0 +1,37 @@
+# == Schema Information
+#
+# Table name: logicals
+#
+#  id                 :integer          not null, primary key
+#  request_id         :integer
+#  redundancy         :boolean
+#  scalability        :boolean
+#  subnets            :integer
+#  subnet_description :string
+#  scripts            :boolean
+#  iptable            :boolean
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#
+# Indexes
+#
+#  index_logicals_on_request_id  (request_id)
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  redundancy: false
+  scalability: false
+  subnets: 1
+  subnet_description: MyString
+  scripts: false
+  iptable: false
+
+two:
+  redundancy: false
+  scalability: false
+  subnets: 1
+  subnet_description: MyString
+  scripts: false
+  iptable: false

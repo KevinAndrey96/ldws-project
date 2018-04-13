@@ -1,0 +1,36 @@
+# == Schema Information
+#
+# Table name: physicals
+#
+#  id              :integer          not null, primary key
+#  request_id      :integer
+#  height          :integer
+#  width           :integer
+#  large           :integer
+#  computers       :integer
+#  conference_hall :boolean
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#
+# Indexes
+#
+#  index_physicals_on_request_id  (request_id)
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  company_id: 
+  height: 1
+  width: 1
+  large: 1
+  computers: 1
+  conference_hall: false
+
+two:
+  company_id: 
+  height: 1
+  width: 1
+  large: 1
+  computers: 1
+  conference_hall: false

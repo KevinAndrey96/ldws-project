@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @company.name %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @company.user %>
+</p>
+
+<p>
+  <strong>Nit:</strong>
+  <%= @company.nit %>
+</p>
+
+<p>
+  <strong>Mision:</strong>
+  <%= @company.mision %>
+</p>
+
+<p>
+  <strong>Vision:</strong>
+  <%= @company.vision %>
+</p>
+<%= link_to 'Agregar solicitud', new_request_path(@company) %>
+<a href="/requests/new?company_id=<%= @company.id%>">Solicitud</a>
+<br>
+<br>
+
+<%= link_to 'Edit', edit_company_path(@company) %> |
+<%= link_to 'Back', companies_path %>

@@ -1,0 +1,74 @@
+<%= form_for(@request) do |f| %>
+  <% if @request.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@request.errors.count, "error") %> prohibited this request from being saved:</h2>
+
+      <ul>
+      <% @request.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <input type="hidden" value="<%= params[:company_id]%>" name="company_id">
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.label :objective %><br>
+    <%= f.text_field :objective %>
+  </div>
+  <div class="field">
+    <%= f.label :observation %><br>
+    <%= f.text_field :observation %>
+  </div>
+  <div class="field">
+    <%= f.label :web %><br>
+    <%= f.check_box :web %>
+  </div>
+  <div class="field">
+    <%= f.label :bd %><br>
+    <%= f.check_box :bd %>
+  </div>
+  <div class="field">
+    <%= f.label :aplications %><br>
+    <%= f.check_box :aplications %>
+  </div>
+  <div class="field">
+    <%= f.label :proxy %><br>
+    <%= f.check_box :proxy %>
+  </div>
+  <div class="field">
+    <%= f.label :voip %><br>
+    <%= f.check_box :voip %>
+  </div>
+  <div class="field">
+    <%= f.label :video_conference %><br>
+    <%= f.check_box :video_conference %>
+  </div>
+  <div class="field">
+    <%= f.label :active_dir %><br>
+    <%= f.check_box :active_dir %>
+  </div>
+  <div class="field">
+    <%= f.label :dhcp %><br>
+    <%= f.check_box :dhcp %>
+  </div>
+  <div class="field">
+    <%= f.label :dns %><br>
+    <%= f.check_box :dns %>
+  </div>
+  <div class="field">
+    <%= f.label :ftp %><br>
+    <%= f.check_box :ftp %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

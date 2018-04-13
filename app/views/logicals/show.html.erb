@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Redundancy:</strong>
+  <%= @logical.redundancy %>
+</p>
+
+<p>
+  <strong>Scalability:</strong>
+  <%= @logical.scalability %>
+</p>
+
+<p>
+  <strong>Subnets:</strong>
+  <%= @logical.subnets %>
+</p>
+
+<p>
+  <strong>Subnet description:</strong>
+  <%= @logical.subnet_description %>
+</p>
+
+<p>
+  <strong>Scripts:</strong>
+  <%= @logical.scripts %>
+</p>
+
+<p>
+  <strong>Iptable:</strong>
+  <%= @logical.iptable %>
+</p>
+
+<%= link_to 'Reporte', report_index_path({:request_id => @logical.request.id}) %>
+
+<%= link_to 'Edit', edit_logical_path(@logical) %> |
+<%= link_to 'Back', logicals_path %>

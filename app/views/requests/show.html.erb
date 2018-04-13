@@ -1,0 +1,82 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @request.title %>
+</p>
+
+<p>
+  <strong>Company:</strong>
+  <%= @request.company %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @request.description %>
+</p>
+
+<p>
+  <strong>Objective:</strong>
+  <%= @request.objective %>
+</p>
+
+<p>
+  <strong>Observation:</strong>
+  <%= @request.observation %>
+</p>
+
+<p>
+  <strong>Web:</strong>
+  <%= @request.web %>
+</p>
+
+<p>
+  <strong>Bd:</strong>
+  <%= @request.bd %>
+</p>
+
+<p>
+  <strong>Aplications:</strong>
+  <%= @request.aplications %>
+</p>
+
+<p>
+  <strong>Proxy:</strong>
+  <%= @request.proxy %>
+</p>
+
+<p>
+  <strong>Voip:</strong>
+  <%= @request.voip %>
+</p>
+
+<p>
+  <strong>Video conference:</strong>
+  <%= @request.video_conference %>
+</p>
+
+<p>
+  <strong>Active dir:</strong>
+  <%= @request.active_dir %>
+</p>
+
+<p>
+  <strong>Dhcp:</strong>
+  <%= @request.dhcp %>
+</p>
+
+<p>
+  <strong>Dns:</strong>
+  <%= @request.dns %>
+</p>
+
+<p>
+  <strong>Ftp:</strong>
+  <%= @request.ftp %>
+</p>
+
+
+<a href="/physicals/new?request_id=<%= @request.id%>">Datos físicos</a>
+<br>
+<%= link_to 'Edit', edit_request_path(@request) %> |
+<%= link_to 'Back', requests_path %>

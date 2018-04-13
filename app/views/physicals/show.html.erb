@@ -1,0 +1,38 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Company:</strong>
+  <%= @physical.request %>
+</p>
+
+<p>
+  <strong>Height:</strong>
+  <%= @physical.height %>
+</p>
+
+<p>
+  <strong>Width:</strong>
+  <%= @physical.width %>
+</p>
+
+<p>
+  <strong>Large:</strong>
+  <%= @physical.large %>
+</p>
+
+<p>
+  <strong>Computers:</strong>
+  <%= @physical.computers %>
+</p>
+
+<p>
+  <strong>Conference hall:</strong>
+  <%= @physical.conference_hall %>
+</p>
+
+<a href="/physicals/new?request_id=<%= @physical.request.id%>">Agregar piso</a>
+<br>
+<a href="/logicals/new?request_id=<%= @physical.request.id%>">Continuar a lógico</a>
+<br><br>
+<%= link_to 'Edit', edit_physical_path(@physical) %> |
+<%= link_to 'Back', physicals_path %>

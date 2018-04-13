@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Logicals</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Redundancy</th>
+      <th>Scalability</th>
+      <th>Subnets</th>
+      <th>Subnet description</th>
+      <th>Scripts</th>
+      <th>Iptable</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @logicals.each do |logical| %>
+      <tr>
+        <td><%= logical.redundancy %></td>
+        <td><%= logical.scalability %></td>
+        <td><%= logical.subnets %></td>
+        <td><%= logical.subnet_description %></td>
+        <td><%= logical.scripts %></td>
+        <td><%= logical.iptable %></td>
+        <td><%= link_to 'Show', logical %></td>
+        <td><%= link_to 'Edit', edit_logical_path(logical) %></td>
+        <td><%= link_to 'Destroy', logical, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Logical', new_logical_path %>

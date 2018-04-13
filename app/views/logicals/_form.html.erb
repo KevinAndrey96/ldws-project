@@ -1,0 +1,44 @@
+<%= form_for(@logical) do |f| %>
+  <% if @logical.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@logical.errors.count, "error") %> prohibited this logical from being saved:</h2>
+
+      <ul>
+      <% @logical.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  
+  <input type="hidden" name="request_id" value="<%= params[:request_id]%>">
+  
+  <div class="field">
+    <%= f.label :redundancy %><br>
+    <%= f.check_box :redundancy %>
+  </div>
+  <div class="field">
+    <%= f.label :scalability %><br>
+    <%= f.check_box :scalability %>
+  </div>
+  <div class="field">
+    <%= f.label :subnets %><br>
+    <%= f.number_field :subnets %>
+  </div>
+  <div class="field">
+    <%= f.label :subnet_description %><br>
+    <%= f.text_field :subnet_description %>
+  </div>
+  <div class="field">
+    <%= f.label :scripts %><br>
+    <%= f.check_box :scripts %>
+  </div>
+  <div class="field">
+    <%= f.label :iptable %><br>
+    <%= f.check_box :iptable %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
