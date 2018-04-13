@@ -11,27 +11,38 @@
     <% @request=Request.where(:company_id => params[:id]).first %>
     <div class="container-fluid">
       <center><h1><%=@company.name%></h1></center>
-      <h2>Datos de empresa:</h2>
-      <h3>Título</h3>
-      <p><%=@request.title%></p>
+      <h2>Datos de empresa</h2>
+      <table class="table table-responsive"  border="1" width= "100%">
+          <tbody>
+              <tr>
+                  <th><p><strong>Título: </strong><%=@request.title%></p></th>
+                  <th><p><strong>Descipción: </strong>      <%=@request.description%></p></th>
+              </tr>
+              <tr>
+                  <th><p><strong>Observaciones: </strong>      <%=@request.observation%></p></th>
+                  <th>      <p><strong>Misión: </strong>      <%=@company.mision%></p></th>
+              </tr>
+              <tr>
+                  <th><p><strong>Visión: </strong>      <%=@company.vision%></p></th>
+                  <th><p><strong>Nit: </strong>      <%=@company.nit%></p></th>
+              </tr>
+              <tr>
+                  <th><p><strong>Objetivos: </strong>      <%=@request.objective%></p></th>
+                  
+              </tr>
+             
+          </tbody>
+      </table>
       
-      <h3>Descipción</h3>
-      <p><%=@request.description%></p>
       
-      <h3>Observaciones</h3>
-      <p><%=@request.observation%></p>
       
-      <h3>Misión</h3>
-      <p><%=@company.mision%></p>
-      
-      <h3>Visión</h3>
-      <p><%=@company.vision%></p>
-      
-      <h3>Nit</h3>
-      <p><%=@company.nit%></p>
 
-      <h3>Objetivos</h3>
-      <p><%=@request.objective%></p>
+      
+      
+      
+      
+
+      
       
       <h2>Servicios</h2>
       
