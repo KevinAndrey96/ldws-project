@@ -10,6 +10,12 @@ class CompaniesController < ApplicationController
   # GET /companies/1
   # GET /companies/1.json
   def show
+    respond_to do |format|
+      format.html
+      format.pdf do
+    render  :pdf => "file.pdf", :template => 'report/index.html.erb'
+end
+    end
   end
 
   # GET /companies/new

@@ -1,2 +1,108 @@
-<h1>Report#index</h1>
-<p>Find me in app/views/report/index.html.erb</p>
+<!doctype html>
+<html>
+<head>
+  <meta charset='utf-8' />
+  <%= wicked_pdf_stylesheet_link_tag "pdf" -%>
+  <%= wicked_pdf_javascript_include_tag "number_pages" %>
+</head>
+<body onload='number_pages'>
+  <div id="content">
+    
+    <% @request=Request.where(:company_id => params[:id]).first %>
+    <div class="container-fluid">
+      <center><h1><%=@company.name%></h1></center>
+      <h2>Datos de empresa:</h2>
+      <h3>Título</h3>
+      <p><%=@request.title%></p>
+      
+      <h3>Descipción</h3>
+      <p><%=@request.description%></p>
+      
+      <h3>Observaciones</h3>
+      <p><%=@request.observation%></p>
+      
+      <h3>Misión</h3>
+      <p><%=@company.mision%></p>
+      
+      <h3>Visión</h3>
+      <p><%=@company.vision%></p>
+      
+      <h3>Nit</h3>
+      <p><%=@company.nit%></p>
+
+      <h3>Objetivos</h3>
+      <p><%=@request.objective%></p>
+      
+      <h2>Servicios</h2>
+      
+      <% if @request.web %>  
+      <p>
+        <strong>Web</strong>
+      </p>
+      <% end %>
+
+      <% if @request.bd %>
+      <p>
+        <strong>Base de datos</strong>
+      </p>
+      <% end %>
+
+
+      <% if @request.aplications %>
+      <p>
+        <strong>Aplicaciones</strong>
+      </p>
+      <% end %>
+
+      <% if @request.proxy %>
+      <p>
+        <strong>Proxy</strong>
+        
+      </p>
+      <% end %>
+
+      <% if @request.voip %>
+      <p>
+        <strong>Voip:</strong>
+        
+      </p>
+      <% end %>
+
+
+      <% if @request.video_conference %>
+      <p>
+        <strong>Video conference:</strong>
+      </p>
+      <% end %>
+
+      <% if @request.active_dir %>
+      <p>
+        <strong>Directorio activo:</strong>
+      </p>
+      <% end %>
+
+      <% if @request.dhcp %>
+      <p>
+        <strong>Dhcp:</strong>
+      </p>
+      <% end %>
+
+
+      <% if @request.dns %>
+      <p>
+        <strong>Dns:</strong>
+      </p>
+      <% end %>
+
+      <% if @request.ftp %>
+      <p>
+        <strong>Ftp:</strong>
+        <%= @request.ftp %>
+      </p>
+      <% end %>
+      
+      
+    </div>
+  </div>
+</body>
+</html>
