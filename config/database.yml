@@ -26,4 +26,4 @@ production:
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   database: ldws_production
   username: ldws
-  password: <%= ENV['AGORA_DATABASE_PASSWORD'] %>
+  password: <%= ENV['LDWS_DATABASE_PASSWORD'] %>
