@@ -24,6 +24,6 @@ production:
   adapter: postgresql
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  database: agora_production
-  username: agora
+  database: ldws_production
+  username: ldws
   password: <%= ENV['AGORA_DATABASE_PASSWORD'] %>
