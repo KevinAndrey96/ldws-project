@@ -37,6 +37,8 @@
 </p>
 
 <%= link_to 'Reporte', report_index_path({:request_id => @logical.request.id}), :class => "btn btn-default"%>
+<%= link_to 'Reporte', company_path(:id => company.id,:format => "pdf"), :class => "btn btn-default"%>
+
 <br>
 
 <%= link_to 'Edit', edit_logical_path(@logical) %> |
