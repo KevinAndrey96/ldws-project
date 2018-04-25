@@ -75,6 +75,6 @@ class PhysicalsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def physical_params
-      params.require(:physical).permit(:company_id, :height, :width, :large, :computers, :conference_hall, :request_id)
+      params.require(:physical).permit(:company_id, :height, :width, :large, :computers, :conference_hall, :request_id, :printers)
     end
 end

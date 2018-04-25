@@ -1,194 +1,356 @@
-    <% @request=Request.where(:company_id => @company.id).first %>
+<% @request=Request.where(:company_id => @company.id).first %>
+<% @company=Company.find(@company.id) %>
+<% @physical=Physical.where(:request_id => @request.id) %>
+<% @logical=Logical.where(:request_id => @request.id).first %>
 <!doctype html>
 <html>
 <head>
-  <meta charset='utf-8' />
-  <%= wicked_pdf_stylesheet_link_tag "pdf" -%>
-  <%= wicked_pdf_javascript_include_tag "number_pages" %>
+	<meta charset='utf-8' />
+	<%= wicked_pdf_stylesheet_link_tag "pdf" -%>
+	<%= wicked_pdf_javascript_include_tag "number_pages" %>
 </head>
 <body onload='number_pages'>
-  <div id="content">
-    
-
-    <div class="container-fluid">
-      <center><h1><%=@company.name%></h1></center>
-      <h2>Datos de empresa</h2>
-      <table class="table table-responsive"  border="1" width= "100%">
-          <tbody>
-              <tr>
-                  <th><p><strong>Título: </strong><%=@request.title%></p></th>
-                  <th><p><strong>Descipción: </strong><%=@request.description%></p></th>
-              </tr>
-              <tr>
-                  <th><p><strong>Observaciones: </strong><%=@request.observation%></p></th>
-                  <th>      <p><strong>Misión: </strong><%=@company.mision%></p></th>
-              </tr>
-              <tr>
-                  <th><p><strong>Visión: </strong><%=@company.vision%></p></th>
-                  <th><p><strong>Nit: </strong><%=@company.nit%></p></th>
-              </tr>
-              <tr>
-                  <th><p><strong>Objetivos: </strong><%=@request.objective%></p></th>
-              </tr>
-             
-          </tbody>
-      </table>
-      
-      <center><h1>Cotización estándar</h1></center>
-      
-      <h2>Servicios</h2>
-      
-      <% if @request.web %>  
-      <p><strong>Web: </strong>Servidor Apache (HTTPd)</p>
-      <% end %>
-
-      <% if @request.bd %>
-      <p>        <strong>Base de datos: </strong>MySQL Server</p>
-      <% end %>
+	<div id="content">
 
 
-      <% if @request.aplications %>
-      <p>        <strong>Aplicaciones: </strong>LAMP</p>
-      <% end %>
+		<div class="container-fluid">
+			<div class="row">
+				<br>
+				<br>
+				<center><h1>Reporte de solicitud</h1></center>
+		<br>
+				<h2>Resumen de empresa</h2>
+					<strong>Razón Social: </strong><%= @company.name %><br>
+					<strong>Misión: </strong><%= @company.mision %><br>
+					<strong>Visión: </strong><%= @company.vision %><br>
+					<strong>Nit. </strong><%= @company.nit %><br>
+		<br>
+				<h2>Resumen de solicitud</h2>
+					<strong>Título. </strong><%= @request.title %><br>
+					<strong>Descripción. </strong><%= @request.description %><br>
+					<strong>Observaciones. </strong><%= @request.observation %><br>
+					<strong>Objetivos. </strong><%= @request.objective %><br>
+		<br>
+				<table class="table table-responsive" width= "100%">
+					<tbody>
+						<tr>
+							<td>
+								<div class="col-xs-6">
+									<h2>Servicios</h2>
+										<% if @request.web %>  
+										<strong>Web: </strong>Servidor Apache (HTTPd)<br>
+										<% end %>
+										<% if @request.bd %>
+									 	<strong>Base de datos: </strong>MySQL Server<br>
+										<% end %>
+										<% if @request.aplications %>
+										<strong>Aplicaciones: </strong>LAMP<br>
+										<% end %>
+										<% if @request.proxy %>
+										<strong>Proxy: </strong>Squid 3.5.27<br>
+										<% end %>
+										<% if @request.voip %>
+										<strong>Voip: </strong>Asterisk 15<br>
+										<% end %>
+										<% if @request.email %>
+										<strong>Correo: </strong>Exchange<br>
+										<% end %>
+										<% if @request.video_conference %>
+										<strong>Video conference: </strong>LDAP<br>
+										<% end %>
+										<% if @request.active_dir %>
+										<strong>Directorio activo:</strong><br>
+										<% end %>
+										<% if @request.dhcp %>
+										<strong>Dhcp</strong><br>
+										<% end %>
+										<% if @request.dns %>
+										<strong>Dns</strong><br>
+										<% end %>
+										<% if @request.ftp %>
+										<strong>Ftp</strong><br>
+										<% end %>
+								</div>
+							</td>
+							<td>
+									<div class="col-xs-6">
+										<h2>Aspectos Físicos</h2>
+											<strong>NÚMERO DE PISOS: </strong><%= @physical.count %><br>
+											<strong>ALTURA POR PISO: </strong><%= @physical.first.height %> m<br>
+											<strong>ANCHO POR PISO: </strong><%= @physical.first.width %> m<br>
+											<strong>LARGO POR PISO: </strong><%= @physical.first.large %> m<br>
+											<strong># EXTENSIONES POR PISO:</strong>?<br>
+											<strong>SALA DE JUNTAS: </strong><%= @physical.first.conference_hall %><br>
+											<strong>ENLACES REDUNDANTES: </strong>?<br>
+									</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+<br>
+			<div class="row">
+				<h2>Tabla de resumen</h2>
+				<table class="table table-responsive"  border="1" width= "100%">
+					<thead>
+						<tr>
+							<th>Tipo de dispositivo</th>
+							<th>Cantidad</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Impresoras</td>
+							<td><%= @physical.sum(:printers) %></td>
+						</tr>
+						<tr>
+							<td>Equipos</td>
+							<td><%= @physical.sum(:computers) %></td>
+						</tr>
+						<tr>
+							<td>Servidores</td>
+							<td>1</td>
+						</tr>
+						<tr>
+							<td>Routers</td>
+							<td>
+								1
+							</td>
+						</tr>
+						<tr>
+							<td>Switches de acceso</td>
+							<td>#</td>
+						</tr>
+						<tr>
+							<td>Switches de distribución</td>
+							<td><%= @physical.count %></td>
+						</tr>
+						<tr>
+							<td>Punto de acceso inhalambrico</td>
+							<td>
+								1
+							</td>
+						</tr>
 
-      <% if @request.proxy %>
-      <p>        <strong>Proxy: </strong>Squid 3.5.27</p>
-      <% end %>
-
-      <% if @request.voip %>
-      <p>        <strong>Voip: </strong>Asterisk 15
-      </p>
-      <% end %>
-      
-            <% #if @request.correo %>
-      <p>        <strong>Correo: </strong>Exchange</p>
-      <% #end %>
-
-
-      <% if @request.video_conference %>
-      <p>        <strong>Video conference: </strong>LDAP</p>
-      <% end %>
-
-      <% if @request.active_dir %>
-      <p>        <strong>Directorio activo:</strong>      </p>
-      <% end %>
-
-      <% if @request.dhcp %>
-      <p>        <strong>Dhcp:</strong>      </p>
-      <% end %>
-
-
-      <% if @request.dns %>
-      <p>        <strong>Dns:</strong>      </p>
-      <% end %>
-
-      <% if @request.ftp %>
-      <p>        <strong>Ftp:</strong>        <%= @request.ftp %>      </p>
-      <% end %>
-      
-      <div class="row">
-        <h2>Aspectos Físicos</h2>
- 
-<p><strong>NÚMERO DE PISOS: </strong><%= @physical.count %></p>
-<p><strong>ALTURA POR PISO: </strong><%= @physical.first.height %> m</p>
-<p><strong>ANCHO POR PISO: </strong><%= @physical.first.width %> m</p>
-<p><strong>LARGO POR PISO: </strong><%= @physical.first.large %> m</p>
-<p><strong># EXTENSIONES POR PISO:</strong>?</p> 
-<p><strong>SALA DE JUNTAS: </strong><%= @physical.first.conference_hall %></p>
-<p><strong>ENLACES REDUNDANTES: </strong>?</p>
-
-      </div>
-      
-      <div class="row">
-        <table class="table table-responsive"  border="1" width= "100%">
-          <thead>
-            <tr>
-              <th>Tipo de dispositivo</th>
-              <th>Cantidad</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Impresoras</td>
-              <td><%= @physical.first.computers/5 %></td>
-            </tr>
-            <tr>
-              <td>Equipos</td>
-              <td><%= @physical.first.computers %></td>
-            </tr>
-            <tr>
-              <td>Servidores</td>
-              <td>1</td>
-            </tr>
-            <tr>
-              <td>Routers</td>
-              <td>
-                <% if @physical.first.width>30 && @physical.first.large>30 %>
-                <% @Var=2 %>
-                <%= @Var %>
-                <%else%>
-                <% @Var=1 %>
-                <%= @Var %>
-                <%end%>
-                
-              </td>
-            </tr>
-            <tr>
-              <td>Switches de acceso</td>
-              <td>#</td>
-            </tr>
-            <tr>
-              <td>Switches de distribución</td>
-              <td><%= @physical.count %></td>
-            </tr>
-            <tr>
-              <td>Punto de acceso inhalambrico</td>
-              <td>
-                <%=@Var%>
-</td>
-            </tr>
-            
-            <tr>
-              <td><strong>Total</strong></td>
-              <td>
-                <% @Total= @physical.first.computers/5+@physical.first.computers+1+@Var+ @physical.count+@Var %>
-                <strong><%= @Total %></strong>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      
-      <div class="row">
-        <h2>Direccionamiento</h2>
-        <table class="table table-responsive"  border="1" width= "100%">
-          <thead>
-             <tr>
-               <th>Nombre de Subred</th>
-               <th>Espacio Necesario</th>
-               <th>Espacio Alojado</th>
-               <th>Dirección</th>
-               <th>Máscara</th>
-               <th>Máscara Decimal</th>
-               <th>Rango Asignable</th>
-               <th>Difusión</th>
-             </tr>
+						<tr>
+							<td><strong>Total</strong></td>
+							<td>
+								<% @Total= @physical.sum(:printers)+@physical.sum(:computers)+1+1+ @physical.count+1 %>
+								<strong><%= @Total %></strong>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+<br>
+			<div class="row">
+				<h2>Direccionamiento</h2>
+				<h2>Host <%= @logical.host1 %>.<%= @logical.host2 %>.<%= @logical.host3 %>.<%= @logical.host4 %></h2>
+				<table class="table table-responsive"  border="1" width= "100%">
+					<thead>
+						<tr>
+							<th>Nombre de Subred</th>
+							<th>Espacio Necesario</th>
+							<th>Espacio Alojado</th>
+							<th>Dirección</th>
+							<th>Máscara</th>
+							<th>Máscara Decimal</th>
+							<th>Rango Asignable</th>
+							<th>Difusión</th>
+						</tr>
 
 
-          </thead>
-          <tbody>
-              <tr><td>Gestión</td></tr>
-              <tr><td>Sala de Juntas</td></tr>
-              <tr><td>Presidencia</td></tr>
-              <tr><td>Varios</td></tr>
+					</thead>
+					<tbody>
+			    	<% 
+				    	@host1=@logical.host1
+				    	@host2=@logical.host2
+				    	@host3=@logical.host3
+				    	@host4=@logical.host4
+			    	%>
+						<% @floor=0 %>
+						<% @hosted_space=0 %>
+						<% @physical.each do |physical| %>
+						<% @floor=@floor+1 %>
+						  <tr>
+						    <td>Piso <%= @floor.to_s %></td>
+						    <td><%= physical.computers+physical.printers %></td>
+						    <td><%= @hosted=physical.computers+physical.printers+(physical.computers*@logical.scalability/100) %>
+						    <% @hosted_space=@hosted_space+@hosted %>
+						    </td>
+						    <td>
+						    	<% 
+							    	@host4=@host4+@hosted+2
+							    	if @host4>255
+							    		@host4=@host4-255
+							    		@host3=@host3+1
+							    	end
+						    	%>
+						    	<%= @host1 %>.<%= @host2 %>.<%= @host3 %>.<%= @host4 %> 
+						    </td>
+						    <td>
+						    	<%
+							    	@bits=0
+							    	while @logical.subnets >= (2 ** @bits)-2 do
+									   @bits=@bits+1
+									end
+						    	%>
+						    	/<%= @bits %>
+						    </td>
+						    <td>
+						    	<%
+							    	@mask=0
+							    	@aux=@bits
+							    	while @aux>=0 do
+									   @mask=@mask+(2 ** @aux)
+									   @aux=@aux-1
+									end
+						    	%>
+						    	255.255.255.<%= @mask %>
+						    </td>
+						    <td>
+						    	<%= @host1 %>.<%= @host2 %>.<%= @host3 %>.<%= @logical.host4 %> - <%= @host1 %>.<%= @host2 %>.<%= @host3 %>.<%= @host4-1 %> 
+						    </td>
+						    <td>
+						    	<%= @host1 %>.<%= @host2 %>.<%= @host3 %>.<%= @host4 %>
+						    </td>
+						  </tr>
+						<% end %>
 
-            
-          </tbody>
-        </table>
-      </div>
-      
-      
-    </div>
-  </div>
+					</tbody>
+				</table>
+				<h2>Total de equipos a direccionar: <%= @hosted_space %></h2>
+			</div>
+			<div class="row">
+				<ul>
+					<li>Cisco ASR 1002-HX (100 Gbps de throughput, redundancia por software, ocupa 2 espacios de rack).</li>
+					<li>Cisco ASR 1006-X (100 Gbps de throughput, 29 Gbps de througpout IPSec, redundancia de energía eléctrica con 6 puertos, ocupa 6 espacios de rack).</li>
+				</ul>
+				
+			</div>
+			<div class="row">
+				<h2>Distribución de Equipos de Cuarto de Comunicaciones</h2>
+				<table class="table table-responsive"  border="1" width= "100%">
+					<thead>
+						<tr>
+							<th>Equipo</th>
+							<th>Cantidad de Switch</th>
+							<th>Cantidad de Racks</th>
+							<th>Cantidad de PatchPanels</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+						 	<td></td>
+							<td>1 SWITCH CON 24 PUERTOS</td>
+							<td>1 RACK</td>
+							<td>1 PANELES DE PARCHEO</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="row">
+				<h2>Caracterización cableado estructurado</h2>
+				<table class="table table-responsive"  border="1" width= "100%">
+					<thead>
+						<tr>
+							<th colspan=4><center>Tipo de red a utilizar</center></th>
+						</tr>
+						<tr>
+							<th>Velocidad de transmisión</th>
+							<th>Tipo de cable a usar</th>
+							<th>Longitud máxima que puede haber entre nodos adyacentes</th>
+							<th>Topología o forma física de la red</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>10 Gigabit Ethernet</td>
+							<td>Par por trenzado (UTP) Cat 6</td>
+							<td>100 metros de longitud máxima</td>
+							<td>Estrella (Usando switches y un router)</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="row">
+				<h2>Esquema de redundancia de red</h2>
+			</div>
+			<div class="row">
+				<h2>Configuración de DHCP</h2>
+				<p>
+					ip dhcp excluded-address 192.168.0.0<br>
+					!<br>
+					ip dhcp pool dpool1<br>
+					   import all<br>
+					   network 192.168.0.0 255.255.255.0<br>
+					   default-router 192.168.0.1<br>
+					   dns-server 192.168.35.2<br>
+					   domain-name ldws.com<br>
+					!<br>
+					ip domain name ldws.com<br>
+					ip name-server 192.168.1.1<br>
+				</p>
+			</div>
+			<div class="row">
+				<h2>Configuración de RIP</h2>
+				<p>
+					R1#configure terminal<br>
+					R1(config)#router rip<br>
+					R1(config-router)#version 2<br>
+					R1(config-router)#network 192.168.0.0<br>
+					R1(config-router)#no auto-summary<br>
+					R1(config-router)#end<br>
+				</p>
+			</div>
+			<div class="row">
+				<h1>Scripts de Switches</h1>
+				<h2>Configuración de VLANs</h2>
+				<p>
+					Switch# configure terminal<br>
+					Switch(config)# vlan <#VLAN><br>
+					Switch(config-vlan)# name <#NOMBRE-VLAN><br>
+					Switch(config-vlan)# end<br>
+				</p>
+				<h2>Configuración de STP</h2>
+				<p>
+					!!!!!!!!!!!!!!!!!!!!!!!!!! SPANNING TREE CONFIGURATION !!!!!!!!!!!!!!!!!!!!<br>
+					!<br>
+					! Turn on privileged commands<br>
+					enable<br>
+					!<br>
+					! Enter configuration mode<br>
+					configure terminal<br>
+					!<br>
+					! Configure this switch as primary root for this spanning tree<br>
+					spanning-tree vlan < BEGIN-END> root primary<br>
+					!<br>
+					! Per-Vlan rapid spanning tree mode<br>
+					spanning-tree mode rapid-pvst<br>
+					!<br>
+					! Change an interface's spanning tree port priority<br>
+					interface < INTERFACE_NUMBER><br>
+					spanning-tree vlan < BEGIN-END> port-priority < NUMBER><br>
+					!<br>
+					! Exit from interface configuration mode<br>
+					exit<br>
+					!<br>
+					! Enable an interface to move directly to forwarding on link up<br>
+					!<br>
+					interface range < INTERFACE_NUMBER><br>
+					spanning-tree portfast<br>
+					spanning-tree bpduguard enable<br>
+					!!<br>
+					!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! SAVING !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!<br>
+					!<br>
+					! Exit from configure mode<br>
+					exit<br>
+					!<br>
+					! Copy from current system configuration to startup configuration<br>
+					copy running-config startup-config<br>
+				</p>
+			</div>
+			
+	</div>
 </body>
 </html>

@@ -6,6 +6,7 @@ class CreatePhysicals < ActiveRecord::Migration
       t.integer :width
       t.integer :large
       t.integer :computers
+      t.integer :printers
       t.boolean :conference_hall
 
       t.timestamps null: false

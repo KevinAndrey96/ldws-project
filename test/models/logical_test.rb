@@ -4,8 +4,12 @@
 #
 #  id                 :integer          not null, primary key
 #  request_id         :integer
+#  host1              :integer
+#  host2              :integer
+#  host3              :integer
+#  host4              :integer
 #  redundancy         :boolean
-#  scalability        :boolean
+#  scalability        :integer
 #  subnets            :integer
 #  subnet_description :string
 #  scripts            :boolean

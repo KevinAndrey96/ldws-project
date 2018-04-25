@@ -33,7 +33,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       # t.datetime :locked_at
       
       t.string :name
-      t.string :role
+      t.string :role, default: "User"
       t.string :phone
       t.references :company, index: true, foreign_key: true
 

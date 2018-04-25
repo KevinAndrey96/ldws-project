@@ -14,7 +14,7 @@
 #  current_sign_in_ip     :string
 #  last_sign_in_ip        :string
 #  name                   :string
-#  role                   :string
+#  role                   :string           default("User")
 #  phone                  :string
 #  company_id             :integer
 #  created_at             :datetime         not null

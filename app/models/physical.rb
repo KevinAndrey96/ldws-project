@@ -8,6 +8,7 @@
 #  width           :integer
 #  large           :integer
 #  computers       :integer
+#  printers        :integer
 #  conference_hall :boolean
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null

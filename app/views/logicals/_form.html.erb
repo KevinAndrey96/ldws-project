@@ -20,7 +20,7 @@
   </div>
   <div class="field">
     <%= f.label :scalability %><br>
-    <%= f.check_box :scalability %>
+    <%= f.text_field :scalability %>
   </div>
   <div class="field">
     <%= f.label :subnets %><br>
@@ -37,6 +37,10 @@
   <div class="field">
     <%= f.label :iptable %><br>
     <%= f.check_box :iptable %>
+  </div>
+  <div class="field">
+    <label>Host</label> <br>
+    <%= f.number_field :host1 %><%= f.number_field :host2 %><%= f.number_field :host3 %><%= f.number_field :host4 %>
   </div>
   <div class="actions">
     <input type="submit" class="btn btn-default" value="Continuar">

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180413054427) do
+ActiveRecord::Schema.define(version: 20180425192634) do
 
   create_table "companies", force: :cascade do |t|
     t.string   "name"
@@ -25,10 +25,23 @@ ActiveRecord::Schema.define(version: 20180413054427) do
 
   add_index "companies", ["user_id"], name: "index_companies_on_user_id"
 
+  create_table "equipment", force: :cascade do |t|
+    t.string   "brand"
+    t.string   "type"
+    t.string   "reference"
+    t.integer  "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "logicals", force: :cascade do |t|
     t.integer  "request_id"
+    t.integer  "host1"
+    t.integer  "host2"
+    t.integer  "host3"
+    t.integer  "host4"
     t.boolean  "redundancy"
-    t.boolean  "scalability"
+    t.integer  "scalability"
     t.integer  "subnets"
     t.string   "subnet_description"
     t.boolean  "scripts"
@@ -45,6 +58,7 @@ ActiveRecord::Schema.define(version: 20180413054427) do
     t.integer  "width"
     t.integer  "large"
     t.integer  "computers"
+    t.integer  "printers"
     t.boolean  "conference_hall"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
@@ -76,22 +90,22 @@ ActiveRecord::Schema.define(version: 20180413054427) do
   add_index "requests", ["company_id"], name: "index_requests_on_company_id"
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "email",                  default: "",     null: false
+    t.string   "encrypted_password",     default: "",     null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,      null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.string   "name"
-    t.string   "role"
+    t.string   "role",                   default: "User"
     t.string   "phone"
     t.integer  "company_id"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
   end
 
   add_index "users", ["company_id"], name: "index_users_on_company_id"
