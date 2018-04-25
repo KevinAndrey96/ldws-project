@@ -36,8 +36,9 @@
   <%= @logical.host1 %>.<%= @logical.host2 %>.<%= @logical.host3 %>.<%= @logical.host4 %>
 </p>
 
-<%= link_to 'Reporte', report_index_path({:request_id => @logical.request.id}), :class => "btn btn-default"%>
-<%= link_to 'Reporte', company_path(:id => company.id,:format => "pdf"), :class => "btn btn-default"%>
+<!--<%= link_to 'Reporte', report_index_path({:request_id => @logical.request.id}), :class => "btn btn-default"%>-->
+
+<%= link_to 'Reporte', company_path(:id => Request.find(@logical.request.id).company,:format => "pdf"), :class => "btn btn-default"%>
 
 <br>
 
