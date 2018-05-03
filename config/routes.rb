@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'pruebas/index'
+
   resources :equipment
   get 'report/index'
 
