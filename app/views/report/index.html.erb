@@ -351,6 +351,133 @@
 				</p>
 			</div>
 			
+			<div class="row">
+				<h2>Plano de piso</h2>
+				<div style="border: 2px solid black">
+				<table class="table table-responsive" border='1' width= "100%" style="border-collapse: collapse; border-color: #FAF9F9">
+					<thead>
+					</thead>
+					<tbody>
+						<% i = 0 %>
+						<% while i < @physical.first.large %>
+						  <tr>
+						  	<% j = 0 %>
+						  	
+						  	<% @aux=0 %>
+							<% while j < @physical.first.width %>
+					
+									<% if j == 0 %>
+										<% if i == 0%>
+											<td><center><img class="img-responsive" height="100" src="https://mymsystech.com.co/440-medium_default/rack-3bumen-r2c-9u.jpg"></center></td>
+										<% else %>
+											<td><center><img class="img-responsive" height="100" src="http://www.construmatica.com/construpedia/images/thumb/5/58/Baldosas_by_Patrick_Hoesly.jpg/300px-Baldosas_by_Patrick_Hoesly.jpg"></center></td>
+										<% end %>
+									<% else %>
+										<% if i%2 == 0%>
+											<td><center><img class="img-responsive" height="100" src="http://img.planospara.com/mesa-para-computador-en-mesas-2d-muebles-equipamiento-42531.jpg"></center></td>
+										<% else %>
+											<td><center><img class="img-responsive" height="100" src="http://www.construmatica.com/construpedia/images/thumb/5/58/Baldosas_by_Patrick_Hoesly.jpg/300px-Baldosas_by_Patrick_Hoesly.jpg"></center></td>
+										<%end%>
+									<%end%>
+							  <% j += 1 %>
+							<% end %>
+						  </tr>
+						  <% i += 1 %>
+						<% end %>
+					</tbody>
+				</table>
+				</div>
+				<br>
+				<%@computers_area = @physical.first.computers+(@physical.first.computers*@logical.scalability/100) %>
+				<%@meters = @physical.first.width*@physical.first.large # metros cuadrados de la sala %>
+    			<%@avalaible_area = @meters-@physical.first.width # espacio disponible para pcs %>
+				<%@computers_number = @avalaible_area-((@physical.first.large/2)*(@physical.first.width-1))%>
+
+
+				
+				<strong>Tamaño piso: </strong> <%=@meters %>m²<br>
+			    <% if @physical.first.computers < @computers_number %>
+			    	<strong>Computadores asignados a este piso: </strong> <%=@physical.first.computers %><br>
+			    <% else %>
+			    	<strong>( Maximo excedido ) Computadores asignados a este piso: </strong> <%=@computers_number %> de <%=@physical.first.computers %><br>
+			    <% end %>
+			    <% if @avalaible_area > @computers_area %>
+			    	<strong>Espacio necesario: </strong> <%=@computers_area %><br>
+			    <% else %>
+					<strong>( Espacio excedido ) Espacio disponible: </strong> <%=@avalaible_area %>m² de <%=@computers_area %>m² necesarios<br>
+				<% end %>			    
+			    
+			    
+
+				
+			</div>
+			<div class="row">
+				<h2>Cotización económica</h2>
+				<table class="table table-responsive"  border="1" width= "100%">
+					<thead>
+						<tr>
+							<th>Equipo</th>
+							<th>Cantidad</th>
+							<th>Valor Unitario</th>
+							<th>Total</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>SWITCH</td>
+							<td>3</td>
+							<td>400 USD</td>
+							<td>1.200 USD</td>
+						</tr>
+						<tr>
+							<td colspan="3"><strong>Total: </strong></td>
+							<td><trong>1.200 USD</trong></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="row">
+				<h2>Cotización estándar</h2>
+				<table class="table table-responsive"  border="1" width= "100%">
+					<thead>
+						<tr>
+							<th>Equipo</th>
+							<th>Cantidad</th>
+							<th>Valor Unitario</th>
+							<th>Total</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>SWITCH</td>
+							<td>3</td>
+							<td>500 USD</td>
+							<td>1.500 USD</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="row">
+				<h2>Cotización optima</h2>
+				<table class="table table-responsive"  border="1" width= "100%">
+					<thead>
+						<tr>
+							<th>Equipo</th>
+							<th>Cantidad</th>
+							<th>Valor Unitario</th>
+							<th>Total</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>SWITCH</td>
+							<td>3</td>
+							<td>600 USD</td>
+							<td>1.800 USD</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 	</div>
 </body>
 </html>
