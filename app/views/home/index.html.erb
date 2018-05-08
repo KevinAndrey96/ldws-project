@@ -159,7 +159,15 @@ footer.footer {
     <nav class="navbar navbar-light bg-light static-top">
       <div class="container">
         <a class="navbar-brand" href="/users/sign_in">LDWS Software</a>
-       
+
+<% if user_signed_in? %>
+  Logged in as <strong><%= current_user.email %></strong>.
+  <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link', :style => "z-index: 100;" %> |
+  <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link', :style => "z-index: 100;"  %>
+<% else %>
+  <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link', :style => "z-index: 100;"  %> |
+  <%= link_to "Login", new_user_session_path, :class => 'navbar-link', :style => "z-index: 100;"  %>
+<% end %>
       </div>
     </nav>
 
@@ -176,9 +184,14 @@ footer.footer {
             <form>
               <div class="form-row">
                 <div class="col-12 col-md-9 mb-2 mb-md-0">
+                  
                   <!--<input type="email" class="form-control form-control-lg" placeholder="Enter your email...">-->
+                  
                 </div>
                 <div class="col-12 col-md-3">
+                  <% if user_signed_in? %>
+                  <a href="/companies" class="btn btn-default">Ver mis empresas</a>
+                  <%end%>
                   <!--<button type="submit" class="btn btn-block btn-lg btn-primary">Sign up!</button>-->
                 </div>
               </div>
