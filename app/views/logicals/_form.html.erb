@@ -22,10 +22,10 @@
   </div>
   <div class="field">
     <h3>Número de subredes</h3>
-    <%= f.number_field :subnets, :class => "form-control" %>
+    <%= f.number_field :subnets, :class => "form-control", :required => "true", :min => 1, :max => 10 %>
   </div>
   <div class="field">
-    <%= f.check_box :redundancy %> Redundancia
+    <%= f.check_box :redundancy , :required => "true"%> Redundancia 
   </div>
   <div class="field">
     <%= f.check_box :scripts %> Generar scripts
@@ -36,10 +36,10 @@
   <div class="field">
     <label>Host</label> <br>
     <div class="row">
-      <div class="col-md-3"> <%= f.number_field :host1 , :placeholder => "192", :class => "form-control"%>.</div>
-    <div class="col-md-3"><%= f.number_field :host2 , :placeholder => "168", :class => "form-control"%>.</div>
-<div class="col-md-3"><%= f.number_field :host3 , :placeholder => "0", :class => "form-control"%>.</div>
-<div class="col-md-3"><%= f.number_field :host4 , :placeholder => "1", :class => "form-control"%></div>
+      <div class="col-md-3"> <%= f.number_field :host1 , :placeholder => "192", :class => "form-control" , :required => "true", :min => 0, :max => 255 %>.</div>
+    <div class="col-md-3"><%= f.number_field :host2 , :placeholder => "168", :class => "form-control", :required => "true", :min => 0, :max => 255 %>.</div>
+<div class="col-md-3"><%= f.number_field :host3 , :placeholder => "0", :class => "form-control", :required => "true" , :min => 0, :max => 255 %>.</div>
+<div class="col-md-3"><%= f.number_field :host4 , :placeholder => "1", :class => "form-control", :required => "true", :min => 1, :max => 255 %></div>
     </div>
     
   </div>

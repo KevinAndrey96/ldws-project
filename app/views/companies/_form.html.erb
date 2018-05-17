@@ -10,25 +10,29 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name , :class =>"form-control"%>
+<div class="col-md-4"></div>
+<div class="col-md-4">
+   <div class="field">
+    <h3>Nombre de empresa</h3>
+    <%= f.text_field :name , :class =>"form-control", :required => "true"%>
   </div>
   
   <div class="field">
-    <%= f.label :nit %><br>
-    <%= f.number_field :nit , :class =>"form-control"%>
+    <h3>Nit</h3>
+    <%= f.number_field :nit , :class =>"form-control", :required => "true"%>
   </div>
   <div class="field">
-    <%= f.label :mision %><br>
-    <%= f.text_field :mision, :class =>"form-control" %>
+    <h3>Misión</h3>
+    <%= f.text_field :mision, :class =>"form-control", :required => "true" %>
   </div>
   <div class="field">
-    <%= f.label :vision %><br>
-    <%= f.text_field :vision, :class =>"form-control" %>
+    <h3>Visión</h3>
+    <%= f.text_field :vision, :class =>"form-control", :required => "true" %>
   </div>
   <div class="actions">
     <input type="submit" value="Comenzar" class="btn btn-default">
   </div>
+</div>
+<div class="col-md-4"></div>
+ 
 <% end %>

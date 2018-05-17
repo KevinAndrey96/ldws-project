@@ -16,7 +16,7 @@
     <div class="col-md-4"></div>
     <div class="col-md-4">
       <h3>Título de solicitud</h3>
-      <%= f.text_field :title, :class => "form-control" %>
+      <%= f.text_field :title, :class => "form-control",:required => "true" %>
     </div>
     <div class="col-md-4"></div>
     
@@ -28,7 +28,7 @@
     <div class="col-md-4"></div>
     <div class="col-md-4">
       <h3>Descripción de solicitud</h3>
-      <textarea class="form-control" type="text" name="request[description]" id="request_description"></textarea>
+      <textarea class="form-control" type="text" name="request[description]" id="request_description" required></textarea>
     </div>
     <div class="col-md-4"></div>
 
@@ -40,7 +40,7 @@
     <div class="col-md-4"></div>
     <div class="col-md-4">
       <h3>Objetivos de solicitud</h3>
-      <%= f.text_field :objective, :class => "form-control" %>
+      <%= f.text_field :objective, :class => "form-control" :required => "true"%>
     </div>
     <div class="col-md-4"></div>
 
@@ -51,7 +51,7 @@
     <div class="col-md-4"></div>
     <div class="col-md-4">
       <h3>Observaciones</h3>
-      <%= f.text_field :observation, :class => "form-control" %>
+      <%= f.text_field :observation, :class => "form-control" :required => "true"%>
     </div>
     <div class="col-md-4"></div>
 
