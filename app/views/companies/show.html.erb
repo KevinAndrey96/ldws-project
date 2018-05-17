@@ -5,14 +5,14 @@
 <br><br>
 <br>
 <center>
-<p>
+<!--<p>
   <strong>Name:</strong>
   <%= @company.name %>
 </p>
 
 <p>
   <strong>User:</strong>
-  <%= @company.user %>
+  <%= @company.user.email %>
 </p>
 
 <p>
@@ -29,6 +29,10 @@
   <strong>Vision:</strong>
   <%= @company.vision %>
 </p>
+-->
+<center>
+  <h1>La empresa "<%= @company.name %>" se ha registrado satisfactoriamente, ahora procederemos a registrar la solicitud</h1>
+</center>
 <a href="/requests/new?company_id=<%= @company.id%>" class="btn btn-default">Solicitud</a>
 <br>
 <br>

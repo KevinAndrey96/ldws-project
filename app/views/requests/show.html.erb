@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 <br><br><br><br><br><br><br><br>
 <center>
-<p>
+<!--<p>
   <strong>Title:</strong>
   <%= @request.title %>
 </p>
@@ -79,7 +79,8 @@
   <strong>Email:</strong>
   <%= @request.email %>
 </p>
-
+-->
+<h1>Se ha registrado la solicitud exitosamente. Ahora, por favor ingrese los datos físicos de su empresa</h1>
 
 <a href="/physicals/new?request_id=<%= @request.id%>" class="btn btn-default">Datos físicos</a>
 <br>

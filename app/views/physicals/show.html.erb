@@ -1,6 +1,7 @@
 <p id="notice"><%= notice %></p>
 <br><br><br><br><br><br><br><br>
 <center>
+  <!--
 <p>
   <strong>Company:</strong>
   <%= @physical.request %>
@@ -30,8 +31,9 @@
   <strong>Conference hall:</strong>
   <%= @physical.conference_hall %>
 </p>
-
-<a href="/physicals/new?request_id=<%= @physical.request.id%>" class="btn btn-default">Otro piso</a>
+-->
+<h1>Este piso se ha guardado con exito. A continuación puede continuar con el proceso o bien, agregar un nuevo piso</h1>
+<a href="/physicals/new?request_id=<%= @physical.request.id%>" class="btn btn-default">Nuevo piso</a>
 <br>
 <a href="/logicals/new?request_id=<%= @physical.request.id%>" class="btn btn-default">Continuar a lógico</a>
 <br><br>

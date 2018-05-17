@@ -22,9 +22,7 @@
         <td><%= company.nit %></td>
         <td><%= company.mision %></td>
         <td><%= company.vision %></td>
-        <td><%= link_to 'Ver', company %></td>
         <td><%= link_to 'Reporte', company_path(:id => company.id,:format => "pdf") %></td>
-        <td><%= link_to 'Editar', edit_company_path(company) %></td>
         <td><%= link_to 'Eliminar', company, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>

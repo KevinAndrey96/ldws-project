@@ -13,36 +13,40 @@
   
   
   <input type="hidden" name="request_id" value="<%= params[:request_id]%>">
-  
+  <div class="col-md-4"></div>
+  <div class="col-md-4">
+    
   <div class="field">
-    <%= f.label :redundancy %><br>
-    <%= f.check_box :redundancy %>
+    <h3>Escalabilidad</h3>
+    <%= f.number_field :scalability, :class => "form-control" %>
   </div>
   <div class="field">
-    <%= f.label :scalability %><br>
-    <%= f.text_field :scalability %>
-  </div>
-  <div class="field">
-    <%= f.label :subnets %><br>
+    <h3>Número de subredes</h3>
     <%= f.number_field :subnets, :class => "form-control" %>
   </div>
   <div class="field">
-    <%= f.label :subnet_description %><br>
-    <%= f.text_field :subnet_description , :class => "form-control"%>
+    <%= f.check_box :redundancy %> Redundancia
   </div>
   <div class="field">
-    <%= f.label :scripts %><br>
-    <%= f.check_box :scripts %>
+    <%= f.check_box :scripts %> Generar scripts
   </div>
   <div class="field">
-    <%= f.label :iptable %><br>
-    <%= f.check_box :iptable %>
+    <%= f.check_box :iptable %> Generar tabla de IP
   </div>
   <div class="field">
     <label>Host</label> <br>
-    <%= f.number_field :host1 %><%= f.number_field :host2 %><%= f.number_field :host3 %><%= f.number_field :host4 %>
+    <div class="row">
+      <div class="col-md-3"> <%= f.number_field :host1 , :placeholder => "192", :class => "form-control"%>.</div>
+    <div class="col-md-3"><%= f.number_field :host2 , :placeholder => "168", :class => "form-control"%>.</div>
+<div class="col-md-3"><%= f.number_field :host3 , :placeholder => "0", :class => "form-control"%>.</div>
+<div class="col-md-3"><%= f.number_field :host4 , :placeholder => "1", :class => "form-control"%></div>
+    </div>
+    
   </div>
   <div class="actions">
     <input type="submit" class="btn btn-default" value="Continuar">
   </div>
+  </div>
+  <div class="col-md-4"></div>
+  
 <% end %>

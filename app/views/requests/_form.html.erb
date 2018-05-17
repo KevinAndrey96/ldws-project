@@ -11,68 +11,73 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title, :class => "form-control" %>
+  <div class="field row">
+    <center></center>
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <h3>Título de solicitud</h3>
+      <%= f.text_field :title, :class => "form-control" %>
+    </div>
+    <div class="col-md-4"></div>
+    
   </div>
   <input type="hidden" value="<%= params[:company_id]%>" name="company_id">
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_field :description, :class => "form-control" %>
+  <div class="field row">
+
+  	<center></center>
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <h3>Descripción de solicitud</h3>
+      <textarea class="form-control" type="text" name="request[description]" id="request_description"></textarea>
+    </div>
+    <div class="col-md-4"></div>
+
+    
   </div>
-  <div class="field">
-    <%= f.label :objective %><br>
-    <%= f.text_field :objective, :class => "form-control" %>
+  <div class="field row">
+
+  	<center></center>
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <h3>Objetivos de solicitud</h3>
+      <%= f.text_field :objective, :class => "form-control" %>
+    </div>
+    <div class="col-md-4"></div>
+
   </div>
-  <div class="field">
-    <%= f.label :observation %><br>
-    <%= f.text_field :observation, :class => "form-control" %>
+  <div class="field row">
+
+  	<center></center>
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <h3>Observaciones</h3>
+      <%= f.text_field :observation, :class => "form-control" %>
+    </div>
+    <div class="col-md-4"></div>
+
+    
   </div>
-  <div class="col-md-1">
-    <%= f.label :web %><br>
-    <%= f.check_box :web %>
+  <div class="row">
+    
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <h3>Requerimientos adicionales</h3>
+      <%= f.check_box :web %> Servidor Web<br>
+      <%= f.check_box :bd %> Servidor de base de datos<br>
+      <%= f.check_box :aplications %> Servidor de aplicaciones<br>
+      <%= f.check_box :proxy %> Servidor proxy<br>
+      <%= f.check_box :voip %> Servidor VoIP<br>
+      <%= f.check_box :video_conference %> Servicio Videoconferencia<br>
+      <%= f.check_box :active_dir %> Directorio activo<br>
+      <%= f.check_box :dhcp %> Servicio DHCP<br>
+      <%= f.check_box :dns %> Servidor DNS<br>
+      <%= f.check_box :ftp %> Servidor FTP<br>
+      <%= f.check_box :email %> Servidor de correo electrónico<br>
+    </div>
+    <div class="col-md-4"></div>
   </div>
-  <div class="col-md-1">
-    <%= f.label :bd %><br>
-    <%= f.check_box :bd %>
-  </div>
-  <div class="col-md-1">
-    <%= f.label :aplications %><br>
-    <%= f.check_box :aplications %>
-  </div>
-  <div class="col-md-1">
-    <%= f.label :proxy %><br>
-    <%= f.check_box :proxy %>
-  </div>
-  <div class="col-md-1">
-    <%= f.label :voip %><br>
-    <%= f.check_box :voip %>
-  </div>
-  <div class="col-md-1">
-    <%= f.label :video_conference %><br>
-    <%= f.check_box :video_conference %>
-  </div>
-  <div class="col-md-1">
-    <%= f.label :active_dir %><br>
-    <%= f.check_box :active_dir %>
-  </div>
-  <div class="col-md-1">
-    <%= f.label :dhcp %><br>
-    <%= f.check_box :dhcp %>
-  </div>
-  <div class="col-md-1">
-    <%= f.label :dns %><br>
-    <%= f.check_box :dns %>
-  </div>
-  <div class="col-md-1">
-    <%= f.label :ftp %><br>
-    <%= f.check_box :ftp %>
-  </div>
-  <div class="col-md-1">
-    <%= f.label :email %><br>
-    <%= f.check_box :email %>
-  </div>
+  <br>
   <div class="actions">
-    <input type="submit" class="btn btn-default" value="Continuar">
+    <center><input type="submit" class="btn btn-default" value="Continuar"></center>
   </div>
 <% end %>

@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 <br><br><br><br><br><br><br><br>
 <center>
-<p>
+<!--<<p>
   <strong>Redundancy:</strong>
   <%= @logical.redundancy %>
 </p>
@@ -35,7 +35,8 @@
   <strong>Host:</strong>
   <%= @logical.host1 %>.<%= @logical.host2 %>.<%= @logical.host3 %>.<%= @logical.host4 %>
 </p>
-
+-->
+<h1>Los datos lógicos se han guardado con éxito, a continuación se procederá a registrar los datos de las sub redes indicadas</h1>
 <!--<%= link_to 'Reporte', report_index_path({:request_id => @logical.request.id}), :class => "btn btn-default"%>-->
 
 <%= link_to 'Reporte', company_path(:id => Request.find(@logical.request.id).company,:format => "pdf"), :class => "btn btn-default"%>
