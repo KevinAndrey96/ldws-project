@@ -359,25 +359,41 @@
 					<thead>
 					</thead>
 					<tbody>
+						<%@cont=0%>
+						<%@cable = 0%>
 						<% i = 0 %>
 						<% while i < @physical.first.large %>
+						<% if @cont==@physical.first.computers %>
+							<% next%>
+						<%end%>
 						  <tr>
 						  	<% j = 0 %>
 						  	
 						  	<% @aux=0 %>
 							<% while j < @physical.first.width %>
-					
+							
 									<% if j == 0 %>
 										<% if i == 0%>
-											<td><center><img class="img-responsive" height="100" src="https://mymsystech.com.co/440-medium_default/rack-3bumen-r2c-9u.jpg"></center></td>
+											<td><center><img class="img-responsive" height="30" src="https://mymsystech.com.co/440-medium_default/rack-3bumen-r2c-9u.jpg"></center></td>
 										<% else %>
-											<td><center><img class="img-responsive" height="100" src="http://www.construmatica.com/construpedia/images/thumb/5/58/Baldosas_by_Patrick_Hoesly.jpg/300px-Baldosas_by_Patrick_Hoesly.jpg"></center></td>
+											<td><center><img class="img-responsive" height="30" src="http://www.construmatica.com/construpedia/images/thumb/5/58/Baldosas_by_Patrick_Hoesly.jpg/300px-Baldosas_by_Patrick_Hoesly.jpg"></center></td>
 										<% end %>
 									<% else %>
-										<% if i%2 == 0%>
-											<td><center><img class="img-responsive" height="100" src="http://img.planospara.com/mesa-para-computador-en-mesas-2d-muebles-equipamiento-42531.jpg"></center></td>
+										<% if i%2 == 0 %>
+										
+											<%@x2 = j %>
+											<%@y2 = i %>
+											<%if @cont < @physical.first.computers%>
+												<td><center><img class="img-responsive" height="30" src="http://img.planospara.com/mesa-para-computador-en-mesas-2d-muebles-equipamiento-42531.jpg"></center></td>
+												<%@cont=@cont+1%>
+												<%@cable = (0.5+(@physical.first.height*2)+(((@x2-0)**2+(@y2-0)**2)**0.5)+2)+@cable %>
+											<%else%>
+												<td><center><img class="img-responsive" height="30" src="http://www.construmatica.com/construpedia/images/thumb/5/58/Baldosas_by_Patrick_Hoesly.jpg/300px-Baldosas_by_Patrick_Hoesly.jpg"></center></td>
+											<%end%>
+											
+											
 										<% else %>
-											<td><center><img class="img-responsive" height="100" src="http://www.construmatica.com/construpedia/images/thumb/5/58/Baldosas_by_Patrick_Hoesly.jpg/300px-Baldosas_by_Patrick_Hoesly.jpg"></center></td>
+											<td><center><img class="img-responsive" height="30" src="http://www.construmatica.com/construpedia/images/thumb/5/58/Baldosas_by_Patrick_Hoesly.jpg/300px-Baldosas_by_Patrick_Hoesly.jpg"></center></td>
 										<%end%>
 									<%end%>
 							  <% j += 1 %>
@@ -395,7 +411,7 @@
 				<%@computers_number = @avalaible_area-((@physical.first.large/2)*(@physical.first.width-1))%>
 
 
-				
+				<strong>Cantidad de cable: </strong> <%=@cable %>m<br>
 				<strong>Tamaño piso: </strong> <%=@meters %>m²<br>
 			    <% if @physical.first.computers < @computers_number %>
 			    	<strong>Computadores asignados a este piso: </strong> <%=@physical.first.computers %><br>

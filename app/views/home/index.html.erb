@@ -190,7 +190,10 @@ footer.footer {
                 </div>
                 <div class="col-12 col-md-3">
                   <% if user_signed_in? %>
-                  <a href="/companies" class="btn btn-default">Ver mis empresas</a>
+                    <a href="/companies" class="btn btn-default">Ver mis empresas</a>
+                    <% if current_user.role=="Admin" %>
+                      <a href="/equipment" class="btn btn-default">Admin de Equipos</a>
+                    <%end%>
                   <%end%>
                   <!--<button type="submit" class="btn btn-block btn-lg btn-primary">Sign up!</button>-->
                 </div>

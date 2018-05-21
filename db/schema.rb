@@ -27,9 +27,10 @@ ActiveRecord::Schema.define(version: 20180504060807) do
 
   create_table "equipment", force: :cascade do |t|
     t.string   "brand"
-    t.string   "type"
+    t.string   "etype"
     t.string   "reference"
     t.integer  "price"
+    t.integer  "ports"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "slots"

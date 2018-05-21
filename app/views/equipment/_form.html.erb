@@ -10,36 +10,44 @@
       </ul>
     </div>
   <% end %>
+<div class="col-md-4"></div>
+<div class="col-md-4">
+  <div class="field">
+    <h3>Marca</h3>
+    <%= f.text_field :brand, :class => "form-control" %>
+  </div>
+  <div class="field">
+    <h3>Tipo</h3>
+    <select name="equipment[etype]" id="equipment[etype]" class="form-control">
+      <option value="Switch">Switch</option>
+      <option value="Router">Router</option>
+      <option value="Rack">Rack</option>
+    </select>
+  </div>
+  <div class="field">
+    <h3>Refencia</h3>
+    <%= f.text_field :reference , :class => "form-control"%>
+  </div>
 
   <div class="field">
-    <%= f.label :brand %><br>
-    <%= f.text_field :brand %>
+    <h3>Precio</h3>
+    <%= f.number_field :price , :class => "form-control"%>
   </div>
   <div class="field">
-    <%= f.label :type %><br>
-    <%= f.text_field :type %>
+    <h3>Slots</h3>
+    <%= f.number_field :slots , :class => "form-control"%>
   </div>
   <div class="field">
-    <%= f.label :reference %><br>
-    <%= f.text_field :reference %>
-  </div>
-  <div class="field">
-    <%= f.label :ports %><br>
-    <%= f.text_field :ports %>
-  </div>
-  <div class="field">
-    <%= f.label :price %><br>
-    <%= f.number_field :price %>
-  </div>
-  <div class="field">
-    <%= f.label :slots %><br>
-    <%= f.number_field :slots %>
-  </div>
-  <div class="field">
-    <%= f.label :power %><br>
-    <%= f.number_field :power %>
+    <h3>Potencia</h3>
+    <select name="equipment[power]" id="equipment[power]" class="form-control">
+      <option value="1">Baja</option>
+      <option value="2">Media</option>
+      <option value="3">Alta</option>
+    </select>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <input type="submit" class="btn btn-default" value="Agregar">
   </div>
+  </div>
+  <div class="col-md-4"></div>
 <% end %>
