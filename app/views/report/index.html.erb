@@ -255,6 +255,12 @@
 						<% @floor=0 %>
 						<% @hosted_space=0 %>
 						<% @auxhost=@logical.host4 %>
+						<% default=totalcomputers-@subnets.sum(:computers) %>
+						<% @subaux=Subnet.where(:name => "default", :logical_id => @logical.id).count%>
+						<% if default>0 && @subaux==0%>
+							<% @su=Subnet.new(:name => "default", :description => "Sub red Default", :computers => default, :logical_id => @logical.id)%>
+							<% @su.save %>
+						<%end%>
 						<% @subnets.each do |subnets| %>
 						
 						  <tr>
