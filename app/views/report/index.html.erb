@@ -4,6 +4,7 @@
 <% @logical=Logical.where(:request_id => @request.id).first %>
 <% @subnets=Subnet.where(:logical_id => @logical.id) %>
 <% @sizeofs=Subnet.where(:logical_id => @logical.id).size %>
+<% totalcomputers=@physical.sum(:computers) %>
 
 <!doctype html>
 <html>
@@ -82,9 +83,9 @@
 											<strong>ALTURA POR PISO: </strong><%= @physical.first.height %> m<br>
 											<strong>ANCHO POR PISO: </strong><%= @physical.first.width %> m<br>
 											<strong>LARGO POR PISO: </strong><%= @physical.first.large %> m<br>
-											<strong># EXTENSIONES POR PISO:</strong>?<br>
+											<strong># EXTENSIONES POR PISO:</strong><%= totalcomputers %><br>
 											<strong>SALA DE JUNTAS: </strong><%= @physical.first.conference_hall %><br>
-											<strong>ENLACES REDUNDANTES: </strong>?<br>
+											<strong>ENLACES REDUNDANTES: </strong><%= @logical.redundancy %><br>
 									</div>
 							</td>
 						</tr>
@@ -253,7 +254,7 @@
 			    	%>
 						<% @floor=0 %>
 						<% @hosted_space=0 %>
-						
+						<% @auxhost=@logical.host4 %>
 						<% @subnets.each do |subnets| %>
 						
 						  <tr>
@@ -293,7 +294,9 @@
 						    	255.255.255.<%= @mask %>
 						    </td>
 						    <td>
-						    	<%= @host1 %>.<%= @host2 %>.<%= @host3 %>.<%= @logical.host4 %> - <%= @host1 %>.<%= @host2 %>.<%= @host3 %>.<%= @host4-1 %> 
+						    	
+						    	<%= @host1 %>.<%= @host2 %>.<%= @host3 %>.<%= @auxhost %> - <%= @host1 %>.<%= @host2 %>.<%= @host3 %>.<%= @host4-1 %> 
+						    	<% @auxhost=@host4 %>
 						    </td>
 						    <td>
 						    	<%= @host1 %>.<%= @host2 %>.<%= @host3 %>.<%= @host4 %>
@@ -519,7 +522,7 @@
 				
 			</div>
 			<% end%>
-			<% totalcomputers=@physical.sum(:computers) %>
+			
 			
 			
 			<div class="row">
