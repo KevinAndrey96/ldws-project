@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+<br><br><br><br><br><br><br><br>
+<!--
+<p>
+  <strong>Name:</strong>
+  <%= @subnet.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @subnet.description %>
+</p>
+
+<p>
+  <strong>Computers:</strong>
+  <%= @subnet.computers %>
+</p>
+
+<p>
+  <strong>Logical:</strong>
+  <%= @subnet.logical %>
+</p>
+-->
+<center><h1>A continuación podrá agregar una nueva sub red o continuar al reporte</h1></center>
+
+<center>
+  <%= link_to 'Reporte', company_path(:id => Request.find(@subnet.logical.request.id).company,:format => "pdf"), :class => "btn btn-default"%>
+  <%= link_to 'Nueva subred', new_subnet_url(:id => @subnet.logical.id), :class => "btn btn-default"%>
+</center>
+<!--
+<%= link_to 'Editar', edit_subnet_path(@subnet) %> |
+<%= link_to 'Atrás', subnets_path %>
+-->

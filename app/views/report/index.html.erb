@@ -2,6 +2,9 @@
 <% @company=Company.find(@company.id) %>
 <% @physical=Physical.where(:request_id => @request.id) %>
 <% @logical=Logical.where(:request_id => @request.id).first %>
+<% @subnets=Subnet.where(:logical_id => @logical.id) %>
+<% @sizeofs=Subnet.where(:logical_id => @logical.id).size %>
+
 <!doctype html>
 <html>
 <head>
@@ -143,6 +146,7 @@
 				</table>
 			</div>
 <br>
+<!--
 			<div class="row">
 				<h2>Direccionamiento</h2>
 				<h2>Host <%= @logical.host1 %>.<%= @logical.host2 %>.<%= @logical.host3 %>.<%= @logical.host4 %></h2>
@@ -191,7 +195,87 @@
 						    <td>
 						    	<%
 							    	@bits=0
-							    	while @logical.subnets >= (2 ** @bits)-2 do
+							    	#while @logical.subnets >= (2 ** @bits)-2 do
+									 #  @bits=@bits+1
+									#end
+						    	%>
+						    	/<%= @bits %>
+						    </td>
+						    <td>
+						    	<%
+							    	@mask=0
+							    	@aux=@bits
+							    	while @aux>=0 do
+									   @mask=@mask+(2 ** @aux)
+									   @aux=@aux-1
+									end
+						    	%>
+						    	255.255.255.<%= @mask %>
+						    </td>
+						    <td>
+						    	<%= @host1 %>.<%= @host2 %>.<%= @host3 %>.<%= @logical.host4 %> - <%= @host1 %>.<%= @host2 %>.<%= @host3 %>.<%= @host4-1 %> 
+						    </td>
+						    <td>
+						    	<%= @host1 %>.<%= @host2 %>.<%= @host3 %>.<%= @host4 %>
+						    </td>
+						  </tr>
+						<% end %>
+
+					</tbody>
+				</table>
+				<h2>Total de equipos a direccionar: <%= @hosted_space %></h2>
+			</div>-->
+			
+			<div class="row">
+				<h2>Direccionamiento</h2>
+				<h2>Host <%= @logical.host1 %>.<%= @logical.host2 %>.<%= @logical.host3 %>.<%= @logical.host4 %></h2>
+				<table class="table table-responsive"  border="1" width= "100%">
+					<thead>
+						<tr>
+							<th>Nombre de Subred</th>
+							<th>Espacio Necesario</th>
+							<th>Espacio Alojado</th>
+							<th>Dirección</th>
+							<th>Máscara</th>
+							<th>Máscara Decimal</th>
+							<th>Rango Asignable</th>
+							<th>Difusión</th>
+						</tr>
+
+
+					</thead>
+					<tbody>
+			    	<% 
+				    	@host1=@logical.host1
+				    	@host2=@logical.host2
+				    	@host3=@logical.host3
+				    	@host4=@logical.host4
+			    	%>
+						<% @floor=0 %>
+						<% @hosted_space=0 %>
+						
+						<% @subnets.each do |subnets| %>
+						
+						  <tr>
+						    <td><%= subnets.name %> </td>
+						    <td><%= subnets.computers %></td>
+						    <td><%= @hosted=subnets.computers+(subnets.computers*@logical.scalability/100) %>
+						    <% @hosted_space=@hosted_space+@hosted %>
+						    </td>
+						    <td>
+						    	<% 
+							    	@host4=@host4+@hosted+2
+							    	if @host4>255
+							    		@host4=@host4-255
+							    		@host3=@host3+1
+							    	end
+						    	%>
+						    	<%= @host1 %>.<%= @host2 %>.<%= @host3 %>.<%= @host4 %> 
+						    </td>
+						    <td>
+						    	<%
+							    	@bits=0
+							    	while @sizeofs >= (2 ** @bits)-2 do
 									   @bits=@bits+1
 									end
 						    	%>
@@ -279,17 +363,17 @@
 			<div class="row">
 				<h2>Configuración de DHCP</h2>
 				<p>
-					ip dhcp excluded-address 192.168.0.0<br>
+					ip dhcp excluded-address <%= @logical.host1 %>.<%= @logical.host2 %>.<%= @logical.host3 %>.<%= @logical.host4 %><br>
 					!<br>
 					ip dhcp pool dpool1<br>
 					   import all<br>
-					   network 192.168.0.0 255.255.255.0<br>
-					   default-router 192.168.0.1<br>
+					   network <%= @logical.host1 %>.<%= @logical.host2 %>.<%= @logical.host3 %>.<%= @logical.host4 %> 255.255.255.0<br>
+					   default-router <%= @logical.host1 %>.<%= @logical.host2 %>.<%= @logical.host3 %>.<%= @logical.host4+1 %><br>
 					   dns-server 192.168.35.2<br>
-					   domain-name ldws.com<br>
+					   domain-name <%=@company.name%>.com<br>
 					!<br>
-					ip domain name ldws.com<br>
-					ip name-server 192.168.1.1<br>
+					ip domain name <%=@company.name%>.com<br>
+					ip name-server <%= @logical.host1 %>.<%= @logical.host2 %>.<%= @logical.host3+1 %>.<%= @logical.host4+1 %><br>
 				</p>
 			</div>
 			<div class="row">
@@ -298,7 +382,7 @@
 					R1#configure terminal<br>
 					R1(config)#router rip<br>
 					R1(config-router)#version 2<br>
-					R1(config-router)#network 192.168.0.0<br>
+					R1(config-router)#network <%= @logical.host1 %>.<%= @logical.host2 %>.<%= @logical.host3 %>.<%= @logical.host4 %><br>
 					R1(config-router)#no auto-summary<br>
 					R1(config-router)#end<br>
 				</p>
@@ -306,13 +390,19 @@
 			<div class="row">
 				<h1>Scripts de Switches</h1>
 				<h2>Configuración de VLANs</h2>
-				<h2>Número de VLANs</h2>
+				<% vlan_number=0%>
+				<% @subnets.each do |vlan| %>
+				<%vlan_number+=1%>
+				
+				<h2>VLAN número <%=vlan_number%></h2>
 				<p>
 					Switch# configure terminal<br>
-					Switch(config)# vlan <#VLAN><br>
-					Switch(config-vlan)# name <#NOMBRE-VLAN><br>
+					Switch(config)# vlan <#<%=vlan_number%>><br>
+					Switch(config-vlan)# name <#<%=vlan.name%>><br>
 					Switch(config-vlan)# end<br>
 				</p>
+				<%end%>
+				
 				<h2>Configuración de STP</h2>
 				<p>
 					!!!!!!!!!!!!!!!!!!!!!!!!!! SPANNING TREE CONFIGURATION !!!!!!!!!!!!!!!!!!!!<br>
@@ -351,26 +441,27 @@
 					copy running-config startup-config<br>
 				</p>
 			</div>
+			<% floor_number=0%>
+			<% @physical.each do |physical| %>
+			<% floor_number+=1%>
+			
 			
 			<div class="row">
-				<h2>Plano de piso</h2>
+				<h2>Plano de piso <%=floor_number%></h2>
 				<div style="border: 2px solid black">
 				<table class="table table-responsive" border='1' width= "100%" style="border-collapse: collapse; border-color: #FAF9F9">
 					<thead>
 					</thead>
 					<tbody>
-						<%@cont=0%>
+						<%cont=0%>
 						<%@cable = 0%>
 						<% i = 0 %>
-						<% while i < @physical.first.large %>
-						<% if @cont==@physical.first.computers %>
-							<% next%>
-						<%end%>
+						<% while i < physical.large %>
 						  <tr>
 						  	<% j = 0 %>
 						  	
 						  	<% @aux=0 %>
-							<% while j < @physical.first.width %>
+							<% while j < physical.width %>
 							
 									<% if j == 0 %>
 										<% if i == 0%>
@@ -380,13 +471,14 @@
 										<% end %>
 									<% else %>
 										<% if i%2 == 0 %>
-										
-											<%@x2 = j %>
-											<%@y2 = i %>
-											<%if @cont < @physical.first.computers%>
+											<%if cont < physical.computers%>
 												<td><center><img class="img-responsive" height="30" src="http://img.planospara.com/mesa-para-computador-en-mesas-2d-muebles-equipamiento-42531.jpg"></center></td>
-												<%@cont=@cont+1%>
-												<%@cable = (0.5+(@physical.first.height*2)+(((@x2-0)**2+(@y2-0)**2)**0.5)+2)+@cable %>
+												<%cont+=1%>
+												<% if i == 0 %>
+													<%@cable = (0.5+(physical.height*2)+((j+1))+2)+@cable %>
+												<% else %>
+													<%@cable = (0.5+(physical.height*2)+((i+1)+(j+1))+2)+@cable %>
+												<% end %>
 											<%else%>
 												<td><center><img class="img-responsive" height="30" src="http://www.construmatica.com/construpedia/images/thumb/5/58/Baldosas_by_Patrick_Hoesly.jpg/300px-Baldosas_by_Patrick_Hoesly.jpg"></center></td>
 											<%end%>
@@ -405,18 +497,18 @@
 				</table>
 				</div>
 				<br>
-				<%@computers_area = @physical.first.computers+(@physical.first.computers*@logical.scalability/100) %>
-				<%@meters = @physical.first.width*@physical.first.large # metros cuadrados de la sala %>
-    			<%@avalaible_area = @meters-@physical.first.width # espacio disponible para pcs %>
-				<%@computers_number = @avalaible_area-((@physical.first.large/2)*(@physical.first.width-1))%>
+				<%@computers_area = physical.computers+(physical.computers*@logical.scalability/100) %>
+				<%@meters = physical.width*physical.large # metros cuadrados de la sala %>
+    			<%@avalaible_area = @meters-physical.width # espacio disponible para pcs %>
+				<%@computers_number = @avalaible_area-((physical.large/2)*(physical.width-1))%>
 
 
 				<strong>Cantidad de cable: </strong> <%=@cable %>m<br>
-				<strong>Tamaño piso: </strong> <%=@meters %>m²<br>
-			    <% if @physical.first.computers < @computers_number %>
-			    	<strong>Computadores asignados a este piso: </strong> <%=@physical.first.computers %><br>
+				<strong>Area total de piso: </strong> <%=@meters %>m²<br>
+			    <% if physical.computers < @computers_number %>
+			    	<strong>Computadores asignados a este piso: </strong> <%=physical.computers %><br>
 			    <% else %>
-			    	<strong>( Maximo excedido ) Computadores asignados a este piso: </strong> <%=@computers_number %> de <%=@physical.first.computers %><br>
+			    	<strong>( Maximo excedido ) Computadores asignados a este piso: </strong> <%=@computers_number %> de <%=physical.computers %><br>
 			    <% end %>
 			    <% if @avalaible_area > @computers_area %>
 			    	<strong>Espacio necesario: </strong> <%=@computers_area %><br>
@@ -424,10 +516,12 @@
 					<strong>( Espacio excedido ) Espacio disponible: </strong> <%=@avalaible_area %>m² de <%=@computers_area %>m² necesarios<br>
 				<% end %>			    
 			    
-			    
-
 				
 			</div>
+			<% end%>
+			<% totalcomputers=@physical.sum(:computers) %>
+			
+			
 			<div class="row">
 				<h2>Cotización económica</h2>
 				<table class="table table-responsive"  border="1" width= "100%">
@@ -440,7 +534,11 @@
 						</tr>
 					</thead>
 					<tbody>
+						<% #if totalcomputers < 4 %>
+						<% #if totalcomputers < 4 %>
+						<% #if totalcomputers < 4 %>
 						<tr>
+							
 							<td>SWITCH</td>
 							<td>3</td>
 							<td>400 USD</td>

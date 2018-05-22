@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180504060807) do
+ActiveRecord::Schema.define(version: 20180521200007) do
 
   create_table "companies", force: :cascade do |t|
     t.string   "name"
@@ -45,12 +45,10 @@ ActiveRecord::Schema.define(version: 20180504060807) do
     t.integer  "host4"
     t.boolean  "redundancy"
     t.integer  "scalability"
-    t.integer  "subnets"
-    t.string   "subnet_description"
     t.boolean  "scripts"
     t.boolean  "iptable"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   add_index "logicals", ["request_id"], name: "index_logicals_on_request_id"
@@ -91,6 +89,17 @@ ActiveRecord::Schema.define(version: 20180504060807) do
   end
 
   add_index "requests", ["company_id"], name: "index_requests_on_company_id"
+
+  create_table "subnets", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.integer  "computers"
+    t.integer  "logical_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "subnets", ["logical_id"], name: "index_subnets_on_logical_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",     null: false

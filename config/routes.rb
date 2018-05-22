@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :subnets
   get 'pruebas/index'
 
   resources :equipment

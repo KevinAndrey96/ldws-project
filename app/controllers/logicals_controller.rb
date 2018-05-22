@@ -76,6 +76,6 @@ class LogicalsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def logical_params
-      params.require(:logical).permit(:redundancy, :scalability, :subnets, :subnet_description, :scripts, :iptable, :request_id, :host1, :host2, :host3, :host4)
+      params.require(:logical).permit(:redundancy, :scalability, :scripts, :iptable, :request_id, :host1, :host2, :host3, :host4)
     end
 end

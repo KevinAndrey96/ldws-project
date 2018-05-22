@@ -8,8 +8,6 @@ class CreateLogicals < ActiveRecord::Migration
       t.integer :host4
       t.boolean :redundancy
       t.integer :scalability
-      t.integer :subnets
-      t.string :subnet_description
       t.boolean :scripts
       t.boolean :iptable
       

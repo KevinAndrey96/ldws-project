@@ -12,16 +12,6 @@
 </p>
 
 <p>
-  <strong>Subnets:</strong>
-  <%= @logical.subnets %>
-</p>
-
-<p>
-  <strong>Subnet description:</strong>
-  <%= @logical.subnet_description %>
-</p>
-
-<p>
   <strong>Scripts:</strong>
   <%= @logical.scripts %>
 </p>
@@ -37,12 +27,12 @@
 </p>
 -->
 <h1>Los datos lógicos se han guardado con éxito, a continuación se procederá a registrar los datos de las sub redes indicadas</h1>
-<!--<%= link_to 'Reporte', report_index_path({:request_id => @logical.request.id}), :class => "btn btn-default"%>-->
+<!--<%= link_to 'Reporte', company_path(:id => Request.find(@logical.request.id).company,:format => "pdf"), :class => "btn btn-default"%>-->
+<%= link_to 'Sub Redes', new_subnet_url(:id => @logical.id), :class => "btn btn-default"%>
 
-<%= link_to 'Reporte', company_path(:id => Request.find(@logical.request.id).company,:format => "pdf"), :class => "btn btn-default"%>
 
 <br>
 
-<%= link_to 'Edit', edit_logical_path(@logical) %> |
-<%= link_to 'Back', logicals_path %>
+<%= link_to 'Editar', edit_logical_path(@logical) %> |
+<%= link_to 'Atrás', logicals_path %>
 </center>
