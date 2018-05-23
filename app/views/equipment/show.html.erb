@@ -1,34 +1,42 @@
 <p id="notice"><%= notice %></p>
-
+<div class="col-md-4"></div>
+<div class="col-md-4">
 <p>
-  <strong>Brand:</strong>
+  <h3>Marca</h3>
   <%= @equipment.brand %>
 </p>
 
 <p>
-  <strong>Type:</strong>
+  <h3>Tipo</h3>
   <%= @equipment.etype %>
 </p>
 
 <p>
-  <strong>Reference:</strong>
+  <h3>Referencia</h3>
   <%= @equipment.reference %>
 </p>
 
 <p>
-  <strong>Price:</strong>
+  <h3>Precio</h3>
   <%= @equipment.price %>
 </p>
 
 <p>
-  <strong>Slots:</strong>
-  <%= @equipment.slots %>
+  <h3>Puertos</h3>
+  <%= @equipment.ports %>
 </p>
 
 <p>
-  <strong>Potencia:</strong>
+  <h3>Potencia</h3>
   <%= @equipment.power %>
+</p>
+
+<p>
+  <h3>Slots</h3>
+  <%= @equipment.slots %>
 </p>
 
 <%= link_to 'Edit', edit_equipment_path(@equipment) %> |
 <%= link_to 'Back', equipment_index_path %>
+</div>
+<div class="col-md-4"></div>

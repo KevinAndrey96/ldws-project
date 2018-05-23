@@ -34,9 +34,14 @@
     <%= f.number_field :price , :class => "form-control"%>
   </div>
   <div class="field">
-    <h3>Slots</h3>
+    <h3>Puertos</h3>
+    <%= f.number_field :ports , :class => "form-control"%>
+  </div>
+  <div class="field">
+    <h3>Slots (Opcional)</h3>
     <%= f.number_field :slots , :class => "form-control"%>
   </div>
+  
   <div class="field">
     <h3>Potencia</h3>
     <select name="equipment[power]" id="equipment[power]" class="form-control">

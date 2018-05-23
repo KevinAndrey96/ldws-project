@@ -16,13 +16,11 @@
 #  name                   :string
 #  role                   :string           default("User")
 #  phone                  :string
-#  company_id             :integer
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #
 # Indexes
 #
-#  index_users_on_company_id            (company_id)
 #  index_users_on_email                 (email) UNIQUE
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
