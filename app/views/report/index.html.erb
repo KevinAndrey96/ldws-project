@@ -42,6 +42,22 @@
       <div class="row">
         <h2>Direccionamiento</h2>
         <h2>Host <%= @logical.host1 %>.<%= @logical.host2 %>.<%= @logical.host3 %>.<%= @logical.host4 %></h2>
+        
+        <% if @logical.host1 <= 127%>
+          <%@bits_mask = 8%>
+          <%@class = 'a'%>
+        <% end %>
+        
+        <% if @logical.host1 <= 191 && @logical.host1 > 127%>
+          <%@bits_mask = 16%>
+          <%@class = 'b'%>
+        <% end %>        
+        
+        <% if @logical.host1 <= 223 && @logical.host1 > 191%>
+          <%@bits_mask = 24%>
+          <%@class = 'c'%>
+        <% end %>          
+       
         <table class="table table-responsive"  border="1" width= "100%">
           <thead>
             <tr>
@@ -93,23 +109,37 @@
                 </td>
                 <td>
                   <%
-                    @bits=0
-                    while @sizeofs >= (2 ** @bits)-2 do
-                     @bits=@bits+1
+                  
+                  @bits=0
+                  while @sizeofs >= (2 ** @bits)-2 do
+                   @bits=@bits+1
                   end
-                  %>
-                  /<%= @bits %>
-                </td>
-                <td>
-                  <%
-                    @mask=0
-                    @aux=@bits
-                    while @aux>=0 do
+                  
+                  @mask=0
+                  @count=1
+                  @aux=7
+                  while @count<=@bits do
                      @mask=@mask+(2 ** @aux)
                      @aux=@aux-1
+                     @count=@count+1
                   end
                   %>
-                  255.255.255.<%= @mask %>
+                  /<%= @bits_mask+@bits %>
+                </td>
+                <td>
+                  
+                  <% if @class == 'a' %>
+                    255.<%= @mask %>.0.0
+                  <% end %> 
+                  
+                  <% if @class == 'b' %>
+                    255.255.<%= @mask %>.0
+                  <% end %> 
+                  
+                  <% if @class == 'c' %>
+                    255.255.255.<%= @mask %>
+                  <% end %> 
+                  
                 </td>
                 <td>
                   
@@ -537,6 +567,279 @@
       
       Total de equipos <%= totalcomputers %>
       
+      <div class="row">
+        <h2>Cotización económica</h2>
+        <table class="table table-responsive"  border="1" width= "100%">
+          <thead>
+            <tr>
+              <th>Equipo</th>
+              <th>Descripción</th>
+              <th>Cantidad</th>
+              <th>Valor Unitario</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% total_value=0 %>
+        <%while totalcomputers > 0  do%>
+            <% if totalcomputers < 4 %>
+            <% slots_u+=1 %>
+              <% if @equipment = Equipment.where(:etype => "Switch", :ports => 4, :power => 1 ).order("RANDOM()").first%>
+              <% total_value+=@equipment.price %>
+              <% totalcomputers-=4%>
+              <tr>
+                <td><%= @equipment.etype%></td></td>
+                <td><%= @equipment.etype%> <%= @equipment.brand %> <%= @equipment.reference%> <%= @equipment.ports%> puertos</td></td>
+                <td>1</td>
+                <td><%= @equipment.price%> USD</td>
+                <td><%= @equipment.price%> USD</td>
+              </tr>
+            <% end %>
+            <% end %>
+            <% if totalcomputers < 8 && totalcomputers >= 4%>
+            <% slots_u+=1 %>
+              <% if @equipment = Equipment.where(:etype => "Switch", :ports => 8, :power => 1 ).order("RANDOM()").first%>
+              <% total_value+=@equipment.price %>
+              <% totalcomputers-=8%>
+              <tr>
+                <td><%= @equipment.etype%></td></td>
+                <td><%= @equipment.etype%> <%= @equipment.brand %> <%= @equipment.reference%> <%= @equipment.ports%> puertos</td></td>
+                <td>1</td>
+                <td><%= @equipment.price%> USD</td>
+                <td><%= @equipment.price%> USD</td>
+              </tr>
+            <% end %>
+            <% end %>
+            <% if totalcomputers < 24 && totalcomputers >= 8%>
+            <% slots_u+=1 %>
+            <% totalcomputers-=24%>
+              <% if @equipment = Equipment.where(:etype => "Switch", :ports => 24, :power => 1 ).order("RANDOM()").first%>
+              <% total_value+=@equipment.price %>
+              <tr>
+                <td><%= @equipment.etype%></td></td>
+                <td><%= @equipment.etype%> <%= @equipment.brand %> <%= @equipment.reference%> <%= @equipment.ports%> puertos</td></td>
+                <td>1</td>
+                <td><%= @equipment.price%> USD</td>
+                <td><%= @equipment.price%> USD</td>
+              </tr>
+            <% end %>
+            <% end %>
+            <% if totalcomputers < 48 && totalcomputers >= 24%>
+            <% slots_u+=1 %>
+            <% totalcomputers-=48%>
+              <% if @equipment = Equipment.where(:etype => "Switch", :ports => 48, :power => 1 ).order("RANDOM()").first%>
+              <% total_value+=@equipment.price %>
+              <tr>
+                <td><%= @equipment.etype%></td></td>
+                <td><%= @equipment.etype%> <%= @equipment.brand %> <%= @equipment.reference%> <%= @equipment.ports%> puertos</td></td>
+                <td>1</td>
+                <td><%= @equipment.price%> USD</td>
+                <td><%= @equipment.price%> USD</td>
+              </tr>
+              <% end %>
+            <% end %>
+        <%end%>
+            <% if @equipment = Equipment.where(:etype => "Router", :power => 1 ).order("RANDOM()").first%>
+            <% total_value+=@equipment.price %>
+            <% slots_u+=1 %>
+            <tr>
+              <td><%= @equipment.etype%></td></td>
+              <td><%= @equipment.etype%> <%= @equipment.brand %> <%= @equipment.reference%> <%= @equipment.ports%> puertos</td></td>
+              <td>1</td>
+              <td><%= @equipment.price%> USD</td>
+              <td><%= @equipment.price%> USD</td>
+            </tr>
+            <%end%>
+
+            
+            <% if @equipment = Equipment.where(:etype => "Rack", :power => 1, :slots => slots_u ).order("RANDOM()").first%>
+            <% total_value+=@equipment.price %>
+            <tr>
+              <td><%= @equipment.etype%></td></td>
+              <td><%= @equipment.etype%> <%= @equipment.brand %> <%= @equipment.reference%> <%= @equipment.ports%> puertos</td></td>
+              <td>1</td>
+              <td><%= @equipment.price%> USD</td>
+              <td><%= @equipment.price%> USD</td>
+            </tr>
+            <%end%>
+            
+            <% if @equipment = Equipment.where(:etype => "Cable", :power => 1).order("RANDOM()").first%>
+            <% total_value+=@equipment.price %>
+            <tr>
+              <td><%= @equipment.etype%></td></td>
+              <td><%= @equipment.etype%> <%= @equipment.brand %> <%= @equipment.reference%> <%= @cable %> metros en total</td></td>
+              <td>1</td>
+              <td><%= @equipment.price*@cable%> USD</td>
+              <td><%= @equipment.price*@cable%> USD</td>
+            </tr>
+            <%end%>
+            
+            <tr>
+              <td colspan="4"><strong>Total: </strong></td>
+              <td><trong><%= total_value %> USD</trong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="row">
+        <h2>Cotización estándar</h2>
+        <table class="table table-responsive"  border="1" width= "100%">
+          <thead>
+            <tr>
+              <th>Equipo</th>
+              <th>Cantidad</th>
+              <th>Valor Unitario</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% total_value=0%>
+            <%while totalcomputers > 0  do%>
+            <% if totalcomputers < 4 %>
+              <% if @equipment = Equipment.where(:etype => "Switch", :ports => 4, :power => 2 ).order("RANDOM()").first%>
+              <% total_value+=@equipment.price %>
+              <% totalcomputers-=4%>
+              <tr>
+                <td><%= @equipment.etype%></td></td>
+                <td><%= @equipment.etype%> <%= @equipment.brand %> <%= @equipment.reference%> <%= @equipment.ports%> puertos</td></td>
+                <td>1</td>
+                <td><%= @equipment.price%> USD</td>
+                <td><%= @equipment.price%> USD</td>
+              </tr>
+            <% end %>
+            <% end %>
+            <% if totalcomputers < 8 && totalcomputers >= 4%>
+              <% if @equipment = Equipment.where(:etype => "Switch", :ports => 8, :power => 2 ).order("RANDOM()").first%>
+              <% total_value+=@equipment.price %>
+              <% totalcomputers-=8%>
+              <tr>
+                <td><%= @equipment.etype%></td></td>
+                <td><%= @equipment.etype%> <%= @equipment.brand %> <%= @equipment.reference%> <%= @equipment.ports%> puertos</td></td>
+                <td>1</td>
+                <td><%= @equipment.price%> USD</td>
+                <td><%= @equipment.price%> USD</td>
+              </tr>
+            <% end %>
+            <% end %>
+            <% if totalcomputers < 24 && totalcomputers >= 8%>
+            <% totalcomputers-=24%>
+              <% if @equipment = Equipment.where(:etype => "Switch", :ports => 24, :power => 2 ).order("RANDOM()").first%>
+              <% total_value+=@equipment.price %>
+              <tr>
+                <td><%= @equipment.etype%></td></td>
+                <td><%= @equipment.etype%> <%= @equipment.brand %> <%= @equipment.reference%> <%= @equipment.ports%> puertos</td></td>
+                <td>1</td>
+                <td><%= @equipment.price%> USD</td>
+                <td><%= @equipment.price%> USD</td>
+              </tr>
+            <% end %>
+            <% end %>
+            <% if totalcomputers < 48 && totalcomputers >= 24%>
+            <% totalcomputers-=48%>
+              <% if @equipment = Equipment.where(:etype => "Switch", :ports => 48, :power => 2 ).order("RANDOM()").first%>
+              <% total_value+=@equipment.price %>
+              <tr>
+                <td><%= @equipment.etype%></td></td>
+                <td><%= @equipment.etype%> <%= @equipment.brand %> <%= @equipment.reference%> <%= @equipment.ports%> puertos</td></td>
+                <td>1</td>
+                <td><%= @equipment.price%> USD</td>
+                <td><%= @equipment.price%> USD</td>
+              </tr>
+            <% end %>
+            <% end %>
+        <%end%>
+        <% if @equipment = Equipment.where(:etype => "Router", :power => 2 ).order("RANDOM()").first%>
+            <% total_value+=@equipment.price %>
+            <tr>
+              <td><%= @equipment.etype%></td></td>
+              <td><%= @equipment.etype%> <%= @equipment.brand %> <%= @equipment.reference%> <%= @equipment.ports%> puertos</td></td>
+              <td>1</td>
+              <td><%= @equipment.price%> USD</td>
+              <td><%= @equipment.price%> USD</td>
+            </tr>
+            <%end%>
+          </tbody>
+        </table>
+      </div>
+      <div class="row">
+        <h2>Cotización optima</h2>
+        <table class="table table-responsive"  border="1" width= "100%">
+          <thead>
+            <tr>
+              <th>Equipo</th>
+              <th>Cantidad</th>
+              <th>Valor Unitario</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <%total_value=0%>
+            <%while totalcomputers > 0  do%>
+            <% if totalcomputers < 4 %>
+              <% if @equipment = Equipment.where(:etype => "Switch", :ports => 4, :power => 3 ).order("RANDOM()").first%>
+              <% total_value+=@equipment.price %>
+              <% totalcomputers-=4%>
+              <tr>
+                <td><%= @equipment.etype%></td></td>
+                <td><%= @equipment.etype%> <%= @equipment.brand %> <%= @equipment.reference%> <%= @equipment.ports%> puertos</td></td>
+                <td>1</td>
+                <td><%= @equipment.price%> USD</td>
+                <td><%= @equipment.price%> USD</td>
+              </tr>
+            <% end %>
+            <% end %>
+            <% if totalcomputers < 8 && totalcomputers >= 4%>
+              <% @equipment = Equipment.where(:etype => "Switch", :ports => 8, :power => 3 ).order("RANDOM()").first%>
+              <% total_value+=@equipment.price %>
+              <% totalcomputers-=8%>
+              <tr>
+                <td><%= @equipment.etype%></td></td>
+                <td><%= @equipment.etype%> <%= @equipment.brand %> <%= @equipment.reference%> <%= @equipment.ports%> puertos</td></td>
+                <td>1</td>
+                <td><%= @equipment.price%> USD</td>
+                <td><%= @equipment.price%> USD</td>
+              </tr>
+            <% end %>
+            <% if totalcomputers < 24 && totalcomputers >= 8%>
+            <% totalcomputers-=24%>
+              <% if @equipment = Equipment.where(:etype => "Switch", :ports => 24, :power => 3 ).order("RANDOM()").first%>
+              <% total_value+=@equipment.price %>
+              <tr>
+                <td><%= @equipment.etype%></td></td>
+                <td><%= @equipment.etype%> <%= @equipment.brand %> <%= @equipment.reference%> <%= @equipment.ports%> puertos</td></td>
+                <td>1</td>
+                <td><%= @equipment.price%> USD</td>
+                <td><%= @equipment.price%> USD</td>
+              </tr>
+            <% end %>
+            <% end %>
+            <% if totalcomputers < 48 && totalcomputers >= 24%>
+            <% totalcomputers-=48%>
+              <% if @equipment = Equipment.where(:etype => "Switch", :ports => 48, :power => 3 ).order("RANDOM()").first%>
+              <% total_value+=@equipment.price %>
+              <tr>
+                <td><%= @equipment.etype%></td></td>
+                <td><%= @equipment.etype%> <%= @equipment.brand %> <%= @equipment.reference%> <%= @equipment.ports%> puertos</td></td>
+                <td>1</td>
+                <td><%= @equipment.price%> USD</td>
+                <td><%= @equipment.price%> USD</td>
+              </tr>
+            <% end %>
+            <% end %>
+        <%end%>
+        <% if @equipment = Equipment.where(:etype => "Router", :power => 3 ).order("RANDOM()").first%>
+            <% total_value+=@equipment.price %>
+            <tr>
+              <td><%= @equipment.etype%></td></td>
+              <td><%= @equipment.etype%> <%= @equipment.brand %> <%= @equipment.reference%> <%= @equipment.ports%> puertos</td></td>
+              <td>1</td>
+              <td><%= @equipment.price%> USD</td>
+              <td><%= @equipment.price%> USD</td>
+            </tr>
+            <%end %>
+          </tbody>
+        </table>
+      </div>
   </div>
 </body>
 </html>
