@@ -24,7 +24,7 @@
 <center><h1>A continuación podrá agregar una nueva sub red o continuar al reporte</h1></center>
 
 <center>
-  <%= link_to 'Reporte', company_path(:id => Request.find(@subnet.logical.request.id).company,:format => "pdf"), :class => "btn btn-default"%>
+  <%= link_to 'Reporte', company_path(:id => Request.find(@subnet.logical.request.id).company,:format => "pdf"), :class => "btn btn-default", :target => "_blank"%>
   <%= link_to 'Nueva subred', new_subnet_url(:id => @subnet.logical.id), :class => "btn btn-default"%>
 </center>
 <!--

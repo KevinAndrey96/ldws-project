@@ -41,8 +41,67 @@
     
       <div class="row">
         <h2>Direccionamiento</h2>
-        <h2>Host <%= @logical.host1 %>.<%= @logical.host2 %>.<%= @logical.host3 %>.<%= @logical.host4 %></h2>
+        <%
+        if totalcomputers==1
+          @netmask=32
+        elsif totalcomputers<=2
+          @netmask=30
+        elsif totalcomputers<=6
+          @netmask=29
+        elsif totalcomputers<=14
+          @netmask=28
+        elsif totalcomputers<=31
+          @netmask=27
+        elsif totalcomputers<=62
+          @netmask=26
+        elsif totalcomputers<=126
+          @netmask=25
+        elsif totalcomputers<=254
+          @netmask=24
+        elsif totalcomputers<=510
+          @netmask=23
+        elsif totalcomputers<=1022
+          @netmask=22
+        elsif totalcomputers<=2046
+          @netmask=21
+        elsif totalcomputers<=4094
+          @netmask=20
+        elsif totalcomputers<=8190
+          @netmask=19
+        elsif totalcomputers<=16382
+          @netmask=18
+        elsif totalcomputers<=32766
+          @netmask=17
+        elsif totalcomputers<=65534
+          @netmask=16
+        elsif totalcomputers<=131070
+          @netmask=15
+        elsif totalcomputers<=262142
+          @netmask=14
+        elsif totalcomputers<=524286
+          @netmask=13
+        elsif totalcomputers<=1048574
+          @netmask=12
+        elsif totalcomputers<=2097150
+          @netmask=11
+        elsif totalcomputers<=4194302
+          @netmask=10
+        elsif totalcomputers<=8388606
+          @netmask=9
+        elsif totalcomputers<=16777214
+          @netmask=8
+        elsif totalcomputers<=33554430
+          @netmask=7
+        elsif totalcomputers<=67108862
+          @netmask=6
+        elsif totalcomputers<=134217726
+          @netmask=5
+        elsif totalcomputers<=268435454
+          @netmask=4
+        end
+        %>
         
+        <h2>Host <%= @logical.host1 %>.<%= @logical.host2 %>.<%= @logical.host3 %>.<%= @logical.host4 %> - Mascara de RED: <%=@netmask%></h2>
         <% if @logical.host1 <= 127%>
           <%@bits_mask = 8%>
           <%@class = 'a'%>
@@ -89,14 +148,15 @@
               <% @su=Subnet.new(:name => "default", :description => "Sub red Default", :computers => default, :logical_id => @logical.id)%>
               <% @su.save %>
             <%end%>
-            <% @subnets.each do |subnets| %>
+            <% @subnets.order(computers: :desc).each do |subnets| %>
             
               <tr>
                 <td><%= subnets.name %> </td>
                 <td><%= subnets.computers %></td>
-                <td><%= @hosted=subnets.computers+(subnets.computers*@logical.scalability/100) %>
+                <!--<td><%= @hosted=subnets.computers+(subnets.computers*@logical.scalability/100) %>
                 <% @hosted_space=@hosted_space+@hosted %>
-                </td>
+                </td>-->
+                <td>Aojado</td>
                 <td>
                   <% 
                     @host4=@host4+@hosted+2
@@ -566,6 +626,7 @@
       <% end%>
       
       Total de equipos <%= totalcomputers %>
+      
       
   </div>
 </body>
