@@ -317,41 +317,56 @@
             <tr>
               <td>
                 <div class="col-xs-6">
+                  <%
+                    @Servicios=0
+                  %>
                   <h2>Servicios</h2>
                   <% if @request.web %>  
+                  <% @Servicios+=1 %>
                   <strong>Web: </strong>Servidor Apache (HTTPd)<br>
                   <% end %>
                   <% if @request.bd %>
+                  <% @Servicios+=1 %>
                   <strong>Base de datos: </strong>MySQL Server<br>
                   <% end %>
                   <% if @request.aplications %>
+                  <% @Servicios+=1 %>
                   <strong>Aplicaciones: </strong>LAMP<br>
                   <% end %>
                   <% if @request.proxy %>
+                  <% @Servicios+=1 %>
                   <strong>Proxy: </strong>Squid 3.5.27<br>
                   <% end %>
                   <% if @request.voip %>
+                  <% @Servicios+=5 %>
                   <strong>Voip: </strong>Asterisk 15<br>
                   <% end %>
                   <% if @request.email %>
+                  <% @Servicios+=1 %>
                   <strong>Correo: </strong>Exchange<br>
                   <% end %>
                   <% if @request.video_conference %>
+                  <% @Servicios+=5 %>
                   <strong>Video conference: </strong>LDAP<br>
                   <% end %>
                   <% if @request.active_dir %>
+                  <% @Servicios+=1 %>
                   <strong>Directorio activo: </strong>Si<br>
                   <% end %>
                   <% if @request.dhcp %>
+                  <% @Servicios+=1 %>
                   <strong>Dhcp: </strong>Si<br>
                   <% end %>
                   <% if @request.dns %>
+                  <% @Servicios+=1 %>
                   <strong>Dns: </strong>Si<br>
                   <% end %>
                   <% if @request.ftp %>
+                  <% @Servicios+=1 %>
                   <strong>Ftp: </strong>Si<br>
                   <% end %>
                 </div>
+                
               </td>
               <td>
                 <!--<div class="col-xs-6">
@@ -517,12 +532,21 @@
             </tr>
           </thead>
           <tbody>
+            <% if @Servicios>=5 %>
             <tr>
               <td>10 Gigabit Ethernet</td>
               <td>Par por trenzado (UTP) Cat 6</td>
               <td>100 metros de longitud máxima</td>
               <td>Estrella (Usando switches y un router)</td>
             </tr>
+            <% else %>
+            <tr>
+              <td>100 Mb/s Ethernet</td>
+              <td>Par por trenzado (UTP) Cat 5E</td>
+              <td>100 metros de longitud máxima</td>
+              <td>Estrella (Usando switches y un router)</td>
+            </tr>
+            <% end %>
           </tbody>
         </table>
       </div>
