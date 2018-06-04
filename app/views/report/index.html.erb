@@ -340,21 +340,21 @@
                   <strong>Video conference: </strong>LDAP<br>
                   <% end %>
                   <% if @request.active_dir %>
-                  <strong>Directorio activo:</strong><br>
+                  <strong>Directorio activo: </strong>Si<br>
                   <% end %>
                   <% if @request.dhcp %>
-                  <strong>Dhcp</strong><br>
+                  <strong>Dhcp: </strong>Si<br>
                   <% end %>
                   <% if @request.dns %>
-                  <strong>Dns</strong><br>
+                  <strong>Dns: </strong>Si<br>
                   <% end %>
                   <% if @request.ftp %>
-                  <strong>Ftp</strong><br>
+                  <strong>Ftp: </strong>Si<br>
                   <% end %>
                 </div>
               </td>
               <td>
-                <div class="col-xs-6">
+                <!--<div class="col-xs-6">
                   <h2>Aspectos Físicos</h2>
                   <strong>NÚMERO DE PISOS: </strong><%= @physical.count %><br>
                   <strong>ALTURA POR PISO: </strong><%= @physical.first.height %> m<br>
@@ -363,7 +363,7 @@
                   <strong># EXTENSIONES POR PISO:</strong><%= totalcomputers %><br>
                   <strong>SALA DE JUNTAS: </strong><%= @physical.first.conference_hall %><br>
                   <strong>ENLACES REDUNDANTES: </strong><%= @logical.redundancy %><br>
-                </div>
+                </div>-->
               </td>
             </tr>
           </tbody>
@@ -381,11 +381,20 @@
         <strong>ANCHO PISO <%= cont%>: </strong><%= physical_data.width %> m<br>
         <strong>LARGO PISO <%= cont%>: </strong><%= physical_data.large %> m<br>
         <strong># EXTENSIONES DE PISO:</strong><%= physical_data.computers %><br>
-        <strong>SALA DE JUNTAS: </strong><%= physical_data.conference_hall %><br>
+        <% if physical_data.conference_hall %>
+          <strong>SALA DE JUNTAS: </strong>Si<br>
+        <% else %>
+          <strong>SALA DE JUNTAS: </strong>No<br>
+        <% end %>
         
       </div>
+      <br>
       <% end %>
-      <strong>ENLACES REDUNDANTES: </strong><%= @logical.redundancy %><br>
+      <% if @logical.redundancy %>
+        <strong>ENLACES REDUNDANTES: </strong>Si<br>
+      <% else %>
+        <strong>ENLACES REDUNDANTES: </strong>No<br>
+      <% end%>
 <!--
       <div class="row">
         <h2>Direccionamiento</h2>
