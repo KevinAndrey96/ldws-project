@@ -1,0 +1,69 @@
+<!Doctype html>
+<html>
+<head>
+  <meta charset='utf-8' />
+  <%= wicked_pdf_stylesheet_link_tag "pdf" -%>
+  <%= wicked_pdf_javascript_include_tag "number_pages" %>
+</head>
+<body onload='number_pages'>
+  <div id="content">
+    <div class="container-fluid">
+      <div class="row">
+        <h1>Scripts de Switches</h1>
+        <h2>Configuración de VLANs</h2>
+        <% vlan_number=0%>
+        <% @subnets.each do |vlan| %>
+        <%vlan_number+=1%>
+          <% if vlan.name != "default" %>
+            <h2>VLAN número <%=vlan_number%></h2>
+            <p>
+              Switch# configure terminal<br>
+              Switch(config)# vlan <#<%=vlan_number*10%>><br>
+              Switch(config-vlan)# name <#<%=vlan.name%>><br>
+              Switch(config-vlan)# end<br>
+            </p>
+          <%end%>
+        <%end%>
+        
+        <h2>Configuración de STP</h2>
+        <p>
+          !!!!!!!!!!!!!!!!!!!!!!!!!! SPANNING TREE CONFIGURATION !!!!!!!!!!!!!!!!!!!!<br>
+          !<br>
+          ! Turn on privileged commands<br>
+          enable<br>
+          !<br>
+          ! Enter configuration mode<br>
+          configure terminal<br>
+          !<br>
+          ! Configure this switch as primary root for this spanning tree<br>
+          spanning-tree vlan < BEGIN-END> root primary<br>
+          !<br>
+          ! Per-Vlan rapid spanning tree mode<br>
+          spanning-tree mode rapid-pvst<br>
+          !<br>
+          ! Change an interface's spanning tree port priority<br>
+          interface < INTERFACE_NUMBER><br>
+          spanning-tree vlan < BEGIN-END> port-priority < NUMBER><br>
+          !<br>
+          ! Exit from interface configuration mode<br>
+          exit<br>
+          !<br>
+          ! Enable an interface to move directly to forwarding on link up<br>
+          !<br>
+          interface range < INTERFACE_NUMBER><br>
+          spanning-tree portfast<br>
+          spanning-tree bpduguard enable<br>
+          !!<br>
+          !!!!!!!!!!!!!!!!!!!!!!!!!!!!!! SAVING !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!<br>
+          !<br>
+          ! Exit from configure mode<br>
+          exit<br>
+          !<br>
+          ! Copy from current system configuration to startup configuration<br>
+          copy running-config startup-config<br>
+        </p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!Doctype html>
+<html>
+<head>
+  <meta charset='utf-8' />
+  <%= wicked_pdf_stylesheet_link_tag "pdf" -%>
+  <%= wicked_pdf_javascript_include_tag "number_pages" %>
+</head>
+<body onload='number_pages'>
+  <div id="content">
+    <div class="container-fluid">
+      <div class="row">
+        <br>
+        <br>
+        <center><h1>Reporte de solicitud</h1></center>
+        <br>
+        <h2>Resumen de empresa</h2>
+        <strong>Razón Social: </strong><%= @company.name %><br>
+        <strong>Misión: </strong><%= @company.mision %><br>
+        <strong>Visión: </strong><%= @company.vision %><br>
+        <strong>Nit. </strong><%= @company.nit %><br>
+        <br>
+        <h2>Resumen de solicitud</h2>
+        <strong>Título. </strong><%= @request.title %><br>
+        <strong>Descripción. </strong><%= @request.description %><br>
+        <strong>Observaciones. </strong><%= @request.observation %><br>
+        <strong>Objetivos. </strong><%= @request.objective %><br>
+        <br>
+      </div>
+    </div>
+    <div class="row">
+        <h2>Tabla de resumen</h2>
+        <table class="table table-responsive"  border="1" width= "100%">
+          <thead>
+            <tr>
+              <th>Tipo de dispositivo</th>
+              <th>Cantidad</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Impresoras</td>
+              <td><%= @physical.sum(:printers) %></td>
+            </tr>
+            <tr>
+              <td>Equipos</td>
+              <td><%= @physical.sum(:computers) %></td>
+            </tr>
+            <tr>
+              <td>Servidores</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td>Routers</td>
+              <td>
+                1
+              </td>
+            </tr>
+            <tr>
+              <td>Switches de acceso</td>
+              <td>#</td>
+            </tr>
+            <tr>
+              <td>Switches de distribución</td>
+              <td><%= @physical.count %></td>
+            </tr>
+            <tr>
+              <td>Punto de acceso inhalambrico</td>
+              <td>
+                1
+              </td>
+            </tr>
+
+            <tr>
+              <td><strong>Total</strong></td>
+              <td>
+                <% @Total= @physical.sum(:printers)+@physical.sum(:computers)+1+1+ @physical.count+1 %>
+                <strong><%= @Total %></strong>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  </div>
+</body>
+</html>

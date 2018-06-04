@@ -1,4 +1,14 @@
 Rails.application.routes.draw do
+  get 'pdf/topologia'
+
+  get 'pdf/routers'
+
+  get 'pdf/switches'
+
+  get 'pdf/empresa'
+
+  get 'pdf/direccionamiento'
+
   resources :subnets
   get 'pruebas/index'
 

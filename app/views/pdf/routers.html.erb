@@ -1,0 +1,41 @@
+<!Doctype html>
+<html>
+<head>
+  <meta charset='utf-8' />
+  <%= wicked_pdf_stylesheet_link_tag "pdf" -%>
+  <%= wicked_pdf_javascript_include_tag "number_pages" %>
+</head>
+<body onload='number_pages'>
+  <div id="content">
+    <div class="container-fluid">
+      <div class="row">
+        <h2>Configuración de DHCP</h2>
+        <p>
+          ip dhcp excluded-address <%= @logical.host1 %>.<%= @logical.host2 %>.<%= @logical.host3 %>.<%= @logical.host4 %><br>
+          !<br>
+          ip dhcp pool dpool1<br>
+             import all<br>
+             network <%= @logical.host1 %>.<%= @logical.host2 %>.<%= @logical.host3 %>.<%= @logical.host4 %> 255.255.255.0<br>
+             default-router <%= @logical.host1 %>.<%= @logical.host2 %>.<%= @logical.host3 %>.<%= @logical.host4+1 %><br>
+             dns-server 192.168.35.2<br>
+             domain-name <%=@company.name%>.com<br>
+          !<br>
+          ip domain name <%=@company.name%>.com<br>
+          ip name-server <%= @logical.host1 %>.<%= @logical.host2 %>.<%= @logical.host3+1 %>.<%= @logical.host4+1 %><br>
+        </p>
+      </div>
+      <div class="row">
+        <h2>Configuración de RIP</h2>
+        <p>
+          R1#configure terminal<br>
+          R1(config)#router rip<br>
+          R1(config-router)#version 2<br>
+          R1(config-router)#network <%= @logical.host1 %>.<%= @logical.host2 %>.<%= @logical.host3 %>.<%= @logical.host4 %><br>
+          R1(config-router)#no auto-summary<br>
+          R1(config-router)#end<br>
+        </p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

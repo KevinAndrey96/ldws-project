@@ -1,0 +1,98 @@
+<% totalcomputers=@physical.sum(:computers) %>
+<% totalcomputers2=@physical.sum(:computers) %>
+<% totalcomputers3=@physical.sum(:computers) %>
+<!Doctype html>
+<html>
+<head>
+  <meta charset='utf-8' />
+  <%= wicked_pdf_stylesheet_link_tag "pdf" -%>
+  <%= wicked_pdf_javascript_include_tag "number_pages" %>
+</head>
+<body onload='number_pages'>
+  <div id="content">
+    <div class="container-fluid">
+      <% floor_number=0%>
+      <% @physical.each do |physical| %>
+      <% floor_number+=1%>
+      
+      
+      <div class="row">
+        <h2>Plano de piso <%=floor_number%></h2>
+        <div style="border: 2px solid black">
+        <table class="table table-responsive" border='1' width= "100%" style="border-collapse: collapse; border-color: #FAF9F9">
+          <thead>
+          </thead>
+          <tbody>
+            <%cont=0%>
+            <%@cable = 0%>
+            <% i = 0 %>
+            <% while i < physical.large %>
+              <tr>
+                <% j = 0 %>
+                
+                <% @aux=0 %>
+              <% while j < physical.width %>
+              
+                  <% if j == 0 %>
+                    <% if i == 0%>
+                      <td><center><img class="img-responsive" height="30" src="https://mymsystech.com.co/440-medium_default/rack-3bumen-r2c-9u.jpg"></center></td>
+                    <% else %>
+                      <td><center><img class="img-responsive" height="30" src="http://www.construmatica.com/construpedia/images/thumb/5/58/Baldosas_by_Patrick_Hoesly.jpg/300px-Baldosas_by_Patrick_Hoesly.jpg"></center></td>
+                    <% end %>
+                  <% else %>
+                    <% if i%2 == 0 %>
+                      <%if cont < physical.computers%>
+                        <td><center><img class="img-responsive" height="30" src="http://img.planospara.com/mesa-para-computador-en-mesas-2d-muebles-equipamiento-42531.jpg"></center></td>
+                        <%cont+=1%>
+                        <% if i == 0 %>
+                          <%@cable = (0.5+(physical.height*2)+((j+1))+2)+@cable %>
+                        <% else %>
+                          <%@cable = (0.5+(physical.height*2)+((i+1)+(j+1))+2)+@cable %>
+                        <% end %>
+                      <%else%>
+                        <td><center><img class="img-responsive" height="30" src="http://www.construmatica.com/construpedia/images/thumb/5/58/Baldosas_by_Patrick_Hoesly.jpg/300px-Baldosas_by_Patrick_Hoesly.jpg"></center></td>
+                      <%end%>
+                      
+                      
+                    <% else %>
+                      <td><center><img class="img-responsive" height="30" src="http://www.construmatica.com/construpedia/images/thumb/5/58/Baldosas_by_Patrick_Hoesly.jpg/300px-Baldosas_by_Patrick_Hoesly.jpg"></center></td>
+                    <%end%>
+                  <%end%>
+                <% j += 1 %>
+              <% end %>
+              </tr>
+              <% i += 1 %>
+            <% end %>
+          </tbody>
+        </table>
+        </div>
+        <br>
+        <%@computers_area = physical.computers+(physical.computers*@logical.scalability/100) %>
+        <%@meters = physical.width*physical.large # metros cuadrados de la sala %>
+          <%@avalaible_area = @meters-physical.width # espacio disponible para pcs %>
+        <%@computers_number = @avalaible_area-((physical.large/2)*(physical.width-1))%>
+
+
+        <strong>Cantidad de cable: </strong> <%=@cable %>m<br>
+        <strong>Area total de piso: </strong> <%=@meters %>m²<br>
+          <% if physical.computers < @computers_number %>
+            <strong>Computadores asignados a este piso: </strong> <%=physical.computers %><br>
+          <% else %>
+            <strong>( Maximo excedido ) Computadores asignados a este piso: </strong> <%=@computers_number %> de <%=physical.computers %><br>
+          <% end %>
+          <% if @avalaible_area > @computers_area %>
+            <strong>Espacio necesario: </strong> <%=@computers_area %><br>
+          <% else %>
+          <strong>( Espacio excedido ) Espacio disponible: </strong> <%=@avalaible_area %>m² de <%=@computers_area %>m² necesarios<br>
+        <% end %>         
+          
+        
+      </div>
+      <% end%>
+      
+      Total de equipos <%= totalcomputers %>
+      
+    </div>
+  </div>
+</body>
+</html>
