@@ -42,66 +42,88 @@
       <div class="row">
         <h2>Direccionamiento</h2>
         <%
-        if totalcomputers==1
+        totalcomputers_es=totalcomputers+(totalcomputers*@logical.scalability/100)
+        #Borrar de aquí
+        if totalcomputers_es==1
           @netmask=32
-        elsif totalcomputers<=2
+        elsif totalcomputers_es<=2
           @netmask=30
-        elsif totalcomputers<=6
+        elsif totalcomputers_es<=6
           @netmask=29
-        elsif totalcomputers<=14
+        elsif totalcomputers_es<=14
           @netmask=28
-        elsif totalcomputers<=31
+        elsif totalcomputers_es<=31
           @netmask=27
-        elsif totalcomputers<=62
+        elsif totalcomputers_es<=62
           @netmask=26
-        elsif totalcomputers<=126
+        elsif totalcomputers_es<=126
           @netmask=25
-        elsif totalcomputers<=254
+        elsif totalcomputers_es<=254
           @netmask=24
-        elsif totalcomputers<=510
+        elsif totalcomputers_es<=510
           @netmask=23
-        elsif totalcomputers<=1022
+        elsif totalcomputers_es<=1022
           @netmask=22
-        elsif totalcomputers<=2046
+        elsif totalcomputers_es<=2046
           @netmask=21
-        elsif totalcomputers<=4094
+        elsif totalcomputers_es<=4094
           @netmask=20
-        elsif totalcomputers<=8190
+        elsif totalcomputers_es<=8190
           @netmask=19
-        elsif totalcomputers<=16382
+        elsif totalcomputers_es<=16382
           @netmask=18
-        elsif totalcomputers<=32766
+        elsif totalcomputers_es<=32766
           @netmask=17
-        elsif totalcomputers<=65534
+        elsif totalcomputers_es<=65534
           @netmask=16
-        elsif totalcomputers<=131070
+        elsif totalcomputers_es<=131070
           @netmask=15
-        elsif totalcomputers<=262142
+        elsif totalcomputers_es<=262142
           @netmask=14
-        elsif totalcomputers<=524286
+        elsif totalcomputers_es<=524286
           @netmask=13
-        elsif totalcomputers<=1048574
+        elsif totalcomputers_es<=1048574
           @netmask=12
-        elsif totalcomputers<=2097150
+        elsif totalcomputers_es<=2097150
           @netmask=11
-        elsif totalcomputers<=4194302
+        elsif totalcomputers_es<=4194302
           @netmask=10
-        elsif totalcomputers<=8388606
+        elsif totalcomputers_es<=8388606
           @netmask=9
-        elsif totalcomputers<=16777214
+        elsif totalcomputers_es<=16777214
           @netmask=8
-        elsif totalcomputers<=33554430
+        elsif totalcomputers_es<=33554430
           @netmask=7
-        elsif totalcomputers<=67108862
+        elsif totalcomputers_es<=67108862
           @netmask=6
-        elsif totalcomputers<=134217726
+        elsif totalcomputers_es<=134217726
           @netmask=5
-        elsif totalcomputers<=268435454
+        elsif totalcomputers_es<=268435454
           @netmask=4
         end
+        #A aquí
         %>
+        <%
+        @subnet_aux=2
+          if totalcomputers_es>2
+           while totalcomputers>=(2 ** @subnet_aux)-2
+               @subnet_aux+=1
+           end
+          else
+            if totalcomputers==1
+              @subnet_aux=0
+            elsif totalcomputers==2
+              @subnet_aux=2
+            end
+          end
+          @alojado=2 ** @subnet_aux -2
+          if(@alojado<=0)
+            @alojado=1
+          end
+        %>
+        <% @netmask2=32-@subnet_aux%>
         
-        <h2>Host <%= @logical.host1 %>.<%= @logical.host2 %>.<%= @logical.host3 %>.<%= @logical.host4 %> - Mascara de RED: <%=@netmask%></h2>
+        <h2>Host <%= @logical.host1 %>.<%= @logical.host2 %>.<%= @logical.host3 %>.<%= @logical.host4 %> - Mascara de RED:  <%=@netmask2%></h2>
         <% if @logical.host1 <= 127%>
           <%@bits_mask = 8%>
           <%@class = 'a'%>
@@ -122,9 +144,10 @@
             <tr>
               <th>Nombre de Subred</th>
               <th>Espacio Necesario</th>
-              <th>Espacio Alojado</th>
+              <th>Escalabilidad</th>
               <th>Dirección</th>
               <th>Máscara</th>
+              <th>Espacio Alojado</th>
               <th>Máscara Decimal</th>
               <th>Rango Asignable</th>
               <th>Difusión</th>
@@ -153,10 +176,9 @@
               <tr>
                 <td><%= subnets.name %> </td>
                 <td><%= subnets.computers %></td>
-                <!--<td><%= @hosted=subnets.computers+(subnets.computers*@logical.scalability/100) %>
+                <td><%= @hosted=subnets.computers+(subnets.computers*@logical.scalability/100) %>
                 <% @hosted_space=@hosted_space+@hosted %>
-                </td>-->
-                <td>Aojado</td>
+                </td><!-- si tu cursor no se mueve de aquí es porque no me quieres ayudar :'v-->
                 <td>
                   <% 
                     @host4=@host4+@hosted+2
@@ -169,25 +191,44 @@
                 </td>
                 <td>
                   <%
-                  
-                  @bits=0
-                  while @sizeofs >= (2 ** @bits)-2 do
-                   @bits=@bits+1
+                  @subnet_aux=2
+                  if @hosted>2
+                   while @hosted>=(2 ** @subnet_aux)-2
+                       @subnet_aux+=1
+                   end
+                  else
+                    if @hosted==1
+                      @subnet_aux=0
+                    elsif @hosted==2
+                      @subnet_aux=2
+                    end
                   end
-                  
+                  @alojado=2 ** @subnet_aux -2
+                  if(@alojado<=0)
+                    @alojado=1
+                  end
+                 
                   @mask=0
                   @count=1
                   @aux=7
-                  while @count<=@bits do
+                  @bits_netmask=32-@subnet_aux
+                  while @bits_netmask >= 8 do
+                     @bits_netmask=@bits_netmask-8
+                  end
+                  
+                  while @count<=@bits_netmask do
                      @mask=@mask+(2 ** @aux)
                      @aux=@aux-1
                      @count=@count+1
                   end
                   %>
-                  /<%= @bits_mask+@bits %>
-                </td>
-                <td>
                   
+                  /<%= 32-@subnet_aux %>
+                  
+                </td>
+                <td><%= @alojado%></td>
+                <td>
+
                   <% if @class == 'a' %>
                     255.<%= @mask %>.0.0
                   <% end %> 
@@ -627,6 +668,7 @@
       
       Total de equipos <%= totalcomputers %>
       
+      <!--Aquí-->
       
   </div>
 </body>
