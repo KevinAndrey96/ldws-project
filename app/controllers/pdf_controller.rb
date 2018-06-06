@@ -1,4 +1,5 @@
 class PdfController < ApplicationController
+  
   def empresa
     if params[:id]
       @company=Company.find(params[:id])
@@ -20,6 +21,11 @@ class PdfController < ApplicationController
     render  :pdf => "Reporte", :template => 'pdf/empresa.html.erb'
   end
   def direccionamiento
+    
+ ip = IPAddress::IPv4.new "172.16.10.1/24"
+    
+    
+
     if params[:id]
       @company=Company.find(params[:id])
       @request=Request.where(:company_id => params[:id]).first
@@ -109,4 +115,5 @@ class PdfController < ApplicationController
     @totalcomputers3=@physical.sum(:computers)
     render  :pdf => "Reporte", :template => 'pdf/topologia.html.erb'
   end
+  
 end

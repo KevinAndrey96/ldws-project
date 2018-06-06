@@ -1,0 +1,472 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png" />
+	<link rel="icon" type="image/png" href="assets/img/favicon.png" />
+	<title>Paper Bootstrap Wizard by Creative Tim</title>
+
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+
+	<!-- CSS Files -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="assets/css/paper-bootstrap-wizard.css" rel="stylesheet" />
+
+	<!-- CSS Just for demo purpose, don't include it in your project -->
+	<link href="assets/css/demo.css" rel="stylesheet" />
+
+	<!-- Fonts and Icons -->
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.css" rel="stylesheet">
+	<link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
+	<link href="assets/css/themify-icons.css" rel="stylesheet">
+</head>
+
+<body>
+	<div class="image-container set-full-height" style="background-image: url('')">
+	    <!--   Big container   -->
+	    <div class="container">
+	        <div class="row">
+		        <div class="col-sm-8 col-sm-offset-2">
+
+		            <!--      Wizard container        -->
+		            <div class="wizard-container">
+		                <div class="card wizard-card" data-color="azure" id="wizard">
+		                    <form action="" method="">
+		                <!--        You can switch " data-color="azure" "  with one of the next bright colors: "blue", "green", "orange", "red"           -->
+
+		                    	<div class="wizard-header">
+		                        	<h3 class="wizard-title">Crea una solicitud para tu empresa</h3>
+		                        	<p class="category">Emmmm no se que escribir aqui.</p>
+		                    	</div>
+
+								<div class="wizard-navigation">
+									<div class="progress-with-circle">
+									     <div class="progress-bar" role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="5" style="width: 21%;"></div>
+									</div>
+									<ul>
+			                            <li>
+											<a href="#details" data-toggle="tab">
+												<div class="icon-circle">
+													<i class="ti-bag"></i>
+												</div>
+												Empresa
+											</a>
+										</li>
+			                            <li>
+											<a href="#captain" data-toggle="tab">
+												<div class="icon-circle">
+													<i class="ti-email"></i>
+												</div>
+												Solicitud
+											</a>
+										</li>
+			                            <li>
+											<a href="#description" data-toggle="tab">
+												<div class="icon-circle">
+													<i class="ti-desktop"></i>
+												</div>
+												Fisico
+											</a>
+										</li>
+										<li>
+											<a href="#logic" data-toggle="tab">
+												<div class="icon-circle">
+													<i class="ti-signal"></i>
+												</div>
+												Logico
+											</a>
+										</li>
+										<li>
+											<a href="#subred" data-toggle="tab">
+												<div class="icon-circle">
+													<i class="ti-rss-alt"></i>
+												</div>
+												Subredes
+											</a>
+										</li>
+			                        </ul>
+								</div>
+		                        <div class="tab-content">
+		                            <div class="tab-pane" id="details">
+		                            	<div class="row">
+		                                	<div class="col-sm-12">
+		                                    	<h5 class="info-text">Ingresa los datos de tu empresa !</h5>
+		                                	</div>
+			                                <div class="col-sm-5 col-sm-offset-1">
+			                                    <div class="form-group">
+			                                        <label>Nombre:</label>
+			                                        <input type="text" class="form-control" id="nombre" placeholder="Nombre">
+			                                    </div>
+			                                </div>
+			                                <div class="col-sm-5">
+			                                    <div class="form-group">
+			                                        <label>Nit:</label>
+			                                        <input type="number" class="form-control" id="nit" placeholder="Nit">
+			                                    </div>
+			                                </div>
+	<!-- 		                                <div class="col-sm-5">
+			                                    <div class="form-group">
+			                                        <label>Space</label>
+			                                        <select class="form-control">
+			                                            <option disabled="" selected="">- choose a space -</option>
+			                                            <option>Work Space</option>
+			                                            <option>Meeting Space</option>
+			                                        </select>
+			                                    </div>
+			                                </div> -->
+			                                <div class="col-sm-5 col-sm-offset-1">
+			                                    <div class="form-group">
+			                                        <label>Visión:</label>
+			                                        <input type="text" class="form-control" id="vision" placeholder="Visión">
+			                                    </div>
+			                                </div>
+			                                <div class="col-sm-5">
+			                                    <div class="form-group">
+			                                        <label>Misión:</label>
+			                                        <input type="text" class="form-control" id="mision" placeholder="Misión">
+			                                    </div>
+			                                </div>
+		                            	</div>
+		                        	</div>
+		                            <div class="tab-pane" id="captain">
+		                                <h5 class="info-text">Ahora registraremos tu solicitud ! </h5>
+		                                <div class="col-sm-11 col-sm-offset-1">
+		                                	<div class="form-group">
+		                                        <label>Título:</label>
+		                                        <input type="text" class="form-control" id="titulo" placeholder="Título">
+		                                    </div>
+		                                </div>
+		                                <div class="col-sm-11 col-sm-offset-1">
+		                                    <div class="form-group">
+		                                        <label>Descripción:</label>
+		                                        <textarea class="form-control" id="descripcion" placeholder="Descripción" rows="2"></textarea>
+		                                    </div>
+		                                </div>
+		                                <div class="col-sm-11 col-sm-offset-1">
+		                                    <div class="form-group">
+		                                        <label>Objetivos:</label>
+		                                        <textarea class="form-control" id="objetivos" placeholder="Objetivos" rows="2"></textarea>
+		                                    </div>
+		                                </div>
+		                                <div class="col-sm-11 col-sm-offset-1">
+		                                    <div class="form-group">
+		                                        <label>Observaciones:</label>
+		                                        <textarea class="form-control" id="observaciones" placeholder="Observaciones" rows="2"></textarea>
+		                                    </div>
+		                                </div>
+		                                <div class="row">
+		                                <div class="col-sm-11 col-sm-offset-1">
+		                                	<div class="form-group">
+		                                        <label>Requerimientos adicionales:</label>
+		                                    </div>
+		                                </div></div>
+		                                <div class="row">
+		                                    <div class="col-sm-12s col-sm-offset-1">
+		                                        <div class="col-sm-2">
+													<div class="choice" data-toggle="wizard-checkbox">
+		                                                <input type="checkbox" name="jobb" value="Design">
+		                                                <div class="card card-checkboxes card-hover-effect">
+		                                                    <i class="ti-time"></i>
+															<p>Servidor Web</p>
+		                                                </div>
+		                                            </div>
+		                                        </div>
+		                                        <div class="col-sm-2">
+													<div class="choice" data-toggle="wizard-checkbox">
+		                                                <input type="checkbox" name="jobb" value="Design">
+		                                                <div class="card card-checkboxes card-hover-effect">
+		                                                    <i class="ti-server"></i>
+															<p>Servidor de base de datos</p>
+		                                                </div>
+		                                            </div>
+		                                        </div>
+		                                        <div class="col-sm-2">
+													<div class="choice" data-toggle="wizard-checkbox">
+		                                                <input type="checkbox" name="jobb" value="Design">
+		                                                <div class="card card-checkboxes card-hover-effect">
+		                                                    <i class="ti-android"></i>
+															<p>Servidor de aplicaciones</p>
+		                                                </div>
+		                                            </div>
+		                                        </div>
+		                                        <div class="col-sm-2">
+													<div class="choice" data-toggle="wizard-checkbox">
+		                                                <input type="checkbox" name="jobb" value="Design">
+		                                                <div class="card card-checkboxes card-hover-effect">
+		                                                    <i class="ti-pin"></i>
+															<p>Servidor proxy</p>
+		                                                </div>
+		                                            </div>
+		                                        </div>
+		                                        <div class="col-sm-2">
+													<div class="choice" data-toggle="wizard-checkbox">
+		                                                <input type="checkbox" name="jobb" value="Design">
+		                                                <div class="card card-checkboxes card-hover-effect">
+		                                                    <i class="ti-location-arrow"></i>
+															<p>Servidor VoIP</p>
+		                                                </div>
+		                                            </div>
+		                                        </div>
+		                                        <div class="col-sm-2">
+													<div class="choice" data-toggle="wizard-checkbox">
+		                                                <input type="checkbox" name="jobb" value="Design">
+		                                                <div class="card card-checkboxes card-hover-effect">
+		                                                    <i class="ti-video-camera"></i>
+															<p>Servicio videoconferencia</p>
+		                                                </div>
+		                                            </div>
+		                                        </div>
+		                                    </div>
+		                                </div>
+										<div class="row">
+		                                    <div class="col-sm-12s col-sm-offset-1">
+		                                        <div class="col-sm-2">
+													<div class="choice" data-toggle="wizard-checkbox">
+		                                                <input type="checkbox" name="jobb" value="Design">
+		                                                <div class="card card-checkboxes card-hover-effect">
+		                                                    <i class="ti-agenda"></i>
+															<p>Directorio activo</p>
+		                                                </div>
+		                                            </div>
+		                                        </div>
+		                                        <div class="col-sm-2">
+													<div class="choice" data-toggle="wizard-checkbox">
+		                                                <input type="checkbox" name="jobb" value="Design">
+		                                                <div class="card card-checkboxes card-hover-effect">
+		                                                    <i class="ti-panel"></i>
+															<p>Servicio DHCP</p>
+		                                                </div>
+		                                            </div>
+		                                        </div>
+		                                        <div class="col-sm-2">
+													<div class="choice" data-toggle="wizard-checkbox">
+		                                                <input type="checkbox" name="jobb" value="Design">
+		                                                <div class="card card-checkboxes card-hover-effect">
+		                                                    <i class="ti-bookmark"></i>
+															<p>Servidor DNS</p>
+		                                                </div>
+		                                            </div>
+		                                        </div>
+		                                        <div class="col-sm-2">
+													<div class="choice" data-toggle="wizard-checkbox">
+		                                                <input type="checkbox" name="jobb" value="Design">
+		                                                <div class="card card-checkboxes card-hover-effect">
+		                                                    <i class="ti-plug"></i>
+															<p>Servidor FTP</p>
+		                                                </div>
+		                                            </div>
+		                                        </div>
+		                                        <div class="col-sm-2">
+													<div class="choice" data-toggle="wizard-checkbox">
+		                                                <input type="checkbox" name="jobb" value="Design">
+		                                                <div class="card card-checkboxes card-hover-effect">
+		                                                    <i class="ti-email"></i>
+															<p>Servidor correo electrónico</p>
+		                                                </div>
+		                                            </div>
+		                                        </div>
+		                                    </div>
+		                                </div>    
+		                            </div>
+		                            <div class="tab-pane" id="description">
+		                                <div class="row">
+		                                    <h5 class="info-text"> Ingresa los datos fisicos. </h5>
+		                                    <div id="clone">
+			                                    <div class="col-sm-2">
+			                                        <div class="form-group">
+			                                            <label>Altura</label>
+			                                            <input type="number" class="form-control" id="Alto" placeholder="Altura">
+			                                        </div>
+			                                    </div>
+			                                    <div class="col-sm-2">
+			                                        <div class="form-group">
+			                                            <label>Largo</label>
+			                                            <input type="number" class="form-control" id="Largo" placeholder="Largo">
+			                                        </div>
+			                                    </div>
+			                                    <div class="col-sm-2">
+			                                        <div class="form-group">
+			                                            <label>Ancho</label>
+			                                            <input type="number" class="form-control" id="Ancho" placeholder="Ancho">
+			                                        </div>
+			                                    </div>
+			                                    <div class="col-sm-3">
+			                                        <div class="form-group">
+			                                            <label>Computadores</label>
+			                                            <input type="number" class="form-control" id="computadores" placeholder="Núm.">
+			                                        </div>
+			                                    </div>
+			                                    <div class="col-sm-3">
+			                                        <div class="form-group">
+			                                            <label>Impresoras</label>
+			                                            <input type="number" class="form-control" id="impresoras" placeholder="Núm.">
+			                                        </div>
+			                                    </div> 
+		                                    </div>
+		                                    <div id="copiar"></div>
+		                                </div><br>
+		                                <div class="row">
+		                                	<center class="col-sm-2 col-sm-offset-5">
+		                                		<input type='button' class='btn btn-fill btn-warning btn-wd' name='agregar' id="add" value='Agregar piso' />
+		                                	</center>	
+		                                </div>
+		                            </div>
+		                            <div class="tab-pane" id="logic">
+		                                <div class="row">
+		                                    <h5 class="info-text"> Ingresa los datos logícos. </h5>
+			                                    <div class="row">
+				                                    <div class="col-sm-2 col-sm-offset-1">
+				                                        <div class="form-group">
+				                                            <label>Escalabilidad</label>
+				                                        </div>
+				                                    </div>
+				                                    <div class="col-sm-8">
+				                                        <div class="form-group">
+				                                            <input type="number" class="form-control" id="escalabilidad" placeholder="Escalabilidad">
+				                                        </div>
+				                                    </div>
+			                                    </div>
+			                                    <div class="row">
+			                                    	<div class="col-sm-2 col-sm-offset-1">
+				                                        <div class="form-group">
+				                                            <label>Host</label>
+				                                        </div>
+				                                    </div> 	
+				                                    <div class="col-sm-2 ">
+				                                        <div class="form-group">
+				                                            <input type="number" class="form-control" id="host_1" placeholder="192">
+				                                        </div>
+				                                    </div>
+				                                    <div class="col-sm-2">
+				                                        <div class="form-group">
+				                                            <input type="number" class="form-control" id="host_2" placeholder="168">
+				                                        </div>
+				                                    </div>
+				                                    <div class="col-sm-2">
+				                                        <div class="form-group">
+				                                            <input type="number" class="form-control" id="host_3" placeholder="0">
+				                                        </div>
+				                                    </div>
+				                                    <div class="col-sm-2">
+				                                        <div class="form-group">
+				                                            <input type="number" class="form-control" id="host_4" placeholder="1">
+				                                        </div>
+				                                    </div>
+			                                    </div>
+			                            </div>
+		                                <div class="row">
+		                                    <div class="col-sm-12s col-sm-offset-4">
+		                                        <div class="col-sm-3">
+													<div class="choice" data-toggle="wizard-checkbox">
+		                                                <input type="checkbox" name="jobb" value="Design">
+		                                                <div class="card card-checkboxes card-hover-effect">
+		                                                    <i class="ti-export"></i>
+															<p>Redundancia</p>
+		                                                </div>
+		                                            </div>
+		                                        </div>
+		                                        <div class="col-sm-3">
+													<div class="choice" data-toggle="wizard-checkbox">
+		                                                <input type="checkbox" name="jobb" value="Design">
+		                                                <div class="card card-checkboxes card-hover-effect">
+		                                                    <i class="ti-pulse"></i>
+															<p>Generar scripts</p>
+		                                                </div>
+		                                            </div>
+		                                        </div>
+		                                        <div class="col-sm-3">
+													<div class="choice" data-toggle="wizard-checkbox">
+		                                                <input type="checkbox" name="jobb" value="Design">
+		                                                <div class="card card-checkboxes card-hover-effect">
+		                                                    <i class="ti-rss-alt"></i>
+															<p>Generar tabla de IP</p>
+		                                                </div>
+		                                            </div>
+		                                        </div>
+		                                    </div>
+		                                </div> 
+		                        	</div>
+
+		                            <div class="tab-pane" id="subred">
+		                                <div class="row">
+		                                    <h5 class="info-text"> Ingresa las subredes. </h5>
+		                                    <div id="clone_subred">
+			                                    <div class="col-sm-3 col-sm-offset-1">
+			                                        <div class="form-group">
+			                                            <label>Nombre</label>
+			                                            <input type="text" class="form-control" id="Alto" placeholder="Nombre">
+			                                        </div>
+			                                    </div>
+				                                <div class="col-sm-5">
+				                                    <div class="form-group">
+				                                        <label>Descripción:</label>
+				                                        <textarea class="form-control" id="descripcion" placeholder="Descripción" rows="1"></textarea>
+				                                    </div>
+				                                </div>
+			                                    <div class="col-sm-2">
+			                                        <div class="form-group">
+			                                            <label>Computadores</label>
+			                                            <input type="number" class="form-control" id="computadores" placeholder="Núm.">
+			                                        </div>
+			                                    </div>
+		                                    </div>
+		                                    <div id="copiar_subred"></div>
+		                                </div><br>
+		                                <div class="row">
+		                                	<center class="col-sm-2 col-sm-offset-5">
+		                                		<input type='button' class='btn btn-fill btn-warning btn-wd' name='agregar' id="add_subred" value='Agregar subred' />
+		                                	</center>	
+		                                </div>
+		                            </div>
+		                        </div>
+		                        <div class="wizard-footer">
+		                        	<div class="pull-right">
+		                                <input type='button' class='btn btn-next btn-fill btn-primary btn-wd' name='next' value='Siguiente' />
+		                                <input type='button' class='btn btn-finish btn-fill btn-primary btn-wd' name='finish' value='Finalizar' />
+		                            </div>
+		                            <div class="pull-left">
+		                                <input type='button' class='btn btn-previous btn-default btn-wd' name='previous' value='Anterior' />
+		                            </div>
+		                            <div class="clearfix"></div>
+		                        </div>
+		                    </form>
+		                </div>
+		            </div> <!-- wizard container -->
+		        </div>
+	        </div> <!-- row -->
+	    </div> <!--  big container -->
+
+	    <div class="footer">
+	        <div class="container text-center">
+	             LDWS <i class="fa fa-heart heart"></i> 2018
+	        </div>
+	    </div>
+	</div>
+
+</body>
+
+	<!--   Core JS Files   -->
+	<script src="assets/js/jquery-2.2.4.min.js" type="text/javascript"></script>
+	<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="assets/js/jquery.bootstrap.wizard.js" type="text/javascript"></script>
+
+	<!--  Plugin for the Wizard -->
+	<script src="assets/js/paper-bootstrap-wizard.js" type="text/javascript"></script>
+
+	<!--  More information about jquery.validate here: http://jqueryvalidation.org/	 -->
+	<script src="assets/js/jquery.validate.min.js" type="text/javascript"></script>
+
+</html>
+<script type="text/javascript">
+
+$( "#add" ).click(function() {
+  $( "#clone" ).clone().appendTo( "#copiar" );
+});
+
+$( "#add_subred" ).click(function() {
+  $( "#clone_subred" ).clone().appendTo( "#copiar_subred" );
+});
+
+</script>

@@ -55,7 +55,9 @@ end
 
 gem 'devise'
 gem 'bootstrap-sass', '~> 3.3.6'
+gem 'bootstrap', '~> 4.1.1'
 gem 'autoprefixer-rails'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
 gem 'wkhtmltopdf-heroku'
+gem 'ipaddress', '~> 0.8.3'

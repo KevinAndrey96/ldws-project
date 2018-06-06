@@ -8,6 +8,8 @@
 <% totalcomputers2=@physical.sum(:computers) %>
 <% totalcomputers3=@physical.sum(:computers) %>
 <% slots_u=0 %>
+<% @auxhost2=0%>
+<% cva=0%>
 
 <!doctype html>
 <html>
@@ -178,7 +180,7 @@
                 <td><%= subnets.computers %></td>
                 <td><%= @hosted=subnets.computers+(subnets.computers*@logical.scalability/100) %>
                   <% @hosted_space=@hosted_space+@hosted %>
-                </td><!-- si tu cursor no se mueve de aquí es porque no me quieres ayudar :'v-->
+                </td>
                 <td>
                   <% 
                   @host4=@host4+@hosted+2
@@ -243,8 +245,16 @@
                   
                 </td>
                 <td>
-                  
-                  <%= @host1 %>.<%= @host2 %>.<%= @host3 %>.<%= @auxhost %> - <%= @host1 %>.<%= @host2 %>.<%= @host3 %>.<%= @host4-1 %> 
+                  <%
+                  #if cva==0
+                   # @auxhost2=@logical.host4
+                    #cva+=1
+                  #end
+                  %>
+                  <%= @host1 %>.<%= @host2 %>.<%= @host3 %>.<%= @auxhost2 %> - 
+                  <% @auxhost2+=@alojado %>
+                  <%= @host1 %>.<%= @host2 %>.<%= @host3 %>.<%= @auxhost2 %> 
+                  <% @auxhost2+=1 %>
                   <% @auxhost=@host4 %>
                 </td>
                 <td>
