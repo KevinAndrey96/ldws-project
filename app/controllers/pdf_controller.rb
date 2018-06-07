@@ -6,8 +6,8 @@ class PdfController < ApplicationController
       @company=Company.find(params[:id])
       @request=Request.where(:company_id => params[:id]).first
     elsif params[:request_id]
-      @company=Company.find(params[:request_id])
-      @request=Request.find(params[:request_id])
+      @request=Request.find(params[:request_id]) 
+      @company=Company.find(@request.company_id)
       @physical=Physical.where(:request_id => @request.id)
       @logical=Logical.where(:request_id => @request.id)
     end
@@ -29,8 +29,9 @@ class PdfController < ApplicationController
     #elsif params[:request_id]
     
     if params[:request_id]
-      @company=Company.find(params[:request_id])
       @request=Request.find(params[:request_id])
+      @company=Company.find(@request.company_id)
+      
       @physical=Physical.where(:request_id => @request.id)
       @logical=Logical.where(:request_id => @request.id)
     end
@@ -38,7 +39,7 @@ class PdfController < ApplicationController
     @request=Request.where(:company_id => @company.id).first 
     @company=Company.find(@company.id) 
     @physical=Physical.where(:request_id => @request.id) 
-    @logical=Logical.where(:request_id => @request.id).first 
+    @logical=Logical.where(:request_id => @request.id).last 
     @subnets=Subnet.where(:logical_id => @logical.id) 
     @sizeofs=Subnet.where(:logical_id => @logical.id).size 
     @totalcomputers=@physical.sum(:computers) 
@@ -93,8 +94,8 @@ class PdfController < ApplicationController
     #  @request=Request.where(:company_id => params[:id]).first
     #elsif params[:request_id]
     if params[:request_id]
-      @company=Company.find(params[:request_id])
       @request=Request.find(params[:request_id])
+      @company=Company.find(@request.company_id)
       @physical=Physical.where(:request_id => @request.id)
       @logical=Logical.where(:request_id => @request.id)
     end
@@ -117,8 +118,8 @@ class PdfController < ApplicationController
     #  @request=Request.where(:company_id => params[:id]).first
     #elsif params[:request_id]
     if params[:request_id]
-      @company=Company.find(params[:request_id])
       @request=Request.find(params[:request_id])
+      @company=Company.find(@request.company_id)
       @physical=Physical.where(:request_id => @request.id)
       @logical=Logical.where(:request_id => @request.id)
     end
@@ -140,8 +141,8 @@ class PdfController < ApplicationController
     #  @request=Request.where(:company_id => params[:id]).first
     #elsif params[:request_id]
     if params[:request_id]
-      @company=Company.find(params[:request_id])
       @request=Request.find(params[:request_id])
+      @company=Company.find(@request.company_id)
       @physical=Physical.where(:request_id => @request.id)
       @logical=Logical.where(:request_id => @request.id)
     end
