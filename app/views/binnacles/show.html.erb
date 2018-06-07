@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @binnacle.user %>
+</p>
+
+<p>
+  <strong>Company:</strong>
+  <%= @binnacle.company %>
+</p>
+
+<p>
+  <strong>Action:</strong>
+  <%= @binnacle.action %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @binnacle.description %>
+</p>
+
+<%= link_to 'Edit', edit_binnacle_path(@binnacle) %> |
+<%= link_to 'Back', binnacles_path %>

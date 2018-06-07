@@ -1,11 +1,14 @@
 class RequestsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_request, only: [:show, :edit, :update, :destroy]
 
   # GET /requests
   # GET /requests.json
   def index
-    
-    @requests = Request.all
+    #@requests = Request.all
+    if params[:id]
+      @requests = Request.where(:company_id => params[:id])
+    end
   end
 
   # GET /requests/1

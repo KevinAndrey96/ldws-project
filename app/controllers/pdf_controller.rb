@@ -1,5 +1,5 @@
 class PdfController < ApplicationController
-  
+  before_action :authenticate_user!
   def empresa
     if params[:id]
       @company=Company.find(params[:id])
@@ -22,14 +22,12 @@ class PdfController < ApplicationController
   end
   def direccionamiento
     
- ip = IPAddress::IPv4.new "172.16.10.1/24"
+    #if params[:id]
+     # @company=Company.find(params[:id])
+    #  @request=Request.where(:company_id => params[:id]).first
+    #elsif params[:request_id]
     
-    
-
-    if params[:id]
-      @company=Company.find(params[:id])
-      @request=Request.where(:company_id => params[:id]).first
-    elsif params[:request_id]
+    if params[:request_id]
       @company=Company.find(params[:request_id])
       @request=Request.find(params[:request_id])
       @physical=Physical.where(:request_id => @request.id)
@@ -49,10 +47,11 @@ class PdfController < ApplicationController
     render  :pdf => "Reporte", :template => 'pdf/direccionamiento.html.erb'
   end
   def switches
-    if params[:id]
-      @company=Company.find(params[:id])
-      @request=Request.where(:company_id => params[:id]).first
-    elsif params[:request_id]
+    #if params[:id]
+     # @company=Company.find(params[:id])
+    #  @request=Request.where(:company_id => params[:id]).first
+    #elsif params[:request_id]
+    if params[:request_id]
       @company=Company.find(params[:request_id])
       @request=Request.find(params[:request_id])
       @physical=Physical.where(:request_id => @request.id)
@@ -72,10 +71,11 @@ class PdfController < ApplicationController
     render  :pdf => "Reporte", :template => 'pdf/switches.html.erb'
   end
   def routers
-    if params[:id]
-      @company=Company.find(params[:id])
-      @request=Request.where(:company_id => params[:id]).first
-    elsif params[:request_id]
+    #if params[:id]
+     # @company=Company.find(params[:id])
+    #  @request=Request.where(:company_id => params[:id]).first
+    #elsif params[:request_id]
+    if params[:request_id]
       @company=Company.find(params[:request_id])
       @request=Request.find(params[:request_id])
       @physical=Physical.where(:request_id => @request.id)
@@ -94,10 +94,11 @@ class PdfController < ApplicationController
     render  :pdf => "Reporte", :template => 'pdf/routers.html.erb'
   end
   def topologia
-    if params[:id]
-      @company=Company.find(params[:id])
-      @request=Request.where(:company_id => params[:id]).first
-    elsif params[:request_id]
+    #if params[:id]
+     # @company=Company.find(params[:id])
+    #  @request=Request.where(:company_id => params[:id]).first
+    #elsif params[:request_id]
+    if params[:request_id]
       @company=Company.find(params[:request_id])
       @request=Request.find(params[:request_id])
       @physical=Physical.where(:request_id => @request.id)
@@ -114,6 +115,9 @@ class PdfController < ApplicationController
     @totalcomputers2=@physical.sum(:computers)
     @totalcomputers3=@physical.sum(:computers)
     render  :pdf => "Reporte", :template => 'pdf/topologia.html.erb'
+  end
+  def final
+    render  :pdf => "Reporte", :template => 'pdf/final.html.erb'
   end
   
 end

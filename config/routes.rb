@@ -1,4 +1,13 @@
 Rails.application.routes.draw do
+  get 'pdf/final'
+
+  get 'panel/index'
+
+  resources :binnacles
+  get 'process/index'
+
+  resources :manage_users
+
   get 'process/index'
 
   get 'subnet/index'

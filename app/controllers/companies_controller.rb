@@ -1,10 +1,15 @@
 class CompaniesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_company, only: [:show, :edit, :update, :destroy]
 
   # GET /companies
   # GET /companies.json
   def index
-    @companies = Company.where(:user_id => current_user.id)
+    if current_user.role=="Admin"
+      @companies = Company.all
+    else
+      @companies = Company.where(:user_id => current_user.id)
+    end
   end
 
   # GET /companies/1

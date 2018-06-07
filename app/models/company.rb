@@ -18,5 +18,5 @@
 
 class Company < ActiveRecord::Base
     belongs_to :user
-    has_one :request
+    has_many :request
 end

@@ -1,0 +1,39 @@
+<% if user_signed_in? %>
+<br><br><br>
+<div class="row main">
+    <div class="col-md-12">
+        <div class="col-md-3">
+            <center>EMPRESAS</center>
+            <div class="row option">
+                <center><%= link_to 'Datos básicos de la empresa', pdf_empresa_path(:id => @company.id), :target => "_blank", :class => "btn btn-default" %></center>
+            </div>
+            
+        </div>
+        <div class="col-md-3">
+
+            <center>LOGICO</center>
+            <div class="row option">
+                <center><%= link_to 'Ver resultados de direccionamiento', pdf_direccionamiento_path(:request_id => @request.id), :target => "_blank", :class => "btn btn-default" %></center>
+            </div>
+            <div class="row option">
+                <center><%= link_to 'Ver scripts de configuración para switches', pdf_switches_path(:request_id => @request.id), :target => "_blank", :class => "btn btn-default" %></center>
+            </div>
+            <div class="row option">
+                <center><%= link_to 'Ver scripts de configuración para routers', pdf_routers_path(:request_id => @request.id), :target => "_blank", :class => "btn btn-default" %></center>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <center>FISICO</center>
+            <div class="row option">
+                <center><%= link_to 'Ver resultados de topología', pdf_topologia_path(:request_id => @request.id), :target => "_blank", :class => "btn btn-default" %></center>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <center>REPORTE FINAL</center>
+            <div class="row option">
+                <center><%= link_to 'Ver reporte final', pdf_final_path(:request_id => @request.id), :target => "_blank", :class => "btn btn-default" %></center>
+            </div>
+        </div>
+    </div>
+</div>
+<% end %>
