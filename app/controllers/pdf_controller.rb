@@ -1,4 +1,5 @@
 class PdfController < ApplicationController
+  
   before_action :authenticate_user!
   def empresa
     if params[:id]
@@ -43,6 +44,46 @@ class PdfController < ApplicationController
     @totalcomputers=@physical.sum(:computers) 
     @totalcomputers2=@physical.sum(:computers)
     @totalcomputers3=@physical.sum(:computers)
+    
+    #response = HTTParty.get('http://api.stackexchange.com/2.2/questions?site=stackoverflow')
+    #response = HTTParty.get("http://instanceshape.com/admin/VLSM/index.php?Host=192.168.1.24&sub[uno]=15&sub[dos]=56&sub[tres]=36")
+    require 'uri'
+    require 'net/http'
+    
+    #Direccionamiento normal
+    
+    #myurl="https://instanceshape.com/admin/VLSM/index.php?Host="+@logical.host1.to_s+"."+@logical.host2.to_s+"."+@logical.host3.to_s+"."+@logical.host4.to_s
+    myurl="https://instanceshape.com/admin/VLSM/index.php?Host="+@logical.host1.to_s+"."+@logical.host2.to_s+"."+@logical.host3.to_s+".0";
+    @subnets.each do |subs|
+      myurl+="&sub["+subs.name+"]="+subs.computers.to_s
+    end  
+    url = URI(myurl)
+    http = Net::HTTP.new(url.host, url.port)
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    request = Net::HTTP::Get.new(url)
+    response = http.request(request)
+    puts response.read_body
+    require 'json'
+    @h = JSON.parse response.read_body
+    
+    #Direccionamiento Escalabilidad
+    
+    #myurl="https://instanceshape.com/admin/VLSM/index.php?Host="+@logical.host1.to_s+"."+@logical.host2.to_s+"."+@logical.host3.to_s+"."+@logical.host4.to_s
+    myurl="https://instanceshape.com/admin/VLSM/index.php?Host="+@logical.host1.to_s+"."+@logical.host2.to_s+"."+@logical.host3.to_s+".0"
+    @subnets.each do |subs|
+      myurl+="&sub["+subs.name+"]="+(subs.computers+(subs.computers*@logical.scalability/100)).to_s
+    end  
+    url = URI(myurl)
+    http = Net::HTTP.new(url.host, url.port)
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    request = Net::HTTP::Get.new(url)
+    response = http.request(request)
+    puts response.read_body
+    require 'json'
+    @g = JSON.parse response.read_body
+    
     
     render  :pdf => "Reporte", :template => 'pdf/direccionamiento.html.erb'
   end

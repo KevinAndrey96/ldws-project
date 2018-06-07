@@ -8,225 +8,77 @@
 <body onload='number_pages'>
   <div id="content">
     <div class="container-fluid">
-      <div class="row">
-        <h2>Direccionamiento</h2>
-        <%
-        totalcomputers_es=@totalcomputers+(@totalcomputers*@logical.scalability/100)
-        #Borrar de aquí
-        if totalcomputers_es==1
-        @netmask=32
-        elsif totalcomputers_es<=2
-        @netmask=30
-        elsif totalcomputers_es<=6
-        @netmask=29
-        elsif totalcomputers_es<=14
-        @netmask=28
-        elsif totalcomputers_es<=31
-        @netmask=27
-        elsif totalcomputers_es<=62
-        @netmask=26
-        elsif totalcomputers_es<=126
-        @netmask=25
-        elsif totalcomputers_es<=254
-        @netmask=24
-        elsif totalcomputers_es<=510
-        @netmask=23
-        elsif totalcomputers_es<=1022
-        @netmask=22
-        elsif totalcomputers_es<=2046
-        @netmask=21
-        elsif totalcomputers_es<=4094
-        @netmask=20
-        elsif totalcomputers_es<=8190
-        @netmask=19
-        elsif totalcomputers_es<=16382
-        @netmask=18
-        elsif totalcomputers_es<=32766
-        @netmask=17
-        elsif totalcomputers_es<=65534
-        @netmask=16
-        elsif totalcomputers_es<=131070
-        @netmask=15
-        elsif totalcomputers_es<=262142
-        @netmask=14
-        elsif totalcomputers_es<=524286
-        @netmask=13
-        elsif totalcomputers_es<=1048574
-        @netmask=12
-        elsif totalcomputers_es<=2097150
-        @netmask=11
-        elsif totalcomputers_es<=4194302
-        @netmask=10
-        elsif totalcomputers_es<=8388606
-        @netmask=9
-        elsif totalcomputers_es<=16777214
-        @netmask=8
-        elsif totalcomputers_es<=33554430
-        @netmask=7
-        elsif totalcomputers_es<=67108862
-        @netmask=6
-        elsif totalcomputers_es<=134217726
-        @netmask=5
-        elsif totalcomputers_es<=268435454
-        @netmask=4
-        end
-        #A aquí
-        %>
-        <%
-        @subnet_aux=2
-        if totalcomputers_es>2
-        while @totalcomputers>=(2 ** @subnet_aux)-2
-        @subnet_aux+=1
-        end
-        else
-        if @totalcomputers==1
-        @subnet_aux=0
-        elsif @totalcomputers==2
-        @subnet_aux=2
-        end
-        end
-        @alojado=2 ** @subnet_aux -2
-        if(@alojado<=0)
-        @alojado=1
-        end
-        %>
-        <% @netmask2=32-@subnet_aux%>
+  <div class="row">
+    <h1>Direccionamiento Estándar</h1>
+    <h2>Host: <%=@h["Datos"]["Host"]%> - Máscara de red: <%=@h["Datos"]["Mascara"]%></h2>
+    <table class="table table-responsive"  border="1" width= "100%">
+      <thead>
+        <tr>
+          <th>Nombre de Subred</th>
+          <th>Espacio Necesario</th>
+          <th>Espacio Alojado</th>
+          <th>Dirección</th>
+          <th>Máscara</th>
+          <th>Máscara Decimal</th>
+          <th>Rango Asignable</th>
+          <th>Difusión</th>
+        </tr>
+      </thead>
+      <tbody>
         
-        <h2>Host <%= @logical.host1 %>.<%= @logical.host2 %>.<%= @logical.host3 %>.<%= @logical.host4 %> - Mascara de RED:  <%=@netmask2%></h2>
-        <% if @logical.host1 <= 127%>
-        <%@bits_mask = 8%>
-        <%@class = 'a'%>
+        <% @subnets.order(computers: :desc, name: :asc).each do |subnet| %>
+          <tr>
+            <td><%=subnet.name%></td>
+            <td><%=subnet.computers%></td>
+            <td><%= @h[subnet.name]["size"]%></td>
+            <td><%= @h[subnet.name]["subnet"]%></td>
+            <td>/<%= @h[subnet.name]["cidr"]%></td>
+            <td><%= @h[subnet.name]["mask"]%></td>
+            <td><%= @h[subnet.name]["firstHost"]%> - <%= @h[subnet.name]["lastHost"]%></td>
+            <td><%= @h[subnet.name]["broadcast"]%></td>
+          </tr>
         <% end %>
+      </tbody>
+      </table>
+  </div>
+  <br>
+  <hr>
+  <br>
+  <div class="row">
+    <h1>Direccionamiento con escalabilidad</h1>
+    <h2>Host: <%=@g["Datos"]["Host"]%> - Máscara de red: <%=@g["Datos"]["Mascara"]%></h2>
+    <table class="table table-responsive"  border="1" width= "100%">
+      <thead>
+        <tr>
+          <th>Nombre de Subred</th>
+          <th>Espacio Necesario</th>
+          <th>Espacio Alojado</th>
+          <th>Dirección</th>
+          <th>Máscara</th>
+          <th>Máscara Decimal</th>
+          <th>Rango Asignable</th>
+          <th>Difusión</th>
+        </tr>
+      </thead>
+      <tbody>
         
-        <% if @logical.host1 <= 191 && @logical.host1 > 127%>
-        <%@bits_mask = 16%>
-        <%@class = 'b'%>
-        <% end %>        
-        
-        <% if @logical.host1 <= 223 && @logical.host1 > 191%>
-        <%@bits_mask = 24%>
-        <%@class = 'c'%>
-        <% end %>          
-        
-        <table class="table table-responsive"  border="1" width= "100%">
-          <thead>
-            <tr>
-              <th>Nombre de Subred</th>
-              <th>Espacio Necesario</th>
-              <th>Escalabilidad</th>
-              <th>Dirección</th>
-              <th>Máscara</th>
-              <th>Espacio Alojado</th>
-              <th>Máscara Decimal</th>
-              <th>Rango Asignable</th>
-              <th>Difusión</th>
-            </tr>
-
-
-          </thead>
-          <tbody>
-            <% 
-            @host1=@logical.host1
-            @host2=@logical.host2
-            @host3=@logical.host3
-            @host4=@logical.host4
-            %>
-            <% @floor=0 %>
-            <% @hosted_space=0 %>
-            <% @auxhost=@logical.host4 %>
-            <% default=@totalcomputers-@subnets.sum(:computers) %>
-            <% @subaux=Subnet.where(:name => "default", :logical_id => @logical.id).count%>
-            <% if default>0 && @subaux==0%>
-            <% @su=Subnet.new(:name => "default", :description => "Sub red Default", :computers => default, :logical_id => @logical.id)%>
-            <% @su.save %>
-            <%end%>
-            <% @subnets.order(computers: :desc).each do |subnets| %>
-            
-            <tr>
-              <td><%= subnets.name %> </td>
-              <td><%= subnets.computers %></td>
-              <td><%= @hosted=subnets.computers+(subnets.computers*@logical.scalability/100) %>
-                <% @hosted_space=@hosted_space+@hosted %>
-              </td><!-- si tu cursor no se mueve de aquí es porque no me quieres ayudar :'v-->
-              <td>
-                <% 
-                @host4=@host4+@hosted+2
-                if @host4>255
-                @host4=@host4-255
-                @host3=@host3+1
-                end
-                %>
-                <%= @host1 %>.<%= @host2 %>.<%= @host3 %>.<%= @host4 %> 
-              </td>
-              <td>
-                <%
-                @subnet_aux=2
-                if @hosted>2
-                while @hosted>=(2 ** @subnet_aux)-2
-                @subnet_aux+=1
-                end
-                else
-                if @hosted==1
-                @subnet_aux=0
-                elsif @hosted==2
-                @subnet_aux=2
-                end
-                end
-                @alojado=2 ** @subnet_aux -2
-                if(@alojado<=0)
-                @alojado=1
-                end
-                
-                @mask=0
-                @count=1
-                @aux=7
-                @bits_netmask=32-@subnet_aux
-                while @bits_netmask >= 8 do
-                @bits_netmask=@bits_netmask-8
-                end
-                
-                while @count<=@bits_netmask do
-                @mask=@mask+(2 ** @aux)
-                @aux=@aux-1
-                @count=@count+1
-                end
-                %>
-                
-                /<%= 32-@subnet_aux %>
-                
-              </td>
-              <td><%= @alojado%></td>
-              <td>
-
-                <% if @class == 'a' %>
-                255.<%= @mask %>.0.0
-                <% end %> 
-                
-                <% if @class == 'b' %>
-                255.255.<%= @mask %>.0
-                <% end %> 
-                
-                <% if @class == 'c' %>
-                255.255.255.<%= @mask %>
-                <% end %> 
-                
-              </td>
-              <td>
-                
-                <%= @host1 %>.<%= @host2 %>.<%= @host3 %>.<%= @auxhost %> - <%= @host1 %>.<%= @host2 %>.<%= @host3 %>.<%= @host4-1 %> 
-                <% @auxhost=@host4 %>
-              </td>
-              <td>
-                <%= @host1 %>.<%= @host2 %>.<%= @host3 %>.<%= @host4 %>
-              </td>
-            </tr>
-            <% end %>
-
-          </tbody>
-        </table>
-        <h2>Total de equipos a direccionar: <%= @hosted_space %></h2>
-      </div>
-    </div>
+        <% @subnets.order(computers: :desc, name: :asc).each do |subnet| %>
+          <tr>
+            <td><%=subnet.name%></td>
+            <td><%=(subnet.computers+(subnet.computers*@logical.scalability/100)).to_s%></td>
+            <td><%= @g[subnet.name]["size"]%></td>
+            <td><%= @g[subnet.name]["subnet"]%></td>
+            <td>/<%= @g[subnet.name]["cidr"]%></td>
+            <td><%= @g[subnet.name]["mask"]%></td>
+            <td><%= @g[subnet.name]["firstHost"]%> - <%= @g[subnet.name]["lastHost"]%></td>
+            <td><%= @g[subnet.name]["broadcast"]%></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  
+  </div>
   </div>
 </body>
 </html>
