@@ -124,22 +124,27 @@ img {
     vertical-align: middle;
     width: 30%;
 }
+
 </style>
 
 <body >
 
   <div class="container-fluid">
+<div class="row">
+    <div class="col-md-11">
+        <p class="navbar-text pull-right">
+            <% if user_signed_in? %>
+              Bienvenido <strong><%= current_user.email %></strong>.
+              <%= link_to 'Editar Perfil', edit_user_registration_path, :class => 'navbar-link', :style => "z-index: 100;" %> |
+              <%= link_to "Cerrar Sesión", destroy_user_session_path, method: :delete, :class => 'navbar-link', :style => "z-index: 100;"  %>
+            <% else %>
+              <%= link_to "Registro", new_user_registration_path, :class => 'navbar-link', :style => "z-index: 100;"  %> |
+              <%= link_to "Iniciar Sesión", new_user_session_path, :class => 'navbar-link', :style => "z-index: 100;"  %>
+            <% end %>
+        </p>
+    </div>
+</div>
 
-<p class="navbar-text pull-right">
-<% if user_signed_in? %>
-  Bienvenido <strong><%= current_user.email %></strong>.
-  <%= link_to 'Editar Perfil', edit_user_registration_path, :class => 'navbar-link', :style => "z-index: 100;" %> |
-  <%= link_to "Cerrar Sesión", destroy_user_session_path, method: :delete, :class => 'navbar-link', :style => "z-index: 100;"  %>
-<% else %>
-  <%= link_to "Registro", new_user_registration_path, :class => 'navbar-link', :style => "z-index: 100;"  %> |
-  <%= link_to "Iniciar Sesión", new_user_session_path, :class => 'navbar-link', :style => "z-index: 100;"  %>
-<% end %>
-</p>
 <div class="row">
     <div class="col-md-11 header">
         <div class="col-md-1 title">

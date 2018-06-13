@@ -20,9 +20,9 @@
         <td><%= user.email %></td>
         <td><%= user.phone %></td>
         <td><%= user.role %></td>
-        <td><%= link_to 'Show', manage_user_path(user) %></td>
-        <td><%= link_to 'Edit', edit_manage_user_path(user) %></td>
-        <td><%= link_to 'Destroy', manage_user_path(user), method: :delete, data: { confirm: '¿Está seguro?' } %></td>
+        <td><%= link_to 'Ver', manage_user_path(user) %></td>
+        <td><%= link_to 'Editar', edit_manage_user_path(user) %></td>
+        <td><%= link_to 'Eliminar', manage_user_path(user), method: :delete, data: { confirm: '¿Está seguro?' } %></td>
         
       </tr>
     <% end %>
