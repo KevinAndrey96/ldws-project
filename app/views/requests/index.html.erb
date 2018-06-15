@@ -165,6 +165,7 @@
     
       <tbody>
         <% @requests.each do |request| %>
+        
           <tr>
             <td><%= request.title %></td>
             <td><%= request.company.name %></td>
@@ -182,4 +183,5 @@
 
 <br>
 
-<center><%= link_to 'Nueva Solicitud', new_request_path, :class => "btn btn-default" %></center>
+<!--<center><%= link_to 'Nueva Solicitud', new_request_path, :class => "btn btn-default" %></center>-->
+<center><%= link_to 'Nueva Solicitud',  process_index_path(:new => "false", :id => params[:id]), :class => "btn btn-default" %></center>

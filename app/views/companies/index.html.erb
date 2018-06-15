@@ -171,7 +171,8 @@
             <td><%= company.nit %></td>
             <td><%= company.mision %></td>
             <td><%= company.vision %></td>
-            <td><center><%= link_to 'Ver Solicitudes',  process_index_path(:new => "false", :id => company.id) %></center></td>
+            <td><center><%= link_to 'Ver Solicitudes',  requests_path( :id => company.id) %></center></td>
+            <!--<td><center><%= link_to 'Ver Solicitudes',  process_index_path(:new => "false", :id => company.id) %></center></td>-->
             <!--<td><%= link_to 'Reporte', company_path(:id => company.id,:format => "pdf") %></td>
             <td><%= link_to 'Direccionamiento', company_path(:id => company.id,:format => "pdf") %></td>
             <td><%= link_to 'Reporte', company_path(:id => company.id,:format => "pdf") %></td>
@@ -188,4 +189,4 @@
 
 <br>
 
-<center><%= link_to 'Nueva Empresa', new_company_path, :class => "btn btn-default" %></center>
+<!--<center><%= link_to 'Nueva Empresa', new_company_path, :class => "btn btn-default" %></center>-->

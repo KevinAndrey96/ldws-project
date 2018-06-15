@@ -170,10 +170,11 @@ img {
     			<ul class="nav navbar-nav navbar-right">
     				<li class="active"><%= link_to 'Inicio', home_index_path, :class => 'navbar-link' %></li>
     				<li class="active"><%= link_to 'Gestión de usuarios', manage_users_path, :class => 'navbar-link' %></li>
+    				<li class="active"><%= link_to 'Gestión de solicitudes', process_index_path(:new => "true"), :class => 'navbar-link' %></li>
     				<li class="active"><%= link_to 'Gestión de empresas', companies_path, :class => 'navbar-link' %></li>
-    				<li class="active"><a href="#">Gestión de sistema <span class="sr-only">(current)</span></a></li>
     				<li class="active"><%= link_to 'Gestión de equipos', equipment_index_path, :class => 'navbar-link' %></li>
-    			    <li class="active"><%= link_to 'Gestión de solicitudes', process_index_path(:new => "true"), :class => 'navbar-link' %></li>
+    				<li class="active"><%= link_to 'Gestión de sistema', binnacles_path, :class => 'navbar-link' %></li>
+    			    
     			</ul>
             </div>
 		</div>
@@ -190,6 +191,7 @@ img {
     			<ul class="nav navbar-nav navbar-right">
     				<li class="active"><%= link_to 'Inicio', home_index_path, :class => 'navbar-link' %></li>
     				<li class="active"><%= link_to 'Gestión de Empresas', companies_path, :class => 'navbar-link' %></li>
+    				<li class="active"><%= link_to 'Gestión de solicitudes', process_index_path(:new => "true"), :class => 'navbar-link' %></li>
     			</ul>
             </div>
 		</div>

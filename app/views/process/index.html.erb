@@ -1441,21 +1441,21 @@ input[type="button"]:focus {
 	  <div class="row">
 	    <div class="col-sm-8 col-sm-offset-2">
 <div class="wizard-container">
-		                <div class="card wizard-card" data-color="azure" id="wizard">
-		                    <form action="" method="">
-		                <!--        You can switch " data-color="azure" "  with one of the next bright colors: "blue", "green", "orange", "red"           -->
+          <div class="card wizard-card" data-color="azure" id="wizard">
+              
+          <!--        You can switch " data-color="azure" "  with one of the next bright colors: "blue", "green", "orange", "red"           -->
 
-		                    	<div class="wizard-header">
-		                        	<h3 class="wizard-title">Crea una solicitud para tu empresa</h3>
-		                        	<p class="category">Digite los datos indicados en el formulario para generar el reporte.</p>
-		                    	</div>
+              	<div class="wizard-header">
+                  	<h3 class="wizard-title">Crea una solicitud para tu empresa</h3>
+                  	<p class="category">Digite los datos indicados en el formulario para generar el reporte.</p>
+              	</div>
 
 								<div class="wizard-navigation">
 									<div class="progress-with-circle">
 									     <div class="progress-bar" role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="5" style="width: 21%;"></div>
 									</div>
 									<ul>
-			                            <li>
+			              <li>
 											<a href="#details" data-toggle="tab">
 												<div class="icon-circle">
 													<i class="ti-bag"></i>
@@ -1852,14 +1852,14 @@ input[type="button"]:focus {
 		                        <div class="wizard-footer">
 		                        	<div class="pull-right">
 		                                <input type='button' class='btn btn-next btn-fill btn-primary btn-wd' name='next' value='Siguiente' />
-		                                <input type='button' class='btn btn-finish btn-fill btn-primary btn-wd' name='finish' value='Finalizar' />
+		                                <input type='button' class='btn btn-finish btn-fill btn-primary btn-wd' onclick="Example()" name='finish' value='Finalizar' />
 		                            </div>
 		                            <div class="pull-left">
 		                                <input type='button' class='btn btn-previous btn-default btn-wd' name='previous' value='Anterior' />
 		                            </div>
 		                            <div class="clearfix"></div>
 		                        </div>
-		                    </form>
+		                    
 		                </div>
 		            </div> <!-- wizard container -->
 		        </div>
@@ -1890,6 +1890,11 @@ $( "#add_subred" ).click(function() {
 </script>
 <script>
     $( document ).ready(function() {
+        <%if params[:new]=="false"%>
+          document.getElementById("details").className = "tab-pane";
+          document.getElementById("captain").className = "tab-pane active";
+        <%end%>
+      
         document.getElementById("logical_id").value = Math.round(Math.random()*10000) ;
         document.getElementById("subnet_id").value = Math.round(Math.random()*10000);
         document.getElementById("physicals_id").value = Math.round(Math.random()*10000);
@@ -1905,16 +1910,20 @@ $( "#add_subred" ).click(function() {
         document.getElementById("new_logical").submit();
         document.getElementById("new_subnet").submit();  
     });
-
+    
+    function Example()
+    {
+      window.alert("Hola");
+    }
 </script>
 
 <script>
 
 searchVisible = 0;
 transparent = true;
-
         $(document).ready(function(){
-
+          
+          
             /*  Activate the tooltips      */
             $('[rel="tooltip"]').tooltip();
 
@@ -1949,14 +1958,14 @@ transparent = true;
                 	}
                 },
 
-                onInit : function(tab, navigation, index){
+                onInit : function(#subred, navigation, index){
 
                   //check number of tabs and fill the entire row
                   var $total = navigation.find('li').length;
                   $width = 100/$total;
 
                   navigation.find('li').css('width',$width + '%');
-
+                 
                 },
 
                 onTabClick : function(tab, navigation, index){
