@@ -2,6 +2,7 @@
 <% totalcomputers2=@physical.sum(:computers) %>
 <% totalcomputers3=@physical.sum(:computers) %>
 <!Doctype html>
+
 <html>
 <head>
   <meta charset='utf-8' />
@@ -18,6 +19,8 @@
       
       <div class="row">
         <h2>Plano de piso <%=floor_number%></h2>
+        <center><b>Ancho:</b> <%= physical.width %>m²</center>
+        <center><b>Largo:</b> <%= physical.large %>m²</center>
         <div style="border: 2px solid black">
         <table class="table table-responsive" border='1' width= "100%" style="border-collapse: collapse; border-color: #FAF9F9">
           <thead>

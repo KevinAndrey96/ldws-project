@@ -15,6 +15,12 @@
         -ms-transition: all 150ms linear;
         transition: all 150ms linear;
     }    
+    
+    @media (max-width: 800px) {
+      img {
+         width:100%;
+      }
+    }
 </style>
 <br><br><br>
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -25,32 +31,25 @@
     <li data-target="#myCarousel" data-slide-to="2"></li>
   </ol>
 
+
+
   <!-- Wrapper for slides -->
   <div class="carousel-inner">
     <div class="item active">
         <div class="row">
-          <center><img class="img-responsive" src="https://images.pexels.com/photos/159282/technology-servers-server-159282.jpeg" alt=""></center>
-          <div style="padding:2%" class="col-sm-12 col-md-2 col-md-offset-8">
-              <input type="button" class="btn btn-default" value="Registra tu empresa !">
-          </div> 
+          <center><img style="" class="img-responsive" src="https://images.pexels.com/photos/159282/technology-servers-server-159282.jpeg" alt=""></center>
         </div>
     </div>
 
     <div class="item">
         <div class="row">
-          <center><img class="img-responsive" src="https://images.pexels.com/photos/46218/network-cables-cable-patch-patch-cable-46218.jpeg" alt="Chicago"></center>
-          <div style="padding:1%" class="col-md-2 col-md-offset-8">
-              <input type="button" class="btn btn-default" value="Registra tu empresa !">
-          </div> 
+          <center><img style="" class="img-responsive" src="https://images.pexels.com/photos/46218/network-cables-cable-patch-patch-cable-46218.jpeg" alt="Chicago"></center>
         </div>
     </div>
 
     <div class="item">
         <div class="row">
-          <center><img class="img-responsive" src="https://images.pexels.com/photos/257736/pexels-photo-257736.jpeg" alt="New York"></center>
-          <div style="padding:1%" class="col-md-2 col-md-offset-8">
-              <input type="button" class="btn btn-default" value="Registra tu empresa !">
-          </div> 
+          <center><img style="" class="img-responsive" src="https://images.pexels.com/photos/257736/pexels-photo-257736.jpeg" alt="New York"></center>
         </div>
     </div>
   </div>
@@ -65,3 +64,7 @@
     <span class="sr-only">Next</span>
   </a>
 </div>
+<div style="padding:3%" class="col-md-2 pull-right">
+    <input type="button" class="btn btn-default" value="Registra tu empresa !">
+</div> 
+
