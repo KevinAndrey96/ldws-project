@@ -8,9 +8,6 @@ class CreateLogicals < ActiveRecord::Migration
       t.integer :host4
       t.boolean :redundancy
       t.integer :scalability
-      t.boolean :scripts
-      t.boolean :iptable
-      
 
       t.timestamps null: false
     end

@@ -158,8 +158,12 @@ class PdfController < ApplicationController
     @totalcomputers3=@physical.sum(:computers)
     render  :pdf => "Reporte", :template => 'pdf/topologia.html.erb'
   end
+  def cotizacion
+    render  :pdf => "Reporte", :template => 'pdf/cotizacion.html.erb'
+  end
   def final
     render  :pdf => "Reporte", :template => 'pdf/final.html.erb'
   end
+  
   
 end

@@ -38,7 +38,7 @@ end
   def create
     @company = Company.new(company_params)
     @company.user_id = current_user.id
-
+    @company.save
     respond_to do |format|
       if @company.save
         format.html { redirect_to @company, notice: 'Company was successfully created.' }

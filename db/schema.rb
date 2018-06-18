@@ -57,8 +57,6 @@ ActiveRecord::Schema.define(version: 20180607020107) do
     t.integer  "host4"
     t.boolean  "redundancy"
     t.integer  "scalability"
-    t.boolean  "scripts"
-    t.boolean  "iptable"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end

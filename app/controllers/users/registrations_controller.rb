@@ -12,6 +12,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
    def create
      super
+     @b=Binnacle.create(:user_id => current_user.id, :action => "Crear" , :description => "Nuevo registro en la plataforma")
+     @b.save
    end
 
   # GET /resource/edit
@@ -22,11 +24,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # PUT /resource
    def update
      super
+     @b=Binnacle.create(:user_id => current_user.id, :action => "Editar" , :description => "Se ha editado un usuario")
+     @b.save
    end
 
   # DELETE /resource
    def destroy
      super
+     @b=Binnacle.create(:user_id => current_user.id, :action => "Eliminar" , :description => "Se ha eliminado un usuario")
+     @b.save
    end
 
   # GET /resource/cancel

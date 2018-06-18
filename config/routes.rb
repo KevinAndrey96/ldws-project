@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'pdf/cotizacion'
+
   get 'pdf/final'
 
   get 'panel/index'
@@ -8,7 +10,9 @@ Rails.application.routes.draw do
 
   resources :manage_users
 
-  get 'process/index'
+  #get 'process/index'
+  match '/process',      to: 'process#index',           via: 'get'
+  match '/process',      to: 'process#create',          via: 'post'
 
   get 'subnet/index'
 

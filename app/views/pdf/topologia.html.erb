@@ -2,7 +2,19 @@
 <% totalcomputers2=@physical.sum(:computers) %>
 <% totalcomputers3=@physical.sum(:computers) %>
 <!Doctype html>
-
+<style>
+  .rotar {
+    -ms-transform: rotate(90deg); /* IE 9 */
+    -webkit-transform: rotate(90deg); /* Safari 3-8 */
+    transform: rotate(90deg);
+    position: fixed;
+    bottom: 200px;
+    right: 30px;
+    left: 10px;
+    width: 20px;
+  }  
+  
+</style>
 <html>
 <head>
   <meta charset='utf-8' />
@@ -19,8 +31,10 @@
       
       <div class="row">
         <h2>Plano de piso <%=floor_number%></h2>
-        <center><b>Ancho:</b> <%= physical.width %>m²</center>
-        <center><b>Largo:</b> <%= physical.large %>m²</center>
+        <center><b></b> <%= physical.width %>m²</center>
+        <center class="rotar pull-left" ><b></b> <%= physical.large %>m²</center>
+        <center><div style="border-top: 2px solid #a2232c; padding:; width: 90%;"></div></center>
+        <div style="border-left: 2px solid #a2232c; padding:20px">
         <div style="border: 2px solid black">
         <table class="table table-responsive" border='1' width= "100%" style="border-collapse: collapse; border-color: #FAF9F9">
           <thead>
@@ -69,13 +83,14 @@
           </tbody>
         </table>
         </div>
+        </div>
         <br>
         <%@computers_area = physical.computers+(physical.computers*@logical.scalability/100) %>
         <%@meters = physical.width*physical.large # metros cuadrados de la sala %>
           <%@avalaible_area = @meters-physical.width # espacio disponible para pcs %>
         <%@computers_number = @avalaible_area-((physical.large/2)*(physical.width-1))%>
 
-
+        <strong>Alto: </strong> <%=physical.height %> m<br>
         <strong>Cantidad de cable: </strong> <%=@cable %>m<br>
         <strong>Area total de piso: </strong> <%=@meters %>m²<br>
           <% if physical.computers < @computers_number %>

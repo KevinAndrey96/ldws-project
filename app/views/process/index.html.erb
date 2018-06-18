@@ -1436,6 +1436,7 @@ input[type="button"]:focus {
 </style>
 
 <body>
+  
 <div class="image-container set-full-height" style="background-image: url('')">
   <div class="container">
 	  <div class="row">
@@ -1456,7 +1457,7 @@ input[type="button"]:focus {
 									</div>
 									<ul>
 			              <li>
-											<a href="#details" data-toggle="tab">
+											<a href="#details" onclick="hiddenNextBtn()" data-toggle="tab">
 												<div class="icon-circle">
 													<i class="ti-bag"></i>
 												</div>
@@ -1464,7 +1465,7 @@ input[type="button"]:focus {
 											</a>
 										</li>
 			                            <li>
-											<a href="#captain" data-toggle="tab">
+											<a href="#captain" onclick="hiddenNextBtn()" data-toggle="tab">
 												<div class="icon-circle">
 													<i class="ti-email"></i>
 												</div>
@@ -1472,7 +1473,7 @@ input[type="button"]:focus {
 											</a>
 										</li>
 			                            <li>
-											<a href="#description" data-toggle="tab">
+											<a href="#description" onclick="hiddenNextBtn()" data-toggle="tab">
 												<div class="icon-circle">
 													<i class="ti-desktop"></i>
 												</div>
@@ -1480,7 +1481,7 @@ input[type="button"]:focus {
 											</a>
 										</li>
 										<li>
-											<a href="#logic" data-toggle="tab">
+											<a href="#logic" onclick="hiddenNextBtn()" data-toggle="tab">
 												<div class="icon-circle">
 													<i class="ti-signal"></i>
 												</div>
@@ -1488,7 +1489,7 @@ input[type="button"]:focus {
 											</a>
 										</li>
 										<li>
-											<a href="#subred" data-toggle="tab">
+											<a href="#subred" onclick="showNextBtn()" data-toggle="tab">
 												<div class="icon-circle">
 													<i class="ti-rss-alt"></i>
 												</div>
@@ -1501,7 +1502,8 @@ input[type="button"]:focus {
 		                             <!--Compañia-->
                   <div class="tab-pane" id="details">
                     <div class="row">
-                      <form class="new_company" id="new_company" action="/companies" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="yK7vDfj0ORZZpNIf2OQp50opDeJmu2OTzw9IBl2Ol2yXw8Fh+uBcMt6p8RdNrN2IORV90w+TuaubmcCKud477g==" />        
+                      <form class="new_company" id="new_company" action="/company" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" />
+                      <input type="hidden" name="authenticity_token" value="yK7vDfj0ORZZpNIf2OQp50opDeJmu2OTzw9IBl2Ol2yXw8Fh+uBcMt6p8RdNrN2IORV90w+TuaubmcCKud477g==" />
                         <input type="hidden" name="company[id]" id="company_id" value="">
                         <div class="col-sm-12">
                             <h5 class="info-text">Ingresa los datos de tu empresa !</h5>
@@ -1510,7 +1512,7 @@ input[type="button"]:focus {
                             <div class="form-group">
                                 <label>Nombre:</label>
                                 <%if params[:new]=="false"%>
-                                  <input readonly type="text" class="form-control" name="company[name]" id="company_name" placeholder="Nombre" value="<%=@company.name%>">
+                                  <input readonly type="text" class="form-control" name="company[name]" id="company_name" placeholder="Nombre" required value="<%=@company.name%>">
                                 <%else%>
                                   <input type="text" class="form-control" name="company[name]" id="company_name" placeholder="Nombre" value="">
                                 <%end%>
@@ -1554,7 +1556,7 @@ input[type="button"]:focus {
 	                <!--Solicitud-->
                   <div class="tab-pane" id="captain">
                     <form class="new_request" id="new_request" action="/requests" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="cnYNd6hN2OfsvSJoaniV953YenzeiKvd1sFrSTUsNIItGyMbqlm9w2uwAWD/MGGY7uQKTbegceWCV+PF0XyYAA==" />
-                      <input type="hidden" name="company[id]" id="company_id" value="">
+                      <input type="hidden" name="company[id]" id="company_id_request" value="">
                       <input type="hidden" name="request[id]" id="request_id" value="">
                       <h5 class="info-text">Ahora registraremos tu solicitud ! </h5>
                       <div class="col-sm-11 col-sm-offset-1">
@@ -1572,13 +1574,13 @@ input[type="button"]:focus {
                       <div class="col-sm-11 col-sm-offset-1">
                         <div class="form-group">
                           <label>Objetivos:</label>
-                          <textarea class="form-control" name="request[description]" id="request_description" placeholder="Objetivos" rows="2"></textarea>
+                          <textarea class="form-control" name="request[objective]" id="request_objective" placeholder="Objetivos" rows="2"></textarea>
                         </div>
                       </div>
                       <div class="col-sm-11 col-sm-offset-1">
                         <div class="form-group">
                           <label>Observaciones:</label>
-                          <textarea class="form-control" name="request[description]" id="request_description" placeholder="Observaciones" rows="2"></textarea>
+                          <textarea class="form-control" name="request[observation]" id="request_observation" placeholder="Observaciones" rows="2"></textarea>
                         </div>
                       </div>
                       <div class="row">
@@ -1693,36 +1695,42 @@ input[type="button"]:focus {
                       <h5 class="info-text"> Ingresa los datos fisicos. </h5>
                       <div id="clone">
                         <form class="new_physical" id="new_physical" action="/physicals" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="IzY7J79R7+biHkr48VGY7jRRUVSJrAUDi9hvSFHURoV8WxVLvUWKwmUTafBkGWyBR20hZeCE3zvfTufEtYTqBw==" />
-                          <input type="hidden" name="request[id]" id="request_id" value="">
+                          <input type="hidden" name="request[id]" id="request_id_physical" value="">
                           <input type="hidden" name="physicals[id]" id="physicals_id" value="">
                           <div class="col-sm-2">
                             <div class="form-group">
                               <label>Altura</label>
-                              <input type="number" class="form-control" name="physical[height]" id="physical_height" placeholder="Altura">
+                              <input type="number" class="form-control" name="physical[height]" id="physical_height_1" placeholder="Altura">
                             </div>
                           </div>
                           <div class="col-sm-2">
                             <div class="form-group">
                               <label>Largo</label>
-                              <input type="number" class="form-control" name="physical[width]" id="physical_width" placeholder="Largo">
+                              <input type="number" class="form-control" name="physical[width]" id="physical_width_1" placeholder="Largo">
                             </div>
                           </div>
                           <div class="col-sm-2">
                             <div class="form-group">
                               <label>Ancho</label>
-                              <input type="number" class="form-control" name="physical[large]" id="physical_large" placeholder="Ancho">
+                              <input type="number" class="form-control" name="physical[large]" id="physical_large_1" placeholder="Ancho">
                             </div>
                           </div>
-                          <div class="col-sm-3">
+                          <div class="col-sm-2">
                             <div class="form-group">
                               <label>Computadores</label>
-                              <input type="number" class="form-control" name="physical[computers]" id="physical_computers" placeholder="Núm.">
+                              <input type="number" class="form-control" name="physical[computers]" id="physical_computers_1" placeholder="Núm.">
                             </div>
                           </div>
-                          <div class="col-sm-3">
+                          <div class="col-sm-2">
                             <div class="form-group">
                               <label>Impresoras</label>
-                              <input type="number" class="form-control" name="physical[printers]" id="physical_printers" placeholder="Núm.">
+                              <input type="number" class="form-control" name="physical[printers]" id="physical_printers_1" placeholder="Núm.">
+                            </div>
+                          </div>
+                          <div class="col-sm-2">
+                            <div class="form-group">
+                              <label>Sala de conferencias</label>
+                              <input type="checkbox" class="" name="conference_hall_1" id="physical_conference_hall_1">
                             </div>
                           </div>
                         </form> 
@@ -1739,7 +1747,7 @@ input[type="button"]:focus {
                   <div class="tab-pane" id="logic">
                     <form class="new_logical" id="new_logical" action="/logicals" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="GPdRjRfR97P7KnxLOVW6l7lgXTTDOJ0flTYreIU47zdHmn/hFcWSl3wnX0OsHU74ylwtBaoQRyfBoKP0YWhDtQ==" />
                       <div class="row">
-                        <input type="hidden" name="request[id]" id="request_id" value="">
+                        <input type="hidden" name="request[id]" id="request_id_logical" value="">
                         <input type="hidden" name="logical[id]" id="logical_id" value="">
                         <h5 class="info-text"> Ingresa los datos logícos. </h5>
                           <div class="row">
@@ -1750,7 +1758,7 @@ input[type="button"]:focus {
                             </div>
                             <div class="col-sm-8">
                               <div class="form-group">
-                                <input type="number" class="form-control" name="logical[scalability]" id="logical_scalability" placeholder="Escalabilidad">
+                                <input type="number" class="form-control" min="0" max="100" name="logical[scalability]" id="logical_scalability" placeholder="Escalabilidad">
                               </div>
                             </div>
                           </div>
@@ -1792,22 +1800,7 @@ input[type="button"]:focus {
                               </div>
                             </div>
                           </div>
-                          <div class="col-sm-3">
-                            <div class="choice" data-toggle="wizard-checkbox">
-                              <input type="checkbox" value="1" name="logical[scripts]" id="logical_scripts">
-                              <div class="card card-checkboxes card-hover-effect">
-                                <i class="ti-pulse"></i><p>Generar scripts</p>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-sm-3">
-                            <div class="choice" data-toggle="wizard-checkbox">
-                              <input type="checkbox" value="1" name="logical[iptable]" id="logical_iptable">
-                              <div class="card card-checkboxes card-hover-effect">
-                                 <i class="ti-rss-alt"></i><p>Generar tabla de IP</p>
-                              </div>
-                            </div>
-                          </div>
+                          
                         </div>
                       </div> 
                     </form>
@@ -1819,24 +1812,24 @@ input[type="button"]:focus {
                       <h5 class="info-text"> Ingresa las subredes. </h5>
                       <div id="clone_subred">
                         <form class="new_subnet" id="new_subnet" action="/subnets" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="2gref79QNLc8XpDwG0E2TtyfsikCCiCOroWNAreulTaFZ/ATvURRk7tTs/iOCcIhr6PCGGsi+rb6EwWOU/45tA==" />          
-                          <input type="hidden" name="logical[id]" id="logical_id" value="">
+                          <input type="hidden" name="logical[id]" id="logical_id_subnet" value="">
                           <input type="hidden" name="subnet[id]" id="subnet_id" value="">          
                           <div class="col-sm-3 col-sm-offset-1">
                               <div class="form-group">
                                   <label>Nombre</label>
-                                  <input type="text" class="form-control" name="subnet[name]" id="subnet_name" placeholder="Nombre">
+                                  <input type="text" class="form-control" name="subnet[name]" id="subnet_name_1" placeholder="Nombre">
                               </div>
                           </div>
                           <div class="col-sm-5">
                               <div class="form-group">
                                   <label>Descripción:</label>
-                                  <textarea class="form-control" name="subnet[description]" id="subnet_description" placeholder="Descripción" rows="1"></textarea>
+                                  <textarea class="form-control" name="subnet[description]" id="subnet_description_1" placeholder="Descripción" rows="1"></textarea>
                               </div>
                           </div>
                           <div class="col-sm-2">
                             <div class="form-group">
                               <label>Computadores</label>
-                              <input type="number" class="form-control" name="subnet[computers]" id="subnet_computers" placeholder="Núm.">
+                              <input type="number" class="form-control" name="subnet[computers]" id="subnet_computers_1" placeholder="Núm.">
                             </div>
                           </div>
                         </form>
@@ -1849,16 +1842,17 @@ input[type="button"]:focus {
                       </center> 
                     </div>
                   </div>
-		                        <div class="wizard-footer">
-		                        	<div class="pull-right">
-		                                <input type='button' class='btn btn-next btn-fill btn-primary btn-wd' name='next' value='Siguiente' />
-		                                <input type='button' class='btn btn-finish btn-fill btn-primary btn-wd' onclick="Example()" name='finish' value='Finalizar' />
-		                            </div>
-		                            <div class="pull-left">
-		                                <input type='button' class='btn btn-previous btn-default btn-wd' name='previous' value='Anterior' />
-		                            </div>
-		                            <div class="clearfix"></div>
-		                        </div>
+                  
+                  <div class="wizard-footer">
+                  	<div class="pull-right">
+                          <input type='button' class='btn btn-next btn-fill btn-primary btn-wd' onclick="Example()" id="next" name='next' value='Finalizar' />
+                          <input type='button' class='btn btn-finish btn-fill btn-primary btn-wd' onclick="Example()" name='finish' value='Finalizar' />
+                      </div>
+                      <div class="pull-left">
+                          <input type='button' class='btn btn-previous btn-default btn-wd' name='previous' value='Anterior' />
+                      </div>
+                      <div class="clearfix"></div>
+                  </div>
 		                    
 		                </div>
 		            </div> <!-- wizard container -->
@@ -1872,7 +1866,172 @@ input[type="button"]:focus {
 	        </div>
 	    </div>
 	</div>
+<form name="all_process" id="all_process" method="POST" action=/process>
+    <input type="hidden" name="authenticity_token" value="yK7vDfj0ORZZpNIf2OQp50opDeJmu2OTzw9IBl2Ol2yXw8Fh+uBcMt6p8RdNrN2IORV90w+TuaubmcCKud477g==" />
+    <input type="hidden" id="my_company_id" name="my_company_id" value="">
+    <input type="hidden" id="name" name="name" value="">
+    <input type="hidden" id="nit" name="nit" value="">
+    <input type="hidden" id="mision" name="mision" value="">
+    <input type="hidden" id="vision" name="vision" value="">
+    
+    <input type="hidden" id="my_request_id" name="my_request_id" value="">
+    <input type="hidden" id="my_request_title" name="my_request_title" value="">
+    <input type="hidden" id="my_request_description" name="my_request_description" value="">
+    <input type="hidden" id="my_request_objective" name="my_request_objective" value="">
+    <input type="hidden" id="my_request_observation" name="my_request_observation" value="">
+    
+    <input type="hidden" id="my_request_web" name="my_request_web" value="">
+    <input type="hidden" id="my_request_bd" name="my_request_bd" value="">
+    <input type="hidden" id="my_request_aplications" name="my_request_aplications" value="">
+    <input type="hidden" id="my_request_proxy" name="my_request_proxy" value="">
+    <input type="hidden" id="my_request_voip" name="my_request_voip" value="">
+    <input type="hidden" id="my_request_video_conference" name="my_request_video_conference" value="">
+    <input type="hidden" id="my_request_active_dir" name="my_request_active_dir" value="">
+    <input type="hidden" id="my_request_dhcp" name="my_request_dhcp" value="">
+    <input type="hidden" id="my_request_dns" name="my_request_dns" value="">
+    <input type="hidden" id="my_request_ftp" name="my_request_ftp" value="">
+    <input type="hidden" id="my_request_email" name="my_request_email" value="">
+    
+    <input type="hidden" id="fisico_1" name="fisico_1" value="true">
+    <input type="hidden" id="my_physical_height_1" name="my_physical_height_1" value="">
+    <input type="hidden" id="my_physical_width_1" name="my_physical_width_1" value="">
+    <input type="hidden" id="my_physical_large_1" name="my_physical_large_1" value="">
+    <input type="hidden" id="my_physical_computers_1" name="my_physical_computers_1" value="">
+    <input type="hidden" id="my_physical_printers_1" name="my_physical_printers_1" value="">
+    <input type="hidden" id="my_physical_conference_hall_1" name="my_physical_conference_hall_1" value="">  
 
+    <input type="hidden" id="fisico_2" name="fisico_2" value="false">
+    <input type="hidden" id="my_physical_height_2" name="my_physical_height_2" value="">
+    <input type="hidden" id="my_physical_width_2" name="my_physical_width_2" value="">
+    <input type="hidden" id="my_physical_large_2" name="my_physical_large_2" value="">
+    <input type="hidden" id="my_physical_computers_2" name="my_physical_computers_2" value="">
+    <input type="hidden" id="my_physical_printers_2" name="my_physical_printers_2" value="">
+    <input type="hidden" id="my_physical_conference_hall_2" name="my_physical_conference_hall_2" value="">
+    
+    <input type="hidden" id="fisico_3" name="fisico_3" value="false">
+    <input type="hidden" id="my_physical_height_3" name="my_physical_height_3" value="">
+    <input type="hidden" id="my_physical_width_3" name="my_physical_width_3" value="">
+    <input type="hidden" id="my_physical_large_3" name="my_physical_large_3" value="">
+    <input type="hidden" id="my_physical_computers_3" name="my_physical_computers_3" value="">
+    <input type="hidden" id="my_physical_printers_3" name="my_physical_printers_3" value="">
+    <input type="hidden" id="my_physical_conference_hall_3" name="my_physical_conference_hall_3" value="">
+    
+    <input type="hidden" id="fisico_4" name="fisico_4" value="false">
+    <input type="hidden" id="my_physical_height_4" name="my_physical_height_4" value="">
+    <input type="hidden" id="my_physical_width_4" name="my_physical_width_4" value="">
+    <input type="hidden" id="my_physical_large_4" name="my_physical_large_4" value="">
+    <input type="hidden" id="my_physical_computers_4" name="my_physical_computers_4" value="">
+    <input type="hidden" id="my_physical_printers_4" name="my_physical_printers_4" value="">    
+    <input type="hidden" id="my_physical_conference_hall_4" name="my_physical_conference_hall_4" value="">  
+    
+    <input type="hidden" id="fisico_5" name="fisico_5" value="false">
+    <input type="hidden" id="my_physical_height_5" name="my_physical_height_5" value="">
+    <input type="hidden" id="my_physical_width_5" name="my_physical_width_5" value="">
+    <input type="hidden" id="my_physical_large_5" name="my_physical_large_5" value="">
+    <input type="hidden" id="my_physical_computers_5" name="my_physical_computers_5" value="">
+    <input type="hidden" id="my_physical_printers_5" name="my_physical_printers_5" value="">
+    <input type="hidden" id="my_physical_conference_hall_5" name="my_physical_conference_hall_5" value="">
+    
+    <input type="hidden" id="fisico_6" name="fisico_6" value="false">
+    <input type="hidden" id="my_physical_height_6" name="my_physical_height_6" value="">
+    <input type="hidden" id="my_physical_width_6" name="my_physical_width_6" value="">
+    <input type="hidden" id="my_physical_large_6" name="my_physical_large_6" value="">
+    <input type="hidden" id="my_physical_computers_6" name="my_physical_computers_6" value="">
+    <input type="hidden" id="my_physical_printers_6" name="my_physical_printers_6" value="">      
+    <input type="hidden" id="my_physical_conference_hall_6" name="my_physical_conference_hall_6" value="">
+    
+    <input type="hidden" id="fisico_7" name="fisico_7" value="false">
+    <input type="hidden" id="my_physical_height_7" name="my_physical_height_7" value="">
+    <input type="hidden" id="my_physical_width_7" name="my_physical_width_7" value="">
+    <input type="hidden" id="my_physical_large_7" name="my_physical_large_7" value="">
+    <input type="hidden" id="my_physical_computers_7" name="my_physical_computers_7" value="">
+    <input type="hidden" id="my_physical_printers_7" name="my_physical_printers_7" value="">
+    <input type="hidden" id="my_physical_conference_hall_7" name="my_physical_conference_hall_7" value="">
+    
+    <input type="hidden" id="fisico_8" name="fisico_8" value="false">
+    <input type="hidden" id="my_physical_height_8" name="my_physical_height_8" value="">
+    <input type="hidden" id="my_physical_width_8" name="my_physical_width_8" value="">
+    <input type="hidden" id="my_physical_large_8" name="my_physical_large_8" value="">
+    <input type="hidden" id="my_physical_computers_8" name="my_physical_computers_8" value="">
+    <input type="hidden" id="my_physical_printers_8" name="my_physical_printers_8" value="">
+    <input type="hidden" id="my_physical_conference_hall_8" name="my_physical_conference_hall_8" value="">
+    
+    <input type="hidden" id="fisico_9" name="fisico_9" value="false">
+    <input type="hidden" id="my_physical_height_9" name="my_physical_height_9" value="">
+    <input type="hidden" id="my_physical_width_9" name="my_physical_width_9" value="">
+    <input type="hidden" id="my_physical_large_9" name="my_physical_large_9" value="">
+    <input type="hidden" id="my_physical_computers_9" name="my_physical_computers_9" value="">
+    <input type="hidden" id="my_physical_printers_9" name="my_physical_printers_9" value="">
+    <input type="hidden" id="my_physical_conference_hall_9" name="my_physical_conference_hall_9" value="">
+    
+    <input type="hidden" id="fisico_10" name="fisico_10" value="false">
+    <input type="hidden" id="my_physical_height_10" name="my_physical_height_10" value="">
+    <input type="hidden" id="my_physical_width_10" name="my_physical_width_10" value="">
+    <input type="hidden" id="my_physical_large_10" name="my_physical_large_10" value="">
+    <input type="hidden" id="my_physical_computers_10" name="my_physical_computers_10" value="">
+    <input type="hidden" id="my_physical_printers_10" name="my_physical_printers_10" value="">  
+    <input type="hidden" id="my_physical_conference_hall_10" name="my_physical_conference_hall_10" value="">
+  
+    <input type="hidden" id="my_logical_scalability" name="my_logical_scalability" value="">
+    <input type="hidden" id="my_logical_id" name="my_logical_id" value="">
+    <input type="hidden" id="my_logical_host1" name="my_logical_host1" value="">
+    <input type="hidden" id="my_logical_host2" name="my_logical_host2" value="">
+    <input type="hidden" id="my_logical_host3" name="my_logical_host3" value="">
+    <input type="hidden" id="my_logical_host4" name="my_logical_host4" value="">  
+    <input type="hidden" id="my_logical_redundancy" name="my_logical_redundancy" value="">  
+    
+    <input type="hidden" id="subnet_1" name="subnet_1" value="true">
+    <input type="hidden" id="my_subnet_name_1" name="my_subnet_name_1" value="">
+    <input type="hidden" id="my_subnet_description_1" name="my_subnet_description_1" value="">
+    <input type="hidden" id="my_subnet_computers_1" name="my_subnet_computers_1" value="">
+    
+    <input type="hidden" id="subnet_2" name="subnet_2" value="false">
+    <input type="hidden" id="my_subnet_name_2" name="my_subnet_name_2" value="">
+    <input type="hidden" id="my_subnet_description_2" name="my_subnet_description_2" value="">
+    <input type="hidden" id="my_subnet_computers_2" name="my_subnet_computers_2" value="">
+    
+    <input type="hidden" id="subnet_3" name="subnet_3" value="false">
+    <input type="hidden" id="my_subnet_name_3" name="my_subnet_name_3" value="">
+    <input type="hidden" id="my_subnet_description_3" name="my_subnet_description_3" value="">
+    <input type="hidden" id="my_subnet_computers_3" name="my_subnet_computers_3" value="">
+    
+    <input type="hidden" id="subnet_4" name="subnet_4" value="false">
+    <input type="hidden" id="my_subnet_name_4" name="my_subnet_name_4" value="">
+    <input type="hidden" id="my_subnet_description_4" name="my_subnet_description_4" value="">
+    <input type="hidden" id="my_subnet_computers_4" name="my_subnet_computers_4" value="">
+    
+    <input type="hidden" id="subnet_5" name="subnet_5" value="false">
+    <input type="hidden" id="my_subnet_name_5" name="my_subnet_name_5" value="">
+    <input type="hidden" id="my_subnet_description_5" name="my_subnet_description_5" value="">
+    <input type="hidden" id="my_subnet_computers_5" name="my_subnet_computers_5" value="">
+    
+    <input type="hidden" id="subnet_6" name="subnet_6" value="false">
+    <input type="hidden" id="my_subnet_name_6" name="my_subnet_name_6" value="">
+    <input type="hidden" id="my_subnet_description_6" name="my_subnet_description_6" value="">
+    <input type="hidden" id="my_subnet_computers_6" name="my_subnet_computers_6" value="">
+    
+    <input type="hidden" id="subnet_7" name="subnet_7" value="false">
+    <input type="hidden" id="my_subnet_name_7" name="my_subnet_name_7" value="">
+    <input type="hidden" id="my_subnet_description_7" name="my_subnet_description_7" value="">
+    <input type="hidden" id="my_subnet_computers_7" name="my_subnet_computers_7" value="">
+    
+    <input type="hidden" id="subnet_8" name="subnet_8" value="false">
+    <input type="hidden" id="my_subnet_name_8" name="my_subnet_name_8" value="">
+    <input type="hidden" id="my_subnet_description_8" name="my_subnet_description_8" value="">
+    <input type="hidden" id="my_subnet_computers_8" name="my_subnet_computers_8" value="">
+    
+    <input type="hidden" id="subnet_9" name="subnet_9" value="false">
+    <input type="hidden" id="my_subnet_name_9" name="my_subnet_name_9" value="">
+    <input type="hidden" id="my_subnet_description_9" name="my_subnet_description_9" value="">
+    <input type="hidden" id="my_subnet_computers_9" name="my_subnet_computers_9" value="">
+    
+    <input type="hidden" id="subnet_10" name="subnet_10" value="false">
+    <input type="hidden" id="my_subnet_name_10" name="my_subnet_name_10" value="">
+    <input type="hidden" id="my_subnet_description_10" name="my_subnet_description_10" value="">
+    <input type="hidden" id="my_subnet_computers_10" name="my_subnet_computers_10" value="">
+  
+   
+</form>
 </body>
 
 
@@ -1880,40 +2039,323 @@ input[type="button"]:focus {
 <script type="text/javascript">
 
 $( "#add" ).click(function() {
-  $( "#clone" ).clone().appendTo( "#copiar" );
+  Contador= Contador+1;
+  
+  var Codigo="<div class='col-sm-2'> <div class='form-group'> <label>Altura</label> <input type='number' class='form-control' name='physical[height]' id='physical_height_"+Contador+"' placeholder='Altura'></div></div><div class='col-sm-2'><div class='form-group'><label>Largo</label><input type='number' class='form-control' name='physical[width]' id='physical_width_"+Contador+"' placeholder='Largo'></div></div><div class='col-sm-2'><div class='form-group'><label>Ancho</label><input type='number' class='form-control' name='physical[large]' id='physical_large_"+Contador+"' placeholder='Ancho'></div></div><div class='col-sm-2'><div class='form-group'><label>Computadores</label><input type='number' class='form-control' name='physical[computers]' id='physical_computers_"+Contador+"' placeholder='Núm.'></div></div><div class='col-sm-2'><div class='form-group'><label>Impresoras</label><input type='number' class='form-control' name='physical[printers]' id='physical_printers_"+Contador+"' placeholder='Núm.'></div></div><div class='col-sm-2'><div class='form-group'><label>Sala de conferencias</label><input type='checkbox' class='' name='physical_conference_hall' id='physical_conference_hall_"+Contador+"'></div></div>";
+  $("#copiar").append(Codigo);  
+  document.getElementById("fisico_"+Contador).value= "true"
 });
 
+
 $( "#add_subred" ).click(function() {
-  $( "#clone_subred" ).clone().appendTo( "#copiar_subred" );
+  Cont= Cont+1;
+  console.log("cont:"+Cont);
+  var Codigo = "<div class='col-sm-3 col-sm-offset-1'><div class='form-group'><label>Nombre</label><input type='text' class='form-control' name='subnet[name]' id='subnet_name_"+Cont+"' placeholder='Nombre'></div></div><div class='col-sm-5'><div class='form-group'><label>Descripción:</label><textarea class='form-control' name='subnet[description]' id='subnet_description_"+Cont+"' placeholder='Descripción' rows='1'></textarea></div></div><div class='col-sm-2'><div class='form-group'><label>Computadores</label><input type='number' class='form-control' name='subnet[computers]' id='subnet_computers_"+Cont+"' placeholder='Núm.'></div></div>";
+  $("#copiar_subred").append(Codigo);  
+  document.getElementById("subnet_"+Cont).value= "true"
 });
 
 </script>
 <script>
+var Contador=1;
+var Cont=1;
+
     $( document ).ready(function() {
+      
         <%if params[:new]=="false"%>
           document.getElementById("details").className = "tab-pane";
           document.getElementById("captain").className = "tab-pane active";
         <%end%>
+        
+        document.getElementById('next').type = 'hidden';
       
         document.getElementById("logical_id").value = Math.round(Math.random()*10000) ;
         document.getElementById("subnet_id").value = Math.round(Math.random()*10000);
         document.getElementById("physicals_id").value = Math.round(Math.random()*10000);
         document.getElementById("request_id").value = Math.round(Math.random()*10000);
         document.getElementById("company_id").value = Math.round(Math.random()*10000);
+        document.getElementById("company_id_request").value = document.getElementById("company_id").value;
+        document.getElementById("logical_id_subnet").value = document.getElementById("logical_id").value;
+        document.getElementById("request_id_logical").value = document.getElementById("request_id").value;
+        document.getElementById("request_id_physical").value = document.getElementById("request_id").value;
     });
     
-    $( "#target" ).click(function() {
-      alert("wuuu");
-        document.getElementById("new_company").submit();
-        document.getElementById("new_request").submit();
-        document.getElementById("new_physical").submit();
-        document.getElementById("new_logical").submit();
-        document.getElementById("new_subnet").submit();  
-    });
+    function showNextBtn(){
+      document.getElementById('next').type = 'button';
+    }
+    
+    function hiddenNextBtn(){
+      document.getElementById('next').type = 'hidden';
+    }
+    
+    function validate(){
+      var val = 0;
+      if (document.getElementById("company_id").value == "")
+      	val = 1;		
+      if (document.getElementById("company_name").value == "")
+      	val = 1;
+      if (document.getElementById("company_nit").value == "")
+      	val = 1;
+      if (document.getElementById("company_mision").value == "")
+      	val = 1;
+      if (document.getElementById("company_vision").value == "")
+      	val = 1;
+      if (document.getElementById("company_id_request").value == "")
+      	val = 1;
+      if (document.getElementById("request_id").value == "")
+      	val = 1;
+      if (document.getElementById("request_title").value == "")
+      	val = 1;
+      if (document.getElementById("request_description").value == "")
+      	val = 1;
+      if (document.getElementById("request_objective").value == "")
+      	val = 1;
+      if (document.getElementById("request_observation").value == "")
+      	val = 1;
+      if (document.getElementById("request_id_physical").value == "")
+      	val = 1;
+      if (document.getElementById("physicals_id").value == "")
+      	val = 1;
+      if (document.getElementById("physical_height").value == "")
+      	val = 1;
+      if (document.getElementById("physical_width").value == "")
+      	val = 1;
+      if (document.getElementById("physical_large").value == "")
+      	val = 1;
+      if (document.getElementById("physical_computers").value == "")
+      	val = 1;
+      if (document.getElementById("physical_printers").value == "")
+      	val = 1;
+      if (document.getElementById("request_id_logical").value == "")
+      	val = 1;	
+      if (document.getElementById("logical_id").value == "")
+      	val = 1;
+      if (document.getElementById("logical_scalability").value == "")
+      	val = 1;
+      if (document.getElementById("logical_host1").value == "")
+      	val = 1;
+      if (document.getElementById("logical_host2").value == "")
+      	val = 1;
+      if (document.getElementById("logical_host3").value == "")
+      	val = 1;
+      if (document.getElementById("logical_host4").value == "")
+      	val = 1;
+      if (document.getElementById("logical_id_subnet").value == "")
+      	val = 1;
+      if (document.getElementById("subnet_id").value == "")
+      	val = 1;
+      if (document.getElementById("physical_computers").value == "")
+      	val = 1;
+      if (document.getElementById("subnet_name").value == "")
+      	val = 1;
+      if (document.getElementById("subnet_description").value == "")
+      	val = 1;
+      if (document.getElementById("subnet_computers").value == "")
+      	val = 1;
+
+      return val;
+    }
     
     function Example()
     {
-      window.alert("Hola");
+      //if (validate() == 1){
+      //  alert("Debe rellenar todos los campos");
+      //} else {
+        //document.getElementById("new_company").submit();
+        //document.getElementById("new_request").submit();
+        //document.getElementById("new_physical").submit();
+        //document.getElementById("new_logical").submit();
+        //document.getElementById("new_subnet").submit(); 
+        document.getElementById("my_company_id").value=document.getElementById("company_id").value 	
+        document.getElementById("name").value=document.getElementById("company_name").value
+        document.getElementById("nit").value=document.getElementById("company_nit").value
+        document.getElementById("mision").value=document.getElementById("company_mision").value
+        document.getElementById("vision").value=document.getElementById("company_vision").value
+        
+        
+        document.getElementById("my_request_id").value = document.getElementById("request_id").value 
+        document.getElementById("my_request_title").value = document.getElementById("request_title").value
+        document.getElementById("my_request_description").value = document.getElementById("request_description").value 
+        document.getElementById("my_request_objective").value = document.getElementById("request_objective").value 
+        document.getElementById("my_request_observation").value = document.getElementById("request_observation").value 
+        
+        
+        //web: true, bd: true, aplications: true, proxy: true, voip: false, video_conference: false, active_dir: false, dhcp: false, dns: false, ftp: false, email: false
+        document.getElementById("my_request_web").value = document.getElementById("request_web").value
+        document.getElementById("my_request_bd").value = document.getElementById("request_bd").value
+        document.getElementById("my_request_aplications").value = document.getElementById("request_aplications").value
+        document.getElementById("my_request_proxy").value = document.getElementById("request_proxy").value
+        document.getElementById("my_request_voip").value = document.getElementById("request_voip").value
+        document.getElementById("my_request_video_conference").value = document.getElementById("request_video_conference").value
+        document.getElementById("my_request_active_dir").value = document.getElementById("request_active_dir").value
+        document.getElementById("my_request_dhcp").value = document.getElementById("request_dhcp").value
+        document.getElementById("my_request_dns").value = document.getElementById("request_dns").value
+        document.getElementById("my_request_ftp").value = document.getElementById("request_ftp").value
+        document.getElementById("my_request_email").value = document.getElementById("request_email").value
+        
+        document.getElementById("my_logical_id").value = document.getElementById("logical_id").value 
+        document.getElementById("my_logical_host1").value = document.getElementById("logical_host1").value  
+        document.getElementById("my_logical_host2").value = document.getElementById("logical_host2").value  
+        document.getElementById("my_logical_host3").value = document.getElementById("logical_host3").value  
+        document.getElementById("my_logical_host4").value = document.getElementById("logical_host4").value         
+        document.getElementById("my_logical_scalability").value = document.getElementById("logical_scalability").value  
+        document.getElementById("my_logical_redundancy").value = document.getElementById("logical_redundancy").value  
+        
+        if(Contador >= 1){
+          document.getElementById("my_physical_height_1").value = document.getElementById("physical_height_1").value  
+          document.getElementById("my_physical_width_1").vlue = document.getElementById("physical_width_1").value  
+          document.getElementById("my_physical_large_1").value = document.getElementById("physical_large_1").value  
+          document.getElementById("my_physical_computers_1").value = document.getElementById("physical_computers_1").value  
+          document.getElementById("my_physical_printers_1").value = document.getElementById("physical_printers_1").value
+          document.getElementById("my_physical_conference_hall_1").value = document.getElementById("physical_conference_hall_1").value
+        }
+
+        if(Contador >= 2){
+          document.getElementById("my_physical_height_2").value = document.getElementById("physical_height_2").value  
+          document.getElementById("my_physical_width_2").value = document.getElementById("physical_width_2").value  
+          document.getElementById("my_physical_large_2").value = document.getElementById("physical_large_2").value  
+          document.getElementById("my_physical_computers_2").value = document.getElementById("physical_computers_2").value  
+          document.getElementById("my_physical_conference_hall_2").value = document.getElementById("physical_conference_hall_2").value      
+        }
+        
+        if(Contador >= 3){
+          document.getElementById("my_physical_height_3").value = document.getElementById("physical_height_3").value  
+          document.getElementById("my_physical_width_3").value = document.getElementById("physical_width_3").value  
+          document.getElementById("my_physical_large_3").value = document.getElementById("physical_large_3").value  
+          document.getElementById("my_physical_computers_3").value = document.getElementById("physical_computers_3").value  
+          document.getElementById("my_physical_printers_3").value = document.getElementById("physical_printers_3").value
+          document.getElementById("my_physical_conference_hall_3").value = document.getElementById("physical_conference_hall_3").value
+        }
+        
+        if(Contador >= 4){
+          document.getElementById("my_physical_height_4").value = document.getElementById("physical_height_4").value  
+          document.getElementById("my_physical_width_4").value = document.getElementById("physical_width_4").value  
+          document.getElementById("my_physical_large_4").value = document.getElementById("physical_large_4").value  
+          document.getElementById("my_physical_computers_4").value = document.getElementById("physical_computers_4").value  
+          document.getElementById("my_physical_printers_4").value = document.getElementById("physical_printers_4").value
+          document.getElementById("my_physical_conference_hall_4").value = document.getElementById("physical_conference_hall_4").value
+        }
+        
+        if(Contador >= 5){
+          document.getElementById("my_physical_height_5").value = document.getElementById("physical_height_5").value  
+          document.getElementById("my_physical_width_5").value = document.getElementById("physical_width_5").value  
+          document.getElementById("my_physical_large_5").value = document.getElementById("physical_large_5").value  
+          document.getElementById("my_physical_computers_5").value = document.getElementById("physical_computers_5").value  
+          document.getElementById("my_physical_printers_5").value = document.getElementById("physical_printers_5").value  
+          document.getElementById("my_physical_conference_hall_5").value = document.getElementById("physical_conference_hall_5").value  
+        }
+        
+        if(Contador >= 6){
+          document.getElementById("my_physical_height_6").value = document.getElementById("physical_height_6").value
+          document.getElementById("my_physical_width_6").value = document.getElementById("physical_width_6").value
+          document.getElementById("my_physical_large_6").value = document.getElementById("physical_large_6").value
+          document.getElementById("my_physical_computers_6").value = document.getElementById("physical_computers_6").value
+          document.getElementById("my_physical_printers_6").value = document.getElementById("physical_printers_6").value
+          document.getElementById("my_physical_conference_hall_6").value = document.getElementById("physical_conference_hall_6").value
+        }
+        
+        if(Contador >= 7){
+          document.getElementById("my_physical_height_7").value = document.getElementById("physical_height_7").value
+          document.getElementById("my_physical_width_7").value = document.getElementById("physical_width_7").value
+          document.getElementById("my_physical_large_7").value = document.getElementById("physical_large_7").value
+          document.getElementById("my_physical_computers_7").value = document.getElementById("physical_computers_7").value
+          document.getElementById("my_physical_printers_7").value = document.getElementById("physical_printers_7").value
+          document.getElementById("my_physical_conference_hall_7").value = document.getElementById("physical_conference_hall_7").value
+        }
+        
+        if(Contador >= 8){
+          document.getElementById("my_physical_height_8").value = document.getElementById("physical_height_8").value
+          document.getElementById("my_physical_width_8").value = document.getElementById("physical_width_8").value
+          document.getElementById("my_physical_large_8").value = document.getElementById("physical_large_8").value
+          document.getElementById("my_physical_computers_8").value = document.getElementById("physical_computers_8").value
+          document.getElementById("my_physical_printers_8").value = document.getElementById("physical_printers_8").value
+          document.getElementById("my_physical_conference_hall_8").value = document.getElementById("physical_conference_hall_8").value
+        }
+        
+        if(Contador >= 9){
+          document.getElementById("my_physical_height_9").value = document.getElementById("physical_height_9").value
+          document.getElementById("my_physical_width_9").value = document.getElementById("physical_width_9").value
+          document.getElementById("my_physical_large_9").value = document.getElementById("physical_large_9").value
+          document.getElementById("my_physical_computers_9").value = document.getElementById("physical_computers_9").value
+          document.getElementById("my_physical_printers_9").value = document.getElementById("physical_printers_9").value
+          document.getElementById("my_physical_conference_hall_9").value = document.getElementById("physical_conference_hall_9").value
+        }
+        
+        if(Contador >= 10){
+          document.getElementById("my_physical_height_10").value = document.getElementById("physical_height_10").value
+          document.getElementById("my_physical_width_10").value = document.getElementById("physical_width_10").value
+          document.getElementById("my_physical_large_10").value = document.getElementById("physical_large_10").value
+          document.getElementById("my_physical_computers_10").value = document.getElementById("physical_computers_10").value
+          document.getElementById("my_physical_printers_10").value = document.getElementById("physical_printers_10").value
+          document.getElementById("my_physical_conference_hall_10").value = document.getElementById("physical_conference_hall_10").value
+        }
+        
+        if(Cont >= 1){ 
+        	document.getElementById("my_subnet_name_1").value = document.getElementById("subnet_name_1").value  
+        	document.getElementById("my_subnet_description_1").value = document.getElementById("subnet_description_1").value  
+        	document.getElementById("my_subnet_computers_1").value = document.getElementById("subnet_computers_1").value  
+        }
+        
+        if(Cont >= 2){ 
+        	document.getElementById("my_subnet_name_2").value = document.getElementById("subnet_name_2").value  
+        	document.getElementById("my_subnet_description_2").value = document.getElementById("subnet_description_2").value  
+        	document.getElementById("my_subnet_computers_2").value = document.getElementById("subnet_computers_2").value  
+        }
+        
+        if(Cont >= 3){ 
+        	document.getElementById("my_subnet_name_3").value = document.getElementById("subnet_name_3").value  
+        	document.getElementById("my_subnet_description_3").value = document.getElementById("subnet_description_3").value  
+        	document.getElementById("my_subnet_computers_3").value = document.getElementById("subnet_computers_3").value  
+        }
+        
+        if(Cont >= 4){ 
+        	document.getElementById("my_subnet_name_4").value = document.getElementById("subnet_name_4").value  
+        	document.getElementById("my_subnet_description_4").value = document.getElementById("subnet_description_4").value  
+        	document.getElementById("my_subnet_computers_4").value = document.getElementById("subnet_computers_4").value  
+        }
+        
+        if(Cont >= 5){ 
+        	document.getElementById("my_subnet_name_5").value = document.getElementById("subnet_name_5").value  
+        	document.getElementById("my_subnet_description_5").value = document.getElementById("subnet_description_5").value  
+        	document.getElementById("my_subnet_computers_5").value = document.getElementById("subnet_computers_5").value  
+        }
+        
+        if(Cont >= 6){ 
+        	document.getElementById("my_subnet_name_6").value = document.getElementById("subnet_name_6").value  
+        	document.getElementById("my_subnet_description_6").value = document.getElementById("subnet_description_6").value  
+        	document.getElementById("my_subnet_computers_6").value = document.getElementById("subnet_computers_6").value  
+        }
+        
+        if(Cont >= 7){ 
+        	document.getElementById("my_subnet_name_7").value = document.getElementById("subnet_name_7").value  
+        	document.getElementById("my_subnet_description_7").value = document.getElementById("subnet_description_7").value  
+        	document.getElementById("my_subnet_computers_7").value = document.getElementById("subnet_computers_7").value  
+        }
+        
+        if(Cont >= 8){ 
+        	document.getElementById("my_subnet_name_8").value = document.getElementById("subnet_name_8").value  
+        	document.getElementById("my_subnet_description_8").value = document.getElementById("subnet_description_8").value  
+        	document.getElementById("my_subnet_computers_8").value = document.getElementById("subnet_computers_8").value  
+        }
+        
+        if(Cont >= 9){ 
+        	document.getElementById("my_subnet_name_9").value = document.getElementById("subnet_name_9").value  
+        	document.getElementById("my_subnet_description_9").value = document.getElementById("subnet_description_9").value  
+        	document.getElementById("my_subnet_computers_9").value = document.getElementById("subnet_computers_9").value  
+        }
+        
+        if(Cont >= 10){ 
+        	document.getElementById("my_subnet_name_10").value = document.getElementById("subnet_name_10").value  
+        	document.getElementById("my_subnet_description_10").value = document.getElementById("subnet_description_10").value  
+        	document.getElementById("my_subnet_computers_10").value = document.getElementById("subnet_computers_10").value  
+        }        
+        
+        
+        document.getElementById("all_process").submit();
+        
+      //}
+      
+ 
     }
 </script>
 
@@ -2050,7 +2492,3 @@ transparent = true;
         }
 
 </script>
-
-
-
-

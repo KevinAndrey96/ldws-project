@@ -43,6 +43,7 @@
                     <h2>Reporte Final</h2>
                 </div><div class="pricing-table-features">
                     <p><strong><center><%= link_to 'Ver reporte final', pdf_final_path(:request_id => @request.id), :target => "_blank", :class => "btn btn-default" %></center></strong></p>
+                    <p><strong><center><%= link_to 'Resultados cotización', pdf_cotizacion_path(:request_id => @request.id), :target => "_blank", :class => "btn btn-default" %></center></strong></p>
                 </div>
             </div>
          </div>

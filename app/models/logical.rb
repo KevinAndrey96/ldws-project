@@ -10,8 +10,6 @@
 #  host4       :integer
 #  redundancy  :boolean
 #  scalability :integer
-#  scripts     :boolean
-#  iptable     :boolean
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
