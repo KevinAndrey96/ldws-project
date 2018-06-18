@@ -1522,9 +1522,9 @@ input[type="button"]:focus {
                             <div class="form-group">
                                 <label>Nit:</label>
                                 <%if params[:new]=="false"%>
-                                  <input readonly  type="number" class="form-control" name="company[nit]" id="company_nit"  placeholder="Nit" value="<%=@company.nit%>">
+                                  <input readonly min="0" max="999999999" type="number" class="form-control" name="company[nit]" id="company_nit"  placeholder="Nit" value="<%=@company.nit%>">
                                 <%else%>
-                                  <input type="number" class="form-control" name="company[nit]" id="company_nit"  placeholder="Nit">
+                                  <input type="number" min="0" max="999999999"  class="form-control" name="company[nit]" id="company_nit"  placeholder="Nit">
                                 <%end%>
                                 
                             </div>
@@ -1533,9 +1533,9 @@ input[type="button"]:focus {
                             <div class="form-group">
                                 <label>Visión:</label>
                                 <%if params[:new]=="false"%>
-                                  <input readonly  type="text" class="form-control" name="company[mision]" id="company_mision" placeholder="Visión" value="<%=@company.vision%>">
+                                  <textarea class="form-control" name="company[vision]" id="company_vision" placeholder="Visión" rows="2" value="<%=@company.vision%>">></textarea>
                                 <%else%>
-                                  <input type="text" class="form-control" name="company[mision]" id="company_mision" placeholder="Visión" >
+                                  <textarea class="form-control" name="company[vision]" id="company_vision" placeholder="Visión" rows="2"></textarea>
                                 <%end%>
                             </div>
                         </div>
@@ -1543,9 +1543,9 @@ input[type="button"]:focus {
                             <div class="form-group">
                                 <label>Misión:</label>
                                 <%if params[:new]=="false"%>
-                                  <input readonly type="text" class="form-control" name="company[vision]" id="company_vision" placeholder="Misión" value="<%=@company.vision%>">
+                                  <textarea class="form-control" name="company[mision]" id="company_mision" placeholder="Misión" rows="2" value="<%=@company.mision%>">></textarea>
                                 <%else%>
-                                  <input type="text" class="form-control" name="company[vision]" id="company_vision" placeholder="Misión" >
+                                  <textarea class="form-control" name="company[mision]" id="company_mision" placeholder="Misión" rows="2"></textarea>
                                 <%end%>
                                 
                             </div>
@@ -1700,31 +1700,31 @@ input[type="button"]:focus {
                           <div class="col-sm-2">
                             <div class="form-group">
                               <label>Altura</label>
-                              <input type="number" class="form-control" name="physical[height]" id="physical_height_1" placeholder="Altura">
-                            </div>
-                          </div>
-                          <div class="col-sm-2">
-                            <div class="form-group">
-                              <label>Largo</label>
-                              <input type="number" class="form-control" name="physical[width]" id="physical_width_1" placeholder="Largo">
+                              <input type="number" min="2" max="10" class="form-control" name="physical[height]" id="physical_height_1" placeholder="Altura">
                             </div>
                           </div>
                           <div class="col-sm-2">
                             <div class="form-group">
                               <label>Ancho</label>
-                              <input type="number" class="form-control" name="physical[large]" id="physical_large_1" placeholder="Ancho">
+                              <input type="number" min="2" max="20" class="form-control" name="physical[width]" id="physical_width_1" placeholder="Ancho">
+                            </div>
+                          </div>
+                          <div class="col-sm-2">
+                            <div class="form-group">
+                              <label>Largo</label>
+                              <input type="number" min="2" max="20" class="form-control" name="physical[large]" id="physical_large_1" placeholder="Largo">
                             </div>
                           </div>
                           <div class="col-sm-2">
                             <div class="form-group">
                               <label>Computadores</label>
-                              <input type="number" class="form-control" name="physical[computers]" id="physical_computers_1" placeholder="Núm.">
+                              <input min="0" type="number" class="form-control" name="physical[computers]" id="physical_computers_1" placeholder="Núm.">
                             </div>
                           </div>
                           <div class="col-sm-2">
                             <div class="form-group">
                               <label>Impresoras</label>
-                              <input type="number" class="form-control" name="physical[printers]" id="physical_printers_1" placeholder="Núm.">
+                              <input min="0" type="number" class="form-control" name="physical[printers]" id="physical_printers_1" placeholder="Núm.">
                             </div>
                           </div>
                           <div class="col-sm-2">
@@ -1785,7 +1785,7 @@ input[type="button"]:focus {
                             </div>
                             <div class="col-sm-2">
                               <div class="form-group">
-                                <input type="number" class="form-control" min="1" max="255" name="logical[host4]" id="logical_host4" placeholder="1">
+                                <input type="number" class="form-control" min="0" max="255" name="logical[host4]" id="logical_host4" placeholder="1">
                               </div>
                             </div>
                           </div>
@@ -1829,7 +1829,7 @@ input[type="button"]:focus {
                           <div class="col-sm-2">
                             <div class="form-group">
                               <label>Computadores</label>
-                              <input type="number" class="form-control" name="subnet[computers]" id="subnet_computers_1" placeholder="Núm.">
+                              <input type="number" class="form-control" min='0' name="subnet[computers]" id="subnet_computers_1" placeholder="Núm.">
                             </div>
                           </div>
                         </form>
@@ -2041,7 +2041,7 @@ input[type="button"]:focus {
 $( "#add" ).click(function() {
   Contador= Contador+1;
   
-  var Codigo="<div class='col-sm-2'> <div class='form-group'> <label>Altura</label> <input type='number' class='form-control' name='physical[height]' id='physical_height_"+Contador+"' placeholder='Altura'></div></div><div class='col-sm-2'><div class='form-group'><label>Largo</label><input type='number' class='form-control' name='physical[width]' id='physical_width_"+Contador+"' placeholder='Largo'></div></div><div class='col-sm-2'><div class='form-group'><label>Ancho</label><input type='number' class='form-control' name='physical[large]' id='physical_large_"+Contador+"' placeholder='Ancho'></div></div><div class='col-sm-2'><div class='form-group'><label>Computadores</label><input type='number' class='form-control' name='physical[computers]' id='physical_computers_"+Contador+"' placeholder='Núm.'></div></div><div class='col-sm-2'><div class='form-group'><label>Impresoras</label><input type='number' class='form-control' name='physical[printers]' id='physical_printers_"+Contador+"' placeholder='Núm.'></div></div><div class='col-sm-2'><div class='form-group'><label>Sala de conferencias</label><input type='checkbox' class='' name='physical_conference_hall' id='physical_conference_hall_"+Contador+"'></div></div>";
+  var Codigo="<div class='col-sm-2'> <div class='form-group'> <label>Altura</label> <input type='number' class='form-control' min='2' max='10' name='physical[height]' id='physical_height_"+Contador+"' placeholder='Altura'></div></div><div class='col-sm-2'><div class='form-group'><label>Ancho</label><input type='number' min='2' max='20' class='form-control' name='physical[width]' id='physical_width_"+Contador+"' placeholder='Ancho'></div></div><div class='col-sm-2'><div class='form-group'><label>Largo</label><input min='2' max='20' type='number' class='form-control' name='physical[large]' id='physical_large_"+Contador+"' placeholder='Largo'></div></div><div class='col-sm-2'><div class='form-group'><label>Computadores</label><input type='number' min='0' class='form-control' name='physical[computers]' id='physical_computers_"+Contador+"' placeholder='Núm.'></div></div><div class='col-sm-2'><div class='form-group'><label>Impresoras</label><input type='number' min='0' class='form-control' name='physical[printers]' id='physical_printers_"+Contador+"' placeholder='Núm.'></div></div><div class='col-sm-2'><div class='form-group'><label>Sala de conferencias</label><input type='checkbox' class='' name='physical_conference_hall' id='physical_conference_hall_"+Contador+"'></div></div>";
   $("#copiar").append(Codigo);  
   document.getElementById("fisico_"+Contador).value= "true"
 });
@@ -2050,7 +2050,7 @@ $( "#add" ).click(function() {
 $( "#add_subred" ).click(function() {
   Cont= Cont+1;
   console.log("cont:"+Cont);
-  var Codigo = "<div class='col-sm-3 col-sm-offset-1'><div class='form-group'><label>Nombre</label><input type='text' class='form-control' name='subnet[name]' id='subnet_name_"+Cont+"' placeholder='Nombre'></div></div><div class='col-sm-5'><div class='form-group'><label>Descripción:</label><textarea class='form-control' name='subnet[description]' id='subnet_description_"+Cont+"' placeholder='Descripción' rows='1'></textarea></div></div><div class='col-sm-2'><div class='form-group'><label>Computadores</label><input type='number' class='form-control' name='subnet[computers]' id='subnet_computers_"+Cont+"' placeholder='Núm.'></div></div>";
+  var Codigo = "<div class='col-sm-3 col-sm-offset-1'><div class='form-group'><label>Nombre</label><input type='text' class='form-control' name='subnet[name]' id='subnet_name_"+Cont+"' placeholder='Nombre'></div></div><div class='col-sm-5'><div class='form-group'><label>Descripción:</label><textarea class='form-control' name='subnet[description]' id='subnet_description_"+Cont+"' placeholder='Descripción' rows='1'></textarea></div></div><div class='col-sm-2'><div class='form-group'><label>Computadores</label><input type='number' class='form-control' min='0' name='subnet[computers]' id='subnet_computers_"+Cont+"' placeholder='Núm.'></div></div>";
   $("#copiar_subred").append(Codigo);  
   document.getElementById("subnet_"+Cont).value= "true"
 });
@@ -2203,7 +2203,7 @@ var Cont=1;
         
         if(Contador >= 1){
           document.getElementById("my_physical_height_1").value = document.getElementById("physical_height_1").value  
-          document.getElementById("my_physical_width_1").vlue = document.getElementById("physical_width_1").value  
+          document.getElementById("my_physical_width_1").value = document.getElementById("physical_width_1").value  
           document.getElementById("my_physical_large_1").value = document.getElementById("physical_large_1").value  
           document.getElementById("my_physical_computers_1").value = document.getElementById("physical_computers_1").value  
           document.getElementById("my_physical_printers_1").value = document.getElementById("physical_printers_1").value
@@ -2215,6 +2215,7 @@ var Cont=1;
           document.getElementById("my_physical_width_2").value = document.getElementById("physical_width_2").value  
           document.getElementById("my_physical_large_2").value = document.getElementById("physical_large_2").value  
           document.getElementById("my_physical_computers_2").value = document.getElementById("physical_computers_2").value  
+          document.getElementById("my_physical_printers_2").value = document.getElementById("physical_printers_1").value
           document.getElementById("my_physical_conference_hall_2").value = document.getElementById("physical_conference_hall_2").value      
         }
         
