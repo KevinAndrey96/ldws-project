@@ -103,7 +103,7 @@ class ProcessController < ApplicationController
     end
     
     
-    @b=Binnacle.create(:user_id => current_user.id, :action => "Crear" , :description => "Se ha creado una solicitud completa (Con Empresa)")
+    @b=Binnacle.create(:user_id => current_user.id, :action => "Crear" , :description => "Se ha creado una solicitud completa (Con Empresa)", :company => params[:name])
     @b.save
     
     

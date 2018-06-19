@@ -157,6 +157,7 @@
           <th>Empresa</th>
           <th>Acción</th>
           <th>Descripción</th>
+          <th>Fecha y hora</th>
           <th colspan="3"></th>
         </tr>
       </thead>
@@ -164,10 +165,11 @@
       <tbody>
         <% @binnacles.each do |binnacle| %>
           <tr>
-            <td><%= binnacle.user %></td>
+            <td><%= binnacle.user.email %></td>
             <td><%= binnacle.company %></td>
             <td><%= binnacle.action %></td>
             <td><%= binnacle.description %></td>
+            <td><%= binnacle.created_at %></td>
             <td><%= link_to 'Ver', binnacle %></td>
             <td><%= link_to 'Editar', edit_binnacle_path(binnacle) %></td>
             <td><%= link_to 'Eliminar', binnacle, method: :delete, data: { confirm: '¿Está seguro?' } %></td>

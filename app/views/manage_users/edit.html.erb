@@ -3,7 +3,7 @@
 <%= form_for @user, :url => { :action => "update" } do |f| %> 
   <% if @user.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this client from being saved:</h2>
+      <h2><%= pluralize(@user.errors.count, "error") %> impidió guardar este registro:</h2>
 
       <ul>
       <% @user.errors.full_messages.each do |message| %>
@@ -27,11 +27,11 @@
   </div>
   <div class="field">
     <label>Contraseña</label>
-    <%= f.password_field :password  , :class => 'form-control' %>
+    <%= f.password_field :password  , :class => 'form-control', :placeholder => "Opcional" %>
   </div>
   <div class="field">
     <label>Confirmar Contraseña</label>
-    <%= f.password_field :password_confirmation  , :class => 'form-control' %>
+    <%= f.password_field :password_confirmation  , :class => 'form-control', :placeholder => "Opcional" %>
   </div>
   
   <div class="field">

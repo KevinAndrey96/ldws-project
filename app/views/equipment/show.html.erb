@@ -1,6 +1,7 @@
 <p id="notice"><%= notice %></p>
 <div class="col-md-4"></div>
 <div class="col-md-4">
+  <h2>Resumen de equipo</h2>
 <p>
   <h3>Marca</h3>
   <%= @equipment.brand %>
@@ -36,7 +37,7 @@
   <%= @equipment.slots %>
 </p>
 
-<%= link_to 'Edit', edit_equipment_path(@equipment) %> |
-<%= link_to 'Back', equipment_index_path %>
+<%= link_to 'Editar', edit_equipment_path(@equipment) %> |
+<%= link_to 'Atrás', equipment_index_path %>
 </div>
 <div class="col-md-4"></div>

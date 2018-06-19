@@ -33,8 +33,19 @@ class ManageUsersController < ApplicationController
   end
    
     def update
+      
+      if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
+        params[:user].delete(:password)
+        params[:user].delete(:password_confirmation)
+      end  
+      @user= User.find(params[:id])
+      
+        
       respond_to do |format|
-        @user= User.find(params[:id])
+        
+        
+        #if @user.save
+
         if @user.update(user_params)
           format.html { redirect_to manage_users_path, notice: 'El Usuario se ha actualizado satisfactoriamente' }
           format.json { render:show, status: :ok, location: @user }

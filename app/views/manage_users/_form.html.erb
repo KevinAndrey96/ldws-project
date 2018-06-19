@@ -41,7 +41,7 @@
 <%= form_for @user, url: manage_users_path(@user), html: { method: :create } do |f| %>
     <% if @user.errors.any? %>
       <div id="error_explanation">
-        <h2><%= pluralize(@user.errors.count, "error") %> prohibited this client from being saved:</h2>
+        <h2><%= pluralize(@user.errors.count, "error") %> impidió guardar este registro:</h2>
   
         <ul>
         <% @user.errors.full_messages.each do |message| %>
