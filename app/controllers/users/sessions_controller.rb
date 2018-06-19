@@ -18,9 +18,10 @@ class Users::SessionsController < Devise::SessionsController
 
   # DELETE /resource/sign_out
    def destroy
-     super
-     @b=Binnacle.create(:user_id => current_user.id, :action => "Logout" , :description => "El usuario ha iniciado cerrado sesión")
+     @b=Binnacle.create(:user_id => current_user.id, :action => "Logout" , :description => "El usuario ha cerrado sesión")
      @b.save
+     super
+     
    end
 
    protected
