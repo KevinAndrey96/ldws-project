@@ -167,10 +167,32 @@ class PdfController < ApplicationController
       @logical=Logical.where(:request_id => @request.id)
     end
     #totalcomputers=@physical.sum(:computers)
-    totalcomputers = 100
-    Equipment.where(:type => "Switch")
+    @Sw_status = 1
+    @total_of_computers = @physical.sum(:computers)
     
+    #Potencias
+    @eco=0
+    @est=0
+    @opt=0
     
+    #Verificamos existencias
+    @eq=Equipment.where(:etype => "Switch", :power => 1).count
+    if @eq == 0
+      @eq=Equipment.where(:etype => "Switch", :power => 2).count
+      if @eq == 0
+        @eq=Equipment.where(:etype => "Switch", :power => 3).count  
+        if @eq == 0
+          @Sw_status=0
+        else
+          @eco=3
+        end
+      else
+        @eco=2
+      end
+    else
+      @eco=1
+    end
+  
     
     
     render  :pdf => "Reporte", :template => 'pdf/cotizacion.html.erb'
