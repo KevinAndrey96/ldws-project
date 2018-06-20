@@ -1,2 +1,28 @@
-<h1>Pdf#cotizacion</h1>
-<p>Find me in app/views/pdf/cotizacion.html.erb</p>
+  <div class="row">
+    <h2>Cotización económica</h2>
+    <table class="table table-responsive"  border="1" width= "100%">
+      <thead>
+        <tr>
+          <th>Equipo</th>
+          <th>Descripción</th>
+          <th>Cantidad</th>
+          <th>Valor Unitario</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+            <td><%=@Switch_e%></td>
+            <td><%=@Switch_d%></td>
+            <td><%=@Switch_c%></td>
+            <td><%=@Switch_v%></td>
+            <td><%=@Switch_v*@Switch_c%></td>
+        </tr>
+        
+        <tr>
+          <td colspan="4"><strong>Total: </strong></td>
+          <td><trong><%= total_value %> USD</trong></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

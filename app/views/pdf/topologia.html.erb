@@ -4,14 +4,15 @@
 <!Doctype html>
 <style>
   .rotar {
-    -ms-transform: rotate(90deg); /* IE 9 */
-    -webkit-transform: rotate(90deg); /* Safari 3-8 */
-    transform: rotate(90deg);
+    /*-ms-transform: rotate(90deg); /* IE 9 */
+    /*-webkit-transform: rotate(90deg); /* Safari 3-8 */
+   /* transform: rotate(90deg);
     position: fixed;
     bottom: 200px;
     right: 30px;
     left: 10px;
-    width: 20px;
+    width: 20px;*/
+    
   }  
   
 </style>
@@ -31,10 +32,10 @@
       
       <div class="row">
         <h2>Plano de piso <%=floor_number%></h2>
-        <center><b></b> <%= physical.width %>m²</center>
-        <center class="rotar pull-left" ><b></b> <%= physical.large %>m²</center>
+        <center><b></b> <%= physical.width %>m</center>
+        <label class="rotar pull-left" style=""><b></b> <%= physical.large %>m</label>
         <center><div style="border-top: 2px solid #a2232c; padding:; width: 90%;"></div></center>
-        <div style="border-left: 2px solid #a2232c; padding:20px">
+        <div style="border-left: 2px solid #a2232c; padding:20px; ">
         <div style="border: 2px solid black">
         <table class="table table-responsive" border='1' width= "100%" style="border-collapse: collapse; border-color: #FAF9F9">
           <thead>

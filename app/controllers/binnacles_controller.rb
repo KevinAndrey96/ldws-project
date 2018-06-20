@@ -5,7 +5,7 @@ class BinnaclesController < ApplicationController
   # GET /binnacles
   # GET /binnacles.json
   def index
-    @binnacles = Binnacle.all
+    @binnacles = Binnacle.all.order(created_at: :desc)
   end
 
   # GET /binnacles/1

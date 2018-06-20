@@ -164,7 +164,9 @@
       </thead>
     
       <tbody>
-        <% @requests.each do |request| %>
+                
+        <% begin %>
+          <% @requests.each do |request| %>
         
           <tr>
             <td><%= request.title %></td>
@@ -173,8 +175,14 @@
             <td><%= request.objective %></td>
             <td><%= request.observation %></td>
             <td><center><%= link_to 'Ver', panel_index_path(:request_id => request.id) %></center></td>
+            <td><center><%= link_to 'Eliminar', request, method: :delete, data: { confirm: 'Está seguro?' } %></center></td>
+            <td></td>
           </tr>
         <% end %>
+        <% rescue => ex %>
+          
+        <% end %>
+        
       </tbody>
     </table>
   </div>

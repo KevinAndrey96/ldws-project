@@ -1,24 +1,49 @@
+<style>
+  h2 {
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 30px;
+  }
+  
+  label{
+    font-weight: normal;
+  }
+  
+</style>
+
 <p id="notice"><%= notice %></p>
-<br><br><br><br><br><br>
-<p>
-  <strong>Usuario:</strong>
-  <%= @binnacle.user.email %>
-</p>
-
-<p>
-  <strong>Empresa:</strong>
-  <%= @binnacle.company %>
-</p>
-
-<p>
-  <strong>Acción:</strong>
-  <%= @binnacle.action %>
-</p>
-
-<p>
-  <strong>Descripción:</strong>
-  <%= @binnacle.description %>
-</p>
-
-<%= link_to 'Editar', edit_binnacle_path(@binnacle) %> |
-<%= link_to 'Atrás', binnacles_path %>
+<br><br><br><br>
+<div class="col-md-5"></div>
+<div class="col-md-4">
+  <div class="row">
+    <div class="col-md-10 col-md-offset-3">
+      <h2>Resumen</h2>
+    </div>
+  </div><br>
+  <p>
+    <strong>Usuario:</strong>
+    <label><%= @binnacle.user.email %></label>
+  </p>
+  
+  <p>
+    <strong>Empresa:</strong>
+    <label><%= @binnacle.company %></label>
+  </p>
+  
+  <p>
+    <strong>Acción:</strong>
+    <label><%= @binnacle.action %></label>
+  </p>
+  
+  <p>
+    <strong>Descripción:</strong>
+    <label><%= @binnacle.description %></label>
+  </p>
+  <center>
+    <%= link_to 'Editar', edit_binnacle_path(@binnacle) %> |
+    <%= link_to 'Atrás', binnacles_path %>
+  </center>
+</div>
+<div class="col-md-4"></div>

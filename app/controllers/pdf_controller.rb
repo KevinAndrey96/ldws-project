@@ -23,10 +23,7 @@ class PdfController < ApplicationController
   end
   def direccionamiento
     
-    #if params[:id]
-     # @company=Company.find(params[:id])
-    #  @request=Request.where(:company_id => params[:id]).first
-    #elsif params[:request_id]
+    
     
     if params[:request_id]
       @request=Request.find(params[:request_id])
@@ -45,6 +42,14 @@ class PdfController < ApplicationController
     @totalcomputers=@physical.sum(:computers) 
     @totalcomputers2=@physical.sum(:computers)
     @totalcomputers3=@physical.sum(:computers)
+    
+    totalcomputers=@physical.sum(:computers)
+    default=totalcomputers-@subnets.sum(:computers) 
+    @subaux=Subnet.where(:name => "default", :logical_id => @logical.id).count
+    if default>0 && @subaux==0
+      @su=Subnet.new(:name => "default", :description => "Sub red Default", :computers => default, :logical_id => @logical.id)
+      @su.save 
+    end
     
     #response = HTTParty.get('http://api.stackexchange.com/2.2/questions?site=stackoverflow')
     #response = HTTParty.get("http://instanceshape.com/admin/VLSM/index.php?Host=192.168.1.24&sub[uno]=15&sub[dos]=56&sub[tres]=36")
@@ -136,10 +141,6 @@ class PdfController < ApplicationController
     render  :pdf => "Reporte", :template => 'pdf/routers.html.erb'
   end
   def topologia
-    #if params[:id]
-     # @company=Company.find(params[:id])
-    #  @request=Request.where(:company_id => params[:id]).first
-    #elsif params[:request_id]
     if params[:request_id]
       @request=Request.find(params[:request_id])
       @company=Company.find(@request.company_id)
@@ -159,6 +160,19 @@ class PdfController < ApplicationController
     render  :pdf => "Reporte", :template => 'pdf/topologia.html.erb'
   end
   def cotizacion
+    if params[:request_id]
+      @request=Request.find(params[:request_id])
+      @company=Company.find(@request.company_id)
+      @physical=Physical.where(:request_id => @request.id)
+      @logical=Logical.where(:request_id => @request.id)
+    end
+    #totalcomputers=@physical.sum(:computers)
+    totalcomputers = 100
+    Equipment.where(:type => "Switch")
+    
+    
+    
+    
     render  :pdf => "Reporte", :template => 'pdf/cotizacion.html.erb'
   end
   def final

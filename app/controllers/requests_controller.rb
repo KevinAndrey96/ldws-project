@@ -71,9 +71,14 @@ class RequestsController < ApplicationController
   # DELETE /requests/1
   # DELETE /requests/1.json
   def destroy
+    Physical.where(:request_id => @request.id).destroy_all
+    @l=Logical.where(:request_id => @request.id)
+    Subnet.where(:logical_id => @l.first.id).destroy_all
+    @l.destroy_all
     @request.destroy
+    
     respond_to do |format|
-      format.html { redirect_to requests_url, notice: 'Request was successfully destroyed.' }
+      format.html { redirect_to requests_url, notice: 'Se ha eliminado la solicitud' }
       format.json { head :no_content }
     end
   end
