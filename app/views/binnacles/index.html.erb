@@ -166,7 +166,11 @@
         <% @binnacles.each do |binnacle| %>
           <tr>
             <td><%= binnacle.user.email %></td>
-            <td><%= binnacle.company %></td>
+            <%begin%>
+              <td><%= binnacle.company.name %></td>
+            <%rescue%>
+              
+            <%end%>
             <td><%= binnacle.action %></td>
             <td><%= binnacle.description %></td>
             <td><%= binnacle.created_at %></td>
