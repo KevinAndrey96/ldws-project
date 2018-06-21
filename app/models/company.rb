@@ -18,5 +18,6 @@
 
 class Company < ActiveRecord::Base
     belongs_to :user
+    belongs_to :binnacle
     has_many :request
 end

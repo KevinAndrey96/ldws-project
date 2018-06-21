@@ -18,5 +18,5 @@
 
 class Binnacle < ActiveRecord::Base
   belongs_to :user
-  belongs_to :company
+  has_one :company
 end

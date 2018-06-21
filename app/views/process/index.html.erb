@@ -24,6 +24,37 @@ $(document).ready(function() {
 </script>
 <style>
 
+.modal {
+    top: 170px !important;
+}
+
+.modal .modal-content {
+    width: 502px !important;
+}
+
+.modal-backdrop {
+    z-index: 2 !important;
+}
+
+.modal .modal-content .modal-header {
+    background-color: #4c6c6d;
+    color: #FFF;
+}
+
+.modal .modal-content .modal-body{
+    min-height: 100px;
+    padding-top: 30px;
+}
+
+.modal .modal-content .modal-body button {
+    width: 120px;
+}
+
+.modal .modal-content .modal-body .btn-confirm{
+    background-color: #e10938;
+    border-color: #e10938;
+}
+
 h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .navbar, .brand, a, .td-name, td {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
@@ -1562,7 +1593,7 @@ input[type="button"]:focus {
                             <div class="form-group">
                                 <label>Visión:</label>
                                 <%if params[:new]=="false"%>
-                                  <textarea class="form-control" name="company[vision]" id="company_vision" placeholder="Visión" rows="2" value="<%=@company.vision%>">></textarea>
+                                  <textarea readonly class="form-control" name="company[vision]" id="company_vision" placeholder="Visión" rows="2" value="<%=@company.vision%>"></textarea>
                                 <%else%>
                                   <textarea class="form-control" name="company[vision]" id="company_vision" placeholder="Visión" rows="2"></textarea>
                                 <%end%>
@@ -1572,7 +1603,7 @@ input[type="button"]:focus {
                             <div class="form-group">
                                 <label>Misión:</label>
                                 <%if params[:new]=="false"%>
-                                  <textarea class="form-control" name="company[mision]" id="company_mision" placeholder="Misión" rows="2" value="<%=@company.mision%>">></textarea>
+                                  <textarea readonly class="form-control" name="company[mision]" id="company_mision" placeholder="Misión" rows="2" value="<%=@company.mision%>">fF</textarea>
                                 <%else%>
                                   <textarea class="form-control" name="company[mision]" id="company_mision" placeholder="Misión" rows="2"></textarea>
                                 <%end%>
@@ -1620,98 +1651,76 @@ input[type="button"]:focus {
                         </div>
                       </div>
                       <div class="row">
-                        <div class="col-sm-12s col-sm-offset-1">
+                        <div class="col-sm-12 col-sm-offset-1">
                           <div class="col-sm-2">
-                            <div class="choice" data-toggle="wizard-checkbox">
-                              <input type="checkbox" name="request[web]" id="request_web" value="1">
-                              <div class="card card-checkboxes card-hover-effect">
-                                <i class="ti-time"></i><p>Servidor Web</p>
-                              </div>
+                            <div class="form-group"><br>
+                              <i class="ti-time"></i><p>Servidor Web</p>
+                              <input type="checkbox" name="request[web]" id="request_web" value="">
                             </div>
                           </div>
                           <div class="col-sm-2">
-                            <div class="choice" data-toggle="wizard-checkbox">
-                              <input type="checkbox" value="1" name="request[bd]" id="request_bd">
-                              <div class="card card-checkboxes card-hover-effect">
-                                <i class="ti-server"></i><p>Servidor de base de datos</p>
-                              </div>
+                            <div class="form-group"><br>
+                              <i class="ti-server"></i><p>Servidor de base de datos</p>
+                              <input type="checkbox" value="" name="request[bd]" id="request_bd">
                             </div>
                           </div>
                           <div class="col-sm-2">
-                            <div class="choice" data-toggle="wizard-checkbox">
-                              <input type="checkbox" value="1" name="request[aplications]" id="request_aplications">
-                              <div class="card card-checkboxes card-hover-effect">
-                                  <i class="ti-android"></i><p>Servidor de aplicaciones</p>
-                              </div>
+                            <div class="form-group"><br>
+                              <i class="ti-android"></i><p>Servidor de aplicaciones</p>
+                              <input type="checkbox" value="" name="request[aplications]" id="request_aplications">
                             </div>
                           </div>
                           <div class="col-sm-2">
-                            <div class="choice" data-toggle="wizard-checkbox">
-                              <input type="checkbox" value="1" name="request[proxy]" id="request_proxy">
-                              <div class="card card-checkboxes card-hover-effect">
-                                <i class="ti-pin"></i><p>Servidor proxy</p>
-                              </div>
+                            <div class="form-group"><br>
+                              <i class="ti-pin"></i><p>Servidor proxy</p>
+                              <input type="checkbox" value="" name="request[proxy]" id="request_proxy">
                             </div>
                           </div>
                           <div class="col-sm-2">
-                            <div class="choice" data-toggle="wizard-checkbox">
-                              <input type="checkbox" value="1" name="request[voip]" id="request_voip">
-                              <div class="card card-checkboxes card-hover-effect">
-                                <i class="ti-location-arrow"></i><p>Servidor VoIP</p>
-                              </div>
+                            <div class="form-group"><br>
+                              <i class="ti-location-arrow"></i><p>Servidor VoIP</p>
+                              <input type="checkbox" value="" name="request[voip]" id="request_voip">
                             </div>
                           </div>
                           <div class="col-sm-2">
-                            <div class="choice" data-toggle="wizard-checkbox">
-                              <input type="checkbox" value="1" name="request[video_conference]" id="request_video_conference">
-                              <div class="card card-checkboxes card-hover-effect">
-                                <i class="ti-video-camera"></i><p>Servicio videoconferencia</p>
-                              </div>
+                            <div class="form-group"><br>
+                              <i class="ti-video-camera"></i><p>Servicio videoconferencia</p>
+                              <input type="checkbox" value="" name="request[video_conference]" id="request_video_conference">
                             </div>
                           </div>
                         </div>
                       </div>
 
                       <div class="row">
-                        <div class="col-sm-12s col-sm-offset-1">
+                        <div class="col-sm-12 col-sm-offset-1">
                           <div class="col-sm-2">
-                            <div class="choice" data-toggle="wizard-checkbox">
-                              <input type="checkbox" value="1" name="request[active_dir]" id="request_active_dir">
-                              <div class="card card-checkboxes card-hover-effect">
-                                <i class="ti-agenda"></i><p>Directorio activo</p>
-                              </div>
+                            <div class="form-group"><br>
+                              <i class="ti-agenda"></i><p>Directorio activo</p>
+                              <input type="checkbox" value="" name="request[active_dir]" id="request_active_dir">
                             </div>
                           </div>
                           <div class="col-sm-2">
-                            <div class="choice" data-toggle="wizard-checkbox">
-                              <input type="checkbox" value="1" name="request[dhcp]" id="request_dhcp">
-                              <div class="card card-checkboxes card-hover-effect">
-                               <i class="ti-panel"></i><p>Servicio DHCP</p>
-                              </div>
+                            <div class="form-group"><br>
+                              <i class="ti-panel"></i><p>Servicio DHCP</p>
+                              <input type="checkbox" value="" name="request[dhcp]" id="request_dhcp">
                             </div>
                           </div>
                           <div class="col-sm-2">
-                            <div class="choice" data-toggle="wizard-checkbox">
-                              <input type="checkbox" value="1" name="request[dns]" id="request_dns">
-                              <div class="card card-checkboxes card-hover-effect">
-                                <i class="ti-bookmark"></i><p>Servidor DNS</p>
-                              </div>
+                            <div class="form-group"><br>
+                              <i class="ti-bookmark"></i><p>Servidor DNS</p>
+                              <input type="checkbox" value="" name="request[dns]" id="request_dns">
                             </div>
                           </div>
                           <div class="col-sm-2">
-                            <div class="choice" data-toggle="wizard-checkbox">
-                              <input type="checkbox" value="1" name="request[ftp]" id="request_ftp">
-                              <div class="card card-checkboxes card-hover-effect">
-                                <i class="ti-plug"></i><p>Servidor FTP</p>
-                              </div>
+                            <div class="form-group"><br>
+                              <i class="ti-plug"></i><p>Servidor FTP</p>
+                              <input type="checkbox" value="" name="request[ftp]" id="request_ftp">
                             </div>
                           </div>
                           <div class="col-sm-2">
-                            <div class="choice" data-toggle="wizard-checkbox">
-                              <input type="checkbox" value="1" name="request[email]" id="request_email">
-                              <div class="card card-checkboxes card-hover-effect">
-                                <i class="ti-email"></i><p>Servidor correo electrónico</p>
-                              </div>
+                            <div class="form-group"><br>
+                              <i class="ti-email"></i><p>Servidor correo electrónico</p>
+                              <input type="checkbox" value="" name="request[email]" id="request_email">
                             </div>
                           </div>
                         </div>
@@ -1726,7 +1735,7 @@ input[type="button"]:focus {
                         <form class="new_physical" id="new_physical" action="/physicals" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="IzY7J79R7+biHkr48VGY7jRRUVSJrAUDi9hvSFHURoV8WxVLvUWKwmUTafBkGWyBR20hZeCE3zvfTufEtYTqBw==" />
                           <input type="hidden" name="request[id]" id="request_id_physical" value="">
                           <input type="hidden" name="physicals[id]" id="physicals_id" value="">
-                          <div id="physical_1">
+                          <div id="physical_1" class="row">
                             <div class="col-sm-2">
                               <div class="form-group">
                                 <label>Altura</label>
@@ -1763,12 +1772,408 @@ input[type="button"]:focus {
                                 <input type="checkbox" class="" name="conference_hall_1" id="physical_conference_hall_1">
                               </div>
                             </div>
-                            <!--<div class="col-sm-1">
+                            <div class="col-sm-1" id="delete_physical_1">
                               <div class="form-group"><br><br>
-                                <div id="test" onclick="deletePhysical(physical_1)" name="physical_1"><span style="font-size:18px"  class="glyphicon glyphicon-trash"></span></div>
+                                <div id="test" onclick="deletePhysical()" name="physical_1"><span style="font-size:18px"  class="glyphicon glyphicon-trash"></span></div>
                               </div>
-                            </div>-->
+                            </div>
                           </div>
+                          <div id="physical_2" class="row">
+                            <div class="col-sm-2">
+                              <div class="form-group">
+                                <label>Altura</label>
+                                <input type="number" min="2" max="10" class="form-control" name="physical[height]" id="physical_height_2" placeholder="Altura">
+                              </div>
+                            </div>
+                            <div class="col-sm-2">
+                              <div class="form-group">
+                                <label>Ancho</label>
+                                <input type="number" min="2" max="20" class="form-control" name="physical[width]" id="physical_width_2" placeholder="Ancho">
+                              </div>
+                            </div>
+                            <div class="col-sm-2">
+                              <div class="form-group">
+                                <label>Largo</label>
+                                <input type="number" min="2" max="20" class="form-control" name="physical[large]" id="physical_large_2" placeholder="Largo">
+                              </div>
+                            </div>
+                            <div class="col-sm-2">
+                              <div class="form-group">
+                                <label>Computadores</label>
+                                <input min="0" type="number" class="form-control" name="physical[computers]" id="physical_computers_2" placeholder="Núm.">
+                              </div>
+                            </div>
+                            <div class="col-sm-2">
+                              <div class="form-group">
+                                <label>Impresoras</label>
+                                <input min="0" type="number" class="form-control" name="physical[printers]" id="physical_printers_2" placeholder="Núm.">
+                              </div>
+                            </div>
+                            <div class="col-sm-1">
+                              <div class="form-group"><br>
+                                <label title='Sala de conferencias'>S.C</label>
+                                <input type="checkbox" class="" name="conference_hall_1" id="physical_conference_hall_2">
+                              </div>
+                            </div>
+                            <div id="delete_physical_2"  class="col-sm-1">
+                              <div class="form-group"><br><br>
+                                <div onclick="deletePhysical()" name="physical_2"><span style="font-size:18px"  class="glyphicon glyphicon-trash"></span></div>
+                              </div>
+                            </div>
+                          </div>  
+                          
+                          <div id="physical_3" class="row">
+                            <div class="col-sm-2">
+                              <div class="form-group">
+                                <label>Altura</label>
+                                <input type="number" min="2" max="10" class="form-control" name="physical[height]" id="physical_height_3" placeholder="Altura">
+                              </div>
+                            </div>
+                            <div class="col-sm-2">
+                              <div class="form-group">
+                                <label>Ancho</label>
+                                <input type="number" min="2" max="20" class="form-control" name="physical[width]" id="physical_width_3" placeholder="Ancho">
+                              </div>
+                            </div>
+                            <div class="col-sm-2">
+                              <div class="form-group">
+                                <label>Largo</label>
+                                <input type="number" min="2" max="20" class="form-control" name="physical[large]" id="physical_large_3" placeholder="Largo">
+                              </div>
+                            </div>
+                            <div class="col-sm-2">
+                              <div class="form-group">
+                                <label>Computadores</label>
+                                <input min="0" type="number" class="form-control" name="physical[computers]" id="physical_computers_3" placeholder="Núm.">
+                              </div>
+                            </div>
+                            <div class="col-sm-2">
+                              <div class="form-group">
+                                <label>Impresoras</label>
+                                <input min="0" type="number" class="form-control" name="physical[printers]" id="physical_printers_3" placeholder="Núm.">
+                              </div>
+                            </div>
+                            <div class="col-sm-1">
+                              <div c6lass="form-group"><br>
+                                <label title='Sala de conferencias'>S.C</label>
+                                <input type="checkbox" class="" name="conference_hall_3" id="physical_conference_hall_3">
+                              </div>
+                            </div>
+                            <div id="delete_physical_3"  class="col-sm-1">
+                              <div class="form-group"><br><br>
+                                <div onclick="deletePhysical()" name="physical_1"><span style="font-size:18px"  class="glyphicon glyphicon-trash"></span></div>
+                              </div>
+                            </div>
+                          </div>   
+                          
+                          <div id="physical_4" class="row">
+                            <div class="col-sm-2">
+                              <div class="form-group">
+                                <label>Altura</label>
+                                <input type="number" min="2" max="10" class="form-control" name="physical[height]" id="physical_height_4" placeholder="Altura">
+                              </div>
+                            </div>
+                            <div class="col-sm-2">
+                              <div class="form-group">
+                                <label>Ancho</label>
+                                <input type="number" min="2" max="20" class="form-control" name="physical[width]" id="physical_width_4" placeholder="Ancho">
+                              </div>
+                            </div>
+                            <div class="col-sm-2">
+                              <div class="form-group">
+                                <label>Largo</label>
+                                <input type="number" min="2" max="20" class="form-control" name="physical[large]" id="physical_large_4" placeholder="Largo">
+                              </div>
+                            </div>
+                            <div class="col-sm-2">
+                              <div class="form-group">
+                                <label>Computadores</label>
+                                <input min="0" type="number" class="form-control" name="physical[computers]" id="physical_computers_4" placeholder="Núm.">
+                              </div>
+                            </div>
+                            <div class="col-sm-2">
+                              <div class="form-group">
+                                <label>Impresoras</label>
+                                <input min="0" type="number" class="form-control" name="physical[printers]" id="physical_printers_4" placeholder="Núm.">
+                              </div>
+                            </div>
+                            <div class="col-sm-1">
+                              <div class="form-group"><br>
+                                <label title='Sala de conferencias'>S.C</label>
+                                <input type="checkbox" class="" name="conference_hall_4" id="physical_conference_hall_4">
+                              </div>
+                            </div>
+                            <div id="delete_physical_4"  class="col-sm-1">
+                              <div class="form-group"><br><br>
+                                <div onclick="deletePhysical()" name="physical_1"><span style="font-size:18px"  class="glyphicon glyphicon-trash"></span></div>
+                              </div>
+                            </div>
+                          </div>  
+                          
+                          <div id="physical_5" class="row">
+                            <div class="col-sm-2">
+                              <div class="form-group">
+                                <label>Altura</label>
+                                <input type="number" min="2" max="10" class="form-control" name="physical[height]" id="physical_height_5" placeholder="Altura">
+                              </div>
+                            </div>
+                            <div class="col-sm-2">
+                              <div class="form-group">
+                                <label>Ancho</label>
+                                <input type="number" min="2" max="20" class="form-control" name="physical[width]" id="physical_width_5" placeholder="Ancho">
+                              </div>
+                            </div>
+                            <div class="col-sm-2">
+                              <div class="form-group">
+                                <label>Largo</label>
+                                <input type="number" min="2" max="20" class="form-control" name="physical[large]" id="physical_large_5" placeholder="Largo">
+                              </div>
+                            </div>
+                            <div class="col-sm-2">
+                              <div class="form-group">
+                                <label>Computadores</label>
+                                <input min="0" type="number" class="form-control" name="physical[computers]" id="physical_computers_5" placeholder="Núm.">
+                              </div>
+                            </div>
+                            <div class="col-sm-2">
+                              <div class="form-group">
+                                <label>Impresoras</label>
+                                <input min="0" type="number" class="form-control" name="physical[printers]" id="physical_printers_5" placeholder="Núm.">
+                              </div>
+                            </div>
+                            <div class="col-sm-1">
+                              <div class="form-group"><br>
+                                <label title='Sala de conferencias'>S.C</label>
+                                <input type="checkbox" class="" name="conference_hall_5" id="physical_conference_hall_5">
+                              </div>
+                            </div>
+                            <div id="delete_physical_5"  class="col-sm-1">
+                              <div class="form-group"><br><br>
+                                <div onclick="deletePhysical()" name="physical_1"><span style="font-size:18px"  class="glyphicon glyphicon-trash"></span></div>
+                              </div>
+                            </div>
+                          </div>  
+                          
+                          <div id="physical_6" class="row">
+                            <div class="col-sm-2">
+                              <div class="form-group">
+                                <label>Altura</label>
+                                <input type="number" min="2" max="10" class="form-control" name="physical[height]" id="physical_height_6" placeholder="Altura">
+                              </div>
+                            </div>
+                            <div class="col-sm-2">
+                              <div class="form-group">
+                                <label>Ancho</label>
+                                <input type="number" min="2" max="20" class="form-control" name="physical[width]" id="physical_width_6" placeholder="Ancho">
+                              </div>
+                            </div>
+                            <div class="col-sm-2">
+                              <div class="form-group">
+                                <label>Largo</label>
+                                <input type="number" min="2" max="20" class="form-control" name="physical[large]" id="physical_large_6" placeholder="Largo">
+                              </div>
+                            </div>
+                            <div class="col-sm-2">
+                              <div class="form-group">
+                                <label>Computadores</label>
+                                <input min="0" type="number" class="form-control" name="physical[computers]" id="physical_computers_6" placeholder="Núm.">
+                              </div>
+                            </div>
+                            <div class="col-sm-2">
+                              <div class="form-group">
+                                <label>Impresoras</label>
+                                <input min="0" type="number" class="form-control" name="physical[printers]" id="physical_printers_6" placeholder="Núm.">
+                              </div>
+                            </div>
+                            <div class="col-sm-1">
+                              <div class="form-group"><br>
+                                <label title='Sala de conferencias'>S.C</label>
+                                <input type="checkbox" class="" name="conference_hall_6" id="physical_conference_hall_6">
+                              </div>
+                            </div>
+                            <div id="delete_physical_6"  class="col-sm-1">
+                              <div class="form-group"><br><br>
+                                <div onclick="deletePhysical()" name="physical_1"><span style="font-size:18px"  class="glyphicon glyphicon-trash"></span></div>
+                              </div>
+                            </div>
+                          </div>  
+                          
+                          <div id="physical_7" class="row">
+                            <div class="col-sm-2">
+                              <div class="form-group">
+                                <label>Altura</label>
+                                <input type="number" min="2" max="10" class="form-control" name="physical[height]" id="physical_height_7" placeholder="Altura">
+                              </div>
+                            </div>
+                            <div class="col-sm-2">
+                              <div class="form-group">
+                                <label>Ancho</label>
+                                <input type="number" min="2" max="20" class="form-control" name="physical[width]" id="physical_width_7" placeholder="Ancho">
+                              </div>
+                            </div>
+                            <div class="col-sm-2">
+                              <div class="form-group">
+                                <label>Largo</label>
+                                <input type="number" min="2" max="20" class="form-control" name="physical[large]" id="physical_large_7" placeholder="Largo">
+                              </div>
+                            </div>
+                            <div class="col-sm-2">
+                              <div class="form-group">
+                                <label>Computadores</label>
+                                <input min="0" type="number" class="form-control" name="physical[computers]" id="physical_computers_7" placeholder="Núm.">
+                              </div>
+                            </div>
+                            <div class="col-sm-2">
+                              <div class="form-group">
+                                <label>Impresoras</label>
+                                <input min="0" type="number" class="form-control" name="physical[printers]" id="physical_printers_7" placeholder="Núm.">
+                              </div>
+                            </div>
+                            <div class="col-sm-1">
+                              <div class="form-group"><br>
+                                <label title='Sala de conferencias'>S.C</label>
+                                <input type="checkbox" class="" name="conference_hall_7" id="physical_conference_hall_6">
+                              </div>
+                            </div>
+                            <div id="delete_physical_7"  class="col-sm-1">
+                              <div class="form-group"><br><br>
+                                <div onclick="deletePhysical()" name="physical_1"><span style="font-size:18px"  class="glyphicon glyphicon-trash"></span></div>
+                              </div>
+                            </div>
+                          </div>  
+                          
+                          <div id="physical_8" class="row">
+                            <div class="col-sm-2">
+                              <div class="form-group">
+                                <label>Altura</label>
+                                <input type="number" min="2" max="10" class="form-control" name="physical[height]" id="physical_height_8" placeholder="Altura">
+                              </div>
+                            </div>
+                            <div class="col-sm-2">
+                              <div class="form-group">
+                                <label>Ancho</label>
+                                <input type="number" min="2" max="20" class="form-control" name="physical[width]" id="physical_width_8" placeholder="Ancho">
+                              </div>
+                            </div>
+                            <div class="col-sm-2">
+                              <div class="form-group">
+                                <label>Largo</label>
+                                <input type="number" min="2" max="20" class="form-control" name="physical[large]" id="physical_large_8" placeholder="Largo">
+                              </div>
+                            </div>
+                            <div class="col-sm-2">
+                              <div class="form-group">
+                                <label>Computadores</label>
+                                <input min="0" type="number" class="form-control" name="physical[computers]" id="physical_computers_8" placeholder="Núm.">
+                              </div>
+                            </div>
+                            <div class="col-sm-2">
+                              <div class="form-group">
+                                <label>Impresoras</label>
+                                <input min="0" type="number" class="form-control" name="physical[printers]" id="physical_printers_8" placeholder="Núm.">
+                              </div>
+                            </div>
+                            <div class="col-sm-1">
+                              <div class="form-group"><br>
+                                <label title='Sala de conferencias'>S.C</label>
+                                <input type="checkbox" class="" name="conference_hall_8" id="physical_conference_hall_8">
+                              </div>
+                            </div>
+                            <div id="delete_physical_8"  class="col-sm-1">
+                              <div class="form-group"><br><br>
+                                <div onclick="deletePhysical()" name="physical_1"><span style="font-size:18px"  class="glyphicon glyphicon-trash"></span></div>
+                              </div>
+                            </div>
+                          </div>  
+                          
+                          <div id="physical_9" class="row">
+                            <div class="col-sm-2">
+                              <div class="form-group">
+                                <label>Altura</label>
+                                <input type="number" min="2" max="10" class="form-control" name="physical[height]" id="physical_height_9" placeholder="Altura">
+                              </div>
+                            </div>
+                            <div class="col-sm-2">
+                              <div class="form-group">
+                                <label>Ancho</label>
+                                <input type="number" min="2" max="20" class="form-control" name="physical[width]" id="physical_width_9" placeholder="Ancho">
+                              </div>
+                            </div>
+                            <div class="col-sm-2">
+                              <div class="form-group">
+                                <label>Largo</label>
+                                <input type="number" min="2" max="20" class="form-control" name="physical[large]" id="physical_large_9" placeholder="Largo">
+                              </div>
+                            </div>
+                            <div class="col-sm-2">
+                              <div class="form-group">
+                                <label>Computadores</label>
+                                <input min="0" type="number" class="form-control" name="physical[computers]" id="physical_computers_9" placeholder="Núm.">
+                              </div>
+                            </div>
+                            <div class="col-sm-2">
+                              <div class="form-group">
+                                <label>Impresoras</label>
+                                <input min="0" type="number" class="form-control" name="physical[printers]" id="physical_printers_9" placeholder="Núm.">
+                              </div>
+                            </div>
+                            <div class="col-sm-1">
+                              <div class="form-group"><br>
+                                <label title='Sala de conferencias'>S.C</label>
+                                <input type="checkbox" class="" name="conference_hall_9" id="physical_conference_hall_9">
+                              </div>
+                            </div>
+                            <div id="delete_physical_9"  class="col-sm-1">
+                              <div class="form-group"><br><br>
+                                <div onclick="deletePhysical()" name="physical_1"><span style="font-size:18px"  class="glyphicon glyphicon-trash"></span></div>
+                              </div>
+                            </div>
+                          </div>  
+                          
+                          <div id="physical_10" class="row">
+                            <div class="col-sm-2">
+                              <div class="form-group">
+                                <label>Altura</label>
+                                <input type="number" min="2" max="10" class="form-control" name="physical[height]" id="physical_height_10" placeholder="Altura">
+                              </div>
+                            </div>
+                            <div class="col-sm-2">
+                              <div class="form-group">
+                                <label>Ancho</label>
+                                <input type="number" min="2" max="20" class="form-control" name="physical[width]" id="physical_width_10" placeholder="Ancho">
+                              </div>
+                            </div>
+                            <div class="col-sm-2">
+                              <div class="form-group">
+                                <label>Largo</label>
+                                <input type="number" min="2" max="20" class="form-control" name="physical[large]" id="physical_large_10" placeholder="Largo">
+                              </div>
+                            </div>
+                            <div class="col-sm-2">
+                              <div class="form-group">
+                                <label>Computadores</label>
+                                <input min="0" type="number" class="form-control" name="physical[computers]" id="physical_computers_10" placeholder="Núm.">
+                              </div>
+                            </div>
+                            <div class="col-sm-2">
+                              <div class="form-group">
+                                <label>Impresoras</label>
+                                <input min="0" type="number" class="form-control" name="physical[printers]" id="physical_printers_10" placeholder="Núm.">
+                              </div>
+                            </div>
+                            <div class="col-sm-1">
+                              <div class="form-group"><br>
+                                <label title='Sala de conferencias'>S.C</label>
+                                <input type="checkbox" class="" name="conference_hall_10" id="physical_conference_hall_10">
+                              </div>
+                            </div>
+                            <div id="delete_physical_10"  class="col-sm-1">
+                              <div class="form-group"><br><br>
+                                <div onclick="deletePhysical()" name="physical_1"><span style="font-size:18px"  class="glyphicon glyphicon-trash"></span></div>
+                              </div>
+                            </div>
+                          </div>                           
+                          
                         </form> 
                       </div>
                       <div id="copiar"></div>
@@ -1829,14 +2234,11 @@ input[type="button"]:focus {
                       <div class="row">
                         <div class="col-sm-12s col-sm-offset-4">
                           <div class="col-sm-3">
-                            <div class="choice" data-toggle="wizard-checkbox">
-                              <input type="checkbox" value="1" name="logical[redundancy]" id="logical_redundancy">
-                              <div class="card card-checkboxes card-hover-effect">
-                                <i class="ti-export"></i><p>Redundancia</p>
-                              </div>
+                            <div class="form-group"><br>
+                              <i class="ti-export"></i><p>Redundancia</p>
+                              <input type="checkbox" value="" name="logical[redundancy]" id="logical_redundancy">
                             </div>
                           </div>
-                          
                         </div>
                       </div> 
                     </form>
@@ -1850,24 +2252,265 @@ input[type="button"]:focus {
                         <form class="new_subnet" id="new_subnet" action="/subnets" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="2gref79QNLc8XpDwG0E2TtyfsikCCiCOroWNAreulTaFZ/ATvURRk7tTs/iOCcIhr6PCGGsi+rb6EwWOU/45tA==" />          
                           <input type="hidden" name="logical[id]" id="logical_id_subnet" value="">
                           <input type="hidden" name="subnet[id]" id="subnet_id" value="">          
-                          <div class="col-sm-3 col-sm-offset-1">
+                          <div id="subred_1">
+                            <div class="col-sm-3 col-sm-offset-1">
+                                <div class="form-group">
+                                    <label>Nombre</label>
+                                    <input type="text" class="form-control" name="subnet[name]" id="subnet_name_1" placeholder="Nombre">
+                                </div>
+                            </div>
+                            <div class="col-sm-5">
+                                <div class="form-group">
+                                    <label>Descripción:</label>
+                                    <textarea class="form-control" name="subnet[description]" id="subnet_description_1" placeholder="Descripción" rows="1"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
                               <div class="form-group">
-                                  <label>Nombre</label>
-                                  <input type="text" class="form-control" name="subnet[name]" id="subnet_name_1" placeholder="Nombre">
+                                <label>Computadores</label>
+                                <input type="number" class="form-control" min='0' name="subnet[computers]" id="subnet_computers_1" placeholder="Núm.">
                               </div>
-                          </div>
-                          <div class="col-sm-5">
-                              <div class="form-group">
-                                  <label>Descripción:</label>
-                                  <textarea class="form-control" name="subnet[description]" id="subnet_description_1" placeholder="Descripción" rows="1"></textarea>
+                            </div>
+                            <div id="delete_subnet_1"  class="col-sm-1">
+                              <div class="form-group"><br><br>
+                                <div onclick="deleteSubnet()" ><span style="font-size:18px"  class="glyphicon glyphicon-trash"></span></div>
                               </div>
-                          </div>
-                          <div class="col-sm-2">
-                            <div class="form-group">
-                              <label>Computadores</label>
-                              <input type="number" class="form-control" min='0' name="subnet[computers]" id="subnet_computers_1" placeholder="Núm.">
                             </div>
                           </div>
+                          
+                          <div id="subred_2">
+                            <div class="col-sm-3 col-sm-offset-1">
+                                <div class="form-group">
+                                    <label>Nombre</label>
+                                    <input type="text" class="form-control" name="subnet[name]" id="subnet_name_2" placeholder="Nombre">
+                                </div>
+                            </div>
+                            <div class="col-sm-5">
+                                <div class="form-group">
+                                    <label>Descripción:</label>
+                                    <textarea class="form-control" name="subnet[description]" id="subnet_description_2" placeholder="Descripción" rows="1"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                              <div class="form-group">
+                                <label>Computadores</label>
+                                <input type="number" class="form-control" min='0' name="subnet[computers]" id="subnet_computers_2" placeholder="Núm.">
+                              </div>
+                            </div>
+                            <div id="delete_subnet_2"  class="col-sm-1">
+                              <div class="form-group"><br><br>
+                                <div onclick="deleteSubnet()" ><span style="font-size:18px"  class="glyphicon glyphicon-trash"></span></div>
+                              </div>
+                            </div>
+                        </div>
+                        
+                        <div id="subred_3">
+                            <div class="col-sm-3 col-sm-offset-1">
+                                <div class="form-group">
+                                    <label>Nombre</label>
+                                    <input type="text" class="form-control" name="subnet[name]" id="subnet_name_3" placeholder="Nombre">
+                                </div>
+                            </div>
+                            <div class="col-sm-5">
+                                <div class="form-group">
+                                    <label>Descripción:</label>
+                                    <textarea class="form-control" name="subnet[description]" id="subnet_description_3" placeholder="Descripción" rows="1"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                              <div class="form-group">
+                                <label>Computadores</label>
+                                <input type="number" class="form-control" min='0' name="subnet[computers]" id="subnet_computers_3" placeholder="Núm.">
+                              </div>
+                            </div>
+                            <div id="delete_subnet_3"  class="col-sm-1">
+                              <div class="form-group"><br><br>
+                                <div onclick="deleteSubnet()" ><span style="font-size:18px"  class="glyphicon glyphicon-trash"></span></div>
+                              </div>
+                            </div>
+                        </div>
+                        
+                        <div id="subred_4">
+                            <div class="col-sm-3 col-sm-offset-1">
+                                <div class="form-group">
+                                    <label>Nombre</label>
+                                    <input type="text" class="form-control" name="subnet[name]" id="subnet_name_4" placeholder="Nombre">
+                                </div>
+                            </div>
+                            <div class="col-sm-5">
+                                <div class="form-group">
+                                    <label>Descripción:</label>
+                                    <textarea class="form-control" name="subnet[description]" id="subnet_description_4" placeholder="Descripción" rows="1"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                              <div class="form-group">
+                                <label>Computadores</label>
+                                <input type="number" class="form-control" min='0' name="subnet[computers]" id="subnet_computers_4" placeholder="Núm.">
+                              </div>
+                            </div>
+                            <div id="delete_subnet_4"  class="col-sm-1">
+                              <div class="form-group"><br><br>
+                                <div onclick="deleteSubnet()" ><span style="font-size:18px"  class="glyphicon glyphicon-trash"></span></div>
+                              </div>
+                            </div>
+                        </div>
+                        
+                        <div id="subred_5">
+                            <div class="col-sm-3 col-sm-offset-1">
+                                <div class="form-group">
+                                    <label>Nombre</label>
+                                    <input type="text" class="form-control" name="subnet[name]" id="subnet_name_5" placeholder="Nombre">
+                                </div>
+                            </div>
+                            <div class="col-sm-5">
+                                <div class="form-group">
+                                    <label>Descripción:</label>
+                                    <textarea class="form-control" name="subnet[description]" id="subnet_description_5" placeholder="Descripción" rows="1"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                              <div class="form-group">
+                                <label>Computadores</label>
+                                <input type="number" class="form-control" min='0' name="subnet[computers]" id="subnet_computers_5" placeholder="Núm.">
+                              </div>
+                            </div>
+                            <div id="delete_subnet_5"  class="col-sm-1">
+                              <div class="form-group"><br><br>
+                                <div onclick="deleteSubnet()" ><span style="font-size:18px"  class="glyphicon glyphicon-trash"></span></div>
+                              </div>
+                            </div>
+                        </div>
+                        
+                        <div id="subred_6">
+                            <div class="col-sm-3 col-sm-offset-1">
+                                <div class="form-group">
+                                    <label>Nombre</label>
+                                    <input type="text" class="form-control" name="subnet[name]" id="subnet_name_6" placeholder="Nombre">
+                                </div>
+                            </div>
+                            <div class="col-sm-5">
+                                <div class="form-group">
+                                    <label>Descripción:</label>
+                                    <textarea class="form-control" name="subnet[description]" id="subnet_description_6" placeholder="Descripción" rows="1"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                              <div class="form-group">
+                                <label>Computadores</label>
+                                <input type="number" class="form-control" min='0' name="subnet[computers]" id="subnet_computers_6" placeholder="Núm.">
+                              </div>
+                            </div>
+                            <div id="delete_subnet_6"  class="col-sm-1">
+                              <div class="form-group"><br><br>
+                                <div onclick="deleteSubnet()" ><span style="font-size:18px"  class="glyphicon glyphicon-trash"></span></div>
+                              </div>
+                            </div>
+                        </div>
+                        
+                        <div id="subred_7">
+                            <div class="col-sm-3 col-sm-offset-1">
+                                <div class="form-group">
+                                    <label>Nombre</label>
+                                    <input type="text" class="form-control" name="subnet[name]" id="subnet_name_7" placeholder="Nombre">
+                                </div>
+                            </div>
+                            <div class="col-sm-5">
+                                <div class="form-group">
+                                    <label>Descripción:</label>
+                                    <textarea class="form-control" name="subnet[description]" id="subnet_description_7" placeholder="Descripción" rows="1"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                              <div class="form-group">
+                                <label>Computadores</label>
+                                <input type="number" class="form-control" min='0' name="subnet[computers]" id="subnet_computers_7" placeholder="Núm.">
+                              </div>
+                            </div>
+                            <div id="delete_subnet_7"  class="col-sm-1">
+                              <div class="form-group"><br><br>
+                                <div onclick="deleteSubnet()" ><span style="font-size:18px"  class="glyphicon glyphicon-trash"></span></div>
+                              </div>
+                            </div>
+                        </div>
+                        
+                        <div id="subred_8">
+                            <div class="col-sm-3 col-sm-offset-1">
+                                <div class="form-group">
+                                    <label>Nombre</label>
+                                    <input type="text" class="form-control" name="subnet[name]" id="subnet_name_8" placeholder="Nombre">
+                                </div>
+                            </div>
+                            <div class="col-sm-5">
+                                <div class="form-group">
+                                    <label>Descripción:</label>
+                                    <textarea class="form-control" name="subnet[description]" id="subnet_description_8" placeholder="Descripción" rows="1"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                              <div class="form-group">
+                                <label>Computadores</label>
+                                <input type="number" class="form-control" min='0' name="subnet[computers]" id="subnet_computers_8" placeholder="Núm.">
+                              </div>
+                            </div>
+                            <div id="delete_subnet_8"  class="col-sm-1">
+                              <div class="form-group"><br><br>
+                                <div onclick="deleteSubnet()" ><span style="font-size:18px"  class="glyphicon glyphicon-trash"></span></div>
+                              </div>
+                            </div>
+                        </div>
+                        
+                        <div id="subred_9">
+                            <div class="col-sm-3 col-sm-offset-1">
+                                <div class="form-group">
+                                    <label>Nombre</label>
+                                    <input type="text" class="form-control" name="subnet[name]" id="subnet_name_9" placeholder="Nombre">
+                                </div>
+                            </div>
+                            <div class="col-sm-5">
+                                <div class="form-group">
+                                    <label>Descripción:</label>
+                                    <textarea class="form-control" name="subnet[description]" id="subnet_description_9" placeholder="Descripción" rows="1"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                              <div class="form-group">
+                                <label>Computadores</label>
+                                <input type="number" class="form-control" min='0' name="subnet[computers]" id="subnet_computers_9" placeholder="Núm.">
+                              </div>
+                            </div>
+                            <div id="delete_subnet_9"  class="col-sm-1">
+                              <div class="form-group"><br><br>
+                                <div onclick="deleteSubnet()" ><span style="font-size:18px"  class="glyphicon glyphicon-trash"></span></div>
+                              </div>
+                            </div>
+                        </div>
+                        
+                        <div id="subred_10">
+                            <div class="col-sm-3 col-sm-offset-1">
+                                <div class="form-group">
+                                    <label>Nombre</label>
+                                    <input type="text" class="form-control" name="subnet[name]" id="subnet_name_10" placeholder="Nombre">
+                                </div>
+                            </div>
+                            <div class="col-sm-5">
+                                <div class="form-group">
+                                    <label>Descripción:</label>
+                                    <textarea class="form-control" name="subnet[description]" id="subnet_description_10" placeholder="Descripción" rows="1"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                              <div class="form-group">
+                                <label>Computadores</label>
+                                <input type="number" class="form-control" min='0' name="subnet[computers]" id="subnet_computers_10" placeholder="Núm.">
+                              </div>
+                            </div>
+                            <div id="delete_subnet_10"  class="col-sm-1">
+                              <div class="form-group"><br><br>
+                                <div onclick="deleteSubnet()" ><span style="font-size:18px"  class="glyphicon glyphicon-trash"></span></div>
+                              </div>
+                            </div>
+                        </div>
                         </form>
                       </div>
                       <div id="copiar_subred"></div>
@@ -1884,9 +2527,7 @@ input[type="button"]:focus {
                           <input type='button' class='btn btn-next btn-fill btn-primary btn-wd' onclick="Example()" id="next" name='next' value='Finalizar' />
                           <input type='button' class='btn btn-finish btn-fill btn-primary btn-wd' onclick="Example()" name='finish' value='Finalizar' />
                       </div>
-                      <div class="pull-left">
-                          <input type='button' class='btn btn-previous btn-default btn-wd' name='previous' value='Anterior' />
-                      </div>
+
                       <div class="clearfix"></div>
                   </div>
 		                    
@@ -2069,29 +2710,110 @@ input[type="button"]:focus {
    
 </form>
 </body>
-
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <center><h4 style="font-size:10pt" class="modal-title" id="myModalLabel"><b>LDWS</b></h4></center>
+                </div>
+                <div class="modal-body">
+                    Debe llenar todos los campos del formulario para crear una solicitud.
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <center><h4 style="font-size:10pt" class="modal-title" id="myModalLabel"><b>LDWS</b></h4></center>
+                </div>
+                <div class="modal-body">
+                    La solicitud puede tener un maximo de 10 pisos asignados.
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <center><h4 style="font-size:10pt" class="modal-title" id="myModalLabel"><b>LDWS</b></h4></center>
+                </div>
+                <div class="modal-body">
+                    La solicitud debe tener al menos un piso asignado.
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <center><h4 style="font-size:10pt" class="modal-title" id="myModalLabel"><b>LDWS</b></h4></center>
+                </div>
+                <div class="modal-body">
+                    La solicitud puede tener un maximo de 10 subredes asignadas.
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <center><h4 style="font-size:10pt" class="modal-title" id="myModalLabel"><b>LDWS</b></h4></center>
+                </div>
+                <div class="modal-body">
+                   La solicitud debe tener al menos una subred asignada.
+                </div>
+            </div>
+        </div>
+    </div>
 
 </html>
 <script type="text/javascript">
 
 $( "#add" ).click(function() {
-  Contador= Contador+1;
-  
-  var Codigo="<div id=physical_"+Contador+"'><div class='col-sm-2'> <div class='form-group'> <label>Altura</label> <input type='number' class='form-control' min='2' max='10' name='physical[height]' id='physical_height_"+Contador+"' placeholder='Altura'></div></div><div class='col-sm-2'><div class='form-group'><label>Ancho</label><input type='number' min='2' max='20' class='form-control' name='physical[width]' id='physical_width_"+Contador+"' placeholder='Ancho'></div></div><div class='col-sm-2'><div class='form-group'><label>Largo</label><input min='2' max='20' type='number' class='form-control' name='physical[large]' id='physical_large_"+Contador+"' placeholder='Largo'></div></div><div class='col-sm-2'><div class='form-group'><label>Computadores</label><input type='number' min='0' class='form-control' name='physical[computers]' id='physical_computers_"+Contador+"' placeholder='Núm.'></div></div><div class='col-sm-2'><div class='form-group'><label>Impresoras</label><input type='number' min='0' class='form-control' name='physical[printers]' id='physical_printers_"+Contador+"' placeholder='Núm.'></div></div><div class='col-sm-1'><div class='form-group'><br><label title='Sala de conferencias'>S.C</label><input type='checkbox'  name='conference_hall_1' id='physical_conference_hall_"+Contador+"'></div></div><div class='col-sm-1'><div class='form-group'><br><br><div id='test' onclick='deletePhysical("+Contador+")'><span style='font-size:18px'  class='glyphicon glyphicon-trash'></span></div></div></div></div>";
-  
-  $("#copiar").append(Codigo);  
-  document.getElementById("fisico_"+Contador).value= "true";
-  
+  if (Contador+1 > 10){
+    $("#myModal1").modal("show");
+  } else {
+    $('#delete_physical_'+Contador).hide();
+    Contador= Contador+1;
+    $('#physical_'+Contador).show();
+    document.getElementById("fisico_"+Contador).value= "true";       
+  }  
 });
 
 
 $( "#add_subred" ).click(function() {
-  Cont= Cont+1;
-  console.log("cont:"+Cont);
-  var Codigo = "<div class='col-sm-3 col-sm-offset-1'><div class='form-group'><label>Nombre</label><input type='text' class='form-control' name='subnet[name]' id='subnet_name_"+Cont+"' placeholder='Nombre'></div></div><div class='col-sm-5'><div class='form-group'><label>Descripción:</label><textarea class='form-control' name='subnet[description]' id='subnet_description_"+Cont+"' placeholder='Descripción' rows='1'></textarea></div></div><div class='col-sm-2'><div class='form-group'><label>Computadores</label><input type='number' class='form-control' min='0' name='subnet[computers]' id='subnet_computers_"+Cont+"' placeholder='Núm.'></div></div>";
-  $("#copiar_subred").append(Codigo);  
-  document.getElementById("subnet_"+Cont).value= "true"
-
+  if (Cont+1 > 10){
+    $("#myModal3").modal("show");
+  } else {
+    $('#delete_subnet_'+Cont).hide();
+    Cont= Cont+1;
+    $('#subred_'+Cont).show();
+    document.getElementById("subnet_"+Cont).value= "true";       
+  }
 });
 
 </script>
@@ -2099,22 +2821,49 @@ $( "#add_subred" ).click(function() {
 var Contador=1;
 var Cont=1;
 
-    function deletePhysical(cont){
-      cont = 1
-      var element = $("#physical_"+cont);
+    function deletePhysical(){
+      if (Contador == 1){
+        $("#myModal2").modal("show");
+      } else {
+        $('#physical_'+Contador).hide();
+        document.getElementById("fisico_"+Contador).value= "false";
+        Contador= Contador-1;
+        $('#delete_physical_'+Contador).show();        
+      }
+    }
 
-      console.log(element);
-      $("#physical_"+cont).empty();
-      document.getElementById('my_physical_height_'+cont).value = "" 
-      document.getElementById('my_physical_width_'+cont).value = ""
-      document.getElementById('my_physical_large_'+cont).value = ""
-      document.getElementById('my_physical_computers_'+cont).value = ""  
-      document.getElementById('my_physical_printers_'+cont).value = ""
-      document.getElementById('my_physical_conference_hall_'+cont).value = ""
+    function deleteSubnet(){
+      if (Cont == 1){
+        $("#myModal4").modal("show");
+      } else {
+        $('#subred_'+Cont).hide();
+        document.getElementById("subnet_"+Cont).value= "false";
+        Cont= Cont-1;
+        $('#delete_subnet_'+Cont).show();        
+      }
     }
     
     $( document ).ready(function() {
-      
+        $('#physical_2').hide();
+        $('#physical_3').hide();
+        $('#physical_4').hide();
+        $('#physical_5').hide();
+        $('#physical_6').hide();
+        $('#physical_7').hide();
+        $('#physical_8').hide();
+        $('#physical_9').hide();
+        $('#physical_10').hide();
+        
+        $('#subred_2').hide();
+        $('#subred_3').hide();
+        $('#subred_4').hide();
+        $('#subred_5').hide();
+        $('#subred_6').hide();
+        $('#subred_7').hide();
+        $('#subred_8').hide();
+        $('#subred_9').hide();
+        $('#subred_10').hide();
+        
         <%if params[:new]=="false"%>
           document.getElementById("details").className = "tab-pane";
           document.getElementById("captain").className = "tab-pane active";
@@ -2157,8 +2906,6 @@ var Cont=1;
       	val = 1;
       if (document.getElementById("company_vision").value == "")
       	val = 1;
-      if (document.getElementById("company_id_request").value == "")
-      	val = 1;
       if (document.getElementById("request_id").value == "")
       	val = 1;
       if (document.getElementById("request_title").value == "")
@@ -2171,20 +2918,16 @@ var Cont=1;
       	val = 1;
       if (document.getElementById("request_id_physical").value == "")
       	val = 1;
-      if (document.getElementById("physicals_id").value == "")
+      if (document.getElementById("physical_height_1").value == "")
       	val = 1;
-      if (document.getElementById("physical_height").value == "")
+      if (document.getElementById("physical_width_1").value == "")
       	val = 1;
-      if (document.getElementById("physical_width").value == "")
+      if (document.getElementById("physical_large_1").value == "")
       	val = 1;
-      if (document.getElementById("physical_large").value == "")
+      if (document.getElementById("physical_computers_1").value == "")
       	val = 1;
-      if (document.getElementById("physical_computers").value == "")
+      if (document.getElementById("physical_printers_1").value == "")
       	val = 1;
-      if (document.getElementById("physical_printers").value == "")
-      	val = 1;
-      if (document.getElementById("request_id_logical").value == "")
-      	val = 1;	
       if (document.getElementById("logical_id").value == "")
       	val = 1;
       if (document.getElementById("logical_scalability").value == "")
@@ -2197,17 +2940,11 @@ var Cont=1;
       	val = 1;
       if (document.getElementById("logical_host4").value == "")
       	val = 1;
-      if (document.getElementById("logical_id_subnet").value == "")
+      if (document.getElementById("subnet_name_1").value == "")
       	val = 1;
-      if (document.getElementById("subnet_id").value == "")
+      if (document.getElementById("subnet_description_1").value == "")
       	val = 1;
-      if (document.getElementById("physical_computers").value == "")
-      	val = 1;
-      if (document.getElementById("subnet_name").value == "")
-      	val = 1;
-      if (document.getElementById("subnet_description").value == "")
-      	val = 1;
-      if (document.getElementById("subnet_computers").value == "")
+      if (document.getElementById("subnet_computers_1").value == "")
       	val = 1;
 
       return val;
@@ -2216,13 +2953,9 @@ var Cont=1;
     function Example()
     {
       if (validate() == 1){
-        alert("Debe rellenar todos los campos");
+        $("#myModal").modal("show");
       } else {
-        //document.getElementById("new_company").submit();
-        //document.getElementById("new_request").submit();
-        //document.getElementById("new_physical").submit();
-        //document.getElementById("new_logical").submit();
-        //document.getElementById("new_subnet").submit(); 
+
         document.getElementById("my_company_id").value=document.getElementById("company_id").value 	
         document.getElementById("name").value=document.getElementById("company_name").value
         document.getElementById("nit").value=document.getElementById("company_nit").value
