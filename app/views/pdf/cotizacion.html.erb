@@ -23,14 +23,14 @@
         </tr>
         <tr>
           <% if @Sw_status == 0 %>
-            <td colspan="5">No hay Switches disponibles en el sistema</td>
+            <td colspan="5">No hay switches disponibles para cotizar</td>
           <%else%>
           <% 
           totalcomputers=@total_of_computers
           
           while totalcomputers>0  do
             #@Myeq=Equipment.where('ports < ?',totalcomputers).order(:ports).last
-            @Myeq=Equipment.where('ports < ? and power = ?',totalcomputers, @eco).order(:ports).last
+            @Myeq=Equipment.where('ports < ? and power = ? and etype = ?',totalcomputers, @eco,"Switch").order(:ports).last
             
             begin
               
@@ -53,7 +53,7 @@
             #Añadir router final
             
             #@Myeq=Equipment.where('ports > ?',totalcomputers).order(:ports).first
-            @Myeq=Equipment.where('ports > ? and power = ?',totalcomputers,@eco).order(:ports).first
+            @Myeq=Equipment.where('ports > ? and power = ? and etype = ?',totalcomputers,@eco,"Switch").order(:ports).first
             cont=1
             totalcomputers-=@Myeq.ports*cont
             end
@@ -77,11 +77,28 @@
           <%end%>
         </tr>
         <!-- Routers -->
-        <!--
+        <% if @R_status == 0 %>
+            <td colspan="5">No hay Routers disponibles para cotizar</td>
+          <%else%>
         <tr>
           <td colspan="5">Router</td>
         </tr>
-        -->
+        <%
+          @Myeq=Equipment.where('power = ? and etype = ?',@eco_r,"Router").order("RANDOM()").first
+        %>
+        <tr>
+          <td><%=@Myeq.brand%></td>
+          <td>Router marca <%=@Myeq.brand%>, referencia: [<%=@Myeq.reference %>], el equipo tiene una potencia <%=@Myeq.power %>/3</td>
+          <td><%=cont%></td>
+          <td><%=@Myeq.price%></td>
+          <td><%=@Myeq.price*cont%></td>
+          <%total_value+=@Myeq.price*cont%>
+        </tr>
+        
+        <%end%>
+        <!-- Rack -->
+        
+        
         <tr>
           <td colspan="4"><strong>Total: </strong></td>
           <td><strong><%= total_value %> USD</strong></td>

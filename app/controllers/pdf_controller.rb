@@ -192,6 +192,31 @@ class PdfController < ApplicationController
     else
       @eco=1
     end
+    
+    #Código de Routers
+    
+    @R_status = 1
+    
+    @eco_r=0
+    @est_r=0
+    @opt_r=0
+    
+    @eq_r=Equipment.where(:etype => "Router", :power => 1).count
+    if @eq_r == 0
+      @eq_r=Equipment.where(:etype => "Router", :power => 2).count
+      if @eq_r == 0
+        @eq_r=Equipment.where(:etype => "Router", :power => 3).count  
+        if @eq_r == 0
+          @R_status=0
+        else
+          @eco_r=3
+        end
+      else
+        @eco_r=2
+      end
+    else
+      @eco_r=1
+    end
   
     
     

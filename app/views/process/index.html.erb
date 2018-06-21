@@ -1739,7 +1739,7 @@ input[type="button"]:focus {
                             <div class="col-sm-2">
                               <div class="form-group">
                                 <label>Altura</label>
-                                <input type="number" min="2" max="10" class="form-control" name="physical[height]" id="physical_height_1" placeholder="Altura">
+                                <input type="number" min="2" max="10" onkeypress="validarAltura()" class="form-control" name="physical[height]" id="physical_height_1" placeholder="Altura">
                               </div>
                             </div>
                             <div class="col-sm-2">
@@ -1773,9 +1773,6 @@ input[type="button"]:focus {
                               </div>
                             </div>
                             <div class="col-sm-1" id="delete_physical_1">
-                              <div class="form-group"><br><br>
-                                <div id="test" onclick="deletePhysical()" name="physical_1"><span style="font-size:18px"  class="glyphicon glyphicon-trash"></span></div>
-                              </div>
                             </div>
                           </div>
                           <div id="physical_2" class="row">
@@ -2272,9 +2269,6 @@ input[type="button"]:focus {
                               </div>
                             </div>
                             <div id="delete_subnet_1"  class="col-sm-1">
-                              <div class="form-group"><br><br>
-                                <div onclick="deleteSubnet()" ><span style="font-size:18px"  class="glyphicon glyphicon-trash"></span></div>
-                              </div>
                             </div>
                           </div>
                           
@@ -2821,6 +2815,8 @@ $( "#add_subred" ).click(function() {
 var Contador=1;
 var Cont=1;
 
+
+    
     function deletePhysical(){
       if (Contador == 1){
         $("#myModal2").modal("show");
@@ -2840,6 +2836,13 @@ var Cont=1;
         document.getElementById("subnet_"+Cont).value= "false";
         Cont= Cont-1;
         $('#delete_subnet_'+Cont).show();        
+      }
+    }
+    
+    function validarAltura(){
+      var altura = document.getElementById("physical_height_"+Contador).value;
+      if (altura == '0' || altura == '1' || altura < '0' || altura > '10'){
+        document.getElementById("physical_height_"+Contador).value == "";
       }
     }
     
