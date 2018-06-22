@@ -2,6 +2,7 @@
   <meta charset="UTF-8">
 </head>
   <%total_value=0%>
+  <%slots=0%>
   
   <div class="row">
     <h2>Cotización económica</h2>
@@ -19,7 +20,7 @@
       <tbody>
         <!-- Switches -->
         <tr>
-          <td colspan="5">Switches</td>
+          <td colspan="5"><strong>Switches</strong></td>
         </tr>
         <tr>
           <% if @Sw_status == 0 %>
@@ -45,7 +46,7 @@
             end
             cont-=1
             
-            #Restar Pueros
+            #Restar Puertos
             totalcomputers-=@Myeq.ports*cont
             
             
@@ -56,7 +57,9 @@
             @Myeq=Equipment.where('ports > ? and power = ? and etype = ?',totalcomputers,@eco,"Switch").order(:ports).first
             cont=1
             totalcomputers-=@Myeq.ports*cont
+            
             end
+            slots+=@Myeq.slots*cont
             %>
             
             <tr>
@@ -69,21 +72,21 @@
             </tr>
             <%
           
-          
-          
           end
           %>
             
           <%end%>
         </tr>
         <!-- Routers -->
-        <% if @R_status == 0 %>
-            <td colspan="5">No hay Routers disponibles para cotizar</td>
-          <%else%>
         <tr>
-          <td colspan="5">Router</td>
+          <td colspan="5"><strong>Routers</strong></td>
         </tr>
+        <% if @R_status == 0 %>
+            <td colspan="5">No hay routers disponibles para cotizar</td>
+          <%else%>
+        
         <%
+          cont=1
           @Myeq=Equipment.where('power = ? and etype = ?',@eco_r,"Router").order("RANDOM()").first
         %>
         <tr>
@@ -97,7 +100,62 @@
         
         <%end%>
         <!-- Rack -->
+        <% mslots=35 %>
+        <tr>
+          <td colspan="5"><strong>Racks</strong></td>
+        </tr>
+        <% if @R_status == 0 %>
+            <td colspan="5">No hay racks disponibles para cotizar</td>
+          <%else%>
+          
+        <%
+          
+          
+          @Myeq=Equipment.where('power = ? and etype = ? and slots >= ?',@eco_ra,"Rack",mslots).order(:slots).first
+          
+          #Revisamos si hay resultados
+          begin
+            aux=@Myeq.brand
+          rescue
+          #Si no hay resultados tendremos que meter varios racks
+          
+          antslots=0
+          ronda=0
+            while mslots>0
+            ronda+=1
+            if ronda!=1
+              @BackMy=@Myeq.dup
+            end
+              begin
+                @Myeq=Equipment.where('power = ? and etype = ? and slots <= ?',@eco_ra,"Rack",mslots).order(:slots).last
+                mslots-=@Myeq.slots
+              rescue
+                @Myeq=Equipment.where('power = ? and etype = ? and slots >= ?',@eco_ra,"Rack",mslots).order(:slots).first
+                mslots-=@Myeq.slots
+              end
+              
+               #Simulación del siguiente loop
+               #if mslots>0
+                 
+              
+              %>
+              <tr>
+                <td><%=@Myeq.brand%></td>
+                <td>Rack marca <%=@Myeq.brand%>, referencia: [<%=@Myeq.reference %>], el equipo tiene espacio para alojar <%=@Myeq.slots %> u</td>
+                <td><%=cont%></td>
+                <td><%=@Myeq.price%></td>
+                <td><%=@Myeq.price*cont%></td>
+                <%total_value+=@Myeq.price*cont%>
+              </tr>
+              <%
+            
+            end
+          end
+            
+        %>
         
+        
+        <%end%>
         
         <tr>
           <td colspan="4"><strong>Total: </strong></td>

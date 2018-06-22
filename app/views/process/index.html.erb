@@ -1512,11 +1512,9 @@ input[type="button"]:focus {
               	</div>
 
 								<div class="wizard-navigation">
-									<div class="progress-with-circle">
-									     <div class="progress-bar" role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="5" style="width: 21%;"></div>
-									</div>
+
 									<ul>
-			              <li>
+			              <li id="details_list">
 											<a href="#details" onclick="hiddenNextBtn()" data-toggle="tab">
 												<div class="icon-circle">
 													<i class="ti-bag"></i>
@@ -1524,9 +1522,9 @@ input[type="button"]:focus {
 												Empresa
 											</a>
 										</li>
-			                            <li>
+			              <li id="captain_list">
 											<a href="#captain" onclick="hiddenNextBtn()" data-toggle="tab">
-												<div class="icon-circle">
+												<div id="icon_captain" class="icon-circle">
 													<i class="ti-email"></i>
 												</div>
 												Solicitud
@@ -1564,14 +1562,19 @@ input[type="button"]:focus {
                     <div class="row">
                       <form class="new_company" id="new_company" action="/company" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" />
                       <input type="hidden" name="authenticity_token" value="yK7vDfj0ORZZpNIf2OQp50opDeJmu2OTzw9IBl2Ol2yXw8Fh+uBcMt6p8RdNrN2IORV90w+TuaubmcCKud477g==" />
-                        <input type="hidden" name="company[id]" id="company_id" value="">
+                      
+                        <% if params[:new] == "false" || params[:edit]=="true"%>
+                          <input type="hidden" name="company[id]" id="company_id" value="<%= params[:id] %>">
+                        <% else %>
+                          <input type="hidden" name="company[id]" id="company_id" value="">
+                        <% end %>
                         <div class="col-sm-12">
                             <h5 class="info-text">Ingresa los datos de tu empresa !</h5>
                         </div>
                         <div class="col-sm-5 col-sm-offset-1">
                             <div class="form-group">
                                 <label>Nombre:</label>
-                                <%if params[:new]=="false"%>
+                                <%if params[:new]=="false" || params[:edit]=="true"%>
                                   <input readonly type="text" class="form-control" name="company[name]" id="company_name" placeholder="Nombre" required value="<%=@company.name%>">
                                 <%else%>
                                   <input type="text" class="form-control" name="company[name]" id="company_name" placeholder="Nombre" value="">
@@ -1581,7 +1584,7 @@ input[type="button"]:focus {
                         <div class="col-sm-5">
                             <div class="form-group">
                                 <label>Nit:</label>
-                                <%if params[:new]=="false"%>
+                                <%if params[:new]=="false" || params[:edit]=="true"%>
                                   <input readonly min="0" max="999999999" type="number" class="form-control" name="company[nit]" id="company_nit"  placeholder="Nit" value="<%=@company.nit%>">
                                 <%else%>
                                   <input type="number" min="0" max="999999999"  class="form-control" name="company[nit]" id="company_nit"  placeholder="Nit">
@@ -1592,8 +1595,8 @@ input[type="button"]:focus {
                         <div class="col-sm-5 col-sm-offset-1">
                             <div class="form-group">
                                 <label>Visión:</label>
-                                <%if params[:new]=="false"%>
-                                  <textarea readonly class="form-control" name="company[vision]" id="company_vision" placeholder="Visión" rows="2" value="<%=@company.vision%>"></textarea>
+                                <%if params[:new]=="false" || params[:edit]=="true"%>
+                                  <textarea readonly class="form-control" name="company[vision]" id="company_vision" placeholder="Visión" rows="2" ><%=@company.vision%></textarea>
                                 <%else%>
                                   <textarea class="form-control" name="company[vision]" id="company_vision" placeholder="Visión" rows="2"></textarea>
                                 <%end%>
@@ -1602,8 +1605,8 @@ input[type="button"]:focus {
                         <div class="col-sm-5">
                             <div class="form-group">
                                 <label>Misión:</label>
-                                <%if params[:new]=="false"%>
-                                  <textarea readonly class="form-control" name="company[mision]" id="company_mision" placeholder="Misión" rows="2" value="<%=@company.mision%>">fF</textarea>
+                                <%if params[:new]=="false" || params[:edit]=="true"%>
+                                  <textarea readonly class="form-control" name="company[mision]" id="company_mision" placeholder="Misión" rows="2" ><%=@company.mision%></textarea>
                                 <%else%>
                                   <textarea class="form-control" name="company[mision]" id="company_mision" placeholder="Misión" rows="2"></textarea>
                                 <%end%>
@@ -1622,25 +1625,41 @@ input[type="button"]:focus {
                       <div class="col-sm-11 col-sm-offset-1">
                         <div class="form-group">
                           <label>Título:</label>
-                          <input type="text" class="form-control" name="request[title]" id="request_title" placeholder="Título">
+                          <%if params[:edit]=="true"%>
+                            <input type="text" class="form-control" name="request[title]" id="request_title" placeholder="Título" value="<%=@request.title%>">                           
+                          <%else%>
+                            <input type="text" class="form-control" name="request[title]" id="request_title" placeholder="Título">
+                          <%end%>
                         </div>
                       </div>
                       <div class="col-sm-11 col-sm-offset-1">
                         <div class="form-group">
                           <label>Descripción:</label>
-                          <textarea class="form-control" name="request[description]" id="request_description" placeholder="Descripción" rows="2"></textarea>
+                          <%if params[:edit]=="true"%>
+                            <textarea class="form-control" name="request[description]" id="request_description" placeholder="Descripción" rows="2"><%=@request.description%></textarea>                           
+                          <%else%>
+                            <textarea class="form-control" name="request[description]" id="request_description" placeholder="Descripción" rows="2"></textarea>
+                          <%end%>
                         </div>
                       </div>
                       <div class="col-sm-11 col-sm-offset-1">
                         <div class="form-group">
                           <label>Objetivos:</label>
-                          <textarea class="form-control" name="request[objective]" id="request_objective" placeholder="Objetivos" rows="2"></textarea>
+                          <%if params[:edit]=="true"%>
+                            <textarea class="form-control" name="request[objective]" id="request_objective" placeholder="Objetivos" rows="2"><%=@request.objective%></textarea>                           
+                          <%else%>
+                            <textarea class="form-control" name="request[objective]" id="request_objective" placeholder="Objetivos" rows="2"></textarea>
+                          <%end%>
                         </div>
                       </div>
                       <div class="col-sm-11 col-sm-offset-1">
                         <div class="form-group">
                           <label>Observaciones:</label>
-                          <textarea class="form-control" name="request[observation]" id="request_observation" placeholder="Observaciones" rows="2"></textarea>
+                          <%if params[:edit]=="true"%>
+                            <textarea class="form-control" name="request[observation]" id="request_observation" placeholder="Observaciones" rows="2"><%=@request.observation%></textarea>                           
+                          <%else%>
+                            <textarea class="form-control" name="request[observation]" id="request_observation" placeholder="Observaciones" rows="2"></textarea>
+                          <%end%>
                         </div>
                       </div>
                       <div class="row">
@@ -1654,38 +1673,62 @@ input[type="button"]:focus {
                         <div class="col-sm-12 col-sm-offset-1">
                           <div class="col-sm-2">
                             <div class="form-group"><br>
-                              <i class="ti-time"></i><p>Servidor Web</p>
-                              <input type="checkbox" name="request[web]" id="request_web" value="">
+                              <i class="ti-cloud"></i><p>Servidor Web</p>
+                              <%if params[:edit]=="true"%>
+                                <input type="checkbox" name="request[web]" id="request_web" checked="<%=@request.web%>">                           
+                              <%else%>
+                                <input type="checkbox" name="request[web]" id="request_web" value="">
+                              <%end%>
                             </div>
                           </div>
                           <div class="col-sm-2">
                             <div class="form-group"><br>
                               <i class="ti-server"></i><p>Servidor de base de datos</p>
-                              <input type="checkbox" value="" name="request[bd]" id="request_bd">
+                              <%if params[:edit]=="true"%>
+                                <input type="checkbox" value="" name="request[bd]" id="request_bd" checked="<%=@request.bd%>">                         
+                              <%else%>
+                                <input type="checkbox" value="" name="request[bd]" id="request_bd">
+                              <%end%>                              
                             </div>
                           </div>
                           <div class="col-sm-2">
                             <div class="form-group"><br>
                               <i class="ti-android"></i><p>Servidor de aplicaciones</p>
-                              <input type="checkbox" value="" name="request[aplications]" id="request_aplications">
+                              <%if params[:edit]=="true"%>
+                                <input type="checkbox" value="" name="request[aplications]" id="request_aplications" checked="<%=@request.aplications%>">                         
+                              <%else%>
+                                <input type="checkbox" value="" name="request[aplications]" id="request_aplications">
+                              <%end%> 
                             </div>
                           </div>
                           <div class="col-sm-2">
                             <div class="form-group"><br>
                               <i class="ti-pin"></i><p>Servidor proxy</p>
-                              <input type="checkbox" value="" name="request[proxy]" id="request_proxy">
+                              <%if params[:edit]=="true"%>
+                                <input type="checkbox" value="" name="request[proxy]" id="request_proxy" checked="<%=@request.proxy%>">                         
+                              <%else%>
+                                <input type="checkbox" value="" name="request[proxy]" id="request_proxy">
+                              <%end%> 
                             </div>
                           </div>
                           <div class="col-sm-2">
                             <div class="form-group"><br>
                               <i class="ti-location-arrow"></i><p>Servidor VoIP</p>
-                              <input type="checkbox" value="" name="request[voip]" id="request_voip">
+                              <%if params[:edit]=="true"%>
+                                <input type="checkbox" value="" name="request[voip]" id="request_voip" checked="<%=@request.voip%>">                         
+                              <%else%>
+                                <input type="checkbox" value="" name="request[voip]" id="request_voip">
+                              <%end%> 
                             </div>
                           </div>
                           <div class="col-sm-2">
                             <div class="form-group"><br>
                               <i class="ti-video-camera"></i><p>Servicio videoconferencia</p>
-                              <input type="checkbox" value="" name="request[video_conference]" id="request_video_conference">
+                              <%if params[:edit]=="true"%>
+                                <input type="checkbox" value="" name="request[video_conference]" id="request_video_conference" checked="<%=@request.video_conference%>">                         
+                              <%else%>
+                                <input type="checkbox" value="" name="request[video_conference]" id="request_video_conference">
+                              <%end%> 
                             </div>
                           </div>
                         </div>
@@ -1696,31 +1739,51 @@ input[type="button"]:focus {
                           <div class="col-sm-2">
                             <div class="form-group"><br>
                               <i class="ti-agenda"></i><p>Directorio activo</p>
-                              <input type="checkbox" value="" name="request[active_dir]" id="request_active_dir">
+                              <%if params[:edit]=="true"%>
+                                <input type="checkbox" value="" name="request[active_dir]" id="request_active_dir" checked="<%=@request.active_dir%>">                         
+                              <%else%>
+                                <input type="checkbox" value="" name="request[active_dir]" id="request_active_dir">
+                              <%end%> 
                             </div>
                           </div>
                           <div class="col-sm-2">
                             <div class="form-group"><br>
-                              <i class="ti-panel"></i><p>Servicio DHCP</p>
-                              <input type="checkbox" value="" name="request[dhcp]" id="request_dhcp">
+                              <i class="ti-desktop"></i><p>Servicio DHCP</p>
+                              <%if params[:edit]=="true"%>
+                                <input type="checkbox" value="" name="request[dhcp]" id="request_dhcp" checked="<%=@request.dhcp%>">                         
+                              <%else%>
+                                <input type="checkbox" value="" name="request[dhcp]" id="request_dhcp">
+                              <%end%> 
                             </div>
                           </div>
                           <div class="col-sm-2">
                             <div class="form-group"><br>
-                              <i class="ti-bookmark"></i><p>Servidor DNS</p>
-                              <input type="checkbox" value="" name="request[dns]" id="request_dns">
+                              <i class="ti-world"></i><p>Servidor DNS</p>
+                              <%if params[:edit]=="true"%>
+                                <input type="checkbox" value="" name="request[dns]" id="request_dns" checked="<%=@request.dns%>">                         
+                              <%else%>
+                                <input type="checkbox" value="" name="request[dns]" id="request_dns">
+                              <%end%> 
                             </div>
                           </div>
                           <div class="col-sm-2">
                             <div class="form-group"><br>
-                              <i class="ti-plug"></i><p>Servidor FTP</p>
-                              <input type="checkbox" value="" name="request[ftp]" id="request_ftp">
+                              <i class="ti-file"></i><p>Servidor FTP</p>
+                              <%if params[:edit]=="true"%>
+                                <input type="checkbox" value="" name="request[ftp]" id="request_ftp" checked="<%=@request.ftp%>">                         
+                              <%else%>
+                                <input type="checkbox" value="" name="request[ftp]" id="request_ftp">
+                              <%end%> 
                             </div>
                           </div>
                           <div class="col-sm-2">
                             <div class="form-group"><br>
                               <i class="ti-email"></i><p>Servidor correo electrónico</p>
-                              <input type="checkbox" value="" name="request[email]" id="request_email">
+                              <%if params[:edit]=="true"%>
+                                <input type="checkbox" value="" name="request[email]" id="request_email" checked="<%=@request.email%>">                         
+                              <%else%>
+                                <input type="checkbox" value="" name="request[email]" id="request_email">
+                              <%end%> 
                             </div>
                           </div>
                         </div>
@@ -1739,7 +1802,7 @@ input[type="button"]:focus {
                             <div class="col-sm-2">
                               <div class="form-group">
                                 <label>Altura</label>
-                                <input type="number" min="2" max="10" onkeypress="validarAltura()" class="form-control" name="physical[height]" id="physical_height_1" placeholder="Altura">
+                                <input type="number" min="2" max="10" class="form-control" name="physical[height]" id="physical_height_1" placeholder="Altura">
                               </div>
                             </div>
                             <div class="col-sm-2">
@@ -2196,7 +2259,11 @@ input[type="button"]:focus {
                             </div>
                             <div class="col-sm-8">
                               <div class="form-group">
-                                <input type="number" class="form-control" min="0" max="100" name="logical[scalability]" id="logical_scalability" placeholder="Escalabilidad">
+                                <%if params[:edit]=="true"%>
+                                  <input type="number" class="form-control" min="0" max="100" name="logical[scalability]" id="logical_scalability" placeholder="Escalabilidad" value="<%=@logical.scalability%>">
+                                <%else%>
+                                  <input type="number" class="form-control" min="0" max="100" name="logical[scalability]" id="logical_scalability" placeholder="Escalabilidad">
+                                <%end%>
                               </div>
                             </div>
                           </div>
@@ -2208,22 +2275,38 @@ input[type="button"]:focus {
                             </div>  
                             <div class="col-sm-2 ">
                               <div class="form-group">
-                                <input type="number" class="form-control" min="0" max="255" name="logical[host1]" id="logical_host1" placeholder="192">
+                                <%if params[:edit]=="true"%>
+                                  <input type="number" class="form-control" min="0" max="255" name="logical[host1]" id="logical_host1" placeholder="192" value="<%=@logical.host1%>">
+                                <%else%>
+                                  <input type="number" class="form-control" min="0" max="255" name="logical[host1]" id="logical_host1" placeholder="192">
+                                <%end%>                                
                               </div>
                             </div>
                             <div class="col-sm-2">
                               <div class="form-group">
-                                <input type="number" class="form-control" min="0" max="255" name="logical[host2]" id="logical_host2" placeholder="168">
+                                <%if params[:edit]=="true"%>
+                                  <input type="number" class="form-control" min="0" max="255" name="logical[host2]" id="logical_host2" placeholder="192" value="<%=@logical.host2%>">
+                                <%else%>
+                                  <input type="number" class="form-control" min="0" max="255" name="logical[host2]" id="logical_host2" placeholder="192">
+                                <%end%>                                    
                               </div>
                             </div>
                             <div class="col-sm-2">
                               <div class="form-group">
-                                <input type="number" class="form-control" min="0" max="255" name="logical[host3" id="logical_host3" placeholder="0">
+                                <%if params[:edit]=="true"%>
+                                  <input type="number" class="form-control" min="0" max="255" name="logical[host3]" id="logical_host3" placeholder="192" value="<%=@logical.host3%>">
+                                <%else%>
+                                  <input type="number" class="form-control" min="0" max="255" name="logical[host3]" id="logical_host3" placeholder="192">
+                                <%end%>                                    
                               </div>
                             </div>
                             <div class="col-sm-2">
                               <div class="form-group">
-                                <input type="number" class="form-control" min="0" max="255" name="logical[host4]" id="logical_host4" placeholder="1">
+                                <%if params[:edit]=="true"%>
+                                  <input type="number" class="form-control" min="0" max="255" name="logical[host4]" id="logical_host4" placeholder="192" value="<%=@logical.host4%>">
+                                <%else%>
+                                  <input type="number" class="form-control" min="0" max="255" name="logical[host4]" id="logical_host4" placeholder="192">
+                                <%end%>                                    
                               </div>
                             </div>
                           </div>
@@ -2233,7 +2316,11 @@ input[type="button"]:focus {
                           <div class="col-sm-3">
                             <div class="form-group"><br>
                               <i class="ti-export"></i><p>Redundancia</p>
-                              <input type="checkbox" value="" name="logical[redundancy]" id="logical_redundancy">
+                                <%if params[:edit]=="true"%>
+                                  <input type="checkbox" value="" name="logical[redundancy]" id="logical_redundancy" checked="<%=@logical.host4%>">
+                                <%else%>
+                                  <input type="checkbox" value="" name="logical[redundancy]" id="logical_redundancy">
+                                <%end%>  
                             </div>
                           </div>
                         </div>
@@ -2539,7 +2626,16 @@ input[type="button"]:focus {
 	</div>
 <form name="all_process" id="all_process" method="POST" action=/process>
     <input type="hidden" name="authenticity_token" value="yK7vDfj0ORZZpNIf2OQp50opDeJmu2OTzw9IBl2Ol2yXw8Fh+uBcMt6p8RdNrN2IORV90w+TuaubmcCKud477g==" />
-    <input type="hidden" id="my_company_id" name="my_company_id" value="">
+    <% if params[:new] == "false" %>
+      <input type="hidden" id="my_company_id" name="my_company_id" value="<%= params[:id] %>">
+    <%else %>
+      <input type="hidden" id="my_company_id" name="my_company_id" >
+    <% end %>
+    <% if params[:new] == "false" %>
+      <input type="hidden" name="otra_solicitud" id="otra_solicitud" value="true">
+    <% else %>
+      <input type="hidden" name="otra_solicitud" id="otra_solicitud" value="false">
+    <% end %>
     <input type="hidden" id="name" name="name" value="">
     <input type="hidden" id="nit" name="nit" value="">
     <input type="hidden" id="mision" name="mision" value="">
@@ -2812,6 +2908,7 @@ $( "#add_subred" ).click(function() {
 
 </script>
 <script>
+            
 var Contador=1;
 var Cont=1;
 
@@ -2839,13 +2936,6 @@ var Cont=1;
       }
     }
     
-    function validarAltura(){
-      var altura = document.getElementById("physical_height_"+Contador).value;
-      if (altura == '0' || altura == '1' || altura < '0' || altura > '10'){
-        document.getElementById("physical_height_"+Contador).value == "";
-      }
-    }
-    
     $( document ).ready(function() {
         $('#physical_2').hide();
         $('#physical_3').hide();
@@ -2870,22 +2960,23 @@ var Cont=1;
         <%if params[:new]=="false"%>
           document.getElementById("details").className = "tab-pane";
           document.getElementById("captain").className = "tab-pane active";
+          document.getElementById("captain_list").className = "active";
+          document.getElementById("details_list").classList.remove("active");
+        <%else%>
+          document.getElementById("company_id").value = Math.round(Math.random()*10000);
         <%end%>
         
         document.getElementById('next').type = 'hidden';
-      
         document.getElementById("logical_id").value = Math.round(Math.random()*10000) ;
         document.getElementById("subnet_id").value = Math.round(Math.random()*10000);
         document.getElementById("physicals_id").value = Math.round(Math.random()*10000);
         document.getElementById("request_id").value = Math.round(Math.random()*10000);
-        document.getElementById("company_id").value = Math.round(Math.random()*10000);
         document.getElementById("company_id_request").value = document.getElementById("company_id").value;
         document.getElementById("logical_id_subnet").value = document.getElementById("logical_id").value;
         document.getElementById("request_id_logical").value = document.getElementById("request_id").value;
         document.getElementById("request_id_physical").value = document.getElementById("request_id").value;
     });
     
-
     
     function showNextBtn(){
       document.getElementById('next').type = 'button';
@@ -2953,6 +3044,7 @@ var Cont=1;
       return val;
     }
     
+    
     function Example()
     {
       if (validate() == 1){
@@ -2972,19 +3064,72 @@ var Cont=1;
         document.getElementById("my_request_objective").value = document.getElementById("request_objective").value 
         document.getElementById("my_request_observation").value = document.getElementById("request_observation").value 
         
-        
         //web: true, bd: true, aplications: true, proxy: true, voip: false, video_conference: false, active_dir: false, dhcp: false, dns: false, ftp: false, email: false
-        document.getElementById("my_request_web").value = document.getElementById("request_web").value
-        document.getElementById("my_request_bd").value = document.getElementById("request_bd").value
-        document.getElementById("my_request_aplications").value = document.getElementById("request_aplications").value
-        document.getElementById("my_request_proxy").value = document.getElementById("request_proxy").value
-        document.getElementById("my_request_voip").value = document.getElementById("request_voip").value
-        document.getElementById("my_request_video_conference").value = document.getElementById("request_video_conference").value
-        document.getElementById("my_request_active_dir").value = document.getElementById("request_active_dir").value
-        document.getElementById("my_request_dhcp").value = document.getElementById("request_dhcp").value
-        document.getElementById("my_request_dns").value = document.getElementById("request_dns").value
-        document.getElementById("my_request_ftp").value = document.getElementById("request_ftp").value
-        document.getElementById("my_request_email").value = document.getElementById("request_email").value
+        if( document.getElementById("request_web").checked == true){
+            document.getElementById("my_request_web").value = "true";
+        } else {
+            document.getElementById("my_request_web").value = "false";
+        }
+ 
+        if( document.getElementById("request_bd").checked == true){
+            document.getElementById("my_request_bd").value = "true";
+        } else {
+            document.getElementById("my_request_bd").value = "false";
+        }
+        
+        if( document.getElementById("request_aplications").checked == true){
+            document.getElementById("my_request_aplications").value = "true";
+        } else {
+            document.getElementById("my_request_aplications").value = "false";
+        }
+        
+        if( document.getElementById("request_proxy").checked == true){
+            document.getElementById("my_request_proxy").value = "true";
+        } else {
+            document.getElementById("my_request_proxy").value = "false";
+        }
+        
+        if( document.getElementById("request_voip").checked == true){
+            document.getElementById("my_request_voip").value = "true";
+        } else {
+            document.getElementById("my_request_voip").value = "false";
+        }
+        
+        if( document.getElementById("request_video_conference").checked == true){
+            document.getElementById("my_request_video_conference").value = "true";
+        } else {
+            document.getElementById("my_request_video_conference").value = "false";
+        }
+        
+        if( document.getElementById("request_active_dir").checked == true){
+            document.getElementById("my_request_active_dir").value = "true";
+        } else {
+            document.getElementById("my_request_active_dir").value = "false";
+        }
+        
+        if( document.getElementById("request_dhcp").checked == true){
+            document.getElementById("my_request_dhcp").value = "true";
+        } else {
+            document.getElementById("my_request_dhcp").value = "false";
+        }
+        
+        if( document.getElementById("request_dns").checked == true){
+            document.getElementById("my_request_dns").value = "true";
+        } else {
+            document.getElementById("my_request_dns").value = "false";
+        }
+        
+        if( document.getElementById("request_ftp").checked == true){
+            document.getElementById("my_request_ftp").value = "true";
+        } else {
+            document.getElementById("my_request_ftp").value = "false";
+        }
+        
+        if( document.getElementById("request_email").checked == true){
+            document.getElementById("my_request_email").value = "true";
+        } else {
+            document.getElementById("my_request_email").value = "false";
+        }
         
         document.getElementById("my_logical_id").value = document.getElementById("logical_id").value 
         document.getElementById("my_logical_host1").value = document.getElementById("logical_host1").value  
@@ -2992,7 +3137,12 @@ var Cont=1;
         document.getElementById("my_logical_host3").value = document.getElementById("logical_host3").value  
         document.getElementById("my_logical_host4").value = document.getElementById("logical_host4").value         
         document.getElementById("my_logical_scalability").value = document.getElementById("logical_scalability").value  
-        document.getElementById("my_logical_redundancy").value = document.getElementById("logical_redundancy").value  
+        
+        if( document.getElementById("logical_redundancy").checked == true){
+            document.getElementById("my_logical_redundancy").value = "true";
+        } else {
+            document.getElementById("my_logical_redundancy").value = "false";
+        }
         
         if(Contador >= 1){
           document.getElementById("my_physical_height_1").value = document.getElementById("physical_height_1").value  
@@ -3000,7 +3150,12 @@ var Cont=1;
           document.getElementById("my_physical_large_1").value = document.getElementById("physical_large_1").value  
           document.getElementById("my_physical_computers_1").value = document.getElementById("physical_computers_1").value  
           document.getElementById("my_physical_printers_1").value = document.getElementById("physical_printers_1").value
-          document.getElementById("my_physical_conference_hall_1").value = document.getElementById("physical_conference_hall_1").value
+          
+          if( document.getElementById("physical_conference_hall_1").checked == true){
+              document.getElementById("my_physical_conference_hall_1").value = "true";
+          } else {
+              document.getElementById("my_physical_conference_hall_1").value = "false";
+          }
         }
 
         if(Contador >= 2){
@@ -3009,7 +3164,13 @@ var Cont=1;
           document.getElementById("my_physical_large_2").value = document.getElementById("physical_large_2").value  
           document.getElementById("my_physical_computers_2").value = document.getElementById("physical_computers_2").value  
           document.getElementById("my_physical_printers_2").value = document.getElementById("physical_printers_1").value
-          document.getElementById("my_physical_conference_hall_2").value = document.getElementById("physical_conference_hall_2").value      
+          document.getElementById("my_physical_conference_hall_2").value = document.getElementById("physical_conference_hall_2").value
+          
+          if( document.getElementById("physical_conference_hall_2").checked == true){
+              document.getElementById("my_physical_conference_hall_2").value = "true";
+          } else {
+              document.getElementById("my_physical_conference_hall_2").value = "false";
+          }
         }
         
         if(Contador >= 3){
@@ -3019,6 +3180,12 @@ var Cont=1;
           document.getElementById("my_physical_computers_3").value = document.getElementById("physical_computers_3").value  
           document.getElementById("my_physical_printers_3").value = document.getElementById("physical_printers_3").value
           document.getElementById("my_physical_conference_hall_3").value = document.getElementById("physical_conference_hall_3").value
+          
+          if( document.getElementById("physical_conference_hall_3").checked == true){
+              document.getElementById("my_physical_conference_hall_3").value = "true";
+          } else {
+              document.getElementById("my_physical_conference_hall_3").value = "false";
+          }
         }
         
         if(Contador >= 4){
@@ -3028,6 +3195,13 @@ var Cont=1;
           document.getElementById("my_physical_computers_4").value = document.getElementById("physical_computers_4").value  
           document.getElementById("my_physical_printers_4").value = document.getElementById("physical_printers_4").value
           document.getElementById("my_physical_conference_hall_4").value = document.getElementById("physical_conference_hall_4").value
+        
+          if( document.getElementById("physical_conference_hall_4").checked == true){
+              document.getElementById("my_physical_conference_hall_4").value = "true";
+          } else {
+              document.getElementById("my_physical_conference_hall_4").value = "false";
+          }
+          
         }
         
         if(Contador >= 5){
@@ -3037,6 +3211,12 @@ var Cont=1;
           document.getElementById("my_physical_computers_5").value = document.getElementById("physical_computers_5").value  
           document.getElementById("my_physical_printers_5").value = document.getElementById("physical_printers_5").value  
           document.getElementById("my_physical_conference_hall_5").value = document.getElementById("physical_conference_hall_5").value  
+          
+          if( document.getElementById("physical_conference_hall_5").checked == true){
+              document.getElementById("my_physical_conference_hall_5").value = "true";
+          } else {
+              document.getElementById("my_physical_conference_hall_5").value = "false";
+          }
         }
         
         if(Contador >= 6){
@@ -3046,6 +3226,13 @@ var Cont=1;
           document.getElementById("my_physical_computers_6").value = document.getElementById("physical_computers_6").value
           document.getElementById("my_physical_printers_6").value = document.getElementById("physical_printers_6").value
           document.getElementById("my_physical_conference_hall_6").value = document.getElementById("physical_conference_hall_6").value
+        
+          if( document.getElementById("physical_conference_hall_6").checked == true){
+              document.getElementById("my_physical_conference_hall_6").value = "true";
+          } else {
+              document.getElementById("my_physical_conference_hall_6").value = "false";
+          }
+          
         }
         
         if(Contador >= 7){
@@ -3055,6 +3242,12 @@ var Cont=1;
           document.getElementById("my_physical_computers_7").value = document.getElementById("physical_computers_7").value
           document.getElementById("my_physical_printers_7").value = document.getElementById("physical_printers_7").value
           document.getElementById("my_physical_conference_hall_7").value = document.getElementById("physical_conference_hall_7").value
+        
+          if( document.getElementById("physical_conference_hall_7").checked == true){
+              document.getElementById("my_physical_conference_hall_7").value = "true";
+          } else {
+              document.getElementById("my_physical_conference_hall_7").value = "false";
+          }
         }
         
         if(Contador >= 8){
@@ -3064,6 +3257,13 @@ var Cont=1;
           document.getElementById("my_physical_computers_8").value = document.getElementById("physical_computers_8").value
           document.getElementById("my_physical_printers_8").value = document.getElementById("physical_printers_8").value
           document.getElementById("my_physical_conference_hall_8").value = document.getElementById("physical_conference_hall_8").value
+        
+          if( document.getElementById("physical_conference_hall_8").checked == true){
+              document.getElementById("my_physical_conference_hall_8").value = "true";
+          } else {
+              document.getElementById("my_physical_conference_hall_8").value = "false";
+          }
+          
         }
         
         if(Contador >= 9){
@@ -3073,6 +3273,12 @@ var Cont=1;
           document.getElementById("my_physical_computers_9").value = document.getElementById("physical_computers_9").value
           document.getElementById("my_physical_printers_9").value = document.getElementById("physical_printers_9").value
           document.getElementById("my_physical_conference_hall_9").value = document.getElementById("physical_conference_hall_9").value
+          
+          if( document.getElementById("physical_conference_hall_9").checked == true){
+              document.getElementById("my_physical_conference_hall_9").value = "true";
+          } else {
+              document.getElementById("my_physical_conference_hall_9").value = "false";
+          }
         }
         
         if(Contador >= 10){
@@ -3082,6 +3288,12 @@ var Cont=1;
           document.getElementById("my_physical_computers_10").value = document.getElementById("physical_computers_10").value
           document.getElementById("my_physical_printers_10").value = document.getElementById("physical_printers_10").value
           document.getElementById("my_physical_conference_hall_10").value = document.getElementById("physical_conference_hall_10").value
+          
+          if( document.getElementById("physical_conference_hall_10").checked == true){
+              document.getElementById("my_physical_conference_hall_10").value = "true";
+          } else {
+              document.getElementById("my_physical_conference_hall_10").value = "false";
+          }
         }
         
         if(Cont >= 1){ 
@@ -3181,66 +3393,7 @@ transparent = true;
         	});
 
             // Wizard Initialization
-          	$('.wizard-card').bootstrapWizard({
-                'tabClass': 'nav nav-pills',
-                'nextSelector': '.btn-next',
-                'previousSelector': '.btn-previous',
 
-                onNext: function(tab, navigation, index) {
-                	var $valid = $('.wizard-card form').valid();
-                	if(!$valid) {
-                		$validator.focusInvalid();
-                		return false;
-                	}
-                },
-
-                onInit : function(#subred, navigation, index){
-
-                  //check number of tabs and fill the entire row
-                  var $total = navigation.find('li').length;
-                  $width = 100/$total;
-
-                  navigation.find('li').css('width',$width + '%');
-                 
-                },
-
-                onTabClick : function(tab, navigation, index){
-
-                    var $valid = $('.wizard-card form').valid();
-
-                    if(!$valid){
-                        return false;
-                    } else{
-                        return true;
-                    }
-
-                },
-
-                onTabShow: function(tab, navigation, index) {
-                    var $total = navigation.find('li').length;
-                    var $current = index+1;
-                    var $wizard = navigation.closest('.wizard-card');
-
-                    // If it's the last tab then hide the last button and show the finish instead
-                    if($current >= $total) {
-                        $($wizard).find('.btn-next').hide();
-                        $($wizard).find('.btn-finish').show();
-                    } else {
-                        $($wizard).find('.btn-next').show();
-                        $($wizard).find('.btn-finish').hide();
-                    }
-
-                    //update progress
-                    var move_distance = 100 / $total;
-                    move_distance = move_distance * (index) + move_distance / 2;
-
-                    $wizard.find($('.progress-bar')).css({width: move_distance + '%'});
-                    //e.relatedTarget // previous tab
-
-                    $wizard.find($('.wizard-card .nav-pills li.active a .icon-circle')).addClass('checked');
-
-                }
-	        });
 
 
                 // Prepare the preview for profile picture

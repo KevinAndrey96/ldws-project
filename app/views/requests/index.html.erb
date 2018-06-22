@@ -175,6 +175,7 @@
             <td><%= request.objective %></td>
             <td><%= request.observation %></td>
             <td><center><%= link_to 'Ver', panel_index_path(:request_id => request.id) %></center></td>
+            <td><center><%= link_to 'Editar',  process_index_path(:edit => "true", :id => request.id) %></center></td>
             <td><center><%= link_to 'Eliminar', request, method: :delete, data: { confirm: 'Está seguro?' } %></center></td>
             <td></td>
           </tr>

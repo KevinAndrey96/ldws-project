@@ -56,38 +56,41 @@ bootstrap.min.css:8
 <div class="col-md-4"></div>
 <div class="col-md-4">
   <div class="field">
-    <h3>Marca</h3>
-    <%= f.text_field :brand, :class => "form-control" %>
-  </div>
-  <div class="field">
     <h3>Tipo</h3>
-    <select name="equipment[etype]" id="equipment[etype]" class="form-control">
+    <select name="equipment[etype]" id="equipment[etype]" class="form-control" onchange="Equipos()">
       <option value="Switch">Switch</option>
       <option value="Router">Router</option>
       <option value="Rack">Rack</option>
       <option value="Cable">Cable</option>
+      <option value="Canaleta">Canaleta</option>
+      <option value="Toma">Toma</option>
     </select>
   </div>
   <div class="field">
-    <h3>Refencia</h3>
+    <h3 id="equipment_brand1">Marca</h3>
+    <%= f.text_field :brand, :class => "form-control" %>
+  </div>
+  
+  <div class="field">
+    <h3 id="equipment_reference1" >Refencia</h3>
     <%= f.text_field :reference , :class => "form-control"%>
   </div>
 
   <div class="field">
-    <h3>Precio</h3>
+    <h3 id="equipment_price1">Precio</h3>
     <%= f.number_field :price , :class => "form-control"%>
   </div>
   <div class="field">
-    <h3>Puertos usables</h3>
+    <h3 id="equipment_ports1">Puertos usables</h3>
     <%= f.number_field :ports , :class => "form-control"%>
   </div>
   <div class="field">
-    <h3>Slots (Opcional)</h3>
+    <h3 id="equipment_slots1">Slots</h3>
     <%= f.number_field :slots , :class => "form-control"%>
   </div>
   
   <div class="field">
-    <h3>Potencia</h3>
+    <h3 id="equipment_power1">Potencia</h3>
     <select name="equipment[power]" id="equipment[power]" class="form-control">
       <option value="1">Baja</option>
       <option value="2">Media</option>
@@ -100,3 +103,110 @@ bootstrap.min.css:8
   </div>
   <div class="col-md-4"></div>
 <% end %>
+<script>
+  function Equipos()
+  {
+    var tipo = document.getElementById("equipment[etype]").value
+    
+    switch (tipo)
+    {
+      case "Switch":
+        {
+          document.getElementById("equipment_brand").style.display="inline-block";
+          document.getElementById("equipment_reference").style.display="inline-block";
+          document.getElementById("equipment_price").style.display="inline-block";
+          document.getElementById("equipment_ports").style.display="inline-block";
+          document.getElementById("equipment_slots").style.display="inline-block";
+          
+          document.getElementById("equipment_brand1").style.display="inline-block";
+          document.getElementById("equipment_reference1").style.display="inline-block";
+          document.getElementById("equipment_price1").style.display="inline-block";
+          document.getElementById("equipment_ports1").style.display="inline-block";
+          document.getElementById("equipment_slots1").style.display="inline-block";
+          
+          document.getElementById("equipment_power1").innerHTML="Potencia";
+        }break;
+      case "Router":
+        {
+          document.getElementById("equipment_brand").style.display="inline-block";
+          document.getElementById("equipment_reference").style.display="inline-block";
+          document.getElementById("equipment_price").style.display="inline-block";
+          document.getElementById("equipment_ports").style.display="none";
+          document.getElementById("equipment_slots").style.display="inline-block";
+          
+          document.getElementById("equipment_brand1").style.display="inline-block";
+          document.getElementById("equipment_reference1").style.display="inline-block";
+          document.getElementById("equipment_price1").style.display="inline-block";
+          document.getElementById("equipment_ports1").style.display="none";
+          document.getElementById("equipment_slots1").style.display="inline-block";
+          
+          document.getElementById("equipment_power1").innerHTML="Potencia";
+        }break;
+      case "Rack":
+        {
+          document.getElementById("equipment_brand").style.display="inline-block";
+          document.getElementById("equipment_reference").style.display="inline-block";
+          document.getElementById("equipment_price").style.display="inline-block";
+          document.getElementById("equipment_ports").style.display="none";
+          document.getElementById("equipment_slots").style.display="inline-block";
+          
+          document.getElementById("equipment_brand1").style.display="inline-block";
+          document.getElementById("equipment_reference1").style.display="inline-block";
+          document.getElementById("equipment_price1").style.display="inline-block";
+          document.getElementById("equipment_ports1").style.display="none";
+          document.getElementById("equipment_slots1").style.display="inline-block";
+          
+          document.getElementById("equipment_power1").innerHTML="Calidad";
+        }break;
+      case "Cable":
+      {
+          document.getElementById("equipment_brand").style.display="inline-block";
+          document.getElementById("equipment_reference").style.display="inline-block";
+          document.getElementById("equipment_price").style.display="inline-block";
+          document.getElementById("equipment_ports").style.display="none";
+          document.getElementById("equipment_slots").style.display="none";
+          
+          document.getElementById("equipment_brand1").style.display="inline-block";
+          document.getElementById("equipment_reference1").style.display="inline-block";
+          document.getElementById("equipment_price1").style.display="inline-block";
+          document.getElementById("equipment_ports1").style.display="none";
+          document.getElementById("equipment_slots1").style.display="none";
+          
+          document.getElementById("equipment_power1").innerHTML="Calidad";
+      }break;
+      case "Canaleta":
+      {
+          document.getElementById("equipment_brand").style.display="inline-block";
+          document.getElementById("equipment_reference").style.display="inline-block";
+          document.getElementById("equipment_price").style.display="inline-block";
+          document.getElementById("equipment_ports").style.display="none";
+          document.getElementById("equipment_slots").style.display="none";
+          
+          document.getElementById("equipment_brand1").style.display="inline-block";
+          document.getElementById("equipment_reference1").style.display="inline-block";
+          document.getElementById("equipment_price1").style.display="inline-block";
+          document.getElementById("equipment_ports1").style.display="none";
+          document.getElementById("equipment_slots1").style.display="none";
+          
+          document.getElementById("equipment_power1").innerHTML="Calidad";
+      }break;
+      case "Toma":
+      {
+          document.getElementById("equipment_brand").style.display="inline-block";
+          document.getElementById("equipment_reference").style.display="inline-block";
+          document.getElementById("equipment_price").style.display="inline-block";
+          document.getElementById("equipment_ports").style.display="none";
+          document.getElementById("equipment_slots").style.display="none";
+          
+          document.getElementById("equipment_brand1").style.display="inline-block";
+          document.getElementById("equipment_reference1").style.display="inline-block";
+          document.getElementById("equipment_price1").style.display="inline-block";
+          document.getElementById("equipment_ports1").style.display="none";
+          document.getElementById("equipment_slots1").style.display="none";
+          
+          document.getElementById("equipment_power1").innerHTML="Calidad";
+      }break;
+    }
+    
+  }
+</script>

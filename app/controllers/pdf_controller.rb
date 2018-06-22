@@ -217,7 +217,30 @@ class PdfController < ApplicationController
     else
       @eco_r=1
     end
-  
+    
+    @Ra_status = 1
+    
+    @eco_ra=0
+    @est_ra=0
+    @opt_ra=0
+    
+    @eq_ra=Equipment.where(:etype => "Rack", :power => 1).count
+    if @eq_ra == 0
+      @eq_ra=Equipment.where(:etype => "Rack", :power => 2).count
+      if @eq_ra == 0
+        @eq_ra=Equipment.where(:etype => "Rack", :power => 3).count  
+        if @eq_ra == 0
+          @Ra_status=0
+        else
+          @eco_ra=3
+        end
+      else
+        @eco_ra=2
+      end
+    else
+      @eco_ra=1
+    end
+    
     
     
     render  :pdf => "Reporte", :template => 'pdf/cotizacion.html.erb'

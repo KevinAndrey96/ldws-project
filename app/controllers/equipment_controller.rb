@@ -29,8 +29,8 @@ class EquipmentController < ApplicationController
 
     respond_to do |format|
       if @equipment.save
-        format.html { redirect_to @equipment, notice: 'Equipment was successfully created.' }
-        format.json { render :show, status: :created, location: @equipment }
+        format.html { redirect_to equipment_index_url, notice: 'Creado satisfactoriamente' }
+        format.json { render :index, status: :created, location: @equipment }
       else
         format.html { render :new }
         format.json { render json: @equipment.errors, status: :unprocessable_entity }
@@ -43,7 +43,7 @@ class EquipmentController < ApplicationController
   def update
     respond_to do |format|
       if @equipment.update(equipment_params)
-        format.html { redirect_to @equipment, notice: 'Equipment was successfully updated.' }
+        redirect_to equipment_index_url, notice: 'Equipment was successfully updated.'
         format.json { render :show, status: :ok, location: @equipment }
       else
         format.html { render :edit }

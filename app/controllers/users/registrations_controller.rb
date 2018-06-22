@@ -12,7 +12,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
    def create
      super
-     @b=Binnacle.create(:user_id => current_user.id, :action => "Crear" , :description => "Nuevo registro en la plataforma")
+     @b=Binnacle.create(:user_id => current_user.id, :action => "Login" , :description => "Nuevo registro en la plataforma")
      @b.save
    end
 

@@ -1,11 +1,24 @@
 class BinnaclesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_binnacle, only: [:show, :edit, :update, :destroy]
+  before_action :set_binnacle, only: [:show, :destroy]
 
   # GET /binnacles
   # GET /binnacles.json
   def index
-    @binnacles = Binnacle.all.order(created_at: :desc)
+    #@binnacles = Binnacle.all.order(created_at: :desc)
+    ## perform a paginated query:
+    if params[:spec]=="login"
+      @binnacles = Binnacle.where("action = ? or action = ?", "Login", "Logout").order(created_at: :desc).paginate(:page => params[:page], :per_page => 10)
+    elsif params[:spec]=="other"
+      @binnacles = Binnacle.where("action = ? ", "Crear").order(created_at: :desc).paginate(:page => params[:page], :per_page => 10)
+    else
+      @binnacles = Binnacle.all.order(created_at: :desc).paginate(:page => params[:page], :per_page => 10)
+    end
+    # or, use an explicit "per page" limit:
+    
+    
+    ## render page links in the view:
+    
   end
 
   # GET /binnacles/1
