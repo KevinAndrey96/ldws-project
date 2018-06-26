@@ -166,13 +166,14 @@ class PdfController < ApplicationController
       @physical=Physical.where(:request_id => @request.id)
       @logical=Logical.where(:request_id => @request.id)
     end
+    
     #totalcomputers=@physical.sum(:computers)
     @Sw_status = 1
     @total_of_computers = @physical.sum(:computers)
     
     #Potencias
     @eco=0
-    @est=0
+    
     @opt=0
     
     #Verificamos existencias
@@ -198,7 +199,6 @@ class PdfController < ApplicationController
     @R_status = 1
     
     @eco_r=0
-    @est_r=0
     @opt_r=0
     
     @eq_r=Equipment.where(:etype => "Router", :power => 1).count
@@ -218,10 +218,10 @@ class PdfController < ApplicationController
       @eco_r=1
     end
     
+    #Código de Racks
     @Ra_status = 1
     
     @eco_ra=0
-    @est_ra=0
     @opt_ra=0
     
     @eq_ra=Equipment.where(:etype => "Rack", :power => 1).count
@@ -240,6 +240,466 @@ class PdfController < ApplicationController
     else
       @eco_ra=1
     end
+    
+    #Código de Cable
+    @Ca_status = 1
+    
+    @eco_ca=0
+    
+    @eq_ca=Equipment.where(:etype => "Cable", :power => 1).count
+    if @eq_ca == 0
+      @eq_ca=Equipment.where(:etype => "Cable", :power => 2).count
+      if @eq_ca == 0
+        @eq_ca=Equipment.where(:etype => "Cable", :power => 3).count  
+        if @eq_ca == 0
+          @Ca_status=0
+        else
+          @eco_ca=3
+        end
+      else
+        @eco_ca=2
+      end
+    else
+      @eco_ca=1
+    end
+    
+    #Cantidad de cable
+    @physical=Physical.where(:request_id => params[:request_id]) 
+    @physical.each do |physical|
+    cont=0
+    @cable = 0
+     i = 0 
+     while i < physical.large 
+         j = 0 
+         @aux=0 
+       while j < physical.width 
+      
+           if j != 0 
+             if i%2 == 0 
+              if cont < physical.computers
+                cont+=1
+                 if i == 0 
+                  @cable = (0.5+(physical.height*2)+((j+1))+2)+@cable 
+                 else 
+                  @cable = (0.5+(physical.height*2)+((i+1)+(j+1))+2)+@cable 
+                 end 
+              end
+            end
+          end
+         j += 1 
+       end 
+       i += 1 
+     end 
+   end
+     #Código de Canaleta
+    @Can_status = 1
+    
+    @eco_can=0
+    @opt_can=0
+    
+    @eq_can=Equipment.where(:etype => "Canaleta", :power => 1).count
+    if @eq_can == 0
+      @eq_can=Equipment.where(:etype => "Canaleta", :power => 2).count
+      if @eq_can == 0
+        @eq_can=Equipment.where(:etype => "Canaleta", :power => 3).count  
+        if @eq_can == 0
+          @Can_status=0
+        else
+          @eco_can=3
+        end
+      else
+        @eco_can=2
+      end
+    else
+      @eco_can=1
+    end
+    
+    #Código de Canaleta
+    @T_status = 1
+    
+    @eco_t=0
+    @opt_t=0
+    
+    @eq_t=Equipment.where(:etype => "Toma", :power => 1).count
+    if @eq_t == 0
+      @eq_t=Equipment.where(:etype => "Toma", :power => 2).count
+      if @eq_t == 0
+        @eq_t=Equipment.where(:etype => "Toma", :power => 3).count  
+        if @eq_t == 0
+          @T_status=0
+        else
+          @eco_t=3
+        end
+      else
+        @eco_t=2
+      end
+    else
+      @eco_t=1
+    end
+    
+    
+    
+    #Estandar
+    
+    
+    
+        
+    #totalcomputers=@physical.sum(:computers)
+    @Sw_status = 1
+    @total_of_computers = @physical.sum(:computers)
+    
+    #Potencias
+    @est=0
+    
+    #Verificamos existencias
+    @eq=Equipment.where(:etype => "Switch", :power => 2).count
+    if @eq == 0
+      @eq=Equipment.where(:etype => "Switch", :power => 3).count
+      if @eq == 0
+        @eq=Equipment.where(:etype => "Switch", :power => 1).count  
+        if @eq == 0
+          @Sw_status=0
+        else
+          @est=1
+        end
+      else
+        @est=3
+      end
+    else
+      @est=2
+    end
+    
+    #Código de Routers
+    
+    @R_status = 1
+    
+    @est_r=0
+    
+    @eq_r=Equipment.where(:etype => "Router", :power => 2).count
+    if @eq_r == 0
+      @eq_r=Equipment.where(:etype => "Router", :power => 3).count
+      if @eq_r == 0
+        @eq_r=Equipment.where(:etype => "Router", :power => 1).count  
+        if @eq_r == 0
+          @R_status=0
+        else
+          @est_r=1
+        end
+      else
+        @est_r=3
+      end
+    else
+      @est_r=2
+    end
+    
+    #Código de Racks
+    @Ra_status = 1
+    
+    @est_ra=0
+    @est_ra=0
+    @opt_ra=0
+    
+    @eq_ra=Equipment.where(:etype => "Rack", :power => 2).count
+    if @eq_ra == 0
+      @eq_ra=Equipment.where(:etype => "Rack", :power => 3).count
+      if @eq_ra == 0
+        @eq_ra=Equipment.where(:etype => "Rack", :power => 1).count  
+        if @eq_ra == 0
+          @Ra_status=0
+        else
+          @est_ra=1
+        end
+      else
+        @est_ra=3
+      end
+    else
+      @est_ra=2
+    end
+    
+    #Código de Cable
+    @Ca_status = 1
+    
+    @est_ca=0
+    
+    @eq_ca=Equipment.where(:etype => "Cable", :power => 2).count
+    if @eq_ca == 0
+      @eq_ca=Equipment.where(:etype => "Cable", :power => 3).count
+      if @eq_ca == 0
+        @eq_ca=Equipment.where(:etype => "Cable", :power => 1).count  
+        if @eq_ca == 0
+          @Ca_status=0
+        else
+          @est_ca=1
+        end
+      else
+        @est_ca=3
+      end
+    else
+      @est_ca=2
+    end
+    
+    #Cantidad de cable
+    @physical=Physical.where(:request_id => params[:request_id]) 
+    @physical.each do |physical|
+    cont=0
+    @cable = 0
+     i = 0 
+     while i < physical.large 
+         j = 0 
+         @aux=0 
+       while j < physical.width 
+      
+           if j != 0 
+             if i%2 == 0 
+              if cont < physical.computers
+                cont+=1
+                 if i == 0 
+                  @cable = (0.5+(physical.height*2)+((j+1))+2)+@cable 
+                 else 
+                  @cable = (0.5+(physical.height*2)+((i+1)+(j+1))+2)+@cable 
+                 end 
+              end
+            end
+          end
+         j += 1 
+       end 
+       i += 1 
+     end 
+   end
+     #Código de Canaleta
+    @Can_status = 1
+    
+    @est_can=0
+    @est_can=0
+    @opt_can=0
+    
+    @eq_can=Equipment.where(:etype => "Canaleta", :power => 2).count
+    if @eq_can == 0
+      @eq_can=Equipment.where(:etype => "Canaleta", :power => 3).count
+      if @eq_can == 0
+        @eq_can=Equipment.where(:etype => "Canaleta", :power => 1).count  
+        if @eq_can == 0
+          @Can_status=0
+        else
+          @est_can=1
+        end
+      else
+        @est_can=3
+      end
+    else
+      @est_can=2
+    end
+    
+    #Código de Canaleta
+    @T_status = 1
+    
+    @est_t=0
+    @est_t=0
+    @opt_t=0
+    
+    @eq_t=Equipment.where(:etype => "Toma", :power => 2).count
+    if @eq_t == 0
+      @eq_t=Equipment.where(:etype => "Toma", :power => 3).count
+      if @eq_t == 0
+        @eq_t=Equipment.where(:etype => "Toma", :power => 1).count  
+        if @eq_t == 0
+          @T_status=0
+        else
+          @est_t=1
+        end
+      else
+        @est_t=3
+      end
+    else
+      @est_t=2
+    end
+    
+    
+    
+    
+    
+    
+    # Optima
+    
+    
+    
+    
+    
+    
+        
+    #totalcomputers=@physical.sum(:computers)
+    @Sw_status = 1
+    @total_of_computers = @physical.sum(:computers)
+    
+    #Potencias
+    @opt=0
+    
+    #Verificamos existencias
+    @eq=Equipment.where(:etype => "Switch", :power => 3).count
+    if @eq == 0
+      @eq=Equipment.where(:etype => "Switch", :power => 2).count
+      if @eq == 0
+        @eq=Equipment.where(:etype => "Switch", :power => 1).count  
+        if @eq == 0
+          @Sw_status=0
+        else
+          @opt=1
+        end
+      else
+        @opt=2
+      end
+    else
+      @opt=3
+    end
+    
+    #Código de Routers
+    
+    @R_status = 1
+    
+    @opt_r=0
+    
+    @eq_r=Equipment.where(:etype => "Router", :power => 3).count
+    if @eq_r == 0
+      @eq_r=Equipment.where(:etype => "Router", :power => 2).count
+      if @eq_r == 0
+        @eq_r=Equipment.where(:etype => "Router", :power => 1).count  
+        if @eq_r == 0
+          @R_status=0
+        else
+          @opt_r=1
+        end
+      else
+        @opt_r=2
+      end
+    else
+      @opt_r=3
+    end
+    
+    #Código de Racks
+    @Ra_status = 1
+    
+    @opt_ra=0
+    @opt_ra=0
+    @opt_ra=0
+    
+    @eq_ra=Equipment.where(:etype => "Rack", :power => 3).count
+    if @eq_ra == 0
+      @eq_ra=Equipment.where(:etype => "Rack", :power => 2).count
+      if @eq_ra == 0
+        @eq_ra=Equipment.where(:etype => "Rack", :power => 1).count  
+        if @eq_ra == 0
+          @Ra_status=0
+        else
+          @opt_ra=1
+        end
+      else
+        @opt_ra=2
+      end
+    else
+      @opt_ra=3
+    end
+    
+    #Código de Cable
+    @Ca_status = 1
+    
+    @opt_ca=0
+    
+    @eq_ca=Equipment.where(:etype => "Cable", :power => 3).count
+    if @eq_ca == 0
+      @eq_ca=Equipment.where(:etype => "Cable", :power => 2).count
+      if @eq_ca == 0
+        @eq_ca=Equipment.where(:etype => "Cable", :power => 1).count  
+        if @eq_ca == 0
+          @Ca_status=0
+        else
+          @opt_ca=1
+        end
+      else
+        @opt_ca=2
+      end
+    else
+      @opt_ca=3
+    end
+    
+    #Cantidad de cable
+    @physical=Physical.where(:request_id => params[:request_id]) 
+    @physical.each do |physical|
+    cont=0
+    @cable = 0
+     i = 0 
+     while i < physical.large 
+         j = 0 
+         @aux=0 
+       while j < physical.width 
+      
+           if j != 0 
+             if i%2 == 0 
+              if cont < physical.computers
+                cont+=1
+                 if i == 0 
+                  @cable = (0.5+(physical.height*2)+((j+1))+2)+@cable 
+                 else 
+                  @cable = (0.5+(physical.height*2)+((i+1)+(j+1))+2)+@cable 
+                 end 
+              end
+            end
+          end
+         j += 1 
+       end 
+       i += 1 
+     end 
+   end
+     #Código de Canaleta
+    @Can_status = 1
+    
+    @opt_can=0
+    @opt_can=0
+    @opt_can=0
+    
+    @eq_can=Equipment.where(:etype => "Canaleta", :power => 3).count
+    if @eq_can == 0
+      @eq_can=Equipment.where(:etype => "Canaleta", :power => 2).count
+      if @eq_can == 0
+        @eq_can=Equipment.where(:etype => "Canaleta", :power => 1).count  
+        if @eq_can == 0
+          @Can_status=0
+        else
+          @opt_can=1
+        end
+      else
+        @opt_can=2
+      end
+    else
+      @opt_can=3
+    end
+    
+    #Código de Canaleta
+    @T_status = 1
+    
+    @opt_t=0
+    @opt_t=0
+    @opt_t=0
+    
+    @eq_t=Equipment.where(:etype => "Toma", :power => 3).count
+    if @eq_t == 0
+      @eq_t=Equipment.where(:etype => "Toma", :power => 2).count
+      if @eq_t == 0
+        @eq_t=Equipment.where(:etype => "Toma", :power => 1).count  
+        if @eq_t == 0
+          @T_status=0
+        else
+          @opt_t=1
+        end
+      else
+        @opt_t=2
+      end
+    else
+      @opt_t=3
+    end
+    
+    
+    
+    
     
     
     

@@ -13,7 +13,8 @@ Rails.application.routes.draw do
   #get 'process/index'
   match '/process',      to: 'process#index',           via: 'get'
   match '/process',      to: 'process#create',          via: 'post'
-
+  
+  
   get 'subnet/index'
 
   get 'pdf/topologia'
