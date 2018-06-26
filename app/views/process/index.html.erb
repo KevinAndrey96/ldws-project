@@ -3510,41 +3510,29 @@ var Cont_subred=0;
         }
         
         <%if params[:edit]=="true"%>
+        <%cont_algo=0%>
           <% @physicals.each do |physical| %>
-          
+            <%cont_algo+=1%>
+            <%@mi="mi_fisico_"+cont_algo.to_s%> 
+            <%if cont_algo >= 1%>
+              document.getElementById("<%=@mi%>").value = document.getElementById("<%=@mi%>").value  
+            <%end%>
           <% end %> 
         <% end %>
         
-        if(Cont_fisico >= 1){
-          document.getElementById("mi_fisico_1").value = document.getElementById("id_fisico_1").value  
-        }
-        if(Cont_fisico >= 2){
-          document.getElementById("mi_fisico_2").value = document.getElementById("id_fisico_2").value  
-        }
-        if(Cont_fisico >= 3){
-          document.getElementById("mi_fisico_3").value = document.getElementById("id_fisico_3").value  
-        }
-        if(Cont_fisico >= 4){
-          document.getElementById("mi_fisico_4").value = document.getElementById("id_fisico_4").value  
-        }
-        if(Cont_fisico >= 5){
-          document.getElementById("mi_fisico_5").value = document.getElementById("id_fisico_5").value  
-        }
-        if(Cont_fisico >= 6){
-          document.getElementById("mi_fisico_6").value = document.getElementById("id_fisico_6").value  
-        }
-        if(Cont_fisico >= 7){
-          document.getElementById("mi_fisico_7").value = document.getElementById("id_fisico_7").value  
-        }
-        if(Cont_fisico >= 8){
-          document.getElementById("mi_fisico_8").value = document.getElementById("id_fisico_8").value  
-        }
-        if(Cont_fisico >= 9){
-          document.getElementById("mi_fisico_9").value = document.getElementById("id_fisico_9").value  
-        }
-        if(Cont_fisico >= 10){
-          document.getElementById("mi_fisico_10").value = document.getElementById("id_fisico_10").value  
-        }
+        <%if params[:edit]=="true"%>
+        <%cont_algo=0%>
+          <% @subnets.each do |subnet| %>
+            <%cont_algo+=1%>
+            <%@mi="mi_subnet_"+cont_algo.to_s%> 
+            <%if cont_algo >= 1%>
+              document.getElementById("<%=@mi%>").value = document.getElementById("<%=@mi%>").value  
+            <%end%>
+          <% end %> 
+        <% end %>
+        
+
+        
         
         if(Contador >= 1 || Cont_fisico >= 1){
           document.getElementById("my_physical_height_1").value = document.getElementById("physical_height_1").value  
@@ -3690,36 +3678,20 @@ var Cont_subred=0;
           }
         }
         
+        <%if params[:edit]=="true"%>
+        <%cont_algo=0%>
+          <% @physicals.each do |physical| %>
+            <%cont_algo+=1%>
+            <%@mi="mi_subnet_"+cont_algo.to_s%> 
+            <%if cont_algo >= 1%>
+              document.getElementById("<%=@mi%>").value = document.getElementById("<%=@mi%>").value  
+            <%end%>
+          <% end %> 
+        <% end %>
         if(Cont_subred >= 1){ 
           document.getElementById("mi_subnet_1").value = document.getElementById("id_subred_1").value 
         }
-        if(Cont_subred >= 2){ 
-          document.getElementById("mi_subnet_2").value = document.getElementById("id_subred_2").value 
-        }
-        if(Cont_subred >= 3){ 
-          document.getElementById("mi_subnet_3").value = document.getElementById("id_subred_3").value 
-        }
-        if(Cont_subred >= 4){ 
-          document.getElementById("mi_subnet_4").value = document.getElementById("id_subred_4").value 
-        }
-        if(Cont_subred >= 5){ 
-          document.getElementById("mi_subnet_5").value = document.getElementById("id_subred_5").value 
-        }
-        if(Cont_subred >= 6){ 
-          document.getElementById("mi_subnet_6").value = document.getElementById("id_subred_6").value 
-        }
-        if(Cont_subred >= 7){ 
-          document.getElementById("mi_subnet_7").value = document.getElementById("id_subred_7").value 
-        }
-        if(Cont_subred >= 8){ 
-          document.getElementById("mi_subnet_8").value = document.getElementById("id_subred_8").value 
-        }
-        if(Cont_subred >= 9){ 
-          document.getElementById("mi_subnet_9").value = document.getElementById("id_subred_9").value 
-        }
-        if(Cont_subred >= 10){ 
-          document.getElementById("mi_subnet_10").value = document.getElementById("id_subred_10").value 
-        }
+
         
         if(Cont >= 1 || Cont_subred >= 1){ 
         	document.getElementById("my_subnet_name_1").value = document.getElementById("subnet_name_1").value  
