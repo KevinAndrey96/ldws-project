@@ -47,7 +47,8 @@
             </tr>
             <tr>
               <td>Servidores</td>
-              <td>1</td>
+             
+              <td><%=@servidores%></td>
             </tr>
             <tr>
               <td>Routers</td>
@@ -57,14 +58,60 @@
             </tr>
             <tr>
               <td>Switches de acceso</td>
-              <td>#</td>
+              
+              
+              <% if @Sw_status == 0 %>
+            <td colspan="5">No disponible</td>
+          <%else%>
+          <% 
+          totalcomputers=@total_of_computers
+          
+          while totalcomputers>0  do
+            #@Myeq=Equipment.where('ports < ?',totalcomputers).order(:ports).last
+            
+            @Myeq=Equipment.where('ports < ? and power = ? and etype = ?',totalcomputers, @eco,"Switch").order(:ports).last
+            
+            begin
+              
+            #Calcular Cantidad
+            cont=1
+            while true
+              if @Myeq.ports*cont>totalcomputers
+                break
+              else
+                cont+=1
+              end
+            end
+            cont-=1
+            
+            #Roptar Puertos
+            totalcomputers-=@Myeq.ports*cont
+            
+            
+            rescue
+            #Añadir switch final
+            
+            #@Myeq=Equipment.where('ports > ?',totalcomputers).order(:ports).first
+            
+              @Myeq=Equipment.where('ports > ? and power = ? and etype = ?',totalcomputers,@eco,"Switch").order(:ports).first
+              cont=1
+              totalcomputers-=@Myeq.ports*cont
+            
+            end
+            
+          
+          end
+          %>
+            <td><%=cont-(cont*0.2).ceil%></td>
             </tr>
+          <%end%>
+          
             <tr>
               <td>Switches de distribución</td>
-              <td><%= @physical.count %></td>
+              <td><%= (cont*0.2).ceil %></td>
             </tr>
             <tr>
-              <td>Punto de acceso inhalambrico</td>
+              <td>Punto de acceso inalambrico</td>
               <td>
                 1
               </td>
@@ -73,13 +120,78 @@
             <tr>
               <td><strong>Total</strong></td>
               <td>
-                <% @Total= @physical.sum(:printers)+@physical.sum(:computers)+1+1+ @physical.count+1 %>
+                
+                <% @Total= @physical.sum(:printers)+@physical.sum(:computers)+@servidores+1+(cont-(cont*0.2).ceil)+(cont*0.2).ceil+1 %>
                 <strong><%= @Total %></strong>
               </td>
             </tr>
           </tbody>
         </table>
       </div>
+      <div class="row">
+                  
+                  <h2>Servicios</h2>
+                  <% if @request.web %>  
+                  <strong>Web: </strong>Servidor Apache (HTTPd)<br>
+                  <% end %>
+                  <% if @request.bd %>
+                  <strong>Base de datos: </strong>MySQL Server<br>
+                  <% end %>
+                  <% if @request.aplications %>
+                  <strong>Aplicaciones: </strong>LAMP<br>
+                  <% end %>
+                  <% if @request.proxy %>
+                  <strong>Proxy: </strong>Squid 3.5.27<br>
+                  <% end %>
+                  <% if @request.voip %>
+                  <strong>Voip: </strong>Asterisk 15<br>
+                  <% end %>
+                  <% if @request.email %>
+                  <strong>Correo: </strong>Exchange<br>
+                  <% end %>
+                  <% if @request.video_conference %>
+                  <strong>Video conference: </strong>LDAP<br>
+                  <% end %>
+                  <% if @request.active_dir %>
+                  <strong>Directorio activo: </strong>Si<br>
+                  <% end %>
+                  <% if @request.dhcp %>
+                  <strong>Dhcp: </strong>Si<br>
+                  <% end %>
+                  <% if @request.dns %>
+                  <strong>Dns: </strong>Si<br>
+                  <% end %>
+                  <% if @request.ftp %>
+                  <strong>Ftp: </strong>Si<br>
+                  <% end %>
+                </div>
+                <div class="row">
+                  <h2>Aspectos Físicos</h2>
+                  <strong>NÚMERO DE PISOS: </strong><%= @physical.count %><br>
+                  <% cont=0 %>
+                  <% @physical.each do |physical_data| %>
+                  <div class="col-xs-6">
+                    <%cont+=1%>
+                    <br>
+                    <strong>ALTURA PISO <%= cont%>: </strong><%= physical_data.height %> m<br>
+                    <strong>ANCHO PISO <%= cont%>: </strong><%= physical_data.width %> m<br>
+                    <strong>LARGO PISO <%= cont%>: </strong><%= physical_data.large %> m<br>
+                    <strong># EXTENSIONES DE PISO:</strong><%= physical_data.computers %><br>
+                    <% if physical_data.conference_hall %>
+                      <strong>SALA DE JUNTAS: </strong>Si<br>
+                    <% else %>
+                      <strong>SALA DE JUNTAS: </strong>No<br>
+                    <% end %>
+                    
+                  </div>
+                  <% end %>
+                  <% if @logical.redundancy %>
+                    <strong>ENLACES REDUNDANTES: </strong>Si<br>
+                  <% else %>
+                    <strong>ENLACES REDUNDANTES: </strong>Si<br>
+                  <% end%>
+                  
+                </div>
   </div>
 </body>
 </html>

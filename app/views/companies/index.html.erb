@@ -144,10 +144,11 @@
 <div class="row">
   <div class="col-md-10 col-md-offset-1">
     <h2>Empresas registradas</h2>
+    <p id="notice"><%= notice %></p>
   </div>
 </div>
 
-<p id="notice"><%= notice %></p>
+
 
 <div class="row">
   <div class="col-md-10 col-md-offset-1">
@@ -183,6 +184,7 @@
         <% end %>
       </tbody>
     </table>    
+    <%= link_to 'Nueva empresa', process_index_path(:new => "true"), :class => 'btn btn-default' %>
   </div>  
 </div>
 

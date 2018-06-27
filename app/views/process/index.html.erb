@@ -1585,9 +1585,9 @@ input[type="button"]:focus {
                             <div class="form-group">
                                 <label>Nit:</label>
                                 <%if params[:new]=="false" || params[:edit]=="true"%>
-                                  <input readonly min="0" max="999999999" type="number" class="form-control" name="company[nit]" id="company_nit"  placeholder="Nit" value="<%=@company.nit%>">
+                                  <input readonly min="0" max="999999999" type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="company[nit]" id="company_nit"  placeholder="Nit" value="<%=@company.nit%>">
                                 <%else%>
-                                  <input type="number" min="0" max="999999999"  class="form-control" name="company[nit]" id="company_nit"  placeholder="Nit">
+                                  <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="0" max="999999999"  class="form-control" name="company[nit]" id="company_nit"  placeholder="Nit">
                                 <%end%>
                                 
                             </div>
@@ -1819,31 +1819,31 @@ input[type="button"]:focus {
                                 <div class="col-sm-2">
                                   <div class="form-group">
                                     <label>Altura</label>
-                                    <input type="number" min="2" max="10" class="form-control" name="physical[height]" id="<%=@altura %>" placeholder="Altura" value="<%= physical.height %>">
+                                    <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="10" class="form-control" name="physical[height]" id="<%=@altura %>" placeholder="Altura" value="<%= physical.height %>">
                                   </div>
                                 </div>
                                 <div class="col-sm-2">
                                   <div class="form-group">
                                     <label>Ancho</label>
-                                    <input type="number" min="2" max="20" class="form-control" name="physical[width]" id="<%=@ancho %>" placeholder="Ancho" value="<%= physical.width %>">
+                                    <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[width]" id="<%=@ancho %>" placeholder="Ancho" value="<%= physical.width %>">
                                   </div>
                                 </div>
                                 <div class="col-sm-2">
                                   <div class="form-group">
                                     <label>Largo</label>
-                                    <input type="number" min="2" max="20" class="form-control" name="physical[large]" id="<%=@largo %>" placeholder="Largo" value="<%= physical.large %>">
+                                    <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[large]" id="<%=@largo %>" placeholder="Largo" value="<%= physical.large %>">
                                   </div>
                                 </div>
                                 <div class="col-sm-2">
                                   <div class="form-group">
                                     <label>Computadores</label>
-                                    <input min="0" type="number" class="form-control" name="physical[computers]" id="<%=@comp %>" placeholder="Núm." value="<%= physical.computers %>">
+                                    <input min="0" type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="physical[computers]" id="<%=@comp %>" placeholder="Núm." value="<%= physical.computers %>">
                                   </div>
                                 </div>
                                 <div class="col-sm-2">
                                   <div class="form-group">
                                     <label>Impresoras</label>
-                                    <input min="0" type="number" class="form-control" name="physical[printers]" id="<%=@imp %>" placeholder="Núm." value="<%= physical.printers %>">
+                                    <input min="0" type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="physical[printers]" id="<%=@imp %>" placeholder="Núm." value="<%= physical.printers %>">
                                   </div>
                                 </div>
                                 <div class="col-sm-1">
@@ -1879,31 +1879,31 @@ input[type="button"]:focus {
                                 <div class="col-sm-2">
                                   <div class="form-group">
                                     <label>Altura</label>
-                                    <input type="number" min="2" max="10" class="form-control" name="physical[height]" id="<%=@altura %>" placeholder="Altura" >
+                                    <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="10" class="form-control" name="physical[height]" id="<%=@altura %>" placeholder="Altura" >
                                   </div>
                                 </div>
                                 <div class="col-sm-2">
                                   <div class="form-group">
                                     <label>Ancho</label>
-                                    <input type="number" min="2" max="20" class="form-control" name="physical[width]" id="<%=@ancho %>" placeholder="Ancho">
+                                    <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[width]" id="<%=@ancho %>" placeholder="Ancho">
                                   </div>
                                 </div>
                                 <div class="col-sm-2">
                                   <div class="form-group">
                                     <label>Largo</label>
-                                    <input type="number" min="2" max="20" class="form-control" name="physical[large]" id="<%=@largo %>" placeholder="Largo">
+                                    <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[large]" id="<%=@largo %>" placeholder="Largo">
                                   </div>
                                 </div>
                                 <div class="col-sm-2">
                                   <div class="form-group">
                                     <label>Computadores</label>
-                                    <input min="0" type="number" class="form-control" name="physical[computers]" id="<%=@comp %>" placeholder="Núm.">
+                                    <input min="0" type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="physical[computers]" id="<%=@comp %>" placeholder="Núm.">
                                   </div>
                                 </div>
                                 <div class="col-sm-2">
                                   <div class="form-group">
                                     <label>Impresoras</label>
-                                    <input min="0" type="number" class="form-control" name="physical[printers]" id="<%=@imp %>" placeholder="Núm.">
+                                    <input min="0" type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="physical[printers]" id="<%=@imp %>" placeholder="Núm.">
                                   </div>
                                 </div>
                                 <div class="col-sm-1">
@@ -1924,31 +1924,31 @@ input[type="button"]:focus {
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Altura</label>
-                                  <input type="number" min="2" max="10" class="form-control" name="physical[height]" id="physical_height_1" placeholder="Altura">
+                                  <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="10" class="form-control" name="physical[height]" id="physical_height_1" placeholder="Altura">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Ancho</label>
-                                  <input type="number" min="2" max="20" class="form-control" name="physical[width]" id="physical_width_1" placeholder="Ancho">
+                                  <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[width]" id="physical_width_1" placeholder="Ancho">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Largo</label>
-                                  <input type="number" min="2" max="20" class="form-control" name="physical[large]" id="physical_large_1" placeholder="Largo">
+                                  <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[large]" id="physical_large_1" placeholder="Largo">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Computadores</label>
-                                  <input min="0" type="number" class="form-control" name="physical[computers]" id="physical_computers_1" placeholder="Núm.">
+                                  <input min="0" type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="physical[computers]" id="physical_computers_1" placeholder="Núm.">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Impresoras</label>
-                                  <input min="0" type="number" class="form-control" name="physical[printers]" id="physical_printers_1" placeholder="Núm.">
+                                  <input min="0" type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="physical[printers]" id="physical_printers_1" placeholder="Núm.">
                                 </div>
                               </div>
                               <div class="col-sm-1">
@@ -1964,31 +1964,31 @@ input[type="button"]:focus {
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Altura</label>
-                                  <input type="number" min="2" max="10" class="form-control" name="physical[height]" id="physical_height_2" placeholder="Altura">
+                                  <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="10" class="form-control" name="physical[height]" id="physical_height_2" placeholder="Altura">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Ancho</label>
-                                  <input type="number" min="2" max="20" class="form-control" name="physical[width]" id="physical_width_2" placeholder="Ancho">
+                                  <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[width]" id="physical_width_2" placeholder="Ancho">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Largo</label>
-                                  <input type="number" min="2" max="20" class="form-control" name="physical[large]" id="physical_large_2" placeholder="Largo">
+                                  <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[large]" id="physical_large_2" placeholder="Largo">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Computadores</label>
-                                  <input min="0" type="number" class="form-control" name="physical[computers]" id="physical_computers_2" placeholder="Núm.">
+                                  <input min="0" type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="physical[computers]" id="physical_computers_2" placeholder="Núm.">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Impresoras</label>
-                                  <input min="0" type="number" class="form-control" name="physical[printers]" id="physical_printers_2" placeholder="Núm.">
+                                  <input min="0" type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="physical[printers]" id="physical_printers_2" placeholder="Núm.">
                                 </div>
                               </div>
                               <div class="col-sm-1">
@@ -2008,31 +2008,31 @@ input[type="button"]:focus {
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Altura</label>
-                                  <input type="number" min="2" max="10" class="form-control" name="physical[height]" id="physical_height_3" placeholder="Altura">
+                                  <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="10" class="form-control" name="physical[height]" id="physical_height_3" placeholder="Altura">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Ancho</label>
-                                  <input type="number" min="2" max="20" class="form-control" name="physical[width]" id="physical_width_3" placeholder="Ancho">
+                                  <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[width]" id="physical_width_3" placeholder="Ancho">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Largo</label>
-                                  <input type="number" min="2" max="20" class="form-control" name="physical[large]" id="physical_large_3" placeholder="Largo">
+                                  <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[large]" id="physical_large_3" placeholder="Largo">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Computadores</label>
-                                  <input min="0" type="number" class="form-control" name="physical[computers]" id="physical_computers_3" placeholder="Núm.">
+                                  <input min="0" type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="physical[computers]" id="physical_computers_3" placeholder="Núm.">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Impresoras</label>
-                                  <input min="0" type="number" class="form-control" name="physical[printers]" id="physical_printers_3" placeholder="Núm.">
+                                  <input min="0" type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="physical[printers]" id="physical_printers_3" placeholder="Núm.">
                                 </div>
                               </div>
                               <div class="col-sm-1">
@@ -2052,31 +2052,31 @@ input[type="button"]:focus {
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Altura</label>
-                                  <input type="number" min="2" max="10" class="form-control" name="physical[height]" id="physical_height_4" placeholder="Altura">
+                                  <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="10" class="form-control" name="physical[height]" id="physical_height_4" placeholder="Altura">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Ancho</label>
-                                  <input type="number" min="2" max="20" class="form-control" name="physical[width]" id="physical_width_4" placeholder="Ancho">
+                                  <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[width]" id="physical_width_4" placeholder="Ancho">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Largo</label>
-                                  <input type="number" min="2" max="20" class="form-control" name="physical[large]" id="physical_large_4" placeholder="Largo">
+                                  <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[large]" id="physical_large_4" placeholder="Largo">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Computadores</label>
-                                  <input min="0" type="number" class="form-control" name="physical[computers]" id="physical_computers_4" placeholder="Núm.">
+                                  <input min="0" type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="physical[computers]" id="physical_computers_4" placeholder="Núm.">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Impresoras</label>
-                                  <input min="0" type="number" class="form-control" name="physical[printers]" id="physical_printers_4" placeholder="Núm.">
+                                  <input min="0" type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="physical[printers]" id="physical_printers_4" placeholder="Núm.">
                                 </div>
                               </div>
                               <div class="col-sm-1">
@@ -2096,31 +2096,31 @@ input[type="button"]:focus {
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Altura</label>
-                                  <input type="number" min="2" max="10" class="form-control" name="physical[height]" id="physical_height_5" placeholder="Altura">
+                                  <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="10" class="form-control" name="physical[height]" id="physical_height_5" placeholder="Altura">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Ancho</label>
-                                  <input type="number" min="2" max="20" class="form-control" name="physical[width]" id="physical_width_5" placeholder="Ancho">
+                                  <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[width]" id="physical_width_5" placeholder="Ancho">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Largo</label>
-                                  <input type="number" min="2" max="20" class="form-control" name="physical[large]" id="physical_large_5" placeholder="Largo">
+                                  <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[large]" id="physical_large_5" placeholder="Largo">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Computadores</label>
-                                  <input min="0" type="number" class="form-control" name="physical[computers]" id="physical_computers_5" placeholder="Núm.">
+                                  <input min="0" type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="physical[computers]" id="physical_computers_5" placeholder="Núm.">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Impresoras</label>
-                                  <input min="0" type="number" class="form-control" name="physical[printers]" id="physical_printers_5" placeholder="Núm.">
+                                  <input min="0" type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="physical[printers]" id="physical_printers_5" placeholder="Núm.">
                                 </div>
                               </div>
                               <div class="col-sm-1">
@@ -2140,31 +2140,31 @@ input[type="button"]:focus {
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Altura</label>
-                                  <input type="number" min="2" max="10" class="form-control" name="physical[height]" id="physical_height_6" placeholder="Altura">
+                                  <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="10" class="form-control" name="physical[height]" id="physical_height_6" placeholder="Altura">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Ancho</label>
-                                  <input type="number" min="2" max="20" class="form-control" name="physical[width]" id="physical_width_6" placeholder="Ancho">
+                                  <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[width]" id="physical_width_6" placeholder="Ancho">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Largo</label>
-                                  <input type="number" min="2" max="20" class="form-control" name="physical[large]" id="physical_large_6" placeholder="Largo">
+                                  <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[large]" id="physical_large_6" placeholder="Largo">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Computadores</label>
-                                  <input min="0" type="number" class="form-control" name="physical[computers]" id="physical_computers_6" placeholder="Núm.">
+                                  <input min="0" type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="physical[computers]" id="physical_computers_6" placeholder="Núm.">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Impresoras</label>
-                                  <input min="0" type="number" class="form-control" name="physical[printers]" id="physical_printers_6" placeholder="Núm.">
+                                  <input min="0" type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="physical[printers]" id="physical_printers_6" placeholder="Núm.">
                                 </div>
                               </div>
                               <div class="col-sm-1">
@@ -2184,31 +2184,31 @@ input[type="button"]:focus {
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Altura</label>
-                                  <input type="number" min="2" max="10" class="form-control" name="physical[height]" id="physical_height_7" placeholder="Altura">
+                                  <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="10" class="form-control" name="physical[height]" id="physical_height_7" placeholder="Altura">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Ancho</label>
-                                  <input type="number" min="2" max="20" class="form-control" name="physical[width]" id="physical_width_7" placeholder="Ancho">
+                                  <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[width]" id="physical_width_7" placeholder="Ancho">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Largo</label>
-                                  <input type="number" min="2" max="20" class="form-control" name="physical[large]" id="physical_large_7" placeholder="Largo">
+                                  <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[large]" id="physical_large_7" placeholder="Largo">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Computadores</label>
-                                  <input min="0" type="number" class="form-control" name="physical[computers]" id="physical_computers_7" placeholder="Núm.">
+                                  <input min="0" type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="physical[computers]" id="physical_computers_7" placeholder="Núm.">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Impresoras</label>
-                                  <input min="0" type="number" class="form-control" name="physical[printers]" id="physical_printers_7" placeholder="Núm.">
+                                  <input min="0" type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="physical[printers]" id="physical_printers_7" placeholder="Núm.">
                                 </div>
                               </div>
                               <div class="col-sm-1">
@@ -2228,31 +2228,31 @@ input[type="button"]:focus {
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Altura</label>
-                                  <input type="number" min="2" max="10" class="form-control" name="physical[height]" id="physical_height_8" placeholder="Altura">
+                                  <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="10" class="form-control" name="physical[height]" id="physical_height_8" placeholder="Altura">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Ancho</label>
-                                  <input type="number" min="2" max="20" class="form-control" name="physical[width]" id="physical_width_8" placeholder="Ancho">
+                                  <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[width]" id="physical_width_8" placeholder="Ancho">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Largo</label>
-                                  <input type="number" min="2" max="20" class="form-control" name="physical[large]" id="physical_large_8" placeholder="Largo">
+                                  <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[large]" id="physical_large_8" placeholder="Largo">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Computadores</label>
-                                  <input min="0" type="number" class="form-control" name="physical[computers]" id="physical_computers_8" placeholder="Núm.">
+                                  <input min="0" type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="physical[computers]" id="physical_computers_8" placeholder="Núm.">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Impresoras</label>
-                                  <input min="0" type="number" class="form-control" name="physical[printers]" id="physical_printers_8" placeholder="Núm.">
+                                  <input min="0" type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="physical[printers]" id="physical_printers_8" placeholder="Núm.">
                                 </div>
                               </div>
                               <div class="col-sm-1">
@@ -2272,31 +2272,31 @@ input[type="button"]:focus {
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Altura</label>
-                                  <input type="number" min="2" max="10" class="form-control" name="physical[height]" id="physical_height_9" placeholder="Altura">
+                                  <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="10" class="form-control" name="physical[height]" id="physical_height_9" placeholder="Altura">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Ancho</label>
-                                  <input type="number" min="2" max="20" class="form-control" name="physical[width]" id="physical_width_9" placeholder="Ancho">
+                                  <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[width]" id="physical_width_9" placeholder="Ancho">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Largo</label>
-                                  <input type="number" min="2" max="20" class="form-control" name="physical[large]" id="physical_large_9" placeholder="Largo">
+                                  <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[large]" id="physical_large_9" placeholder="Largo">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Computadores</label>
-                                  <input min="0" type="number" class="form-control" name="physical[computers]" id="physical_computers_9" placeholder="Núm.">
+                                  <input min="0" type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="physical[computers]" id="physical_computers_9" placeholder="Núm.">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Impresoras</label>
-                                  <input min="0" type="number" class="form-control" name="physical[printers]" id="physical_printers_9" placeholder="Núm.">
+                                  <input min="0" type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="physical[printers]" id="physical_printers_9" placeholder="Núm.">
                                 </div>
                               </div>
                               <div class="col-sm-1">
@@ -2316,31 +2316,31 @@ input[type="button"]:focus {
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Altura</label>
-                                  <input type="number" min="2" max="10" class="form-control" name="physical[height]" id="physical_height_10" placeholder="Altura">
+                                  <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="10" class="form-control" name="physical[height]" id="physical_height_10" placeholder="Altura">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Ancho</label>
-                                  <input type="number" min="2" max="20" class="form-control" name="physical[width]" id="physical_width_10" placeholder="Ancho">
+                                  <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[width]" id="physical_width_10" placeholder="Ancho">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Largo</label>
-                                  <input type="number" min="2" max="20" class="form-control" name="physical[large]" id="physical_large_10" placeholder="Largo">
+                                  <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[large]" id="physical_large_10" placeholder="Largo">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Computadores</label>
-                                  <input min="0" type="number" class="form-control" name="physical[computers]" id="physical_computers_10" placeholder="Núm.">
+                                  <input min="0" type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="physical[computers]" id="physical_computers_10" placeholder="Núm.">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Impresoras</label>
-                                  <input min="0" type="number" class="form-control" name="physical[printers]" id="physical_printers_10" placeholder="Núm.">
+                                  <input min="0" type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="physical[printers]" id="physical_printers_10" placeholder="Núm.">
                                 </div>
                               </div>
                               <div class="col-sm-1">
@@ -2387,9 +2387,9 @@ input[type="button"]:focus {
                             <div class="col-sm-8">
                               <div class="form-group">
                                 <%if params[:edit]=="true"%>
-                                  <input type="number" class="form-control" min="0" max="100" name="logical[scalability]" id="logical_scalability" placeholder="Escalabilidad" value="<%=@logical.scalability%>">
+                                  <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" min="0" max="100" name="logical[scalability]" id="logical_scalability" placeholder="Escalabilidad" value="<%=@logical.scalability%>">
                                 <%else%>
-                                  <input type="number" class="form-control" min="0" max="100" name="logical[scalability]" id="logical_scalability" placeholder="Escalabilidad">
+                                  <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" min="0" max="100" name="logical[scalability]" id="logical_scalability" placeholder="Escalabilidad">
                                 <%end%>
                               </div>
                             </div>
@@ -2406,36 +2406,36 @@ input[type="button"]:focus {
                             <div class="col-sm-2 ">
                               <div class="form-group">
                                 <%if params[:edit]=="true"%>
-                                  <input type="number" class="form-control" min="0" max="255" name="logical[host1]" id="logical_host1" placeholder="192" value="<%=@logical.host1%>">
+                                  <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" min="0" max="255" name="logical[host1]" id="logical_host1" placeholder="192" value="<%=@logical.host1%>">
                                 <%else%>
-                                  <input type="number" class="form-control" min="0" max="255" name="logical[host1]" id="logical_host1" placeholder="192">
+                                  <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" min="0" max="255" name="logical[host1]" id="logical_host1" placeholder="192">
                                 <%end%>                                
                               </div>
                             </div>
                             <div class="col-sm-2">
                               <div class="form-group">
                                 <%if params[:edit]=="true"%>
-                                  <input type="number" class="form-control" min="0" max="255" name="logical[host2]" id="logical_host2" placeholder="168" value="<%=@logical.host2%>">
+                                  <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" min="0" max="255" name="logical[host2]" id="logical_host2" placeholder="168" value="<%=@logical.host2%>">
                                 <%else%>
-                                  <input type="number" class="form-control" min="0" max="255" name="logical[host2]" id="logical_host2" placeholder="168">
+                                  <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" min="0" max="255" name="logical[host2]" id="logical_host2" placeholder="168">
                                 <%end%>                                    
                               </div>
                             </div>
                             <div class="col-sm-2">
                               <div class="form-group">
                                 <%if params[:edit]=="true"%>
-                                  <input type="number" class="form-control" min="0" max="255" name="logical[host3]" id="logical_host3" placeholder="0" value="<%=@logical.host3%>">
+                                  <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" min="0" max="255" name="logical[host3]" id="logical_host3" placeholder="0" value="<%=@logical.host3%>">
                                 <%else%>
-                                  <input type="number" class="form-control" min="0" max="255" name="logical[host3]" id="logical_host3" placeholder="0">
+                                  <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" min="0" max="255" name="logical[host3]" id="logical_host3" placeholder="0">
                                 <%end%>                                    
                               </div>
                             </div>
                             <div class="col-sm-2">
                               <div class="form-group">
                                 <%if params[:edit]=="true"%>
-                                  <input type="number" class="form-control" min="0" max="255" name="logical[host4]" id="logical_host4" placeholder="0" value="<%=@logical.host4%>">
+                                  <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" min="0" max="255" name="logical[host4]" id="logical_host4" placeholder="0" value="<%=@logical.host4%>">
                                 <%else%>
-                                  <input type="number" class="form-control" min="0" max="255" name="logical[host4]" id="logical_host4" placeholder="0">
+                                  <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" min="0" max="255" name="logical[host4]" id="logical_host4" placeholder="0">
                                 <%end%>                                    
                               </div>
                             </div>
@@ -2497,7 +2497,7 @@ input[type="button"]:focus {
                                 <div class="col-sm-2">
                                   <div class="form-group">
                                     <label>Computadores</label>
-                                    <input type="number" class="form-control" min='0' name="subnet[computers]" id="<%=@compu %>" placeholder="Núm." value="<%= subnet.computers %>">
+                                    <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" min='0' name="subnet[computers]" id="<%=@compu %>" placeholder="Núm." value="<%= subnet.computers %>">
                                   </div>
                                 </div>
                                 <div id="<%=@remove %>"  class="col-sm-1">
@@ -2533,7 +2533,7 @@ input[type="button"]:focus {
                                 <div class="col-sm-2">
                                   <div class="form-group">
                                     <label>Computadores</label>
-                                    <input type="number" class="form-control" min='0' name="subnet[computers]" id="<%=@compu %>" placeholder="Núm.">
+                                    <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" min='0' name="subnet[computers]" id="<%=@compu %>" placeholder="Núm.">
                                   </div>
                                 </div>
                                 <div id="<%=@remove %>"  class="col-sm-1">
@@ -2562,7 +2562,7 @@ input[type="button"]:focus {
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Computadores</label>
-                                  <input type="number" class="form-control" min='0' name="subnet[computers]" id="subnet_computers_1" placeholder="Núm.">
+                                  <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" min='0' name="subnet[computers]" id="subnet_computers_1" placeholder="Núm.">
                                 </div>
                               </div>
                               <div id="delete_subnet_1"  class="col-sm-1">
@@ -2585,7 +2585,7 @@ input[type="button"]:focus {
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Computadores</label>
-                                  <input type="number" class="form-control" min='0' name="subnet[computers]" id="subnet_computers_2" placeholder="Núm.">
+                                  <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" min='0' name="subnet[computers]" id="subnet_computers_2" placeholder="Núm.">
                                 </div>
                               </div>
                               <div id="delete_subnet_2"  class="col-sm-1">
@@ -2611,7 +2611,7 @@ input[type="button"]:focus {
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Computadores</label>
-                                  <input type="number" class="form-control" min='0' name="subnet[computers]" id="subnet_computers_3" placeholder="Núm.">
+                                  <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" min='0' name="subnet[computers]" id="subnet_computers_3" placeholder="Núm.">
                                 </div>
                               </div>
                               <div id="delete_subnet_3"  class="col-sm-1">
@@ -2637,7 +2637,7 @@ input[type="button"]:focus {
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Computadores</label>
-                                  <input type="number" class="form-control" min='0' name="subnet[computers]" id="subnet_computers_4" placeholder="Núm.">
+                                  <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" min='0' name="subnet[computers]" id="subnet_computers_4" placeholder="Núm.">
                                 </div>
                               </div>
                               <div id="delete_subnet_4"  class="col-sm-1">
@@ -2663,7 +2663,7 @@ input[type="button"]:focus {
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Computadores</label>
-                                  <input type="number" class="form-control" min='0' name="subnet[computers]" id="subnet_computers_5" placeholder="Núm.">
+                                  <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" min='0' name="subnet[computers]" id="subnet_computers_5" placeholder="Núm.">
                                 </div>
                               </div>
                               <div id="delete_subnet_5"  class="col-sm-1">
@@ -2689,7 +2689,7 @@ input[type="button"]:focus {
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Computadores</label>
-                                  <input type="number" class="form-control" min='0' name="subnet[computers]" id="subnet_computers_6" placeholder="Núm.">
+                                  <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" min='0' name="subnet[computers]" id="subnet_computers_6" placeholder="Núm.">
                                 </div>
                               </div>
                               <div id="delete_subnet_6"  class="col-sm-1">
@@ -2715,7 +2715,7 @@ input[type="button"]:focus {
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Computadores</label>
-                                  <input type="number" class="form-control" min='0' name="subnet[computers]" id="subnet_computers_7" placeholder="Núm.">
+                                  <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" min='0' name="subnet[computers]" id="subnet_computers_7" placeholder="Núm.">
                                 </div>
                               </div>
                               <div id="delete_subnet_7"  class="col-sm-1">
@@ -2741,7 +2741,7 @@ input[type="button"]:focus {
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Computadores</label>
-                                  <input type="number" class="form-control" min='0' name="subnet[computers]" id="subnet_computers_8" placeholder="Núm.">
+                                  <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" min='0' name="subnet[computers]" id="subnet_computers_8" placeholder="Núm.">
                                 </div>
                               </div>
                               <div id="delete_subnet_8"  class="col-sm-1">
@@ -2767,7 +2767,7 @@ input[type="button"]:focus {
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Computadores</label>
-                                  <input type="number" class="form-control" min='0' name="subnet[computers]" id="subnet_computers_9" placeholder="Núm.">
+                                  <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" min='0' name="subnet[computers]" id="subnet_computers_9" placeholder="Núm.">
                                 </div>
                               </div>
                               <div id="delete_subnet_9"  class="col-sm-1">
@@ -2793,7 +2793,7 @@ input[type="button"]:focus {
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Computadores</label>
-                                  <input type="number" class="form-control" min='0' name="subnet[computers]" id="subnet_computers_10" placeholder="Núm.">
+                                  <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" min='0' name="subnet[computers]" id="subnet_computers_10" placeholder="Núm.">
                                 </div>
                               </div>
                               <div id="delete_subnet_10"  class="col-sm-1">
@@ -2820,7 +2820,10 @@ input[type="button"]:focus {
                   <div class="wizard-footer">
                   	<div class="pull-right">
                           <input type='button' class='btn btn-next btn-fill btn-primary btn-wd' onclick="Example()" id="next" name='next' value='Finalizar' />
-                          <input type='button' class='btn btn-finish btn-fill btn-primary btn-wd' onclick="Example()" name='finish' value='Finalizar' />
+                          <input type='button' class='btn btn-next btn-fill btn-primary btn-wd' onclick="next1()" id="next_company" name='finish' value='Siguiente' />
+                          <input type='button' class='btn btn-next btn-fill btn-primary btn-wd' onclick="next2()" id="next_request" name='finish' value='Siguiente' />
+                          <input type='button' class='btn btn-next btn-fill btn-primary btn-wd' onclick="next3()" id="next_physical" name='finish' value='Siguiente' />
+                          <input type='button' class='btn btn-next btn-fill btn-primary btn-wd' onclick="next4()" id="next_logical" name='finish' value='Siguiente' />
                       </div>
 
                       <div class="clearfix"></div>
@@ -3328,6 +3331,11 @@ var Cont_subred=0;
         <%end%>
         
         document.getElementById('next').type = 'hidden';
+        document.getElementById('next_company').type = 'hidden';
+        document.getElementById('next_request').type = 'hidden';
+        document.getElementById('next_physical').type = 'hidden';
+        document.getElementById('next_logical').type = 'hidden';
+        
         document.getElementById("logical_id").value = Math.round(Math.random()*10000) ;
         document.getElementById("subnet_id").value = Math.round(Math.random()*10000);
         document.getElementById("physicals_id").value = Math.round(Math.random()*10000);
@@ -3566,7 +3574,7 @@ var Cont_subred=0;
         if(Contador >= 3 || Cont_fisico >= 3){
           document.getElementById("my_physical_height_3").value = document.getElementById("physical_height_3").value  
           document.getElementById("my_physical_width_3").value = document.getElementById("physical_width_3").value  
-          document.getElementById("my_physical_large_3").value = document.getElementById("physical_large_3").value  
+          document.getElementById("my_physical_large_3").value = document.getdocument.getElementById('next').type = 'hidden';ElementById("physical_large_3").value  
           document.getElementById("my_physical_computers_3").value = document.getElementById("physical_computers_3").value  
           document.getElementById("my_physical_printers_3").value = document.getElementById("physical_printers_3").value
           
@@ -3760,79 +3768,4 @@ var Cont_subred=0;
       
  
     }
-</script>
-
-<script>
-
-searchVisible = 0;
-transparent = true;
-        $(document).ready(function(){
-          
-          
-            /*  Activate the tooltips      */
-            $('[rel="tooltip"]').tooltip();
-
-            // Code for the Validator
-            var $validator = $('.wizard-card form').validate({
-        		  rules: {
-        		    firstname: {
-        		      required: true,
-        		      minlength: 3
-        		    },
-        		    lastname: {
-        		      required: true,
-        		      minlength: 3
-        		    },
-        		    email: {
-        		      required: true
-        		    }
-                },
-        	});
-
-            // Wizard Initialization
-
-
-
-                // Prepare the preview for profile picture
-                $("#wizard-picture").change(function(){
-                    readURL(this);
-                });
-
-                $('[data-toggle="wizard-radio"]').click(function(){
-                    wizard = $(this).closest('.wizard-card');
-                    wizard.find('[data-toggle="wizard-radio"]').removeClass('active');
-                    $(this).addClass('active');
-                    $(wizard).find('[type="radio"]').removeAttr('checked');
-                    $(this).find('[type="radio"]').attr('checked','true');
-                });
-
-                $('[data-toggle="wizard-checkbox"]').click(function(){
-                    if( $(this).hasClass('active')){
-                        $(this).removeClass('active');
-                        $(this).find('[type="checkbox"]').removeAttr('checked');
-                    } else {
-                        $(this).addClass('active');
-                        $(this).find('[type="checkbox"]').attr('checked','true');
-                    }
-                });
-
-                $('.set-full-height').css('height', 'auto');
-
-            });
-
-
-
-         //Function to show image before upload
-
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-
-                reader.onload = function (e) {
-                    $('#wizardPicturePreview').attr('src', e.target.result).fadeIn('slow');
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
 </script>

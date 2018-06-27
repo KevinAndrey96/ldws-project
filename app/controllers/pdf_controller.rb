@@ -2,22 +2,73 @@ class PdfController < ApplicationController
   
   before_action :authenticate_user!
   def empresa
-    if params[:id]
-      @company=Company.find(params[:id])
-      @request=Request.where(:company_id => params[:id]).first
-    elsif params[:request_id]
+    if params[:request_id]
       @request=Request.find(params[:request_id]) 
       @company=Company.find(@request.company_id)
       @physical=Physical.where(:request_id => @request.id)
-      @logical=Logical.where(:request_id => @request.id)
+      @logical=Logical.where(:request_id => @request.id).first
+      @subnets=Subnet.where(:logical_id => @logical.id)
     end
-    @id_empresa=params[:id]
-    @request=Request.where(:company_id => @company.id).first 
-    @company=Company.find(@company.id) 
-    @physical=Physical.where(:request_id => @request.id) 
-    @logical=Logical.where(:request_id => @request.id).first 
-    @subnets=Subnet.where(:logical_id => @logical.id) 
     @sizeofs=Subnet.where(:logical_id => @logical.id).size 
+    
+    #totalcomputers=@physical.sum(:computers)
+    @Sw_status = 1
+    @total_of_computers = @physical.sum(:computers)
+    
+    #Potencias
+    @eco=0
+    #Verificamos existencias
+    @eq=Equipment.where(:etype => "Switch", :power => 1).count
+    if @eq == 0
+      @eq=Equipment.where(:etype => "Switch", :power => 2).count
+      if @eq == 0
+        @eq=Equipment.where(:etype => "Switch", :power => 3).count  
+        if @eq == 0
+          @Sw_status=0
+        else
+          @eco=3
+        end
+      else
+        @eco=2
+      end
+    else
+      @eco=1
+    end
+    
+    @servidores=0
+    if @request.web?
+      @servidores+=1
+    end
+    if @request.bd?
+      @servidores+=1
+    end
+    if @request.aplications?
+      @servidores+=1
+    end
+    if @request.proxy?
+      @servidores+=1
+    end
+    if @request.voip?
+      @servidores+=1
+    end
+    if @request.video_conference?
+      @servidores+=1
+    end
+    if @request.active_dir?
+      @servidores+=1
+    end
+    if @request.dhcp?
+      @servidores+=1
+    end
+    if @request.dns?
+      @servidores+=1
+    end
+    if @request.ftp?
+      @servidores+=1
+    end
+    if @request.email?
+      @servidores+=1
+    end
    
     render  :pdf => "Reporte", :template => 'pdf/empresa.html.erb'
   end

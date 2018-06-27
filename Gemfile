@@ -64,3 +64,4 @@ gem 'ipaddress', '~> 0.8.3'
 gem 'local_time'
 gem 'devise-i18n'
 gem 'will_paginate', '~> 3.1.0'
+gem 'rails-erd', group: :development
