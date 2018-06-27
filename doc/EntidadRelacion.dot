@@ -12,14 +12,16 @@ splines = "spline";
 node[ shape  =  "Mrecord" , fontsize  =  "10" , fontname  =  "Arial" , margin  =  "0.07,0.05" , penwidth  =  "1.0"];
 edge[ fontname  =  "Arial" , fontsize  =  "7" , dir  =  "both" , arrowsize  =  "0.9" , penwidth  =  "1.0" , labelangle  =  "32" , labeldistance  =  "1.8"];
 rankdir = "TB";
-label = "Workspace domain model\n\n";
+label = "LDWS\n\n";
 m_Binnacle [label = <{<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
   <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">Binnacle</font></td></tr>
 </table>
 |
 <table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
   <tr><td align="left" width="130" port="action">action <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="company_id">company_id <font face="Arial Italic" color="grey60">integer FK</font></td></tr>
   <tr><td align="left" width="130" port="description">description <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="user_id">user_id <font face="Arial Italic" color="grey60">integer FK</font></td></tr>
 </table>
 }>];
 m_Company [label = <{<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
@@ -30,6 +32,7 @@ m_Company [label = <{<table border="0" align="center" cellspacing="0.5" cellpadd
   <tr><td align="left" width="130" port="mision">mision <font face="Arial Italic" color="grey60">string</font></td></tr>
   <tr><td align="left" width="130" port="name">name <font face="Arial Italic" color="grey60">string</font></td></tr>
   <tr><td align="left" width="130" port="nit">nit <font face="Arial Italic" color="grey60">integer</font></td></tr>
+  <tr><td align="left" width="130" port="user_id">user_id <font face="Arial Italic" color="grey60">integer FK</font></td></tr>
   <tr><td align="left" width="130" port="vision">vision <font face="Arial Italic" color="grey60">string</font></td></tr>
 </table>
 }>];
@@ -57,6 +60,7 @@ m_Logical [label = <{<table border="0" align="center" cellspacing="0.5" cellpadd
   <tr><td align="left" width="130" port="host3">host3 <font face="Arial Italic" color="grey60">integer</font></td></tr>
   <tr><td align="left" width="130" port="host4">host4 <font face="Arial Italic" color="grey60">integer</font></td></tr>
   <tr><td align="left" width="130" port="redundancy">redundancy <font face="Arial Italic" color="grey60">boolean</font></td></tr>
+  <tr><td align="left" width="130" port="request_id">request_id <font face="Arial Italic" color="grey60">integer FK</font></td></tr>
   <tr><td align="left" width="130" port="scalability">scalability <font face="Arial Italic" color="grey60">integer</font></td></tr>
 </table>
 }>];
@@ -70,6 +74,7 @@ m_Physical [label = <{<table border="0" align="center" cellspacing="0.5" cellpad
   <tr><td align="left" width="130" port="height">height <font face="Arial Italic" color="grey60">integer</font></td></tr>
   <tr><td align="left" width="130" port="large">large <font face="Arial Italic" color="grey60">integer</font></td></tr>
   <tr><td align="left" width="130" port="printers">printers <font face="Arial Italic" color="grey60">integer</font></td></tr>
+  <tr><td align="left" width="130" port="request_id">request_id <font face="Arial Italic" color="grey60">integer FK</font></td></tr>
   <tr><td align="left" width="130" port="width">width <font face="Arial Italic" color="grey60">integer</font></td></tr>
 </table>
 }>];
@@ -81,6 +86,7 @@ m_Request [label = <{<table border="0" align="center" cellspacing="0.5" cellpadd
   <tr><td align="left" width="130" port="active_dir">active_dir <font face="Arial Italic" color="grey60">boolean</font></td></tr>
   <tr><td align="left" width="130" port="aplications">aplications <font face="Arial Italic" color="grey60">boolean</font></td></tr>
   <tr><td align="left" width="130" port="bd">bd <font face="Arial Italic" color="grey60">boolean</font></td></tr>
+  <tr><td align="left" width="130" port="company_id">company_id <font face="Arial Italic" color="grey60">integer FK</font></td></tr>
   <tr><td align="left" width="130" port="description">description <font face="Arial Italic" color="grey60">string</font></td></tr>
   <tr><td align="left" width="130" port="dhcp">dhcp <font face="Arial Italic" color="grey60">boolean</font></td></tr>
   <tr><td align="left" width="130" port="dns">dns <font face="Arial Italic" color="grey60">boolean</font></td></tr>
@@ -102,6 +108,7 @@ m_Subnet [label = <{<table border="0" align="center" cellspacing="0.5" cellpaddi
 <table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
   <tr><td align="left" width="130" port="computers">computers <font face="Arial Italic" color="grey60">integer</font></td></tr>
   <tr><td align="left" width="130" port="description">description <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="logical_id">logical_id <font face="Arial Italic" color="grey60">integer FK</font></td></tr>
   <tr><td align="left" width="130" port="name">name <font face="Arial Italic" color="grey60">string</font></td></tr>
 </table>
 }>];

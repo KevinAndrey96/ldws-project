@@ -941,10 +941,6 @@ input[type="button"]:focus {
   right: 8px;
 }
 
-.btn-tooltip {
-  white-space: nowrap;
-}
-
 .buttons-with-margin .btn {
   margin-bottom: 5px;
 }
@@ -1076,116 +1072,6 @@ input[type="button"]:focus {
   transition: all 0.2s linear;
 }
 
-.tooltip {
-  font-size: 14px;
-  font-weight: bold;
-}
-
-.tooltip-arrow {
-  display: none;
-  opacity: 0;
-}
-
-.tooltip-inner {
-  background-color: #FAE6A4;
-  border-radius: 4px;
-  box-shadow: 0 1px 13px rgba(0, 0, 0, 0.14), 0 0 0 1px rgba(115, 71, 38, 0.23);
-  color: #734726;
-  max-width: 200px;
-  padding: 6px 10px;
-  text-align: center;
-  text-decoration: none;
-}
-.tooltip-inner:after {
-  content: "";
-  display: inline-block;
-  left: 100%;
-  margin-left: -56%;
-  position: absolute;
-}
-.tooltip-inner:before {
-  content: "";
-  display: inline-block;
-  left: 100%;
-  margin-left: -56%;
-  position: absolute;
-}
-
-.tooltip.top {
-  margin-top: -11px;
-  padding: 0;
-}
-.tooltip.top .tooltip-inner:after {
-  border-top: 11px solid #FAE6A4;
-  border-left: 11px solid transparent;
-  border-right: 11px solid transparent;
-  bottom: -10px;
-}
-.tooltip.top .tooltip-inner:before {
-  border-top: 11px solid rgba(0, 0, 0, 0.2);
-  border-left: 11px solid transparent;
-  border-right: 11px solid transparent;
-  bottom: -11px;
-}
-
-.tooltip.bottom {
-  margin-top: 11px;
-  padding: 0;
-}
-.tooltip.bottom .tooltip-inner:after {
-  border-bottom: 11px solid #FAE6A4;
-  border-left: 11px solid transparent;
-  border-right: 11px solid transparent;
-  top: -10px;
-}
-.tooltip.bottom .tooltip-inner:before {
-  border-bottom: 11px solid rgba(0, 0, 0, 0.2);
-  border-left: 11px solid transparent;
-  border-right: 11px solid transparent;
-  top: -11px;
-}
-
-.tooltip.left {
-  margin-left: -11px;
-  padding: 0;
-}
-.tooltip.left .tooltip-inner:after {
-  border-left: 11px solid #FAE6A4;
-  border-top: 11px solid transparent;
-  border-bottom: 11px solid transparent;
-  right: -10px;
-  left: auto;
-  margin-left: 0;
-}
-.tooltip.left .tooltip-inner:before {
-  border-left: 11px solid rgba(0, 0, 0, 0.2);
-  border-top: 11px solid transparent;
-  border-bottom: 11px solid transparent;
-  right: -11px;
-  left: auto;
-  margin-left: 0;
-}
-
-.tooltip.right {
-  margin-left: 11px;
-  padding: 0;
-}
-.tooltip.right .tooltip-inner:after {
-  border-right: 11px solid #FAE6A4;
-  border-top: 11px solid transparent;
-  border-bottom: 11px solid transparent;
-  left: -10px;
-  top: 0;
-  margin-left: 0;
-}
-.tooltip.right .tooltip-inner:before {
-  border-right: 11px solid rgba(0, 0, 0, 0.2);
-  border-top: 11px solid transparent;
-  border-bottom: 11px solid transparent;
-  left: -11px;
-  top: 0;
-  margin-left: 0;
-}
 
 .card {
   border-radius: 6px;
@@ -1514,50 +1400,49 @@ input[type="button"]:focus {
 								<div class="wizard-navigation">
 
 									<ul>
-			              <li id="details_list">
-											<a href="#details" onclick="hiddenNextBtn()" data-toggle="tab">
-												<div class="icon-circle">
+			              <li onclick="companyBtn()"  id="details_list">
+											<a href="#details" onclick="companyBtn()" data-toggle="tab">
+												<div onclick="companyBtn()" class="icon-circle">
 													<i class="ti-bag"></i>
 												</div>
 												Empresa
 											</a>
 										</li>
-			              <li id="captain_list">
-											<a href="#captain" onclick="hiddenNextBtn()" data-toggle="tab">
-												<div id="icon_captain" class="icon-circle">
+			              <li onclick="requestBtn()" id="captain_list">
+											<a id="solicitud" href="#captain" onclick="requestBtn()" data-toggle="tab">
+												<div onclick="requestBtn()" id="icon_captain" class="icon-circle">
 													<i class="ti-email"></i>
 												</div>
 												Solicitud
 											</a>
 										</li>
-			                            <li>
-											<a href="#description" onclick="hiddenNextBtn()" data-toggle="tab">
-												<div class="icon-circle">
+			              <li onclick="physicalBtn()"  id="description_list">
+											<a id="fisico" href="#description" onclick="physicalBtn()" data-toggle="tab">
+												<div onclick="physicalBtn()" class="icon-circle">
 													<i class="ti-desktop"></i>
 												</div>
 												Fisico
 											</a>
 										</li>
-										<li>
-											<a href="#logic" onclick="hiddenNextBtn()" data-toggle="tab">
-												<div class="icon-circle">
+										<li onclick="logicalBtn()" id=logic_list>
+											<a id="logiico" href="#logic" onclick="logicalBtn()" data-toggle="tab">
+												<div onclick="logicalBtn()" class="icon-circle">
 													<i class="ti-signal"></i>
 												</div>
 												Logico
 											</a>
 										</li>
-										<li>
-											<a href="#subred" onclick="showNextBtn()" data-toggle="tab">
-												<div class="icon-circle">
+										<li onclick="subnetBtn()" id="subred_list">
+											<a id="subredd" href="#subred" onclick="subnetBtn()" data-toggle="tab">
+												<div onclick="subnetBtn()" class="icon-circle">
 													<i class="ti-rss-alt"></i>
 												</div>
 												Subredes
 											</a>
 										</li>
-			                        </ul>
+			            </ul>
 								</div>
-		                        <div class="tab-content">
-		                             <!--Compañia-->
+		            <div class="tab-content">
                   <div class="tab-pane" id="details">
                     <div class="row">
                       <form class="new_company" id="new_company" action="/company" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" />
@@ -2381,7 +2266,51 @@ input[type="button"]:focus {
                           <div class="row">
                             <div class="col-sm-2 col-sm-offset-1">
                               <div class="form-group">
-                                <label>Escalabilidad</label>
+                                <!--<label data-toggle="tooltip" data-placement="top" title="Porcentaje de crecimiento de la red a futuro">Escalabilidad</label>-->
+                                <style>
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+</style>
+
+                               
+<label class="" data-toggle="tooltip" data-placement="top" title="Porcentaje de crecimiento de la red a futuro">Escalabilidad</label>
+                                
                               </div>
                             </div>
                             <div class="col-sm-8">
@@ -2445,7 +2374,7 @@ input[type="button"]:focus {
                         <div class="col-sm-12s col-sm-offset-4">
                           <div class="col-sm-3">
                             <div class="form-group"><br>
-                              <i class="ti-export"></i><p>Redundancia</p>
+                              <i class="ti-export"></i><p title="capacidad de la red te tener redundancia en las conexiones">Redundancia de red</p>
                                 <%if params[:edit]=="true" && @logical.redundancy? %>
                                   <input type="checkbox" value="" name="logical[redundancy]" id="logical_redundancy" checked>
                                 <%else%>
@@ -2820,10 +2749,10 @@ input[type="button"]:focus {
                   <div class="wizard-footer">
                   	<div class="pull-right">
                           <input type='button' class='btn btn-next btn-fill btn-primary btn-wd' onclick="Example()" id="next" name='next' value='Finalizar' />
-                          <input type='button' class='btn btn-next btn-fill btn-primary btn-wd' onclick="next1()" id="next_company" name='finish' value='Siguiente' />
-                          <input type='button' class='btn btn-next btn-fill btn-primary btn-wd' onclick="next2()" id="next_request" name='finish' value='Siguiente' />
-                          <input type='button' class='btn btn-next btn-fill btn-primary btn-wd' onclick="next3()" id="next_physical" name='finish' value='Siguiente' />
-                          <input type='button' class='btn btn-next btn-fill btn-primary btn-wd' onclick="next4()" id="next_logical" name='finish' value='Siguiente' />
+                          <input type='button' class='btn btn-next btn-fill btn-primary btn-wd' onclick="nextcomp()" id="next_company" name='finish' value='Siguiente' />
+                          <input type='button' class='btn btn-next btn-fill btn-primary btn-wd' onclick="nextreq()" id="next_request" name='finish' value='Siguiente' />
+                          <input type='button' class='btn btn-next btn-fill btn-primary btn-wd' onclick="nextphy()" id="next_physical" name='finish' value='Siguiente' />
+                          <input type='button' class='btn btn-next btn-fill btn-primary btn-wd' onclick="nextlog()" id="next_logical" name='finish' value='Siguiente' />
                       </div>
 
                       <div class="clearfix"></div>
@@ -3320,21 +3249,35 @@ var Cont_subred=0;
           document.getElementById("captain").className = "tab-pane active";
           document.getElementById("captain_list").className = "active";
           document.getElementById("details_list").classList.remove("active");
+          $('#next').hide();
+          $('#next_company').hide();
+          $('#next_request').show;
+          $('#next_physical').hide();
+          $('#next_logical').hide();
         <%else%>
           document.getElementById("company_id").value = Math.round(Math.random()*10000);
+          $('#next').hide();
+          $('#next_company').show();
+          $('#next_request').hide();
+          $('#next_physical').hide();
+          $('#next_logical').hide();
         <%end%>
         
+        <%if params[:new]=="true" %>
+          $('#next').hide();
+          $('#next_company').show();
+          $('#next_request').hide();
+          $('#next_physical').hide();
+          $('#next_logical').hide();
+        <%end%>
         <%if params[:edit]=="true"%>
           document.getElementById("request_id").value = <%=params[:id]%>
         <%else%>
           document.getElementById("request_id").value = Math.round(Math.random()*10000);
         <%end%>
         
-        document.getElementById('next').type = 'hidden';
-        document.getElementById('next_company').type = 'hidden';
-        document.getElementById('next_request').type = 'hidden';
-        document.getElementById('next_physical').type = 'hidden';
-        document.getElementById('next_logical').type = 'hidden';
+
+
         
         document.getElementById("logical_id").value = Math.round(Math.random()*10000) ;
         document.getElementById("subnet_id").value = Math.round(Math.random()*10000);
@@ -3346,13 +3289,85 @@ var Cont_subred=0;
         document.getElementById("request_id_physical").value = document.getElementById("request_id").value;
     });
     
-    
-    function showNextBtn(){
-      document.getElementById('next').type = 'button';
+    function nextcomp(){
+      $("#solicitud").trigger("click");
+      $('#next').hide();
+      $('#next_company').hide();
+      $('#next_request').show();
+      $('#next_physical').hide();
+      $('#next_logical').hide();
     }
     
-    function hiddenNextBtn(){
-      document.getElementById('next').type = 'hidden';
+    function nextreq(){
+      $("#fisico").trigger("click");
+      $('#next').hide();
+      $('#next_company').hide();
+      $('#next_request').hide();
+      $('#next_physical').show();
+      $('#next_logical').hide();
+    }
+    
+    function nextphy(){
+      $("#logiico").trigger("click");
+      $('#next').hide();
+      $('#next_company').hide();
+      $('#next_request').hide();
+      $('#next_physical').hide();
+      $('#next_logical').show();      
+    }
+    
+    function nextlog(){
+      $("#subredd").trigger("click");
+      $('#next').show();
+      $('#next_company').hide();
+      $('#next_request').hide();
+      $('#next_physical').hide();
+      $('#next_logical').hide();
+      document.getElementById("next").classList.remove("disabled");
+      document.getElementById("next_company").classList.remove("disabled");
+      document.getElementById("next_request").classList.remove("disabled");
+      document.getElementById("next_physical").classList.remove("disabled");
+      document.getElementById("next_logical").classList.remove("disabled");
+    }
+    
+    function companyBtn(){
+        $('#next').hide();
+        $('#next_company').show();
+        $('#next_request').hide();
+        $('#next_physical').hide();
+        $('#next_logical').hide();
+    }    
+    
+    function requestBtn(){
+        $('#next').hide();
+        $('#next_company').hide();
+        $('#next_request').show();
+        $('#next_physical').hide();
+        $('#next_logical').hide();
+    }
+    
+    function physicalBtn(){
+        $('#next').hide();
+        $('#next_company').hide();
+        $('#next_request').hide();
+        $('#next_physical').show();
+        $('#next_logical').hide();
+    }
+    
+    function logicalBtn(){
+        $('#next').hide();
+        $('#next_company').hide();
+        $('#next_request').hide();
+        $('#next_physical').hide();
+        $('#next_logical').show();
+    }
+    
+    function subnetBtn(){
+        $('#next').show();
+        $('#next_company').hide();
+        $('#next_request').hide();
+        $('#next_physical').hide();
+        $('#next_logical').hide();
     }
     
 
@@ -3680,7 +3695,6 @@ var Cont_subred=0;
           document.getElementById("my_physical_printers_10").value = document.getElementById("physical_printers_10").value
           
           if( document.getElementById("physical_conference_hall_10").checked == true){
-              document.getElementById("my_physical_conference_hall_10").value = "true";
           } else {
               document.getElementById("my_physical_conference_hall_10").value = "false";
           }
@@ -3765,7 +3779,6 @@ var Cont_subred=0;
         document.getElementById("all_process").submit();
         
       }
-      
  
     }
 </script>
