@@ -68,24 +68,24 @@ bootstrap.min.css:8
   </div>
   <div class="field">
     <h3 id="equipment_brand1">Marca</h3>
-    <%= f.text_field :brand, :class => "form-control" %>
+    <%= f.text_field :brand, :class => "form-control" , :required => "true"%>
   </div>
   
   <div class="field">
     <h3 id="equipment_reference1" >Refencia</h3>
-    <%= f.text_field :reference , :class => "form-control"%>
+    <%= f.text_field :reference , :class => "form-control", :required => "true"%>
   </div>
 
   <div class="field">
     <h3 id="equipment_price1">Precio</h3>
-    <%= f.number_field :price , :class => "form-control"%>
+    <%= f.number_field :price , :class => "form-control", :required => "true" %>
   </div>
   <div class="field">
-    <h3 id="equipment_ports1">Puertos usables</h3>
+    <h3 id="equipment_ports1">Puertos usables (opcional)</h3>
     <%= f.number_field :ports , :class => "form-control"%>
   </div>
   <div class="field">
-    <h3 id="equipment_slots1">Slots</h3>
+    <h3 id="equipment_slots1">Slots (opcional)</h3>
     <%= f.number_field :slots , :class => "form-control"%>
   </div>
   

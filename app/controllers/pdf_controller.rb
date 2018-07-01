@@ -598,6 +598,7 @@ class PdfController < ApplicationController
         end
       else
         @opt=2
+        
       end
     else
       @opt=3

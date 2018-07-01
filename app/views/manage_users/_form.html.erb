@@ -37,7 +37,7 @@
       font-size: 15px;
   }
 </style>
-
+<div class="row">
 <%= form_for @user, url: manage_users_path(@user), html: { method: :create } do |f| %>
     <% if @user.errors.any? %>
       <div id="error_explanation">
@@ -90,3 +90,4 @@
   <div class="col-md-4"></div>
 <br>
 
+</div>

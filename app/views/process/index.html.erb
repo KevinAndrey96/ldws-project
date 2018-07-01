@@ -3062,6 +3062,7 @@ input[type="button"]:focus {
     </div>
 
 </html>
+
 <script type="text/javascript">
 var Contador=1;
 var Cont=1;
@@ -3176,7 +3177,7 @@ var Cont_subred=0;
     }
     
     $( document ).ready(function() {
-       
+        
         <%if params[:edit]=="true"%>
         
           <%cont=0%>
@@ -3242,7 +3243,6 @@ var Cont_subred=0;
           $('#subred_10').hide();
           
         <%end%>       
-
         
         <%if params[:new]=="false" || params[:edit]=="true"%>
           document.getElementById("details").className = "tab-pane";
@@ -3254,13 +3254,6 @@ var Cont_subred=0;
           $('#next_request').show;
           $('#next_physical').hide();
           $('#next_logical').hide();
-        <%else%>
-          document.getElementById("company_id").value = Math.round(Math.random()*10000);
-          $('#next').hide();
-          $('#next_company').show();
-          $('#next_request').hide();
-          $('#next_physical').hide();
-          $('#next_logical').hide();
         <%end%>
         
         <%if params[:new]=="true" %>
@@ -3270,14 +3263,12 @@ var Cont_subred=0;
           $('#next_physical').hide();
           $('#next_logical').hide();
         <%end%>
+        
         <%if params[:edit]=="true"%>
           document.getElementById("request_id").value = <%=params[:id]%>
         <%else%>
           document.getElementById("request_id").value = Math.round(Math.random()*10000);
         <%end%>
-        
-
-
         
         document.getElementById("logical_id").value = Math.round(Math.random()*10000) ;
         document.getElementById("subnet_id").value = Math.round(Math.random()*10000);

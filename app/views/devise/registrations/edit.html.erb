@@ -42,16 +42,17 @@ bootstrap.min.css:8
 </style>
 <br>
 <div class="row">
-  <div class="col-md-10 col-md-offset-4">
+  <div class="col-md-10">
     <h2>Editar usuario</h2>
   </div>
 </div>
 
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
+  
   <div class="col-md-4"></div>
   <div class="col-md-4">
+    <%= devise_error_messages! %>
     <div class="field">
       <h3>Correo electrónico</h3>
       <%= f.email_field :email, autofocus: true, autocomplete: "email", :class => "form-control", :placeholder => "Correo electrónico" %>
@@ -69,18 +70,18 @@ bootstrap.min.css:8
       <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
     <% end %>
   
-    <div class="field">
+    <div class="field row">
       <h3>Contraseña</h3> <i>(Deja este campo en blanco si no quieres cambiar tu contraseña)</i><br />
-      <%= f.password_field :password, autocomplete: "off", :class => "form-control" %>
+      <%= f.password_field :password, autocomplete: "off", :class => "form-control", :minlength => "6" %>
       <% if @minimum_password_length %>
         <br />
         <em> minimo <%= @minimum_password_length %> caracteres</em>
       <% end %>
     </div>
   
-    <div class="field">
+    <div class="field row">
       <h3>Confirma tu contraseña</h3><br />
-      <%= f.password_field :password_confirmation, autocomplete: "off", :class => "form-control" %>
+      <%= f.password_field :password_confirmation, autocomplete: "off", :class => "form-control", :minlength => "6"%>
     </div>
   
     <div class="field">
