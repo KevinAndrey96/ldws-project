@@ -2,7 +2,7 @@
 
 <head>
   <title>LDWS - Software</title>
-  <link href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css" rel="stylesheet" />
+  
     <link href="https://netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
@@ -11,17 +11,6 @@
   <%= csrf_meta_tags %>
   
 </head>
-<script>
-$(document).ready(function() {
-  if (document.cookie.indexOf('reloaded=') === -1) 
-  { 
-    document.cookie = 'reloaded=ok;'; 
-    location.reload(); 
-    
-  }
-    });    
-  
-</script>
 <style>
 
 .modal {
@@ -2763,6 +2752,7 @@ input[type="button"]:focus {
 		        </div>
 	        </div> <!-- row -->
 	    </div> <!--  big container -->
+	    <center><%= link_to "Volver", home_index_path, :class => "btn btn-default"%></center>
 
 	    <div class="footerr">
 	        <div class="container text-center">
@@ -2771,7 +2761,7 @@ input[type="button"]:focus {
 	    </div>
 	</div>
 
-<form name="all_process" id="all_process" method="POST" action=/process>
+<form name="all_process" id="all_process" method="POST" action="/process">
     <input type="hidden" name="authenticity_token" value="yK7vDfj0ORZZpNIf2OQp50opDeJmu2OTzw9IBl2Ol2yXw8Fh+uBcMt6p8RdNrN2IORV90w+TuaubmcCKud477g==" />
     
     <% if params[:new] == "false" %>
@@ -2980,7 +2970,7 @@ input[type="button"]:focus {
   
    
 </form>
-</body>
+
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -3061,8 +3051,8 @@ input[type="button"]:focus {
         </div>
     </div>
 
-</html>
 
+</body>
 <script type="text/javascript">
 var Contador=1;
 var Cont=1;
@@ -3176,8 +3166,16 @@ var Cont_subred=0;
         <%end%> 
     }
     
-    $( document ).ready(function() {
+    function recargar(){
         
+        if (localStorage.getItem("reload") == null){
+            localStorage.setItem('reload', 'true');
+            location.reload();
+        }
+    }    
+    
+    $( document ).ready(function() {
+        recargar();
         <%if params[:edit]=="true"%>
         
           <%cont=0%>
@@ -3257,12 +3255,14 @@ var Cont_subred=0;
         <%end%>
         
         <%if params[:new]=="true" %>
+          document.getElementById("company_id").value = Math.round(Math.random()*10000);
           $('#next').hide();
           $('#next_company').show();
           $('#next_request').hide();
           $('#next_physical').hide();
           $('#next_logical').hide();
         <%end%>
+
         
         <%if params[:edit]=="true"%>
           document.getElementById("request_id").value = <%=params[:id]%>
@@ -3393,8 +3393,6 @@ var Cont_subred=0;
       	val = 1;
       if (document.getElementById("physical_printers_1").value == "")
       	val = 1;
-      if (document.getElementById("logical_id").value == "")
-      	val = 1;
       if (document.getElementById("logical_scalability").value == "")
       	val = 1;
       if (document.getElementById("logical_host1").value == "")
@@ -3510,12 +3508,12 @@ var Cont_subred=0;
             document.getElementById("my_request_email").value = "false";
         }
         
-        document.getElementById("my_logical_id").value = document.getElementById("logical_id").value 
-        document.getElementById("my_logical_host1").value = document.getElementById("logical_host1").value  
-        document.getElementById("my_logical_host2").value = document.getElementById("logical_host2").value  
-        document.getElementById("my_logical_host3").value = document.getElementById("logical_host3").value  
-        document.getElementById("my_logical_host4").value = document.getElementById("logical_host4").value         
-        document.getElementById("my_logical_scalability").value = document.getElementById("logical_scalability").value  
+        document.getElementById("my_logical_id").value = document.getElementById("logical_id").value;
+        document.getElementById("my_logical_host1").value = document.getElementById("logical_host1").value;
+        document.getElementById("my_logical_host2").value = document.getElementById("logical_host2").value;
+        document.getElementById("my_logical_host3").value = document.getElementById("logical_host3").value;  
+        document.getElementById("my_logical_host4").value = document.getElementById("logical_host4").value;        
+        document.getElementById("my_logical_scalability").value = document.getElementById("logical_scalability").value;
         
         if( document.getElementById("logical_redundancy").checked == true){
             document.getElementById("my_logical_redundancy").value = "true";
@@ -3549,11 +3547,11 @@ var Cont_subred=0;
         
         
         if(Contador >= 1 || Cont_fisico >= 1){
-          document.getElementById("my_physical_height_1").value = document.getElementById("physical_height_1").value  
-          document.getElementById("my_physical_width_1").value = document.getElementById("physical_width_1").value  
-          document.getElementById("my_physical_large_1").value = document.getElementById("physical_large_1").value  
-          document.getElementById("my_physical_computers_1").value = document.getElementById("physical_computers_1").value  
-          document.getElementById("my_physical_printers_1").value = document.getElementById("physical_printers_1").value
+          document.getElementById("my_physical_height_1").value = document.getElementById("physical_height_1").value;
+          document.getElementById("my_physical_width_1").value = document.getElementById("physical_width_1").value;
+          document.getElementById("my_physical_large_1").value = document.getElementById("physical_large_1").value;
+          document.getElementById("my_physical_computers_1").value = document.getElementById("physical_computers_1").value;
+          document.getElementById("my_physical_printers_1").value = document.getElementById("physical_printers_1").value;
           
           if( document.getElementById("physical_conference_hall_1").checked == true){
               document.getElementById("my_physical_conference_hall_1").value = "true";
@@ -3563,8 +3561,8 @@ var Cont_subred=0;
         }
         
         if(Contador >= 2 || Cont_fisico >= 2){
-          document.getElementById("my_physical_height_2").value = document.getElementById("physical_height_2").value  
-          document.getElementById("my_physical_width_2").value = document.getElementById("physical_width_2").value  
+          document.getElementById("my_physical_height_2").value = document.getElementById("physical_height_2").value;  
+          document.getElementById("my_physical_width_2").value = document.getElementById("physical_width_2").value;
           document.getElementById("my_physical_large_2").value = document.getElementById("physical_large_2").value  
           document.getElementById("my_physical_computers_2").value = document.getElementById("physical_computers_2").value  
           document.getElementById("my_physical_printers_2").value = document.getElementById("physical_printers_2").value
@@ -3580,7 +3578,8 @@ var Cont_subred=0;
         if(Contador >= 3 || Cont_fisico >= 3){
           document.getElementById("my_physical_height_3").value = document.getElementById("physical_height_3").value  
           document.getElementById("my_physical_width_3").value = document.getElementById("physical_width_3").value  
-          document.getElementById("my_physical_large_3").value = document.getdocument.getElementById('next').type = 'hidden';ElementById("physical_large_3").value  
+          
+          document.getElementById("my_physical_large_3").value = document.getElementById("physical_large_3").value  
           document.getElementById("my_physical_computers_3").value = document.getElementById("physical_computers_3").value  
           document.getElementById("my_physical_printers_3").value = document.getElementById("physical_printers_3").value
           
@@ -3768,8 +3767,8 @@ var Cont_subred=0;
         
         
         document.getElementById("all_process").submit();
-        
       }
  
     }
 </script>
+</html>

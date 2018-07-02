@@ -391,9 +391,6 @@ class PdfController < ApplicationController
     
     
     #Estandar
-    
-    
-    
         
     #totalcomputers=@physical.sum(:computers)
     @Sw_status = 1
@@ -675,9 +672,13 @@ class PdfController < ApplicationController
     
     #Cantidad de cable
     @physical=Physical.where(:request_id => params[:request_id]) 
-    @physical.each do |physical|
-    cont=0
     @cable = 0
+    @physical.each do |physical|
+      if physical.conference_hall?
+        @cable += 10.5
+      end
+    cont=0
+    
      i = 0 
      while i < physical.large 
          j = 0 
@@ -701,6 +702,7 @@ class PdfController < ApplicationController
        i += 1 
      end 
    end
+   
      #Código de Canaleta
     @Can_status = 1
     

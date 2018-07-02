@@ -23,6 +23,8 @@
   <%= wicked_pdf_javascript_include_tag "number_pages" %>
 </head>
 <body onload='number_pages'>
+  
+  
   <div id="content">
     <div class="container-fluid">
       <% floor_number=0%>
@@ -83,7 +85,87 @@
             <% end %>
           </tbody>
         </table>
+        
         </div>
+        
+        </div>
+        
+        <div>
+          <% if physical.conference_hall? %>
+          <h3>Sala de conferencias piso <%=floor_number%></h3>
+          
+          
+          
+          
+          
+          <div class="row">
+        <center><b></b> <%= physical.width %>m</center>
+        <label class="rotar pull-left" style=""><b></b> <%= physical.large %>m</label>
+        <center><div style="border-top: 2px solid #a2232c; padding:; width: 90%;"></div></center>
+        <div style="border-left: 2px solid #a2232c; padding:20px; ">
+        <div style="border: 2px solid black">
+          
+          <table class="table table-responsive" border='1' width= "100%" style="border-collapse: collapse; border-color: #FAF9F9">
+          <thead>
+          </thead>
+          <tbody>
+            <%cont=0%>
+            <% i = 0 %>
+            <% while i < 3 %>
+              <tr>
+                <% j = 0 %>
+                
+                <% @aux=0 %>
+              <% while j < 3 %>
+              
+                  <% if j == 0 %>
+                    <% if i == 0%>
+                      <td><center><img class="img-responsive" height="30" src="https://mymsystech.com.co/440-medium_default/rack-3bumen-r2c-9u.jpg"></center></td>
+                    <% else %>
+                      <td><center><img class="img-responsive" height="30" src="http://www.construmatica.com/construpedia/images/thumb/5/58/Baldosas_by_Patrick_Hoesly.jpg/300px-Baldosas_by_Patrick_Hoesly.jpg"></center></td>
+                    <% end %>
+                  <% else %>
+                    <% if i%2 == 0 %>
+                      <%if cont < 1%>
+                        <td><center><img class="img-responsive" height="30" src="http://img.planospara.com/mesa-para-computador-en-mesas-2d-muebles-equipamiento-42531.jpg"></center></td>
+                        <%cont+=1%>
+                        <% if i == 0 %>
+                          <%@cable = (0.5+(3*2)+((j+1))+2)+@cable %>
+                        <% else %>
+                          <%@cable = (0.5+(3*2)+((i+1)+(j+1))+2)+@cable %>
+                        <% end %>
+                      <%else%>
+                        <td><center><img class="img-responsive" height="30" src="http://www.construmatica.com/construpedia/images/thumb/5/58/Baldosas_by_Patrick_Hoesly.jpg/300px-Baldosas_by_Patrick_Hoesly.jpg"></center></td>
+                      <%end%>
+                      
+                      
+                    <% else %>
+                      <td><center><img class="img-responsive" height="30" src="http://www.construmatica.com/construpedia/images/thumb/5/58/Baldosas_by_Patrick_Hoesly.jpg/300px-Baldosas_by_Patrick_Hoesly.jpg"></center></td>
+                    <%end%>
+                  <%end%>
+                <% j += 1 %>
+              <% end %>
+              </tr>
+              <% i += 1 %>
+            <% end %>
+          </tbody>
+        </table>
+        
+        
+        </div>
+        
+        </div>
+        
+        <div>
+        
+        
+        
+        
+        
+          
+          
+          
+        <% end %>
         </div>
         <br>
         <%@computers_area = physical.computers+(physical.computers*@logical.scalability/100) %>
@@ -113,5 +195,7 @@
       
     </div>
   </div>
+  
+  
 </body>
 </html>

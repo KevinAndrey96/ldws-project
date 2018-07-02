@@ -57,6 +57,9 @@
               </td>
             </tr>
             <tr>
+              <%
+              cont=0
+              %>
               <td>Switches de acceso</td>
               
               
@@ -74,7 +77,7 @@
             begin
               
             #Calcular Cantidad
-            cont=1
+            
             while true
               if @Myeq.ports*cont>totalcomputers
                 break
@@ -94,7 +97,7 @@
             #@Myeq=Equipment.where('ports > ?',totalcomputers).order(:ports).first
             
               @Myeq=Equipment.where('ports > ? and power = ? and etype = ?',totalcomputers,@eco,"Switch").order(:ports).first
-              cont=1
+              cont+=1
               totalcomputers-=@Myeq.ports*cont
             
             end
