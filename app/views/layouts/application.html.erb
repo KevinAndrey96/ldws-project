@@ -171,11 +171,15 @@ img {
     			<ul class="nav navbar-nav navbar-right">
     				<li class="active"><%= link_to 'Inicio', home_index_path, :class => 'navbar-link' %></li>
     				<li class="active"><%= link_to 'Usuarios', manage_users_path, :class => 'navbar-link' %></li>
-    				<li class="active"><%= link_to 'Nueva empresa', process_index_path(:new => "true"), :class => 'navbar-link' %></li>
+    				<li class="active"><%= link_to 'Nueva empresa', process_index_path(:new => "true"), :class => 'navbar-link', :onclick => 'funcionclear()'  %></li>
     				<li class="active"><%= link_to 'Empresas', companies_path, :class => 'navbar-link' %></li>
     				<li class="active"><%= link_to 'Inventario', equipment_index_path, :class => 'navbar-link' %></li>
     				<li class="active"><%= link_to 'Actividad reciente', binnacles_path, :class => 'navbar-link' %></li>
-    			    
+    			    <script>
+                    function funcionclear(){
+                        localStorage.clear();
+                    }
+                    </script>
     			</ul>
             </div>
 		</div>
@@ -199,6 +203,13 @@ img {
 	</div>
 </nav>
 <%end%>
+
+
+
+
+
+
+
 <%end%>
 <div class="row container-fluid">
     

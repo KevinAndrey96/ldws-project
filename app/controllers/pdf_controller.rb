@@ -675,7 +675,7 @@ class PdfController < ApplicationController
     @cable = 0
     @physical.each do |physical|
       if physical.conference_hall?
-        @cable += 10.5
+        @cable+=2*physical.height+physical.width+physical.large+4
       end
     cont=0
     

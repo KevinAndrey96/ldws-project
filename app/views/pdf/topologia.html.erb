@@ -1,6 +1,7 @@
 <% totalcomputers=@physical.sum(:computers) %>
 <% totalcomputers2=@physical.sum(:computers) %>
 <% totalcomputers3=@physical.sum(:computers) %>
+<% computers_number2=0%>
 <!Doctype html>
 <style>
   .rotar {
@@ -30,8 +31,6 @@
       <% floor_number=0%>
       <% @physical.each do |physical| %>
       <% floor_number+=1%>
-      
-      
       <div class="row">
         <h2>Plano de piso <%=floor_number%></h2>
         <center><b></b> <%= physical.width %>m</center>
@@ -39,6 +38,10 @@
         <center><div style="border-top: 2px solid #a2232c; padding:; width: 90%;"></div></center>
         <div style="border-left: 2px solid #a2232c; padding:20px; ">
         <div style="border: 2px solid black">
+      <% if physical.conference_hall? %>
+      
+      <!-- PISO CON SALA DE CONFERENCIAS-->
+      
         <table class="table table-responsive" border='1' width= "100%" style="border-collapse: collapse; border-color: #FAF9F9">
           <thead>
           </thead>
@@ -52,7 +55,6 @@
                 
                 <% @aux=0 %>
               <% while j < physical.width %>
-              
                   <% if j == 0 %>
                     <% if i == 0%>
                       <td><center><img class="img-responsive" height="30" src="https://mymsystech.com.co/440-medium_default/rack-3bumen-r2c-9u.jpg"></center></td>
@@ -60,23 +62,30 @@
                       <td><center><img class="img-responsive" height="30" src="http://www.construmatica.com/construpedia/images/thumb/5/58/Baldosas_by_Patrick_Hoesly.jpg/300px-Baldosas_by_Patrick_Hoesly.jpg"></center></td>
                     <% end %>
                   <% else %>
-                    <% if i%2 == 0 %>
-                      <%if cont < physical.computers%>
-                        <td><center><img class="img-responsive" height="30" src="http://img.planospara.com/mesa-para-computador-en-mesas-2d-muebles-equipamiento-42531.jpg"></center></td>
-                        <%cont+=1%>
-                        <% if i == 0 %>
-                          <%@cable = (0.5+(physical.height*2)+((j+1))+2)+@cable %>
-                        <% else %>
-                          <%@cable = (0.5+(physical.height*2)+((i+1)+(j+1))+2)+@cable %>
-                        <% end %>
-                      <%else%>
-                        <td><center><img class="img-responsive" height="30" src="http://www.construmatica.com/construpedia/images/thumb/5/58/Baldosas_by_Patrick_Hoesly.jpg/300px-Baldosas_by_Patrick_Hoesly.jpg"></center></td>
-                      <%end%>
-                      
-                      
+                    <% if j == physical.width-1 && i == physical.large-1%>
+                      <td><center><img class="img-responsive" height="30" src="http://www.onidserv.com/lutronshop/image/large/400/lutron-lighting-controls-rn-rj45-h-i-400.gif"></center></td>
                     <% else %>
-                      <td><center><img class="img-responsive" height="30" src="http://www.construmatica.com/construpedia/images/thumb/5/58/Baldosas_by_Patrick_Hoesly.jpg/300px-Baldosas_by_Patrick_Hoesly.jpg"></center></td>
-                    <%end%>
+                      <% if (j == physical.width-2 && i == physical.large-1) || (j == physical.width-2 && i == physical.large-2) || (j == physical.width-1 && i == physical.large-2)%>
+                        <td><center><img class="img-responsive" height="30" src="https://ae01.alicdn.com/kf/HTB1YTNfKFXXXXXdXVXXq6xXFXXX5/Piscina-baldosas-de-vidrio-azul-blends-mar-mediterr-neo-vidrio-mosaicos-azules-para-piscinas-backsplash-de.jpg"></center></td>
+                      <%else%>
+                        <% if i%2 == 0 %>
+                          <%if cont < physical.computers%>
+                            <td><center><img class="img-responsive" height="30" src="http://img.planospara.com/mesa-para-computador-en-mesas-2d-muebles-equipamiento-42531.jpg"></center></td>
+                            <% computers_number2+=1%>
+                            <%cont+=1%>
+                            <% if i == 0 %>
+                              <%@cable = (0.5+(physical.height*2)+((j+1))+2)+@cable %>
+                            <% else %>
+                              <%@cable = (0.5+(physical.height*2)+((i+1)+(j+1))+2)+@cable %>
+                            <% end %>
+                          <%else%>
+                            <td><center><img class="img-responsive" height="30" src="http://www.construmatica.com/construpedia/images/thumb/5/58/Baldosas_by_Patrick_Hoesly.jpg/300px-Baldosas_by_Patrick_Hoesly.jpg"></center></td>
+                          <%end%>
+                        <% else %>
+                          <td><center><img class="img-responsive" height="30" src="http://www.construmatica.com/construpedia/images/thumb/5/58/Baldosas_by_Patrick_Hoesly.jpg/300px-Baldosas_by_Patrick_Hoesly.jpg"></center></td>
+                        <%end%>                      
+                      <%end%>
+                    <% end %>
                   <%end%>
                 <% j += 1 %>
               <% end %>
@@ -85,6 +94,67 @@
             <% end %>
           </tbody>
         </table>
+      
+      
+      
+      
+      <% else %>
+      
+      <!-- PISO SIN SALA DE CONFERENCIAS -->
+
+      <table class="table table-responsive" border='1' width= "100%" style="border-collapse: collapse; border-color: #FAF9F9">
+        <thead>
+        </thead>
+        <tbody>
+          <%cont=0%>
+          <%@cable = 0%>
+          <% i = 0 %>
+          <% while i < physical.large %>
+            <tr>
+              <% j = 0 %>
+              
+              <% @aux=0 %>
+            <% while j < physical.width %>
+            
+                <% if j == 0 %>
+                  <% if i == 0%>
+                    <td><center><img class="img-responsive" height="30" src="https://mymsystech.com.co/440-medium_default/rack-3bumen-r2c-9u.jpg"></center></td>
+                  <% else %>
+                    <td><center><img class="img-responsive" height="30" src="http://www.construmatica.com/construpedia/images/thumb/5/58/Baldosas_by_Patrick_Hoesly.jpg/300px-Baldosas_by_Patrick_Hoesly.jpg"></center></td>
+                    
+                  <% end %>
+                <% else %>
+                  <% if i%2 == 0 %>
+                    <%if cont < physical.computers%>
+                      <td><center><img class="img-responsive" height="30" src="http://img.planospara.com/mesa-para-computador-en-mesas-2d-muebles-equipamiento-42531.jpg"></center></td>
+                      <% computers_number2+=1%>
+                      <%cont+=1%>
+                      <% if i == 0 %>
+                        <%@cable = (0.5+(physical.height*2)+((j+1))+2)+@cable %>
+                      <% else %>
+                        <%@cable = (0.5+(physical.height*2)+((i+1)+(j+1))+2)+@cable %>
+                      <% end %>
+                    <%else%>
+                      <td><center><img class="img-responsive" height="30" src="http://www.construmatica.com/construpedia/images/thumb/5/58/Baldosas_by_Patrick_Hoesly.jpg/300px-Baldosas_by_Patrick_Hoesly.jpg"></center></td>
+                      
+                    <%end%>
+                    
+                    
+                  <% else %>
+                    <td><center><img class="img-responsive" height="30" src="http://www.construmatica.com/construpedia/images/thumb/5/58/Baldosas_by_Patrick_Hoesly.jpg/300px-Baldosas_by_Patrick_Hoesly.jpg"></center></td>
+                    
+                  <%end%>
+                <%end%>
+              <% j += 1 %>
+            <% end %>
+            </tr>
+            <% i += 1 %>
+          <% end %>
+        </tbody>
+      </table>      
+    <%end%>
+      
+      
         
         </div>
         
@@ -95,12 +165,16 @@
           <h3>Sala de conferencias piso <%=floor_number%></h3>
           
           
-          
+          <%
+        
+            @cable+=2*physical.height+physical.width+physical.large+4
+        
+          %>
           
           
           <div class="row">
-        <center><b></b> <%= physical.width %>m</center>
-        <label class="rotar pull-left" style=""><b></b> <%= physical.large %>m</label>
+        <center><b></b> <%= 2 %>m</center>
+        <label class="rotar pull-left" style=""><b></b> <%= 2 %>m</label>
         <center><div style="border-top: 2px solid #a2232c; padding:; width: 90%;"></div></center>
         <div style="border-left: 2px solid #a2232c; padding:20px; ">
         <div style="border: 2px solid black">
@@ -111,36 +185,36 @@
           <tbody>
             <%cont=0%>
             <% i = 0 %>
-            <% while i < 3 %>
+            <% while i < 2 %>
               <tr>
                 <% j = 0 %>
                 
                 <% @aux=0 %>
-              <% while j < 3 %>
+              <% while j < 2 %>
               
                   <% if j == 0 %>
                     <% if i == 0%>
-                      <td><center><img class="img-responsive" height="30" src="https://mymsystech.com.co/440-medium_default/rack-3bumen-r2c-9u.jpg"></center></td>
+                      <td><center><img class="img-responsive" height="30" src="https://ae01.alicdn.com/kf/HTB1YTNfKFXXXXXdXVXXq6xXFXXX5/Piscina-baldosas-de-vidrio-azul-blends-mar-mediterr-neo-vidrio-mosaicos-azules-para-piscinas-backsplash-de.jpg"></center></td>
                     <% else %>
-                      <td><center><img class="img-responsive" height="30" src="http://www.construmatica.com/construpedia/images/thumb/5/58/Baldosas_by_Patrick_Hoesly.jpg/300px-Baldosas_by_Patrick_Hoesly.jpg"></center></td>
+                      <td><center><img class="img-responsive" height="30" src="https://ae01.alicdn.com/kf/HTB1YTNfKFXXXXXdXVXXq6xXFXXX5/Piscina-baldosas-de-vidrio-azul-blends-mar-mediterr-neo-vidrio-mosaicos-azules-para-piscinas-backsplash-de.jpg"></center></td>
                     <% end %>
                   <% else %>
                     <% if i%2 == 0 %>
                       <%if cont < 1%>
-                        <td><center><img class="img-responsive" height="30" src="http://img.planospara.com/mesa-para-computador-en-mesas-2d-muebles-equipamiento-42531.jpg"></center></td>
+                        <td><center><img class="img-responsive" height="30" src="https://ae01.alicdn.com/kf/HTB1YTNfKFXXXXXdXVXXq6xXFXXX5/Piscina-baldosas-de-vidrio-azul-blends-mar-mediterr-neo-vidrio-mosaicos-azules-para-piscinas-backsplash-de.jpg"></center></td>
                         <%cont+=1%>
                         <% if i == 0 %>
-                          <%@cable = (0.5+(3*2)+((j+1))+2)+@cable %>
+                          <%#@cable = (0.5+(3*2)+((j+1))+2)+@cable %>
                         <% else %>
-                          <%@cable = (0.5+(3*2)+((i+1)+(j+1))+2)+@cable %>
+                          <%#@cable = (0.5+(3*2)+((i+1)+(j+1))+2)+@cable %>
                         <% end %>
                       <%else%>
-                        <td><center><img class="img-responsive" height="30" src="http://www.construmatica.com/construpedia/images/thumb/5/58/Baldosas_by_Patrick_Hoesly.jpg/300px-Baldosas_by_Patrick_Hoesly.jpg"></center></td>
+                        <td><center><img class="img-responsive" height="30" src="https://ae01.alicdn.com/kf/HTB1YTNfKFXXXXXdXVXXq6xXFXXX5/Piscina-baldosas-de-vidrio-azul-blends-mar-mediterr-neo-vidrio-mosaicos-azules-para-piscinas-backsplash-de.jpg"></center></td>
                       <%end%>
                       
                       
                     <% else %>
-                      <td><center><img class="img-responsive" height="30" src="http://www.construmatica.com/construpedia/images/thumb/5/58/Baldosas_by_Patrick_Hoesly.jpg/300px-Baldosas_by_Patrick_Hoesly.jpg"></center></td>
+                      <td><center><img class="img-responsive" height="30" style="padding-top: 2px;" src="http://www.onidserv.com/lutronshop/image/large/400/lutron-lighting-controls-rn-rj45-h-i-400.gif"></center></td>
                     <%end%>
                   <%end%>
                 <% j += 1 %>
@@ -159,12 +233,6 @@
         <div>
         
         
-        
-        
-        
-          
-          
-          
         <% end %>
         </div>
         <br>
@@ -179,13 +247,15 @@
           <% if physical.computers < @computers_number %>
             <strong>Computadores asignados a este piso: </strong> <%=physical.computers %><br>
           <% else %>
-            <strong>( Maximo excedido ) Computadores asignados a este piso: </strong> <%=@computers_number %> de <%=physical.computers %><br>
+            <strong>( Maximo excedido ) Computadores asignados a este piso: </strong> <%= computers_number2%> de <%=physical.computers %><br>
           <% end %>
           <% if @avalaible_area > @computers_area %>
             <strong>Espacio necesario: </strong> <%=@computers_area %><br>
           <% else %>
           <strong>( Espacio excedido ) Espacio disponible: </strong> <%=@avalaible_area %>m² de <%=@computers_area %>m² necesarios<br>
-        <% end %>         
+          
+        <% end %>
+        <%computers_number2=0%>
           
         
       </div>
