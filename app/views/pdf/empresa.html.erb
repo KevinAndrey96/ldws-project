@@ -23,7 +23,7 @@
         <strong>Título. </strong><%= @request.title %><br>
         <strong>Descripción. </strong><%= @request.description %><br>
         <strong>Observaciones. </strong><%= @request.observation %><br>
-        <strong>Objetivos. </strong><%= @request.objective %><br>
+        <strong>Objetivos: </strong><pre><%= @request.objective %></pre><br>
         <br>
       </div>
     </div>
@@ -188,10 +188,10 @@
                     
                   </div>
                   <% end %>
-                  <% if @logical.redundancy %>
+                  <% if @logical.redundancy? %>
                     <strong>ENLACES REDUNDANTES: </strong>Si<br>
                   <% else %>
-                    <strong>ENLACES REDUNDANTES: </strong>Si<br>
+                    <strong>ENLACES REDUNDANTES: </strong>No<br>
                   <% end%>
                   
                 </div>
