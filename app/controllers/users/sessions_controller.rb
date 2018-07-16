@@ -23,6 +23,15 @@ class Users::SessionsController < Devise::SessionsController
      super
      
    end
+   
+   def active
+    render_session_status
+  end
+
+  def timeout
+    flash[:notice] = "La sesión expiró"
+    redirect_to "/users/sign_in"
+  end
 
    protected
 

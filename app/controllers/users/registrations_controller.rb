@@ -33,9 +33,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # DELETE /resource
    def destroy
-     super
-     @b=Binnacle.create(:user_id => current_user.id, :action => "Eliminar" , :description => "Se ha eliminado un usuario")
+    @b=Binnacle.create(:user_id => current_user.id, :action => "Eliminar" , :description => "Se ha eliminado un usuario")
      @b.save
+     super
+     
    end
 
   # GET /resource/cancel

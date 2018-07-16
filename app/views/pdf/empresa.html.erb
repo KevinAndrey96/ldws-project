@@ -5,6 +5,13 @@
   <%= wicked_pdf_stylesheet_link_tag "pdf" -%>
   <%= wicked_pdf_javascript_include_tag "number_pages" %>
 </head>
+<style>
+  pre{
+    font-family: verdana, arial, helvetica, sans-serif;
+    font-size: 16px;
+    
+  }
+</style>
 <body onload='number_pages'>
   <div id="content">
     <div class="container-fluid">
@@ -27,8 +34,15 @@
         <br>
       </div>
     </div>
+    
+    
+    <!--Tabla Normal -->
     <div class="row">
         <h2>Tabla de resumen</h2>
+        <% if @logical.redundancy? %>
+        <h3>Redundancia de red</h3>
+        <%end%>
+        
         <table class="table table-responsive"  border="1" width= "100%">
           <thead>
             <tr>
@@ -105,18 +119,24 @@
           
           end
           %>
-            <td><%=cont-(cont*0.2).ceil%></td>
+            <!--<td><%=cont-(cont*0.2).ceil%></td>-->
+            
+            <%if @logical.redundancy? %>
+              <td><%=cont*2-1%></td>
+            <%else%>
+              <td><%=cont-1%></td>
+            <%end%>
             </tr>
           <%end%>
           
             <tr>
               <td>Switches de distribución</td>
-              <td><%= (cont*0.2).ceil %></td>
+              <td>1</td>
             </tr>
             <tr>
-              <td>Punto de acceso inalambrico</td>
+              <td>Puntos de acceso inalambrico</td>
               <td>
-                1
+                <%=@physical.count%>
               </td>
             </tr>
 
@@ -124,7 +144,7 @@
               <td><strong>Total</strong></td>
               <td>
                 
-                <% @Total= @physical.sum(:printers)+@physical.sum(:computers)+@servidores+1+(cont-(cont*0.2).ceil)+(cont*0.2).ceil+1 %>
+                <% @Total= @physical.sum(:printers)+@physical.sum(:computers)+@servidores+1+cont+@physical.count %>
                 <strong><%= @Total %></strong>
               </td>
             </tr>
@@ -187,6 +207,7 @@
                     <% end %>
                     
                   </div>
+                  <br>
                   <% end %>
                   <% if @logical.redundancy? %>
                     <strong>ENLACES REDUNDANTES: </strong>Si<br>

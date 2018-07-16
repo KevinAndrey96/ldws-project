@@ -1374,64 +1374,64 @@ input[type="button"]:focus {
   
 <div class="image-container set-full-height" style="background-image: url('')">
   <div class="container">
-	  <div class="row">
-	    <div class="col-sm-8 col-sm-offset-2">
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2">
 <div class="wizard-container">
           <div class="card wizard-card" data-color="azure" id="wizard">
               
           <!--        You can switch " data-color="azure" "  with one of the next bright colors: "blue", "green", "orange", "red"           -->
 
-              	<div class="wizard-header">
-                  	<h3 class="wizard-title">Crea una solicitud para tu empresa</h3>
-                  	<p class="category">Digite los datos indicados en el formulario para generar el reporte.</p>
-              	</div>
+                <div class="wizard-header">
+                    <h3 class="wizard-title">Crea una solicitud para tu empresa</h3>
+                    <p class="category">Digite los datos indicados en el formulario para generar el reporte.</p>
+                </div>
 
-								<div class="wizard-navigation">
+                <div class="wizard-navigation">
 
-									<ul>
-			              <li onclick="companyBtn()"  id="details_list">
-											<a id="compañia" href="#details" onclick="companyBtn()" data-toggle="tab">
-												<div onclick="companyBtn()" class="icon-circle">
-													<i class="ti-bag"></i>
-												</div>
-												Empresa
-											</a>
-										</li>
-			              <li onclick="requestBtn()" id="captain_list">
-											<a id="solicitud" href="#captain" onclick="requestBtn()" data-toggle="tab">
-												<div onclick="requestBtn()" id="icon_captain" class="icon-circle">
-													<i class="ti-email"></i>
-												</div>
-												Solicitud
-											</a>
-										</li>
-			              <li onclick="physicalBtn()"  id="description_list">
-											<a id="fisico" href="#description" onclick="physicalBtn()" data-toggle="tab">
-												<div onclick="physicalBtn()" class="icon-circle">
-													<i class="ti-desktop"></i>
-												</div>
-												Fisico
-											</a>
-										</li>
-										<li onclick="logicalBtn()" id=logic_list>
-											<a id="logiico" href="#logic" onclick="logicalBtn()" data-toggle="tab">
-												<div onclick="logicalBtn()" class="icon-circle">
-													<i class="ti-signal"></i>
-												</div>
-												Logico
-											</a>
-										</li>
-										<li onclick="subnetBtn()" id="subred_list">
-											<a id="subredd" href="#subred" onclick="subnetBtn()" data-toggle="tab">
-												<div onclick="subnetBtn()" class="icon-circle">
-													<i class="ti-rss-alt"></i>
-												</div>
-												Subredes
-											</a>
-										</li>
-			            </ul>
-								</div>
-		            <div class="tab-content">
+                  <ul>
+                    <li onclick="companyBtn()"  id="details_list">
+                      <a id="compañia" href="#details" onclick="companyBtn()" data-toggle="tab">
+                        <div onclick="companyBtn()" class="icon-circle">
+                          <i class="ti-bag"></i>
+                        </div>
+                        Empresa
+                      </a>
+                    </li>
+                    <li onclick="requestBtn()" id="captain_list">
+                      <a id="solicitud" href="#captain" onclick="requestBtn()" data-toggle="tab">
+                        <div onclick="requestBtn()" id="icon_captain" class="icon-circle">
+                          <i class="ti-email"></i>
+                        </div>
+                        Solicitud
+                      </a>
+                    </li>
+                    <li onclick="physicalBtn()"  id="description_list">
+                      <a id="fisico" href="#description" onclick="physicalBtn()" data-toggle="tab">
+                        <div onclick="physicalBtn()" class="icon-circle">
+                          <i class="ti-desktop"></i>
+                        </div>
+                        Fisico
+                      </a>
+                    </li>
+                    <li onclick="logicalBtn()" id=logic_list>
+                      <a id="logiico" href="#logic" onclick="logicalBtn()" data-toggle="tab">
+                        <div onclick="logicalBtn()" class="icon-circle">
+                          <i class="ti-signal"></i>
+                        </div>
+                        Logico
+                      </a>
+                    </li>
+                    <li onclick="subnetBtn()" id="subred_list">
+                      <a id="subredd" href="#subred" onclick="subnetBtn()" data-toggle="tab">
+                        <div onclick="subnetBtn()" class="icon-circle">
+                          <i class="ti-rss-alt"></i>
+                        </div>
+                        Subredes
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="tab-content">
                   <div class="tab-pane" id="details">
                     <div class="row">
                       <form class="new_company" id="new_company" action="/company" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" />
@@ -1478,9 +1478,9 @@ input[type="button"]:focus {
                             <div class="form-group">
                                 <label>Visión:</label>
                                 <%if params[:new]=="false" || params[:edit]=="true"%>
-                                  <textarea readonly class="form-control" name="company[vision]" id="company_vision" placeholder="Visión" rows="2" ><%=@company.vision%></textarea>
+                                  <textarea  style="resize: both;" readonly class="form-control" name="company[vision]" id="company_vision" placeholder="Visión" rows="2" ><%=@company.vision%></textarea>
                                 <%else%>
-                                  <textarea class="form-control" name="company[vision]" id="company_vision" placeholder="Visión" rows="2"></textarea>
+                                  <textarea  style="resize: both;" class="form-control" name="company[vision]" id="company_vision" placeholder="Visión" rows="2"></textarea>
                                 <%end%>
                             </div>
                         </div>
@@ -1488,9 +1488,9 @@ input[type="button"]:focus {
                             <div class="form-group">
                                 <label>Misión:</label>
                                 <%if params[:new]=="false" || params[:edit]=="true"%>
-                                  <textarea readonly class="form-control" name="company[mision]" id="company_mision" placeholder="Misión" rows="2" ><%=@company.mision%></textarea>
+                                  <textarea style="resize: both;" readonly class="form-control" name="company[mision]" id="company_mision" placeholder="Misión" rows="2" ><%=@company.mision%></textarea>
                                 <%else%>
-                                  <textarea class="form-control" name="company[mision]" id="company_mision" placeholder="Misión" rows="2"></textarea>
+                                  <textarea style="resize: both;" class="form-control" name="company[mision]" id="company_mision" placeholder="Misión" rows="2"></textarea>
                                 <%end%>
                                 
                             </div>
@@ -1498,7 +1498,7 @@ input[type="button"]:focus {
                       </form>
                     </div>
                   </div>
-	                <!--Solicitud-->
+                  <!--Solicitud-->
                   <div class="tab-pane" id="captain">
                     <form class="new_request" id="new_request" action="/requests" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="cnYNd6hN2OfsvSJoaniV953YenzeiKvd1sFrSTUsNIItGyMbqlm9w2uwAWD/MGGY7uQKTbegceWCV+PF0XyYAA==" />
                       <input type="hidden" name="company[id]" id="company_id_request" value="">
@@ -1672,7 +1672,7 @@ input[type="button"]:focus {
                       </div>    
                     </form>
                   </div>
-	<!--Datos fisicos-->
+  <!--Datos fisicos-->
                   <div class="tab-pane" id="description">
                     <div class="row">
                       <h5 class="info-text"> Ingresa los datos fisicos. </h5>
@@ -1701,25 +1701,25 @@ input[type="button"]:focus {
                                 <div class="col-sm-2">
                                   <div class="form-group">
                                     <label>Altura</label>
-                                    <input type="number"  onkeyup="this.value = minmax(this.value, 2, 10)"  onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="10" class="form-control" name="physical[height]" id="<%=@altura %>" placeholder="Altura" value="<%= physical.height %>">
+                                    <input type="number"  onkeyup="this.value = minmax(this.value, 1, 10)"  onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="10" class="form-control" name="physical[height]" id="<%=@altura %>" placeholder="Altura" value="<%= physical.height %>">
                                   </div>
                                 </div>
                                 <div class="col-sm-2">
                                   <div class="form-group">
                                     <label>Ancho</label>
-                                    <input type="number" onkeyup="this.value = minmax(this.value, 2, 20)"  onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[width]" id="<%=@ancho %>" placeholder="Ancho" value="<%= physical.width %>">
+                                    <input type="number" onkeyup="this.value = minmax(this.value, 1, 20)"  onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[width]" id="<%=@ancho %>" placeholder="Ancho" value="<%= physical.width %>">
                                   </div>
                                 </div>
                                 <div class="col-sm-2">
                                   <div class="form-group">
                                     <label>Largo</label>
-                                    <input type="number"  onkeyup="this.value = minmax(this.value, 2, 20)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[large]" id="<%=@largo %>" placeholder="Largo" value="<%= physical.large %>">
+                                    <input type="number"  onkeyup="this.value = minmax(this.value, 1, 20)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[large]" id="<%=@largo %>" placeholder="Largo" value="<%= physical.large %>">
                                   </div>
                                 </div>
                                 <div class="col-sm-2">
                                   <div class="form-group">
                                     <label>Computadores</label>
-                                    <input min="0" type="number"  onkeyup="this.value = minmax(this.value, 0, 10000)" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="physical[computers]" id="<%=@comp %>" placeholder="Núm." value="<%= physical.computers %>">
+                                    <input min="2" type="number"  onkeyup="this.value = minmax(this.value, 2, 10000)" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="physical[computers]" id="<%=@comp %>" placeholder="Núm." value="<%= physical.computers %>">
                                   </div>
                                 </div>
                                 <div class="col-sm-2">
@@ -1730,7 +1730,7 @@ input[type="button"]:focus {
                                 </div>
                                 <div class="col-sm-1">
                                   <div class="form-group"><br>
-                                    <label title='Sala de conferencias'>S.C</label>
+                                    <label title='Sala de conferencias'>Sala de conferencias</label>
                                     <%if params[:edit]=="true" && physical.conference_hall? %>
                                       <input type="checkbox" class="" name="conference_hall_1" id="<%=@sc %>" checked>
                                     <%else%>
@@ -1761,25 +1761,25 @@ input[type="button"]:focus {
                                 <div class="col-sm-2">
                                   <div class="form-group">
                                     <label>Altura</label>
-                                    <input type="number"  onkeyup="this.value = minmax(this.value, 2, 10)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="10" class="form-control" name="physical[height]" id="<%=@altura %>" placeholder="Altura" >
+                                    <input type="number"  onkeyup="this.value = minmax(this.value, 1, 10)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="10" class="form-control" name="physical[height]" id="<%=@altura %>" placeholder="Altura" >
                                   </div>
                                 </div>
                                 <div class="col-sm-2">
                                   <div class="form-group">
                                     <label>Ancho</label>
-                                    <input type="number"  onkeyup="this.value = minmax(this.value, 2, 20)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[width]" id="<%=@ancho %>" placeholder="Ancho">
+                                    <input type="number"  onkeyup="this.value = minmax(this.value, 1, 20)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[width]" id="<%=@ancho %>" placeholder="Ancho">
                                   </div>
                                 </div>
                                 <div class="col-sm-2">
                                   <div class="form-group">
                                     <label>Largo</label>
-                                    <input type="number" onkeyup="this.value = minmax(this.value, 2, 20)"  onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[large]" id="<%=@largo %>" placeholder="Largo">
+                                    <input type="number" onkeyup="this.value = minmax(this.value, 1, 20)"  onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[large]" id="<%=@largo %>" placeholder="Largo">
                                   </div>
                                 </div>
                                 <div class="col-sm-2">
                                   <div class="form-group">
                                     <label>Computadores</label>
-                                    <input min="0"  onkeyup="this.value = minmax(this.value, 0, 10000)" type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="physical[computers]" id="<%=@comp %>" placeholder="Núm.">
+                                    <input min="2"  onkeyup="this.value = minmax(this.value, 2, 10000)" type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="physical[computers]" id="<%=@comp %>" placeholder="Núm.">
                                   </div>
                                 </div>
                                 <div class="col-sm-2">
@@ -1790,7 +1790,7 @@ input[type="button"]:focus {
                                 </div>
                                 <div class="col-sm-1">
                                   <div class="form-group"><br>
-                                    <label title='Sala de conferencias'>S.C</label>
+                                    <label title='Sala de conferencias'>Sala de conferencias</label>
                                     <input type="checkbox" class="" name="conference_hall_1" id="<%=@sc %>">
                                   </div>
                                 </div>
@@ -1806,25 +1806,25 @@ input[type="button"]:focus {
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Altura</label>
-                                  <input type="number" onkeyup="this.value = minmax(this.value, 2, 10)"  onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="10" class="form-control" name="physical[height]" id="physical_height_1" placeholder="Altura">
+                                  <input type="number" onkeyup="this.value = minmax(this.value, 1, 10)"  onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="10" class="form-control" name="physical[height]" id="physical_height_1" placeholder="Altura">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Ancho</label>
-                                  <input type="number"  onkeyup="this.value = minmax(this.value, 2, 20)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[width]" id="physical_width_1" placeholder="Ancho">
+                                  <input type="number"  onkeyup="this.value = minmax(this.value, 1, 20)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[width]" id="physical_width_1" placeholder="Ancho">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Largo</label>
-                                  <input type="number"  onkeyup="this.value = minmax(this.value, 2, 20)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[large]" id="physical_large_1" placeholder="Largo">
+                                  <input type="number"  onkeyup="this.value = minmax(this.value, 1, 20)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[large]" id="physical_large_1" placeholder="Largo">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Computadores</label>
-                                  <input min="0" type="number" onkeyup="this.value = minmax(this.value, 0, 10000)"  onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="physical[computers]" id="physical_computers_1" placeholder="Núm.">
+                                  <input min="2" type="number" onkeyup="this.value = minmax(this.value, 2, 10000)"  onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="physical[computers]" id="physical_computers_1" placeholder="Núm.">
                                 </div>
                               </div>
                               <div class="col-sm-2">
@@ -1835,7 +1835,7 @@ input[type="button"]:focus {
                               </div>
                               <div class="col-sm-1">
                                 <div class="form-group"><br>
-                                  <label title='Sala de conferencias'>S.C</label>
+                                  <label title='Sala de conferencias'>Sala de conferencias</label>
                                   <input type="checkbox" class="" name="conference_hall_1" id="physical_conference_hall_1">
                                 </div>
                               </div>
@@ -1846,25 +1846,25 @@ input[type="button"]:focus {
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Altura</label>
-                                  <input type="number" onkeyup="this.value = minmax(this.value, 2, 10)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="10" class="form-control" name="physical[height]" id="physical_height_2" placeholder="Altura">
+                                  <input type="number" onkeyup="this.value = minmax(this.value, 1, 10)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="10" class="form-control" name="physical[height]" id="physical_height_2" placeholder="Altura">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Ancho</label>
-                                  <input type="number"  onkeyup="this.value = minmax(this.value, 2, 20)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[width]" id="physical_width_2" placeholder="Ancho">
+                                  <input type="number"  onkeyup="this.value = minmax(this.value, 1, 20)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[width]" id="physical_width_2" placeholder="Ancho">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Largo</label>
-                                  <input type="number"  onkeyup="this.value = minmax(this.value, 2, 20)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[large]" id="physical_large_2" placeholder="Largo">
+                                  <input type="number"  onkeyup="this.value = minmax(this.value, 1, 20)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[large]" id="physical_large_2" placeholder="Largo">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Computadores</label>
-                                  <input min="0" type="number" onkeyup="this.value = minmax(this.value, 0, 10000)"  onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="physical[computers]" id="physical_computers_2" placeholder="Núm.">
+                                  <input min="2" type="number" onkeyup="this.value = minmax(this.value, 2, 10000)"  onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="physical[computers]" id="physical_computers_2" placeholder="Núm.">
                                 </div>
                               </div>
                               <div class="col-sm-2">
@@ -1875,7 +1875,7 @@ input[type="button"]:focus {
                               </div>
                               <div class="col-sm-1">
                                 <div class="form-group"><br>
-                                  <label title='Sala de conferencias'>S.C</label>
+                                  <label title='Sala de conferencias'>Sala de conferencias</label>
                                   <input type="checkbox" class="" name="conference_hall_1" id="physical_conference_hall_2">
                                 </div>
                               </div>
@@ -1890,25 +1890,25 @@ input[type="button"]:focus {
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Altura</label>
-                                  <input type="number" onkeyup="this.value = minmax(this.value, 2, 10)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="10" class="form-control" name="physical[height]" id="physical_height_3" placeholder="Altura">
+                                  <input type="number" onkeyup="this.value = minmax(this.value, 1, 10)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="10" class="form-control" name="physical[height]" id="physical_height_3" placeholder="Altura">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Ancho</label>
-                                  <input type="number"  onkeyup="this.value = minmax(this.value, 2, 20)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[width]" id="physical_width_3" placeholder="Ancho">
+                                  <input type="number"  onkeyup="this.value = minmax(this.value, 1, 20)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[width]" id="physical_width_3" placeholder="Ancho">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Largo</label>
-                                  <input type="number"  onkeyup="this.value = minmax(this.value, 2, 20)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[large]" id="physical_large_3" placeholder="Largo">
+                                  <input type="number"  onkeyup="this.value = minmax(this.value, 1, 20)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[large]" id="physical_large_3" placeholder="Largo">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Computadores</label>
-                                  <input min="0" type="number" onkeyup="this.value = minmax(this.value, 0, 10000)"  onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="physical[computers]" id="physical_computers_3" placeholder="Núm.">
+                                  <input min="2" type="number" onkeyup="this.value = minmax(this.value, 2, 10000)"  onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="physical[computers]" id="physical_computers_3" placeholder="Núm.">
                                 </div>
                               </div>
                               <div class="col-sm-2">
@@ -1919,7 +1919,7 @@ input[type="button"]:focus {
                               </div>
                               <div class="col-sm-1">
                                 <div class="form-group"><br>
-                                  <label title='Sala de conferencias'>S.C</label>
+                                  <label title='Sala de conferencias'>Sala de conferencias</label>
                                   <input type="checkbox" class="" name="conference_hall_3" id="physical_conference_hall_3">
                                 </div>
                               </div>
@@ -1934,25 +1934,25 @@ input[type="button"]:focus {
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Altura</label>
-                                  <input type="number" onkeyup="this.value = minmax(this.value, 2, 10)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="10" class="form-control" name="physical[height]" id="physical_height_4" placeholder="Altura">
+                                  <input type="number" onkeyup="this.value = minmax(this.value, 1, 10)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="10" class="form-control" name="physical[height]" id="physical_height_4" placeholder="Altura">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Ancho</label>
-                                  <input type="number"  onkeyup="this.value = minmax(this.value, 2, 20)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[width]" id="physical_width_4" placeholder="Ancho">
+                                  <input type="number"  onkeyup="this.value = minmax(this.value, 1, 20)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[width]" id="physical_width_4" placeholder="Ancho">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Largo</label>
-                                  <input type="number"  onkeyup="this.value = minmax(this.value, 2, 20)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[large]" id="physical_large_4" placeholder="Largo">
+                                  <input type="number"  onkeyup="this.value = minmax(this.value, 1, 20)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[large]" id="physical_large_4" placeholder="Largo">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Computadores</label>
-                                  <input min="0" type="number" onkeyup="this.value = minmax(this.value, 0, 10000)"  onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="physical[computers]" id="physical_computers_4" placeholder="Núm.">
+                                  <input min="2" type="number" onkeyup="this.value = minmax(this.value, 2, 10000)"  onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="physical[computers]" id="physical_computers_4" placeholder="Núm.">
                                 </div>
                               </div>
                               <div class="col-sm-2">
@@ -1963,7 +1963,7 @@ input[type="button"]:focus {
                               </div>
                               <div class="col-sm-1">
                                 <div class="form-group"><br>
-                                  <label title='Sala de conferencias'>S.C</label>
+                                  <label title='Sala de conferencias'>Sala de conferencias</label>
                                   <input type="checkbox" class="" name="conference_hall_4" id="physical_conference_hall_4">
                                 </div>
                               </div>
@@ -1978,25 +1978,25 @@ input[type="button"]:focus {
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Altura</label>
-                                  <input type="number" onkeyup="this.value = minmax(this.value, 2, 10)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="10" class="form-control" name="physical[height]" id="physical_height_5" placeholder="Altura">
+                                  <input type="number" onkeyup="this.value = minmax(this.value, 1, 10)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="10" class="form-control" name="physical[height]" id="physical_height_5" placeholder="Altura">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Ancho</label>
-                                  <input type="number"  onkeyup="this.value = minmax(this.value, 2, 20)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[width]" id="physical_width_5" placeholder="Ancho">
+                                  <input type="number"  onkeyup="this.value = minmax(this.value, 1, 20)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[width]" id="physical_width_5" placeholder="Ancho">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Largo</label>
-                                  <input type="number"  onkeyup="this.value = minmax(this.value, 2, 20)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[large]" id="physical_large_5" placeholder="Largo">
+                                  <input type="number"  onkeyup="this.value = minmax(this.value, 1, 20)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[large]" id="physical_large_5" placeholder="Largo">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Computadores</label>
-                                  <input min="0" type="number" onkeyup="this.value = minmax(this.value, 0, 10000)"  onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="physical[computers]" id="physical_computers_5" placeholder="Núm.">
+                                  <input min="2" type="number" onkeyup="this.value = minmax(this.value, 2, 10000)"  onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="physical[computers]" id="physical_computers_5" placeholder="Núm.">
                                 </div>
                               </div>
                               <div class="col-sm-2">
@@ -2007,7 +2007,7 @@ input[type="button"]:focus {
                               </div>
                               <div class="col-sm-1">
                                 <div class="form-group"><br>
-                                  <label title='Sala de conferencias'>S.C</label>
+                                  <label title='Sala de conferencias'>Sala de conferencias</label>
                                   <input type="checkbox" class="" name="conference_hall_5" id="physical_conference_hall_5">
                                 </div>
                               </div>
@@ -2022,25 +2022,25 @@ input[type="button"]:focus {
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Altura</label>
-                                  <input type="number" onkeyup="this.value = minmax(this.value, 2, 10)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="10" class="form-control" name="physical[height]" id="physical_height_6" placeholder="Altura">
+                                  <input type="number" onkeyup="this.value = minmax(this.value, 1, 10)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="10" class="form-control" name="physical[height]" id="physical_height_6" placeholder="Altura">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Ancho</label>
-                                  <input type="number"  onkeyup="this.value = minmax(this.value, 2, 20)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[width]" id="physical_width_6" placeholder="Ancho">
+                                  <input type="number"  onkeyup="this.value = minmax(this.value, 1, 20)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[width]" id="physical_width_6" placeholder="Ancho">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Largo</label>
-                                  <input type="number"  onkeyup="this.value = minmax(this.value, 2, 20)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[large]" id="physical_large_6" placeholder="Largo">
+                                  <input type="number"  onkeyup="this.value = minmax(this.value, 1, 20)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[large]" id="physical_large_6" placeholder="Largo">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Computadores</label>
-                                  <input min="0" type="number" onkeyup="this.value = minmax(this.value, 0, 10000)"  onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="physical[computers]" id="physical_computers_6" placeholder="Núm.">
+                                  <input min="2" type="number" onkeyup="this.value = minmax(this.value, 2, 10000)"  onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="physical[computers]" id="physical_computers_6" placeholder="Núm.">
                                 </div>
                               </div>
                               <div class="col-sm-2">
@@ -2051,7 +2051,7 @@ input[type="button"]:focus {
                               </div>
                               <div class="col-sm-1">
                                 <div class="form-group"><br>
-                                  <label title='Sala de conferencias'>S.C</label>
+                                  <label title='Sala de conferencias'>Sala de conferencias</label>
                                   <input type="checkbox" class="" name="conference_hall_6" id="physical_conference_hall_6">
                                 </div>
                               </div>
@@ -2066,25 +2066,25 @@ input[type="button"]:focus {
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Altura</label>
-                                  <input type="number" onkeyup="this.value = minmax(this.value, 2, 10)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="10" class="form-control" name="physical[height]" id="physical_height_7" placeholder="Altura">
+                                  <input type="number" onkeyup="this.value = minmax(this.value, 1, 10)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="10" class="form-control" name="physical[height]" id="physical_height_7" placeholder="Altura">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Ancho</label>
-                                  <input type="number"  onkeyup="this.value = minmax(this.value, 2, 20)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[width]" id="physical_width_7" placeholder="Ancho">
+                                  <input type="number"  onkeyup="this.value = minmax(this.value, 1, 20)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[width]" id="physical_width_7" placeholder="Ancho">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Largo</label>
-                                  <input type="number"  onkeyup="this.value = minmax(this.value, 2, 20)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[large]" id="physical_large_7" placeholder="Largo">
+                                  <input type="number"  onkeyup="this.value = minmax(this.value, 1, 20)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[large]" id="physical_large_7" placeholder="Largo">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Computadores</label>
-                                  <input min="0" type="number" onkeyup="this.value = minmax(this.value, 0, 10000)"  onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="physical[computers]" id="physical_computers_7" placeholder="Núm.">
+                                  <input min="2" type="number" onkeyup="this.value = minmax(this.value, 2, 10000)"  onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="physical[computers]" id="physical_computers_7" placeholder="Núm.">
                                 </div>
                               </div>
                               <div class="col-sm-2">
@@ -2095,7 +2095,7 @@ input[type="button"]:focus {
                               </div>
                               <div class="col-sm-1">
                                 <div class="form-group"><br>
-                                  <label title='Sala de conferencias'>S.C</label>
+                                  <label title='Sala de conferencias'>Sala de conferencias</label>
                                   <input type="checkbox" class="" name="conference_hall_7" id="physical_conference_hall_6">
                                 </div>
                               </div>
@@ -2110,25 +2110,25 @@ input[type="button"]:focus {
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Altura</label>
-                                  <input type="number" onkeyup="this.value = minmax(this.value, 2, 10)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="10" class="form-control" name="physical[height]" id="physical_height_8" placeholder="Altura">
+                                  <input type="number" onkeyup="this.value = minmax(this.value, 1, 10)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="10" class="form-control" name="physical[height]" id="physical_height_8" placeholder="Altura">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Ancho</label>
-                                  <input type="number"  onkeyup="this.value = minmax(this.value, 2, 20)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[width]" id="physical_width_8" placeholder="Ancho">
+                                  <input type="number"  onkeyup="this.value = minmax(this.value, 1, 20)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[width]" id="physical_width_8" placeholder="Ancho">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Largo</label>
-                                  <input type="number"  onkeyup="this.value = minmax(this.value, 2, 20)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[large]" id="physical_large_8" placeholder="Largo">
+                                  <input type="number"  onkeyup="this.value = minmax(this.value, 1, 20)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[large]" id="physical_large_8" placeholder="Largo">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Computadores</label>
-                                  <input min="0" type="number" onkeyup="this.value = minmax(this.value, 0, 10000)"  onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="physical[computers]" id="physical_computers_8" placeholder="Núm.">
+                                  <input min="2" type="number" onkeyup="this.value = minmax(this.value, 2, 10000)"  onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="physical[computers]" id="physical_computers_8" placeholder="Núm.">
                                 </div>
                               </div>
                               <div class="col-sm-2">
@@ -2139,7 +2139,7 @@ input[type="button"]:focus {
                               </div>
                               <div class="col-sm-1">
                                 <div class="form-group"><br>
-                                  <label title='Sala de conferencias'>S.C</label>
+                                  <label title='Sala de conferencias'>Sala de conferencias</label>
                                   <input type="checkbox" class="" name="conference_hall_8" id="physical_conference_hall_8">
                                 </div>
                               </div>
@@ -2154,25 +2154,25 @@ input[type="button"]:focus {
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Altura</label>
-                                  <input type="number" onkeyup="this.value = minmax(this.value, 2, 10)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="10" class="form-control" name="physical[height]" id="physical_height_9" placeholder="Altura">
+                                  <input type="number" onkeyup="this.value = minmax(this.value, 1, 10)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="10" class="form-control" name="physical[height]" id="physical_height_9" placeholder="Altura">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Ancho</label>
-                                  <input type="number"  onkeyup="this.value = minmax(this.value, 2, 20)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[width]" id="physical_width_9" placeholder="Ancho">
+                                  <input type="number"  onkeyup="this.value = minmax(this.value, 1, 20)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[width]" id="physical_width_9" placeholder="Ancho">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Largo</label>
-                                  <input type="number"  onkeyup="this.value = minmax(this.value, 2, 20)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[large]" id="physical_large_9" placeholder="Largo">
+                                  <input type="number"  onkeyup="this.value = minmax(this.value, 1, 20)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[large]" id="physical_large_9" placeholder="Largo">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Computadores</label>
-                                  <input min="0" type="number" onkeyup="this.value = minmax(this.value, 0, 10000)"  onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="physical[computers]" id="physical_computers_9" placeholder="Núm.">
+                                  <input min="2" type="number" onkeyup="this.value = minmax(this.value, 2, 10000)"  onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="physical[computers]" id="physical_computers_9" placeholder="Núm.">
                                 </div>
                               </div>
                               <div class="col-sm-2">
@@ -2183,7 +2183,7 @@ input[type="button"]:focus {
                               </div>
                               <div class="col-sm-1">
                                 <div class="form-group"><br>
-                                  <label title='Sala de conferencias'>S.C</label>
+                                  <label title='Sala de conferencias'>Sala de conferencias</label>
                                   <input type="checkbox" class="" name="conference_hall_9" id="physical_conference_hall_9">
                                 </div>
                               </div>
@@ -2198,25 +2198,25 @@ input[type="button"]:focus {
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Altura</label>
-                                  <input type="number" onkeyup="this.value = minmax(this.value, 2, 10)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="10" class="form-control" name="physical[height]" id="physical_height_10" placeholder="Altura">
+                                  <input type="number" onkeyup="this.value = minmax(this.value, 1, 10)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="10" class="form-control" name="physical[height]" id="physical_height_10" placeholder="Altura">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Ancho</label>
-                                  <input type="number"  onkeyup="this.value = minmax(this.value, 2, 20)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[width]" id="physical_width_10" placeholder="Ancho">
+                                  <input type="number"  onkeyup="this.value = minmax(this.value, 1, 20)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[width]" id="physical_width_10" placeholder="Ancho">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Largo</label>
-                                  <input type="number"  onkeyup="this.value = minmax(this.value, 2, 20)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[large]" id="physical_large_10" placeholder="Largo">
+                                  <input type="number"  onkeyup="this.value = minmax(this.value, 1, 20)" onkeydown="javascript: return event.keyCode == 69 ? false : true" min="2" max="20" class="form-control" name="physical[large]" id="physical_large_10" placeholder="Largo">
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Computadores</label>
-                                  <input min="0" type="number" onkeyup="this.value = minmax(this.value, 0, 10000)"  onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="physical[computers]" id="physical_computers_10" placeholder="Núm.">
+                                  <input min="2" type="number" onkeyup="this.value = minmax(this.value, 2, 10000)"  onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="physical[computers]" id="physical_computers_10" placeholder="Núm.">
                                 </div>
                               </div>
                               <div class="col-sm-2">
@@ -2227,7 +2227,7 @@ input[type="button"]:focus {
                               </div>
                               <div class="col-sm-1">
                                 <div class="form-group"><br>
-                                  <label title='Sala de conferencias'>S.C</label>
+                                  <label title='Sala de conferencias'>Sala de conferencias</label>
                                   <input type="checkbox" class="" name="conference_hall_10" id="physical_conference_hall_10">
                                 </div>
                               </div>
@@ -2306,16 +2306,16 @@ input[type="button"]:focus {
 </style>
 
                                
-<label class="" data-toggle="tooltip" data-placement="top" title="Porcentaje de crecimiento de la red a futuro">Escalabilidad</label>
+<label class="" data-toggle="tooltip" data-placement="top" title="Porcentaje de crecimiento de la red a futuro">Escalabilidad de la red </label><small></small>
                                 
                               </div>
                             </div>
                             <div class="col-sm-8">
                               <div class="form-group">
                                 <%if params[:edit]=="true"%>
-                                  <input type="number" onkeyup="this.value = minmax(this.value, 0, 100)" onkeydown="javascript: return event.keyCode == 69 ? false : true"  onKeyPress="if(parseInt(this.value)>100) return false;" class="form-control" min="0" max="100" name="logical[scalability]" id="logical_scalability" placeholder="Escalabilidad" value="<%=@logical.scalability%>">
+                                  <input type="number" onkeyup="this.value = minmax(this.value, 0, 100)" onkeydown="javascript: return event.keyCode == 69 ? false : true"  onKeyPress="if(parseInt(this.value)>100) return false;" class="form-control" min="0" max="100" name="logical[scalability]" id="logical_scalability" placeholder="Porcentaje de crecimiento de la red a futuro" value="<%=@logical.scalability%>">
                                 <%else%>
-                                  <input type="number" onkeyup="this.value = minmax(this.value, 0, 100)" onkeydown="javascript: return event.keyCode == 69 ? false : true"  onKeyPress="if(parseInt(this.value)>100) return false;" class="form-control" min="0" max="100" name="logical[scalability]" id="logical_scalability" placeholder="Escalabilidad">
+                                  <input type="number" onkeyup="this.value = minmax(this.value, 0, 100)" onkeydown="javascript: return event.keyCode == 69 ? false : true"  onKeyPress="if(parseInt(this.value)>100) return false;" class="form-control" min="0" max="100" name="logical[scalability]" id="logical_scalability" placeholder="Porcentaje de crecimiento de la red a futuro">
                                 <%end%>
                                 <script type="text/javascript">
                                 function minmax(value, min, max) 
@@ -2377,17 +2377,21 @@ input[type="button"]:focus {
                             </div>
                           </div>
                       </div>
+                      <br>
                       <div class="row">
                         <div class="col-sm-12s col-sm-offset-4">
                           <div class="col-sm-3">
                             <div class="form-group"><br>
-                              <i class="ti-export"></i><p title="capacidad de la red te tener redundancia en las conexiones">Redundancia de red</p>
+                              
                                 <%if params[:edit]=="true" && @logical.redundancy? %>
-                                  <input type="checkbox" value="" name="logical[redundancy]" id="logical_redundancy" checked>
+                                  <input type="checkbox" class="form-control" value="" name="logical[redundancy]" id="logical_redundancy" checked>
                                 <%else%>
-                                  <input type="checkbox" value="" name="logical[redundancy]" id="logical_redundancy">
+                                  <input type="checkbox" class="form-control" value="" name="logical[redundancy]" id="logical_redundancy">
                                 <%end%>  
                             </div>
+                          </div>
+                          <div>
+                            <i class="ti-export"></i><p title="capacidad de la red te tener redundancia en las conexiones">Redundancia de red</p><small>(Capacidad de la red de tener redundancia en las conexiones)</small>
                           </div>
                         </div>
                       </div> 
@@ -2433,7 +2437,7 @@ input[type="button"]:focus {
                                 <div class="col-sm-2">
                                   <div class="form-group">
                                     <label>Computadores</label>
-                                    <input type="number" onkeyup="this.value = minmax(this.value, 0, 10000)" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" min='0' name="subnet[computers]" id="<%=@compu %>" placeholder="Núm." value="<%= subnet.computers %>">
+                                    <input type="number" onkeyup="this.value = minmax(this.value, 1, 10000)" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" min='0' name="subnet[computers]" id="<%=@compu %>" placeholder="Núm." value="<%= subnet.computers %>">
                                   </div>
                                 </div>
                                 <div id="<%=@remove %>"  class="col-sm-1">
@@ -2469,7 +2473,7 @@ input[type="button"]:focus {
                                 <div class="col-sm-2">
                                   <div class="form-group">
                                     <label>Computadores</label>
-                                    <input type="number"  onkeyup="this.value = minmax(this.value, 0, 10000)" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" min='0' name="subnet[computers]" id="<%=@compu %>" placeholder="Núm.">
+                                    <input type="number"  onkeyup="this.value = minmax(this.value,1, 10000)" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" min='0' name="subnet[computers]" id="<%=@compu %>" placeholder="Núm.">
                                   </div>
                                 </div>
                                 <div id="<%=@remove %>"  class="col-sm-1">
@@ -2498,7 +2502,7 @@ input[type="button"]:focus {
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Computadores</label>
-                                  <input type="number"  onkeyup="this.value = minmax(this.value, 0, 10000)" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" min='0' name="subnet[computers]" id="subnet_computers_1" placeholder="Núm.">
+                                  <input type="number"  onkeyup="this.value = minmax(this.value, 1, 10000)" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" min='0' name="subnet[computers]" id="subnet_computers_1" placeholder="Núm.">
                                 </div>
                               </div>
                               <div id="delete_subnet_1"  class="col-sm-1">
@@ -2521,7 +2525,7 @@ input[type="button"]:focus {
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Computadores</label>
-                                  <input type="number"  onkeyup="this.value = minmax(this.value, 0, 10000)" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" min='0' name="subnet[computers]" id="subnet_computers_2" placeholder="Núm.">
+                                  <input type="number"  onkeyup="this.value = minmax(this.value, 1, 10000)" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" min='0' name="subnet[computers]" id="subnet_computers_2" placeholder="Núm.">
                                 </div>
                               </div>
                               <div id="delete_subnet_2"  class="col-sm-1">
@@ -2547,7 +2551,7 @@ input[type="button"]:focus {
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Computadores</label>
-                                  <input type="number"  onkeyup="this.value = minmax(this.value, 0, 10000)" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" min='0' name="subnet[computers]" id="subnet_computers_3" placeholder="Núm.">
+                                  <input type="number"  onkeyup="this.value = minmax(this.value, 1, 10000)" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" min='0' name="subnet[computers]" id="subnet_computers_3" placeholder="Núm.">
                                 </div>
                               </div>
                               <div id="delete_subnet_3"  class="col-sm-1">
@@ -2573,7 +2577,7 @@ input[type="button"]:focus {
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Computadores</label>
-                                  <input type="number" onkeyup="this.value = minmax(this.value, 0, 10000)"  onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" min='0' name="subnet[computers]" id="subnet_computers_4" placeholder="Núm.">
+                                  <input type="number" onkeyup="this.value = minmax(this.value, 1, 10000)"  onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" min='0' name="subnet[computers]" id="subnet_computers_4" placeholder="Núm.">
                                 </div>
                               </div>
                               <div id="delete_subnet_4"  class="col-sm-1">
@@ -2599,7 +2603,7 @@ input[type="button"]:focus {
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Computadores</label>
-                                  <input type="number" onkeyup="this.value = minmax(this.value, 0, 10000)"  onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" min='0' name="subnet[computers]" id="subnet_computers_5" placeholder="Núm.">
+                                  <input type="number" onkeyup="this.value = minmax(this.value, 1, 10000)"  onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" min='0' name="subnet[computers]" id="subnet_computers_5" placeholder="Núm.">
                                 </div>
                               </div>
                               <div id="delete_subnet_5"  class="col-sm-1">
@@ -2625,7 +2629,7 @@ input[type="button"]:focus {
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Computadores</label>
-                                  <input type="number"  onkeyup="this.value = minmax(this.value, 0, 10000)" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" min='0' name="subnet[computers]" id="subnet_computers_6" placeholder="Núm.">
+                                  <input type="number"  onkeyup="this.value = minmax(this.value, 1, 10000)" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" min='0' name="subnet[computers]" id="subnet_computers_6" placeholder="Núm.">
                                 </div>
                               </div>
                               <div id="delete_subnet_6"  class="col-sm-1">
@@ -2651,7 +2655,7 @@ input[type="button"]:focus {
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Computadores</label>
-                                  <input type="number"  onkeyup="this.value = minmax(this.value, 0, 10000)" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" min='0' name="subnet[computers]" id="subnet_computers_7" placeholder="Núm.">
+                                  <input type="number"  onkeyup="this.value = minmax(this.value, 1, 10000)" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" min='0' name="subnet[computers]" id="subnet_computers_7" placeholder="Núm.">
                                 </div>
                               </div>
                               <div id="delete_subnet_7"  class="col-sm-1">
@@ -2671,13 +2675,13 @@ input[type="button"]:focus {
                               <div class="col-sm-5">
                                   <div class="form-group">
                                       <label>Descripción:</label>
-                                      <textarea class="form-control" onkeyup="this.value = minmax(this.value, 0, 10000)"  name="subnet[description]" id="subnet_description_8" placeholder="Descripción" rows="1"></textarea>
+                                      <textarea class="form-control"   name="subnet[description]" id="subnet_description_8" placeholder="Descripción" rows="1"></textarea>
                                   </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Computadores</label>
-                                  <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" min='0' name="subnet[computers]" id="subnet_computers_8" placeholder="Núm.">
+                                  <input type="number" onkeyup="this.value = minmax(this.value, 1, 10000)" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" min='0' name="subnet[computers]" id="subnet_computers_8" placeholder="Núm.">
                                 </div>
                               </div>
                               <div id="delete_subnet_8"  class="col-sm-1">
@@ -2703,7 +2707,7 @@ input[type="button"]:focus {
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Computadores</label>
-                                  <input type="number"  onkeyup="this.value = minmax(this.value, 0, 10000)" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" min='0' name="subnet[computers]" id="subnet_computers_9" placeholder="Núm.">
+                                  <input type="number"  onkeyup="this.value = minmax(this.value, 1, 10000)" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" min='0' name="subnet[computers]" id="subnet_computers_9" placeholder="Núm.">
                                 </div>
                               </div>
                               <div id="delete_subnet_9"  class="col-sm-1">
@@ -2729,7 +2733,7 @@ input[type="button"]:focus {
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <label>Computadores</label>
-                                  <input type="number" onkeyup="this.value = minmax(this.value, 0, 10000)"  onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" min='0' name="subnet[computers]" id="subnet_computers_10" placeholder="Núm.">
+                                  <input type="number" onkeyup="this.value = minmax(this.value, 1, 10000)"  onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" min='0' name="subnet[computers]" id="subnet_computers_10" placeholder="Núm.">
                                 </div>
                               </div>
                               <div id="delete_subnet_10"  class="col-sm-1">
@@ -2754,8 +2758,8 @@ input[type="button"]:focus {
                   </div>
                   
                   <div class="wizard-footer">
-                  	<div class="pull-right">
-                  	  <br>
+                    <div class="pull-right">
+                      <br>
                           <input type='button' class='btn btn-next btn-fill btn-primary btn-wd' onclick="Example()" id="next" name='next' value='Finalizar' />
                           <input type='button' class='btn btn-next btn-fill btn-primary btn-wd' onclick="nextcomp()" id="next_company" name='' value='Siguiente' />
                           <input type='button' class='btn btn-next btn-fill btn-primary btn-wd' onclick="nextreq()" id="next_request" name='' value='Siguiente' />
@@ -2770,20 +2774,20 @@ input[type="button"]:focus {
 
                       <div class="clearfix"></div>
                   </div>
-		                    
-		                </div>
-		            </div> <!-- wizard container -->
-		        </div>
-	        </div> <!-- row -->
-	    </div> <!--  big container -->
-	    <center><%= link_to "Volver al inicio", home_index_path, :class => "btn btn-default"%></center>
+                        
+                    </div>
+                </div> <!-- wizard container -->
+            </div>
+          </div> <!-- row -->
+      </div> <!--  big container -->
+      <center><%= link_to "Volver al inicio", home_index_path, :class => "btn btn-default"%></center>
 
-	    <div class="footerr">
-	        <div class="container text-center">
-	             LDWS <i class="fa fa-heart heart"></i> 2018
-	        </div>
-	    </div>
-	</div>
+      <div class="footerr">
+          <div class="container text-center">
+               LDWS <i class="fa fa-heart heart"></i> 2018
+          </div>
+      </div>
+  </div>
 
 <form name="all_process" id="all_process" method="POST" action="/process">
     <input type="hidden" name="authenticity_token" value="yK7vDfj0ORZZpNIf2OQp50opDeJmu2OTzw9IBl2Ol2yXw8Fh+uBcMt6p8RdNrN2IORV90w+TuaubmcCKud477g==" />
@@ -3492,6 +3496,7 @@ var Cont_subred=0;
     }
     
     function physicalBtn(){
+        document.getElementById('logical_host1').value = '';
         $('#next').hide();
         $('#next_company').hide();
         $('#next_request').hide();
@@ -3516,8 +3521,63 @@ var Cont_subred=0;
         $('#return_physical').hide;
         $('#return_logical').show();
         $('#return_subnet').hide();
-        document.getElementById("return_physical").style.display = "none";        
+        document.getElementById("return_physical").style.display = "none";  
+        
+        //Validar IP
+        var cantidad_pisos = 0;
+        if (document.getElementById('physical_computers_1').value != "")
+          cantidad_pisos = cantidad_pisos + parseInt(document.getElementById('physical_computers_1').value);
+        if (document.getElementById('physical_computers_2').value != "")
+          cantidad_pisos = cantidad_pisos + parseInt(document.getElementById('physical_computers_2').value);
+        if (document.getElementById('physical_computers_3').value != "")
+          cantidad_pisos = cantidad_pisos + parseInt(document.getElementById('physical_computers_3').value);
+        if (document.getElementById('physical_computers_4').value != "")
+          cantidad_pisos = cantidad_pisos + parseInt(document.getElementById('physical_computers_4').value);        
+        if (document.getElementById('physical_computers_5').value != "")
+          cantidad_pisos = cantidad_pisos + parseInt(document.getElementById('physical_computers_5').value);
+        if (document.getElementById('physical_computers_6').value != "")
+          cantidad_pisos = cantidad_pisos + parseInt(document.getElementById('physical_computers_6').value);        
+        if (document.getElementById('physical_computers_7').value != "")
+          cantidad_pisos = cantidad_pisos + parseInt(document.getElementById('physical_computers_7').value);
+        if (document.getElementById('physical_computers_8').value != "")
+          cantidad_pisos = cantidad_pisos + parseInt(document.getElementById('physical_computers_8').value);        
+        if (document.getElementById('physical_computers_9').value != "")
+          cantidad_pisos = cantidad_pisos + parseInt(document.getElementById('physical_computers_9').value);
+        if (document.getElementById('physical_computers_10').value != "")
+          cantidad_pisos = cantidad_pisos + parseInt(document.getElementById('physical_computers_10').value);       
+    
+        var min = 0;
+        var max = 0;
+        //CLASE C
+        if (cantidad_pisos >= 0 && cantidad_pisos <= 254 ){
+          min = 192;
+          max = 223;
+          document.getElementById('logical_host1').min = '192';
+          document.getElementById('logical_host1').max = '223';
+        }
+        //CLASE B
+        if (cantidad_pisos >= 255 && cantidad_pisos <= 65534 ){
+          min = 128;
+          max = 191;
+          document.getElementById('logical_host1').min = '128';
+          document.getElementById('logical_host1').max = '191';    
+        }
+        //CLASE A
+        if (cantidad_pisos >= 65535 && cantidad_pisos <= 16777214 ){
+          min = 0;
+          max = 127;
+          document.getElementById('logical_host1').min = '0';
+          document.getElementById('logical_host1').max = '127';
+        }
+        
+        document.getElementById("logical_host1").onkeyup = function() {
+          this.value = minmax(this.value, min, max)
+        };
+        document.getElementById("logical_host1").placeholder = min;
+
     }
+    
+  
     
     function subnetBtn(){
         $('#next').show();
@@ -3540,129 +3600,148 @@ var Cont_subred=0;
       var val = 0;
       var msj="";
       if (document.getElementById("company_id").value == "")
-      	val = 1;
+        val = 1;
       if (document.getElementById("company_name").value == "")
       {
         val = 1;
-      	msj+="Nombre - ";
+        msj+="Nombre - ";
       }
       if (document.getElementById("company_nit").value == "")
       {
         val = 1;
         msj+="Nit - ";
       }
-      	
+        
       if (document.getElementById("company_mision").value == "")
-      	{
+        {
         val = 1;
         msj+="Mision - ";
       }
       if (document.getElementById("company_vision").value == "")
-      	{
+        {
         val = 1;
         msj+="Visión - ";
       }
       if (document.getElementById("request_title").value == "")
-      	{
+        {
         val = 1;
         msj+="Titulo - ";
       }
       if (document.getElementById("request_description").value == "")
-      	{
+        {
           val = 1;
           msj+="Descripción - ";
         }
       if (document.getElementById("request_objective").value == "")
-      	{
+        {
           val = 1;
           msj+="Objetivos - ";
         }
       if (document.getElementById("request_observation").value == "")
-      	{
+        {
           val = 1;
           msj+="Observaciones - ";
         }
 
       for (i = 1; i <= Contador; i++) {
         if (document.getElementById("physical_height_"+i).value == "")
-        	{
+          {
             val = 1;
             msj+="Altura piso "+i+" - ";
           }
         if (document.getElementById("physical_width_"+i).value == "")
-        	{
+          {
             val = 1;
             msj+="Ancho piso "+i+" - ";
           }
         if (document.getElementById("physical_large_"+i).value == "")
-        	{
+          {
             val = 1;
             msj+="Largo piso "+i+" - ";
           }
         if (document.getElementById("physical_computers_"+i).value == "")
-        	{
+          {
             val = 1;
             msj+="Num. computadores piso "+i+" - ";
           }
         if (document.getElementById("physical_printers_"+i).value == "")
-        	{
+          {
             val = 1;
             msj+="Num. impresoras piso "+i+" - ";
           }        
       }  
 
       if (document.getElementById("logical_scalability").value == "")
-      	{
+        {
           val = 1;
           msj+="Escalabilidad - ";
         }
       if (document.getElementById("logical_host1").value == "")
-      	{
+        {
           val = 1;
           msj+="Host 1 - ";
         }
       if (document.getElementById("logical_host2").value == "")
-      	{
+        {
           val = 1;
           msj+="Host 2 - ";
         }
       if (document.getElementById("logical_host3").value == "")
-      	{
+        {
           val = 1;
           msj+="Host 3 - ";
         }
       if (document.getElementById("logical_host4").value == "")
-      	{
+        {
           val = 1;
           msj+="Host 4 - ";
         }
 
       for (j = 1; j <= Cont; j++) {
         if (document.getElementById("subnet_name_"+j).value == "")
-        	{
+          {
             val = 1;
             msj+="Nombre sub red "+j+" - ";
           }
         if (document.getElementById("subnet_description_"+j).value == "")
-        	{
+          {
             val = 1;
             msj+="Descripcion sub red "+j+" - ";
           }
         if (document.getElementById("subnet_computers_"+j).value == "")
-        	{
+          {
             val = 1;
             msj+="Computadores sub red "+j+" - ";
           }       
       }  
         
+  
       
       if (val==1)
       {
-        window.alert("Error, por favor llene los siguientes campos: "+msj)
+        window.alert("Error, por favor llene los siguientes campos: "+msj);
       }else
       {
-      
-        
+          msj="";
+         for (i = 1; i <= Contador; i++) {
+          
+          if (parseInt(document.getElementById("physical_width_"+i).value) == 1)
+            {
+              val = 1;
+              msj+=" Ancho piso "+i+" INCORRECTO ";
+              
+            }
+          if (parseInt(document.getElementById("physical_large_"+i).value) == 1)
+            {
+              val = 1;
+              msj+=" - Largo piso "+i+" INCORRECTO ";
+            }
+              
+        }
+        if (val==1)
+        {
+          window.alert(msj);
+        }
       }
       
       return val;
@@ -3693,7 +3772,7 @@ var Cont_subred=0;
           document.getElementById("mi_company").value = document.getElementById("company_id").value
         <%end%>
 
-        document.getElementById("my_company_id").value=document.getElementById("company_id").value 	
+        document.getElementById("my_company_id").value=document.getElementById("company_id").value  
         document.getElementById("name").value=document.getElementById("company_name").value
         document.getElementById("nit").value=document.getElementById("company_nit").value
         document.getElementById("mision").value=document.getElementById("company_mision").value
@@ -3968,63 +4047,63 @@ var Cont_subred=0;
 
         
         if(Cont >= 1 || Cont_subred >= 1){ 
-        	document.getElementById("my_subnet_name_1").value = document.getElementById("subnet_name_1").value  
-        	document.getElementById("my_subnet_description_1").value = document.getElementById("subnet_description_1").value  
-        	document.getElementById("my_subnet_computers_1").value = document.getElementById("subnet_computers_1").value  
+          document.getElementById("my_subnet_name_1").value = document.getElementById("subnet_name_1").value  
+          document.getElementById("my_subnet_description_1").value = document.getElementById("subnet_description_1").value  
+          document.getElementById("my_subnet_computers_1").value = document.getElementById("subnet_computers_1").value  
         }
         
         if(Cont >= 2 || Cont_subred >= 2){ 
-        	document.getElementById("my_subnet_name_2").value = document.getElementById("subnet_name_2").value  
-        	document.getElementById("my_subnet_description_2").value = document.getElementById("subnet_description_2").value  
-        	document.getElementById("my_subnet_computers_2").value = document.getElementById("subnet_computers_2").value 
+          document.getElementById("my_subnet_name_2").value = document.getElementById("subnet_name_2").value  
+          document.getElementById("my_subnet_description_2").value = document.getElementById("subnet_description_2").value  
+          document.getElementById("my_subnet_computers_2").value = document.getElementById("subnet_computers_2").value 
         }
         
         if(Cont >= 3 || Cont_subred >= 3){ 
-        	document.getElementById("my_subnet_name_3").value = document.getElementById("subnet_name_3").value  
-        	document.getElementById("my_subnet_description_3").value = document.getElementById("subnet_description_3").value  
-        	document.getElementById("my_subnet_computers_3").value = document.getElementById("subnet_computers_3").value
+          document.getElementById("my_subnet_name_3").value = document.getElementById("subnet_name_3").value  
+          document.getElementById("my_subnet_description_3").value = document.getElementById("subnet_description_3").value  
+          document.getElementById("my_subnet_computers_3").value = document.getElementById("subnet_computers_3").value
         }
         
         if(Cont >= 4 || Cont_subred >= 4){ 
-        	document.getElementById("my_subnet_name_4").value = document.getElementById("subnet_name_4").value  
-        	document.getElementById("my_subnet_description_4").value = document.getElementById("subnet_description_4").value  
-        	document.getElementById("my_subnet_computers_4").value = document.getElementById("subnet_computers_4").value  
+          document.getElementById("my_subnet_name_4").value = document.getElementById("subnet_name_4").value  
+          document.getElementById("my_subnet_description_4").value = document.getElementById("subnet_description_4").value  
+          document.getElementById("my_subnet_computers_4").value = document.getElementById("subnet_computers_4").value  
         }
         
         if(Cont >= 5 || Cont_subred >= 5){ 
-        	document.getElementById("my_subnet_name_5").value = document.getElementById("subnet_name_5").value  
-        	document.getElementById("my_subnet_description_5").value = document.getElementById("subnet_description_5").value  
-        	document.getElementById("my_subnet_computers_5").value = document.getElementById("subnet_computers_5").value  
+          document.getElementById("my_subnet_name_5").value = document.getElementById("subnet_name_5").value  
+          document.getElementById("my_subnet_description_5").value = document.getElementById("subnet_description_5").value  
+          document.getElementById("my_subnet_computers_5").value = document.getElementById("subnet_computers_5").value  
         }
         
         if(Cont >= 6 || Cont_subred >= 6){ 
-        	document.getElementById("my_subnet_name_6").value = document.getElementById("subnet_name_6").value  
-        	document.getElementById("my_subnet_description_6").value = document.getElementById("subnet_description_6").value  
-        	document.getElementById("my_subnet_computers_6").value = document.getElementById("subnet_computers_6").value  
+          document.getElementById("my_subnet_name_6").value = document.getElementById("subnet_name_6").value  
+          document.getElementById("my_subnet_description_6").value = document.getElementById("subnet_description_6").value  
+          document.getElementById("my_subnet_computers_6").value = document.getElementById("subnet_computers_6").value  
         }
         
         if(Cont >= 7 || Cont_subred >= 7){ 
-        	document.getElementById("my_subnet_name_7").value = document.getElementById("subnet_name_7").value  
-        	document.getElementById("my_subnet_description_7").value = document.getElementById("subnet_description_7").value  
-        	document.getElementById("my_subnet_computers_7").value = document.getElementById("subnet_computers_7").value 
+          document.getElementById("my_subnet_name_7").value = document.getElementById("subnet_name_7").value  
+          document.getElementById("my_subnet_description_7").value = document.getElementById("subnet_description_7").value  
+          document.getElementById("my_subnet_computers_7").value = document.getElementById("subnet_computers_7").value 
         }
         
         if(Cont >= 8 || Cont_subred >= 8){ 
-        	document.getElementById("my_subnet_name_8").value = document.getElementById("subnet_name_8").value  
-        	document.getElementById("my_subnet_description_8").value = document.getElementById("subnet_description_8").value  
-        	document.getElementById("my_subnet_computers_8").value = document.getElementById("subnet_computers_8").value  
+          document.getElementById("my_subnet_name_8").value = document.getElementById("subnet_name_8").value  
+          document.getElementById("my_subnet_description_8").value = document.getElementById("subnet_description_8").value  
+          document.getElementById("my_subnet_computers_8").value = document.getElementById("subnet_computers_8").value  
         }
         
         if(Cont >= 9 || Cont_subred >= 9){ 
-        	document.getElementById("my_subnet_name_9").value = document.getElementById("subnet_name_9").value  
-        	document.getElementById("my_subnet_description_9").value = document.getElementById("subnet_description_9").value  
-        	document.getElementById("my_subnet_computers_9").value = document.getElementById("subnet_computers_9").value  
+          document.getElementById("my_subnet_name_9").value = document.getElementById("subnet_name_9").value  
+          document.getElementById("my_subnet_description_9").value = document.getElementById("subnet_description_9").value  
+          document.getElementById("my_subnet_computers_9").value = document.getElementById("subnet_computers_9").value  
         }
         
         if(Cont >= 10 || Cont_subred >= 10){ 
-        	document.getElementById("my_subnet_name_10").value = document.getElementById("subnet_name_10").value  
-        	document.getElementById("my_subnet_description_10").value = document.getElementById("subnet_description_10").value  
-        	document.getElementById("my_subnet_computers_10").value = document.getElementById("subnet_computers_10").value
+          document.getElementById("my_subnet_name_10").value = document.getElementById("subnet_name_10").value  
+          document.getElementById("my_subnet_description_10").value = document.getElementById("subnet_description_10").value  
+          document.getElementById("my_subnet_computers_10").value = document.getElementById("subnet_computers_10").value
         }        
         
         

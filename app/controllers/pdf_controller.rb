@@ -678,7 +678,7 @@ class PdfController < ApplicationController
         @cable+=2*physical.height+physical.width+physical.large+4
       end
     cont=0
-    
+    @cable = @cable +(0.5+(physical.height*2)+2) 
      i = 0 
      while i < physical.large 
          j = 0 

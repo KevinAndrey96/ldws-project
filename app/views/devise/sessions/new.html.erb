@@ -50,6 +50,13 @@ bootstrap.min.css:8
   <div class="col-md-10">
     <h2>Iniciar Sesión</h2>
   </div>
+  <% if notice %>
+    <p class="alert alert-success pull-center"><%= notice %></p>
+  <% end %>
+  <% if alert %>
+    <p class="alert alert-danger pull-center">Email o contraseña invalidos</p>
+  <% end %>
+    
 </div>
   <div class="field">
     <h3>Correo electrónico</h3>

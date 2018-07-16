@@ -58,7 +58,11 @@
                   <% if j == 0 %>
                     <% if i == 0%>
                       <td><center><img class="img-responsive" height="30" src="https://mymsystech.com.co/440-medium_default/rack-3bumen-r2c-9u.jpg"></center></td>
-                    <% else %>
+                    <% end %>
+                    <% if i == 1 %>
+                      <td><center><img class="img-responsive" height="30" src="https://images-na.ssl-images-amazon.com/images/I/51bH915cPaL._SY355_.jpg"></center></td>
+                    <% end %>                   
+                    <% if i != 0 && i != 1 %>
                       <td><center><img class="img-responsive" height="30" src="http://www.construmatica.com/construpedia/images/thumb/5/58/Baldosas_by_Patrick_Hoesly.jpg/300px-Baldosas_by_Patrick_Hoesly.jpg"></center></td>
                     <% end %>
                   <% else %>
@@ -119,9 +123,12 @@
                 <% if j == 0 %>
                   <% if i == 0%>
                     <td><center><img class="img-responsive" height="30" src="https://mymsystech.com.co/440-medium_default/rack-3bumen-r2c-9u.jpg"></center></td>
-                  <% else %>
+                  <% end %>
+                  <% if i == 1 %>
+                    <td><center><img class="img-responsive" height="30" src="https://images-na.ssl-images-amazon.com/images/I/51bH915cPaL._SY355_.jpg"></center></td>
+                  <% end %>                   
+                  <% if i != 0 && i != 1 %>
                     <td><center><img class="img-responsive" height="30" src="http://www.construmatica.com/construpedia/images/thumb/5/58/Baldosas_by_Patrick_Hoesly.jpg/300px-Baldosas_by_Patrick_Hoesly.jpg"></center></td>
-                    
                   <% end %>
                 <% else %>
                   <% if i%2 == 0 %>
@@ -238,9 +245,10 @@
         <br>
         <%@computers_area = physical.computers+(physical.computers*@logical.scalability/100) %>
         <%@meters = physical.width*physical.large # metros cuadrados de la sala %>
-          <%@avalaible_area = @meters-physical.width # espacio disponible para pcs %>
+        <%@avalaible_area = @meters-physical.width # espacio disponible para pcs %>
         <%@computers_number = @avalaible_area-((physical.large/2)*(physical.width-1))%>
 
+        <%@cable = @cable+(0.5+(physical.height*2)+2) %> <!--Suma cable AP-->
         <strong>Alto: </strong> <%=physical.height %> m<br>
         <strong>Cantidad de cable: </strong> <%=@cable %>m<br>
         <strong>Area total de piso: </strong> <%=@meters %>m²<br>
