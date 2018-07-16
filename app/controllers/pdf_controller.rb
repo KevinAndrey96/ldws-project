@@ -216,8 +216,9 @@ class PdfController < ApplicationController
       @company=Company.find(@request.company_id)
       @physical=Physical.where(:request_id => @request.id)
       @logical=Logical.where(:request_id => @request.id)
+      
     end
-    
+    @Logical=Logical.where(:request_id => @request.id).first
     #totalcomputers=@physical.sum(:computers)
     @Sw_status = 1
     @total_of_computers = @physical.sum(:computers)
