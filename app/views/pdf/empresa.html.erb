@@ -121,17 +121,28 @@
           %>
             <!--<td><%=cont-(cont*0.2).ceil%></td>-->
             
-            <%if @logical.redundancy? %>
-              <td><%=cont*2-1%></td>
-            <%else%>
+            
               <td><%=cont-1%></td>
-            <%end%>
+            
             </tr>
           <%end%>
           
             <tr>
               <td>Switches de distribución</td>
-              <td>1</td>
+              <%if @logical.redundancy? %>
+                <td>2</td>
+              <%else%>
+                <td>1</td>
+              <%end%>
+              
+            </tr>
+            <tr>
+              <td>Switches de core</td>
+              <%if @logical.redundancy? %>
+                <td>2</td>
+              <%else%>
+                <td>1</td>
+              <%end%>
             </tr>
             <tr>
               <td>Puntos de acceso inalambrico</td>

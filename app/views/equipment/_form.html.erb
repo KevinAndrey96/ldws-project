@@ -64,6 +64,8 @@ bootstrap.min.css:8
       <option value="Cable">Cable</option>
       <option value="Canaleta">Canaleta</option>
       <option value="Toma">Toma</option>
+      <option value="Conector">Conector</option>
+      <option value="AP">AP</option>
     </select>
   </div>
   <div class="field">
@@ -206,6 +208,38 @@ bootstrap.min.css:8
           
           document.getElementById("equipment_power1").innerHTML="Calidad";
       }break;
+      case "Conector":
+      {
+          document.getElementById("equipment_brand").style.display="inline-block";
+          document.getElementById("equipment_reference").style.display="inline-block";
+          document.getElementById("equipment_price").style.display="inline-block";
+          document.getElementById("equipment_ports").style.display="none";
+          document.getElementById("equipment_slots").style.display="none";
+          
+          document.getElementById("equipment_brand1").style.display="inline-block";
+          document.getElementById("equipment_reference1").style.display="inline-block";
+          document.getElementById("equipment_price1").style.display="inline-block";
+          document.getElementById("equipment_ports1").style.display="none";
+          document.getElementById("equipment_slots1").style.display="none";
+          
+          document.getElementById("equipment_power1").innerHTML="Calidad";
+      }break;
+      case "AP":
+        {
+          document.getElementById("equipment_brand").style.display="inline-block";
+          document.getElementById("equipment_reference").style.display="inline-block";
+          document.getElementById("equipment_price").style.display="inline-block";
+          document.getElementById("equipment_ports").style.display="none";
+          document.getElementById("equipment_slots").style.display="none";
+          
+          document.getElementById("equipment_brand1").style.display="inline-block";
+          document.getElementById("equipment_reference1").style.display="inline-block";
+          document.getElementById("equipment_price1").style.display="inline-block";
+          document.getElementById("equipment_ports1").style.display="none";
+          document.getElementById("equipment_slots1").style.display="none";
+          
+          document.getElementById("equipment_power1").innerHTML="Potencia";
+        }break;
     }
     
   }

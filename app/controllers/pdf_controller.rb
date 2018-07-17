@@ -225,7 +225,6 @@ class PdfController < ApplicationController
     
     #Potencias
     @eco=0
-    
     @opt=0
     
     #Verificamos existencias
@@ -274,7 +273,6 @@ class PdfController < ApplicationController
     @Ra_status = 1
     
     @eco_ra=0
-    @opt_ra=0
     
     @eq_ra=Equipment.where(:etype => "Rack", :power => 1).count
     if @eq_ra == 0
@@ -366,7 +364,7 @@ class PdfController < ApplicationController
       @eco_can=1
     end
     
-    #Código de Canaleta
+    #Código de Tomas
     @T_status = 1
     
     @eco_t=0
@@ -389,6 +387,51 @@ class PdfController < ApplicationController
       @eco_t=1
     end
     
+    
+    #Código de Conectores
+    @Co_status = 1
+    
+    @eco_con=0
+    
+    @eq_co=Equipment.where(:etype => "Conector", :power => 1).count
+    if @eq_co == 0
+      @eq_co=Equipment.where(:etype => "Conector", :power => 2).count
+      if @eq_co == 0
+        @eq_co=Equipment.where(:etype => "Conector", :power => 3).count  
+        if @eq_co == 0
+          @Co_status=0
+        else
+          @eco_con=3
+        end
+      else
+        @eco_con=2
+      end
+    else
+      @eco_con=1
+    end
+    
+    #Código de AP
+    @Ap_status = 1
+    
+    @eco_ap=0
+    @opt_ap=0
+    
+    @eq_ap=Equipment.where(:etype => "AP", :power => 1).count
+    if @eq_ap == 0
+      @eq_ap=Equipment.where(:etype => "AP", :power => 2).count
+      if @eq_ap == 0
+        @eq_ap=Equipment.where(:etype => "AP", :power => 3).count  
+        if @eq_ap == 0
+          @Ap_status=0
+        else
+          @eco_ap=3
+        end
+      else
+        @eco_ap=2
+      end
+    else
+      @eco_ap=1
+    end
     
     
     #Estandar
@@ -563,6 +606,50 @@ class PdfController < ApplicationController
       @est_t=2
     end
     
+    #Código de Conectores
+    @Co_status = 1
+    
+    @eco_co=0
+    @opt_co=0
+    
+    @eq_co=Equipment.where(:etype => "Conector", :power => 2).count
+    if @eq_co == 0
+      @eq_co=Equipment.where(:etype => "Conector", :power => 3).count
+      if @eq_co == 0
+        @eq_co=Equipment.where(:etype => "Conector", :power => 1).count  
+        if @eq_co == 0
+          @Co_status=0
+        else
+          @est_co=1
+        end
+      else
+        @est_co=3
+      end
+    else
+      @est_co=2
+    end
+    
+    #Código de AP
+    @Ap_status = 1
+    
+    @opt_ap=0
+    
+    @eq_ap=Equipment.where(:etype => "AP", :power => 2).count
+    if @eq_ap == 0
+      @eq_ap=Equipment.where(:etype => "AP", :power => 3).count
+      if @eq_ap == 0
+        @eq_ap=Equipment.where(:etype => "AP", :power => 1).count  
+        if @eq_ap == 0
+          @Ap_status=0
+        else
+          @est_ap=1
+        end
+      else
+        @est_ap=3
+      end
+    else
+      @est_ap=2
+    end
     
     
     
@@ -753,6 +840,50 @@ class PdfController < ApplicationController
     end
     
     
+    #Código de Conectores
+    @Co_status = 1
+    
+    @eco_co=0
+    @opt_co=0
+    
+    @eq_co=Equipment.where(:etype => "Conector", :power => 3).count
+    if @eq_co == 0
+      @eq_co=Equipment.where(:etype => "Conector", :power => 2).count
+      if @eq_co == 0
+        @eq_co=Equipment.where(:etype => "Conector", :power => 1).count  
+        if @eq_co == 0
+          @Co_status=0
+        else
+          @opt_co=1
+        end
+      else
+        @opt_co=2
+      end
+    else
+      @opt_co=3
+    end
+    
+    #Código de AP
+    @Ap_status = 1
+    
+    @opt_ap=0
+    
+    @eq_ap=Equipment.where(:etype => "AP", :power => 3).count
+    if @eq_ap == 0
+      @eq_ap=Equipment.where(:etype => "AP", :power =>2).count
+      if @eq_ap == 0
+        @eq_ap=Equipment.where(:etype => "AP", :power => 1).count  
+        if @eq_ap == 0
+          @Ap_status=0
+        else
+          @opt_ap=1
+        end
+      else
+        @opt_ap=2
+      end
+    else
+      @opt_ap=3
+    end
     
     
     
