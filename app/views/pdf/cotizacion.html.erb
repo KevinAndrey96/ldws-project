@@ -47,6 +47,7 @@ table, tr, td, th, tbody, thead, tfoot {
           <%else%>
           <% 
           totalcomputers=@total_of_computers
+          auxiliar=0
           
           while totalcomputers>0  do
             #@Myeq=Equipment.where('ports < ?',totalcomputers).order(:ports).last
@@ -89,6 +90,10 @@ table, tr, td, th, tbody, thead, tfoot {
                 cont=cont*2
               end
               cont+=1
+              auxiliar+=1
+              if auxiliar==1
+                switchesconta=cont
+              end
               %>
               <td><div class="avoid"><%=cont%> u</div></td>
               <td><div class="avoid"><%=@Myeq.price%></div></td>
@@ -101,7 +106,7 @@ table, tr, td, th, tbody, thead, tfoot {
           %>
             
           <%end%>
-          <% switchesconta=cont%>
+          
         </tr>
         <!-- Routers -->
         <tr>
