@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180607020107) do
+ActiveRecord::Schema.define(version: 20180802051902) do
 
   create_table "binnacles", force: :cascade do |t|
     t.integer  "user_id"
@@ -25,12 +25,23 @@ ActiveRecord::Schema.define(version: 20180607020107) do
   add_index "binnacles", ["company_id"], name: "index_binnacles_on_company_id"
   add_index "binnacles", ["user_id"], name: "index_binnacles_on_user_id"
 
+  create_table "buildings", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "distance"
+    t.integer  "request_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "buildings", ["request_id"], name: "index_buildings_on_request_id"
+
   create_table "companies", force: :cascade do |t|
     t.string   "name"
     t.integer  "user_id"
     t.integer  "nit"
-    t.string   "mision"
-    t.string   "vision"
+    t.string   "cell"
+    t.string   "phone"
+    t.string   "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -59,6 +70,7 @@ ActiveRecord::Schema.define(version: 20180607020107) do
     t.integer  "scalability"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.boolean  "security"
   end
 
   add_index "logicals", ["request_id"], name: "index_logicals_on_request_id"
@@ -73,8 +85,10 @@ ActiveRecord::Schema.define(version: 20180607020107) do
     t.boolean  "conference_hall"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.integer  "building_id"
   end
 
+  add_index "physicals", ["building_id"], name: "index_physicals_on_building_id"
   add_index "physicals", ["request_id"], name: "index_physicals_on_request_id"
 
   create_table "requests", force: :cascade do |t|

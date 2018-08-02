@@ -4,6 +4,7 @@
 #
 #  id              :integer          not null, primary key
 #  request_id      :integer
+#  building_id     :integer
 #  height          :integer
 #  width           :integer
 #  large           :integer
@@ -15,7 +16,8 @@
 #
 # Indexes
 #
-#  index_physicals_on_request_id  (request_id)
+#  index_physicals_on_building_id  (building_id)
+#  index_physicals_on_request_id   (request_id)
 #
 
 require 'test_helper'

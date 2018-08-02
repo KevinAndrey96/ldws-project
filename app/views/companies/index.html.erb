@@ -157,9 +157,10 @@
           <th>Nombre</th>
           <!--<th>User</th>-->
           <th>Nit</th>
-          <th>Misión</th>
-          <th>Visión</th>
-          <th colspan="3"></th>
+          <th>Celular</th>
+          <th>Teléfono</th>
+          <th>Email</th>
+          <th colspan="1"></th>
         </tr>
       </thead>
     
@@ -169,8 +170,9 @@
             <td><%= company.name %></td>
             <!--<td><%= company.user %></td>-->
             <td><%= company.nit %></td>
-            <td><%= company.mision %></td>
-            <td><%= company.vision %></td>
+            <td><%= company.cell %></td>
+            <td><%= company.phone %></td>
+            <td><%= company.email %></td>
             <td><center><%= link_to 'Ver Solicitudes',  requests_path( :id => company.id) %></center></td>
             <!--<td><center><%= link_to 'Ver Solicitudes',  process_index_path(:new => "false", :id => company.id) %></center></td>-->
             <!--<td><%= link_to 'Reporte', company_path(:id => company.id,:format => "pdf") %></td>

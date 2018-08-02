@@ -18,7 +18,7 @@ class ProcessController < ApplicationController
   def create
     
     if params[:otra_solicitud] == "false"
-      @one=Company.create(:id => params[:my_company_id], :name => params[:name], :user_id => current_user.id, :nit =>  params[:nit], :mision =>  params[:mision], :vision =>  params[:vision])
+      @one=Company.create(:id => params[:my_company_id], :name => params[:name], :user_id => current_user.id, :nit =>  params[:nit], :cell =>  params[:cell], :phone =>  params[:phone], :email =>  params[:email])
       @one.save
       
       @two=Request.create(:id => params[:my_request_id], :title => params[:my_request_title], :company_id => params[:my_company_id] , :description =>  params[:my_request_description],
@@ -26,6 +26,51 @@ class ProcessController < ApplicationController
       :aplications =>  params[:my_request_aplications], :proxy =>  params[:my_request_proxy], :voip =>  params[:my_request_voip], :video_conference =>  params[:my_request_video_conference], 
       :active_dir =>  params[:my_request_active_dir], :dhcp =>  params[:my_request_dhcp], :dns =>  params[:my_request_dns], :ftp =>  params[:my_request_ftp], :email =>  params[:my_request_email])
       @two.save
+      
+      if params[:building_1]=="true"
+        @six=Building.create(:id => params[:building_id_1], :name => params[:building_name_1], :distance => params[:building_distance_1], :request_id => params[:my_request_id])
+        @six.save
+      end
+      if params[:building_2]=="true"
+        @six=Building.create(:id => params[:building_id_2], :name => params[:building_name_2], :distance => params[:building_distance_2], :request_id => params[:my_request_id])
+        @six.save
+      end
+      if params[:building_3]=="true"
+        @six=Building.create(:id => params[:building_id_3], :name => params[:building_name_3], :distance => params[:building_distance_3], :request_id => params[:my_request_id])
+        @six.save
+      end
+      if params[:building_4]=="true"
+        @six=Building.create(:id => params[:building_id_4], :name => params[:building_name_4], :distance => params[:building_distance_4], :request_id => params[:my_request_id])
+        @six.save
+      end
+      if params[:building_5]=="true"
+        @six=Building.create(:id => params[:building_id_5], :name => params[:building_name_5], :distance => params[:building_distance_5], :request_id => params[:my_request_id])
+        @six.save
+      end
+      if params[:building_6]=="true"
+        @six=Building.create(:id => params[:building_id_6], :name => params[:building_name_6], :distance => params[:building_distance_6], :request_id => params[:my_request_id])
+        @six.save
+      end
+      if params[:building_7]=="true"
+        @six=Building.create(:id => params[:building_id_7], :name => params[:building_name_7], :distance => params[:building_distance_7], :request_id => params[:my_request_id])
+        @six.save
+      end
+      if params[:building_8]=="true"
+        @six=Building.create(:id => params[:building_id_8], :name => params[:building_name_8], :distance => params[:building_distance_8], :request_id => params[:my_request_id])
+        @six.save
+      end
+      if params[:building_9]=="true"
+        @six=Building.create(:id => params[:building_id_9], :name => params[:building_name_9], :distance => params[:building_distance_9], :request_id => params[:my_request_id])
+        @six.save
+      end
+      if params[:building_10]=="true"
+        @six=Building.create(:id => params[:building_id_10], :name => params[:building_name_10], :distance => params[:building_distance_10], :request_id => params[:my_request_id])
+        @six.save
+      end
+      
+      
+      
+      
       
       if params[:fisico_1]=="true"
         @three=Physical.create(:request_id => params[:my_request_id], :height => params[:my_physical_height_1], :width => params[:my_physical_width_1],:large => params[:my_physical_large_1],      :computers => params[:my_physical_computers_1], :printers => params[:my_physical_printers_1], :conference_hall => params[:my_physical_conference_hall_1])
@@ -69,7 +114,7 @@ class ProcessController < ApplicationController
       end
       
       @four=Logical.create(:id => params[:my_logical_id], :request_id => params[:my_request_id], :host1 => params[:my_logical_host1], :host2 => params[:my_logical_host2], :host3 => params[:my_logical_host3], :host4 => params[:my_logical_host4],
-      :redundancy => params[:my_logical_redundancy], :scalability => params[:my_logical_scalability])
+      :redundancy => params[:my_logical_redundancy], :scalability => params[:my_logical_scalability], :security => params[:my_logical_security])
       
       if params[:subnet_1]=="true"
         @five=Subnet.create(:name => params[:my_subnet_name_1], :description => params[:my_subnet_description_1], :computers => params[:my_subnet_computers_1], :logical_id => params[:my_logical_id])
@@ -167,7 +212,7 @@ class ProcessController < ApplicationController
       end
       
       @four=Logical.create(:id => params[:my_logical_id], :request_id => params[:my_request_id], :host1 => params[:my_logical_host1], :host2 => params[:my_logical_host2], :host3 => params[:my_logical_host3], :host4 => params[:my_logical_host4],
-      :redundancy => params[:my_logical_redundancy], :scalability => params[:my_logical_scalability])
+      :redundancy => params[:my_logical_redundancy], :scalability => params[:my_logical_scalability], :security => params[:my_logical_security])
       
       if params[:subnet_1]=="true"
         @five=Subnet.create(:name => params[:my_subnet_name_1], :description => params[:my_subnet_description_1], :computers => params[:my_subnet_computers_1], :logical_id => params[:my_logical_id])
@@ -266,7 +311,7 @@ class ProcessController < ApplicationController
       end
       
       @four=Logical.update(params[:mi_logical], :id => params[:my_logical_id], :request_id => params[:my_request_id], :host1 => params[:my_logical_host1], :host2 => params[:my_logical_host2], :host3 => params[:my_logical_host3], :host4 => params[:my_logical_host4],
-      :redundancy => params[:my_logical_redundancy], :scalability => params[:my_logical_scalability])
+      :redundancy => params[:my_logical_redundancy], :scalability => params[:my_logical_scalability], :security => params[:my_logical_security])
       
       Subnet.where(:logical_id => params[:mi_company]).destroy_all
       
@@ -325,11 +370,13 @@ private
     # Never trust parameters from the scary internet, only allow the white list through.
     def process_params
       params.permit(
-       :my_company_id, :name, :nit, :mision, :vision,
+       :my_company_id, :name, :nit, :cell, :phone, :email,
         
        :my_request_id, :my_request_title, :my_request_description, :my_request_objective, :my_request_observation, :my_request_web,
        :my_request_bd, :my_request_aplications, :my_request_proxy, :my_request_voip, :my_request_video_conference, :my_request_active_dir, :my_request_dhcp, :my_request_dns, :my_request_ftp,
        :my_request_email,
+       
+       :building_1, :building_id_1, :building_name_1, :building_distance_1,
        
        #request_id: 3, height: 4, width: 3, large: 10, computers: 120, printers: 5, conference_hall: false,
        :fisico_1, :my_physical_height_1, :my_physical_width_1, :my_physical_large_1, :my_physical_computers_1, :my_physical_printers_1, :my_physical_conference_hall_1,
@@ -343,7 +390,7 @@ private
        :fisico_9, :my_physical_height_9, :my_physical_width_9, :my_physical_large_9, :my_physical_computers_9, :my_physical_printers_9, :my_physical_conference_hall_9,
        :fisico_10, :my_physical_height_10, :my_physical_width_10, :my_physical_large_10, :my_physical_computers_10, :my_physical_printers_10, :my_physical_conference_hall_10,
        
-       :my_logical_id, :my_logical_host1, :my_logical_host2, :my_logical_host3, :my_logical_host4, :my_logical_redundancy, :my_logical_scalability,
+       :my_logical_id, :my_logical_host1, :my_logical_host2, :my_logical_host3, :my_logical_host4, :my_logical_redundancy, :my_logical_scalability, :my_logical_security,
        
        :subnet_1, :my_subnet_name_1, :my_subnet_description_1, :my_subnet_computers_1,
        :subnet_2, :my_subnet_name_2, :my_subnet_description_2, :my_subnet_computers_2,
@@ -363,6 +410,7 @@ private
        
        :mi_logical, :mi_company
        )
+       #Physical.create(:request_id => 1, :height => 12, :width => 13,:large => 15, :computers => 200, :printers => 5, :conference_hall => true, building_id => 1)
     end
 end
 

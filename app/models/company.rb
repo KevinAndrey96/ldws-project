@@ -6,8 +6,9 @@
 #  name       :string
 #  user_id    :integer
 #  nit        :integer
-#  mision     :string
-#  vision     :string
+#  cell       :string
+#  phone      :string
+#  email      :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #

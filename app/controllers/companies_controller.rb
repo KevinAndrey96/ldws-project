@@ -82,6 +82,6 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def company_params
-      params.require(:company).permit(:name, :user_id, :nit, :mision, :vision)
+      params.require(:company).permit(:name, :user_id, :nit, :cell, :phone, :email)
     end
 end

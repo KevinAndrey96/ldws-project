@@ -4,8 +4,9 @@ class CreateCompanies < ActiveRecord::Migration
       t.string :name
       t.references :user, index: true, foreign_key: true
       t.integer :nit
-      t.string :mision
-      t.string :vision
+      t.string :cell
+      t.string :phone
+      t.string :email
 
       t.timestamps null: false
     end

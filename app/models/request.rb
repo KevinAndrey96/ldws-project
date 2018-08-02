@@ -31,4 +31,5 @@ class Request < ActiveRecord::Base
   belongs_to :company
   has_one :logical
   has_many :physical
+  has_many :buildings
 end

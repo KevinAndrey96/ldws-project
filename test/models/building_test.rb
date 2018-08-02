@@ -1,25 +1,22 @@
 # == Schema Information
 #
-# Table name: companies
+# Table name: buildings
 #
 #  id         :integer          not null, primary key
 #  name       :string
-#  user_id    :integer
-#  nit        :integer
-#  cell       :string
-#  phone      :string
-#  email      :string
+#  distance   :integer
+#  request_id :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 # Indexes
 #
-#  index_companies_on_user_id  (user_id)
+#  index_buildings_on_request_id  (request_id)
 #
 
 require 'test_helper'
 
-class CompanyTest < ActiveSupport::TestCase
+class BuildingTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

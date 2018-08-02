@@ -891,9 +891,13 @@ class PdfController < ApplicationController
     
     render  :pdf => "Reporte", :template => 'pdf/cotizacion.html.erb'
   end
+  def red
+    render  :pdf => "Reporte", :template => 'pdf/red.html.erb'
+  end
   def final
     render  :pdf => "Reporte", :template => 'pdf/final.html.erb'
   end
+  
   
   
 end

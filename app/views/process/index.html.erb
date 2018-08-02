@@ -1413,20 +1413,20 @@ input[type="button"]:focus {
                         Fisico
                       </a>
                     </li>
-                    <li onclick="logicalBtn()" id=logic_list>
+                    <!--<li onclick="logicalBtn()" id=logic_list>
                       <a id="logiico" href="#logic" onclick="logicalBtn()" data-toggle="tab">
                         <div onclick="logicalBtn()" class="icon-circle">
                           <i class="ti-signal"></i>
                         </div>
                         Logico
                       </a>
-                    </li>
+                    </li>-->
                     <li onclick="subnetBtn()" id="subred_list">
                       <a id="subredd" href="#subred" onclick="subnetBtn()" data-toggle="tab">
                         <div onclick="subnetBtn()" class="icon-circle">
                           <i class="ti-rss-alt"></i>
                         </div>
-                        Subredes
+                        Grupos de trabajo
                       </a>
                     </li>
                   </ul>
@@ -1474,27 +1474,55 @@ input[type="button"]:focus {
                                 
                             </div>
                         </div>
+                        <div class="col-sm-12">
+                            <h5 class="info-text">Ingresa datos de contacto</h5>
+                        </div>
                         <div class="col-sm-5 col-sm-offset-1">
                             <div class="form-group">
-                                <label>Visión:</label>
+                                <label>Número de Celular:</label>
                                 <%if params[:new]=="false" || params[:edit]=="true"%>
-                                  <textarea  style="resize: both;" readonly class="form-control" name="company[vision]" id="company_vision" placeholder="Visión" rows="2" ><%=@company.vision%></textarea>
+                                  <input readonly min="0"  maxlength="9" max="999999999" type="number" onkeydown="Cel()" class="form-control" name="company[cell]" id="company_cell"  placeholder="Número de celular" value="<%=@company.cell%>">
                                 <%else%>
-                                  <textarea  style="resize: both;" class="form-control" name="company[vision]" id="company_vision" placeholder="Visión" rows="2"></textarea>
+                                  <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true; "  onKeyPress="if(this.value.length==9) return false;" min="0" max="999999999"  class="form-control" name="company[cell]" id="company_cell"  placeholder="Número de celular">
                                 <%end%>
-                            </div>
+                                
+                                <script>
+                                  function Cel(x)
+                                  {
+                                    if(x.value.length==11) return false;
+                                    //javascript: return event.keyCode == 69 ? false : true; 
+                                  }
+                                </script>
+                            </div>    
                         </div>
                         <div class="col-sm-5">
                             <div class="form-group">
-                                <label>Misión:</label>
+                                <label>Email:</label>
                                 <%if params[:new]=="false" || params[:edit]=="true"%>
-                                  <textarea style="resize: both;" readonly class="form-control" name="company[mision]" id="company_mision" placeholder="Misión" rows="2" ><%=@company.mision%></textarea>
+                                  <input readonly type="text" class="form-control" name="company[email]" id="company_email" placeholder="Email" required value="<%=@company.email%>">
                                 <%else%>
-                                  <textarea style="resize: both;" class="form-control" name="company[mision]" id="company_mision" placeholder="Misión" rows="2"></textarea>
+                                  <input type="text" class="form-control" name="company[email]" id="company_email" placeholder="Email" value="">
                                 <%end%>
-                                
                             </div>
                         </div>
+                        <div class="col-sm-5 col-sm-offset-1">
+                            <div class="form-group">
+                                <label>Teléfono fijo:</label>
+                                <%if params[:new]=="false" || params[:edit]=="true"%>
+                                  <input readonly min="0"  maxlength="9" max="999999999" type="number" onkeydown="Tel()" class="form-control" name="company[phone]" id="company_phone"  placeholder="Teléfono fijo" value="<%=@company.phone%>">
+                                <%else%>
+                                  <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true; "  onKeyPress="if(this.value.length==9) return false;" min="0" max="999999999"  class="form-control" name="company[phone]" id="company_phone"  placeholder="Telefono fijo">
+                                <%end%>
+                                
+                                <script>
+                                  function Tel(x)
+                                  {
+                                    if(x.value.length==7) return false;
+                                    //javascript: return event.keyCode == 69 ? false : true; 
+                                  }
+                                </script>
+                            </div>    
+                        </div>                        
                       </form>
                     </div>
                   </div>
@@ -1526,22 +1554,54 @@ input[type="button"]:focus {
                       </div>
                       <div class="col-sm-11 col-sm-offset-1">
                         <div class="form-group">
-                          <label>Objetivos:</label>
+                          <label>Alcance:</label>
                           <%if params[:edit]=="true"%>
-                            <textarea class="form-control" name="request[objective]" id="request_objective" placeholder="Objetivos" rows="2"><%=@request.objective%></textarea>                           
+                            <textarea class="form-control" name="request[objective]" id="request_objective" placeholder="Alcance" rows="2"><%=@request.objective%></textarea>                           
                           <%else%>
-                            <textarea class="form-control" name="request[objective]" id="request_objective" placeholder="Objetivos" rows="2"></textarea>
+                            <textarea class="form-control" name="request[objective]" id="request_objective" placeholder="Alcance" rows="2"></textarea>
                           <%end%>
                         </div>
                       </div>
                       <div class="col-sm-11 col-sm-offset-1">
+                        <label>Observaciones:</label>
+                      </div>
+                      <div class="col-sm-11 col-sm-offset-1">
                         <div class="form-group">
-                          <label>Observaciones:</label>
+                          
                           <%if params[:edit]=="true"%>
                             <textarea class="form-control" name="request[observation]" id="request_observation" placeholder="Observaciones" rows="2"><%=@request.observation%></textarea>                           
                           <%else%>
                             <textarea class="form-control" name="request[observation]" id="request_observation" placeholder="Observaciones" rows="2"></textarea>
                           <%end%>
+                          <div class="col-sm-3">
+                            <div class="form-group"><br>
+                                <%if params[:edit]=="true" && @logical.security? %>
+                                  <label><input type="checkbox" class="" value="" name="logical[security]" id="logical_security" checked>Seguridad</label>
+                                <%else%>
+                                  <label><input type="checkbox" class="" value="" name="logical[security]" id="logical_security">Seguridad</label>
+                                <%end%>  
+                            </div>
+                          </div>
+
+                          <div class="col-sm-3">
+                            <div class="form-group"><br>
+                                <%if params[:edit]=="true" && @logical.redundancy? %>
+                                  <label><input type="checkbox" class="" value="" name="logical[redundancy]" id="logical_redundancy" checked>Redundancia de red</label>
+                                <%else%>
+                                  <label><input type="checkbox" class="" value="" name="logical[redundancy]" id="logical_redundancy">Redundancia de red</label>
+                                <%end%>  
+                            </div>
+                          </div>
+                          
+                          <div class="col-sm-3">
+                            <div class="form-group"><br>
+                                <%if params[:edit]=="true" && @logical.scalability? %>
+                                  <label><input type="checkbox" class="" value="" name="logical[scalability]" id="logical_scalability" checked>Escalabilidad</label>
+                                <%else%>
+                                  <label><input type="checkbox" class="" value="" name="logical[scalability]" id="logical_scalability">Escalabilidad</label>
+                                <%end%>  
+                            </div>
+                          </div>
                         </div>
                       </div>
                       <div class="row">
@@ -1680,6 +1740,38 @@ input[type="button"]:focus {
                         <form class="new_physical" id="new_physical" action="/physicals" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="IzY7J79R7+biHkr48VGY7jRRUVSJrAUDi9hvSFHURoV8WxVLvUWKwmUTafBkGWyBR20hZeCE3zvfTufEtYTqBw==" />
                           <input type="hidden" name="request[id]" id="request_id_physical" value="">
                           <input type="hidden" name="physicals[id]" id="physicals_id" value="">
+
+                          <div class="col-sm-11 ">
+                            <div class="form-group">
+                              <label>Tipo de construcción:</label>
+                              <select class="form-control">
+                                <option value="Enterprise">Enterprise</option>
+                                <option value="Campus">Campus</option>
+                              </select>
+                            </div>
+                          </div>                          
+                          <div class="col-sm-6 ">
+                            <div class="form-group">
+                              <label>Edificio:</label>
+                              <input type="hidden" name="building[id]" id="my_building_id_1" value="">
+                              <%if params[:edit]=="true"%>
+                                <input type="text" class="form-control" name="building[name]" id="my_building_name_1" placeholder="Nombre" value="<%=%>">                           
+                              <%else%>
+                                <input type="text" class="form-control" name="building[name]" id="my_building_name_1" placeholder="Nombre">
+                              <%end%>
+                            </div>
+                          </div>    
+                          <div class="col-sm-5 ">
+                            <div class="form-group">
+                              <label>Distancia:</label>
+                              <input type="hidden" name="building[distance]" id="building_distance" value="">
+                              <%if params[:edit]=="true"%>
+                                <input type="number" class="form-control" name="building[distance]" id="my_building_distance_1" placeholder="Distancia" value="<%=%>">                           
+                              <%else%>
+                                <input type="number" class="form-control" name="building[distance]" id="my_building_distance_1" placeholder="Distancia">
+                              <%end%>
+                            </div>
+                          </div> 
                           <%if params[:edit]=="true"%>
                             <%cont=0%>
                             <% @physicals.each do |physical| %>
@@ -2248,9 +2340,10 @@ input[type="button"]:focus {
                       <div id="copiar"></div>
                     </div><br>
                     <div class="row">
-                      <center class="col-sm-2 col-sm-offset-5">
+                      <center class="col-sm-3">
                         <input type='button' class='btn btn-fill btn-warning btn-wd' name='agregar' id="add" value='Agregar piso' />
                       </center> 
+                 
                     </div>
                   </div>
                  <!--Datos logicos-->
@@ -2311,23 +2404,7 @@ input[type="button"]:focus {
                               </div>
                             </div>
                             <div class="col-sm-8">
-                              <div class="form-group">
-                                <%if params[:edit]=="true"%>
-                                  <input type="number" onkeyup="this.value = minmax(this.value, 0, 100)" onkeydown="javascript: return event.keyCode == 69 ? false : true"  onKeyPress="if(parseInt(this.value)>100) return false;" class="form-control" min="0" max="100" name="logical[scalability]" id="logical_scalability" placeholder="Porcentaje de crecimiento de la red a futuro" value="<%=@logical.scalability%>">
-                                <%else%>
-                                  <input type="number" onkeyup="this.value = minmax(this.value, 0, 100)" onkeydown="javascript: return event.keyCode == 69 ? false : true"  onKeyPress="if(parseInt(this.value)>100) return false;" class="form-control" min="0" max="100" name="logical[scalability]" id="logical_scalability" placeholder="Porcentaje de crecimiento de la red a futuro">
-                                <%end%>
-                                <script type="text/javascript">
-                                function minmax(value, min, max) 
-                                {
-                                    if(parseInt(value) < min || isNaN(parseInt(value))) 
-                                        return min; 
-                                    else if(parseInt(value) > max) 
-                                        return max; 
-                                    else return value;
-                                }
-                                </script>
-                              </div>
+                              
                             </div>
                           </div>
                           <%if params[:edit]=="true"%>
@@ -2379,21 +2456,7 @@ input[type="button"]:focus {
                       </div>
                       <br>
                       <div class="row">
-                        <div class="col-sm-12s col-sm-offset-4">
-                          <div class="col-sm-3">
-                            <div class="form-group"><br>
-                              
-                                <%if params[:edit]=="true" && @logical.redundancy? %>
-                                  <input type="checkbox" class="form-control" value="" name="logical[redundancy]" id="logical_redundancy" checked>
-                                <%else%>
-                                  <input type="checkbox" class="form-control" value="" name="logical[redundancy]" id="logical_redundancy">
-                                <%end%>  
-                            </div>
-                          </div>
-                          <div>
-                            <i class="ti-export"></i><p title="capacidad de la red te tener redundancia en las conexiones">Redundancia de red</p><small>(Capacidad de la red de tener redundancia en las conexiones)</small>
-                          </div>
-                        </div>
+
                       </div> 
                     </form>
                   </div>
@@ -2401,7 +2464,7 @@ input[type="button"]:focus {
                   <!--Sub redes-->
                   <div class="tab-pane" id="subred">
                     <div class="row">
-                      <h5 class="info-text"> Ingresa las subredes. </h5>
+                      <h5 class="info-text"> GRUPOS DE TRABAJO </h5>
                       <div id="clone_subred">
                         <form class="new_subnet" id="new_subnet" action="/subnets" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="2gref79QNLc8XpDwG0E2TtyfsikCCiCOroWNAreulTaFZ/ATvURRk7tTs/iOCcIhr6PCGGsi+rb6EwWOU/45tA==" />          
                           <input type="hidden" name="logical[id]" id="logical_id_subnet" value="">
@@ -2436,7 +2499,7 @@ input[type="button"]:focus {
                                 </div>
                                 <div class="col-sm-2">
                                   <div class="form-group">
-                                    <label>Computadores</label>
+                                    <label>Usuarios</label>
                                     <input type="number" onkeyup="this.value = minmax(this.value, 1, 10000)" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" min='0' name="subnet[computers]" id="<%=@compu %>" placeholder="Núm." value="<%= subnet.computers %>">
                                   </div>
                                 </div>
@@ -2472,7 +2535,7 @@ input[type="button"]:focus {
                                 </div>
                                 <div class="col-sm-2">
                                   <div class="form-group">
-                                    <label>Computadores</label>
+                                    <label>Usuarios</label>
                                     <input type="number"  onkeyup="this.value = minmax(this.value,1, 10000)" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" min='0' name="subnet[computers]" id="<%=@compu %>" placeholder="Núm.">
                                   </div>
                                 </div>
@@ -2501,7 +2564,7 @@ input[type="button"]:focus {
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
-                                  <label>Computadores</label>
+                                  <label>Usuarios</label>
                                   <input type="number"  onkeyup="this.value = minmax(this.value, 1, 10000)" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" min='0' name="subnet[computers]" id="subnet_computers_1" placeholder="Núm.">
                                 </div>
                               </div>
@@ -2524,7 +2587,7 @@ input[type="button"]:focus {
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
-                                  <label>Computadores</label>
+                                  <label>Usuarios</label>
                                   <input type="number"  onkeyup="this.value = minmax(this.value, 1, 10000)" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" min='0' name="subnet[computers]" id="subnet_computers_2" placeholder="Núm.">
                                 </div>
                               </div>
@@ -2550,7 +2613,7 @@ input[type="button"]:focus {
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
-                                  <label>Computadores</label>
+                                  <label>Usuarios</label>
                                   <input type="number"  onkeyup="this.value = minmax(this.value, 1, 10000)" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" min='0' name="subnet[computers]" id="subnet_computers_3" placeholder="Núm.">
                                 </div>
                               </div>
@@ -2576,7 +2639,7 @@ input[type="button"]:focus {
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
-                                  <label>Computadores</label>
+                                  <label>Usuarios</label>
                                   <input type="number" onkeyup="this.value = minmax(this.value, 1, 10000)"  onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" min='0' name="subnet[computers]" id="subnet_computers_4" placeholder="Núm.">
                                 </div>
                               </div>
@@ -2602,7 +2665,7 @@ input[type="button"]:focus {
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
-                                  <label>Computadores</label>
+                                  <label>Usuarios</label>
                                   <input type="number" onkeyup="this.value = minmax(this.value, 1, 10000)"  onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" min='0' name="subnet[computers]" id="subnet_computers_5" placeholder="Núm.">
                                 </div>
                               </div>
@@ -2628,7 +2691,7 @@ input[type="button"]:focus {
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
-                                  <label>Computadores</label>
+                                  <label>Usuarios</label>
                                   <input type="number"  onkeyup="this.value = minmax(this.value, 1, 10000)" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" min='0' name="subnet[computers]" id="subnet_computers_6" placeholder="Núm.">
                                 </div>
                               </div>
@@ -2654,7 +2717,7 @@ input[type="button"]:focus {
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
-                                  <label>Computadores</label>
+                                  <label>Usuarios</label>
                                   <input type="number"  onkeyup="this.value = minmax(this.value, 1, 10000)" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" min='0' name="subnet[computers]" id="subnet_computers_7" placeholder="Núm.">
                                 </div>
                               </div>
@@ -2680,7 +2743,7 @@ input[type="button"]:focus {
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
-                                  <label>Computadores</label>
+                                  <label>Usuarios</label>
                                   <input type="number" onkeyup="this.value = minmax(this.value, 1, 10000)" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" min='0' name="subnet[computers]" id="subnet_computers_8" placeholder="Núm.">
                                 </div>
                               </div>
@@ -2706,7 +2769,7 @@ input[type="button"]:focus {
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
-                                  <label>Computadores</label>
+                                  <label>Usuarios</label>
                                   <input type="number"  onkeyup="this.value = minmax(this.value, 1, 10000)" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" min='0' name="subnet[computers]" id="subnet_computers_9" placeholder="Núm.">
                                 </div>
                               </div>
@@ -2732,7 +2795,7 @@ input[type="button"]:focus {
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
-                                  <label>Computadores</label>
+                                  <label>Usuarios</label>
                                   <input type="number" onkeyup="this.value = minmax(this.value, 1, 10000)"  onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" min='0' name="subnet[computers]" id="subnet_computers_10" placeholder="Núm.">
                                 </div>
                               </div>
@@ -2752,7 +2815,7 @@ input[type="button"]:focus {
                     </div><br>
                     <div class="row">
                       <center class="col-sm-2 col-sm-offset-5">
-                        <input type='button' class='btn btn-fill btn-warning btn-wd' name='agregar' id="add_subred" value='Agregar subred' />
+                        <input type='button' class='btn btn-fill btn-warning btn-wd' name='agregar' id="add_subred" value='Agregar grupo de trabajo' />
                       </center> 
                     </div>
                   </div>
@@ -2811,8 +2874,11 @@ input[type="button"]:focus {
 
     <input type="hidden" id="name" name="name" value="">
     <input type="hidden" id="nit" name="nit" value="">
-    <input type="hidden" id="mision" name="mision" value="">
-    <input type="hidden" id="vision" name="vision" value="">
+    <!--<input type="hidden" id="mision" name="mision" value="">
+    <input type="hidden" id="vision" name="vision" value="">-->
+    <input type="hidden" id="email" name="email" value="">
+    <input type="hidden" id="phone" name="phone" value="">
+    <input type="hidden" id="cell" name="cell" value="">
 
     <input type="hidden" id="my_request_id" name="my_request_id" value="">
     <input type="hidden" id="my_request_title" name="my_request_title" value="">
@@ -2943,6 +3009,7 @@ input[type="button"]:focus {
     <input type="hidden" id="my_logical_host3" name="my_logical_host3" value="">
     <input type="hidden" id="my_logical_host4" name="my_logical_host4" value="">  
     <input type="hidden" id="my_logical_redundancy" name="my_logical_redundancy" value="">  
+    <input type="hidden" id="my_logical_security" name="my_logical_security" value="">  
     
     <input type="hidden" id="subnet_1" name="subnet_1" value="true">
     <input type="hidden" id="my_subnet_name_1" name="my_subnet_name_1" value="">
@@ -2995,8 +3062,11 @@ input[type="button"]:focus {
     <input type="hidden" id="my_subnet_computers_10" name="my_subnet_computers_10" value="">
     
     <input type="hidden" id="mi_company" name="mi_company" value="">
-  
-   
+    <!--Building-->
+    <input type="hidden" id="building_1" name="building_1" value="true">
+    <input type="hidden" id="building_id_1" name="building_id_1" value="">
+    <input type="hidden" id="building_name_1" name="building_name_1" value="">
+    <input type="hidden" id="building_distance_1" name="building_distance_1" value="">   
 </form>
 
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -3057,7 +3127,7 @@ input[type="button"]:focus {
                     <center><h4 style="font-size:10pt" class="modal-title" id="myModalLabel"><b>LDWS</b></h4></center>
                 </div>
                 <div class="modal-body">
-                    La solicitud puede tener un maximo de 10 subredes asignadas.
+                    La solicitud puede tener un maximo de 10 grupos de trabajo asignadas.
                 </div>
             </div>
         </div>
@@ -3073,7 +3143,7 @@ input[type="button"]:focus {
                     <center><h4 style="font-size:10pt" class="modal-title" id="myModalLabel"><b>LDWS</b></h4></center>
                 </div>
                 <div class="modal-body">
-                   La solicitud debe tener al menos una subred asignada.
+                   La solicitud debe tener al menos un grupo de trabajo asignada.
                 </div>
             </div>
         </div>
@@ -3101,6 +3171,7 @@ var Contador=1;
 var Cont=1;
 var Cont_fisico=0;
 var Cont_subred=0;
+$('#request_observation').hide();
 
     <%if params[:edit]=="true"%>
       <% @physicals.each do |physical| %>
@@ -3329,6 +3400,7 @@ var Cont_subred=0;
         document.getElementById("logical_id").value = Math.round(Math.random()*10000) ;
         document.getElementById("subnet_id").value = Math.round(Math.random()*10000);
         document.getElementById("physicals_id").value = Math.round(Math.random()*10000);
+        document.getElementById("my_building_id_1").value = Math.round(Math.random()*10000);
         
         document.getElementById("company_id_request").value = document.getElementById("company_id").value;
         document.getElementById("logical_id_subnet").value = document.getElementById("logical_id").value;
@@ -3385,19 +3457,19 @@ var Cont_subred=0;
     }
 
     function returnsubnet(){
-      $("#logiico").trigger("click");
+      $("#fisico").trigger("click");
       
       $('#next').hide();
       $('#next_company').hide();
       $('#next_request').hide();
-      $('#next_physical').hide();
-      $('#next_logical').show();
+      $('#next_physical').show();
+      $('#next_logical').hide();    
       
       $('#return_request').hide();
       $('#return_physical').hide;
-      $('#return_logical').show();
+      $('#return_logical').hide();
       $('#return_subnet').hide();
-      document.getElementById("return_physical").style.display = "none";
+      document.getElementById("return_physical").style.display = "block";
     }
     
     function nextcomp(){
@@ -3431,18 +3503,25 @@ var Cont_subred=0;
     }
     
     function nextphy(){
-      $("#logiico").trigger("click");
-      $('#next').hide();
+      $("#subredd").trigger("click");
+      $('#next').show();
       $('#next_company').hide();
       $('#next_request').hide();
       $('#next_physical').hide();
-      $('#next_logical').show();    
+      $('#next_logical').hide();
       
       $('#return_request').hide();
       $('#return_physical').hide;
-      $('#return_logical').show();
-      $('#return_subnet').hide();
-      document.getElementById("return_physical").style.display = "none";          
+      $('#return_logical').hide();
+      $('#return_subnet').show();
+      document.getElementById("return_physical").style.display = "none";   
+      
+      document.getElementById("next").classList.remove("disabled");
+      document.getElementById("next_company").classList.remove("disabled");
+      document.getElementById("next_request").classList.remove("disabled");
+      document.getElementById("next_physical").classList.remove("disabled");
+      document.getElementById("next_logical").classList.remove("disabled");
+      document.getElementById("return_subnet").classList.remove("disabled");      
     }
     
     function nextlog(){
@@ -3511,18 +3590,8 @@ var Cont_subred=0;
     }
     
     function logicalBtn(){
-        $('#next').hide();
-        $('#next_company').hide();
-        $('#next_request').hide();
-        $('#next_physical').hide();
-        $('#next_logical').show();
-        
-        $('#return_request').hide();
-        $('#return_physical').hide;
-        $('#return_logical').show();
-        $('#return_subnet').hide();
-        document.getElementById("return_physical").style.display = "none";  
-        
+      
+      
         //Validar IP
         var cantidad_pisos = 0;
         if (document.getElementById('physical_computers_1').value != "")
@@ -3554,13 +3623,21 @@ var Cont_subred=0;
           max = 223;
           document.getElementById('logical_host1').min = '192';
           document.getElementById('logical_host1').max = '223';
+          document.getElementById('logical_host1').value = '192';
+          document.getElementById('logical_host2').value = '0';
+          document.getElementById('logical_host3').value = '0';
+          document.getElementById('logical_host4').value = '0';
         }
         //CLASE B
         if (cantidad_pisos >= 255 && cantidad_pisos <= 65534 ){
           min = 128;
           max = 191;
           document.getElementById('logical_host1').min = '128';
-          document.getElementById('logical_host1').max = '191';    
+          document.getElementById('logical_host1').max = '191'; 
+          document.getElementById('logical_host1').value = '128';
+          document.getElementById('logical_host2').value = '0';
+          document.getElementById('logical_host3').value = '0';
+          document.getElementById('logical_host4').value = '0';
         }
         //CLASE A
         if (cantidad_pisos >= 65535 && cantidad_pisos <= 16777214 ){
@@ -3568,6 +3645,10 @@ var Cont_subred=0;
           max = 127;
           document.getElementById('logical_host1').min = '0';
           document.getElementById('logical_host1').max = '127';
+          document.getElementById('logical_host1').value = '0';
+          document.getElementById('logical_host2').value = '0';
+          document.getElementById('logical_host3').value = '0';
+          document.getElementById('logical_host4').value = '0';
         }
         
         document.getElementById("logical_host1").onkeyup = function() {
@@ -3576,8 +3657,6 @@ var Cont_subred=0;
         document.getElementById("logical_host1").placeholder = min;
 
     }
-    
-  
     
     function subnetBtn(){
         $('#next').show();
@@ -3596,7 +3675,7 @@ var Cont_subred=0;
   
     
     function validate(){
-      
+      logicalBtn();
       var val = 0;
       var msj="";
       if (document.getElementById("company_id").value == "")
@@ -3612,16 +3691,6 @@ var Cont_subred=0;
         msj+="Nit - ";
       }
         
-      if (document.getElementById("company_mision").value == "")
-        {
-        val = 1;
-        msj+="Mision - ";
-      }
-      if (document.getElementById("company_vision").value == "")
-        {
-        val = 1;
-        msj+="Visión - ";
-      }
       if (document.getElementById("request_title").value == "")
         {
         val = 1;
@@ -3635,12 +3704,7 @@ var Cont_subred=0;
       if (document.getElementById("request_objective").value == "")
         {
           val = 1;
-          msj+="Objetivos - ";
-        }
-      if (document.getElementById("request_observation").value == "")
-        {
-          val = 1;
-          msj+="Observaciones - ";
+          msj+="Alcance - ";
         }
 
       for (i = 1; i <= Contador; i++) {
@@ -3671,11 +3735,6 @@ var Cont_subred=0;
           }        
       }  
 
-      if (document.getElementById("logical_scalability").value == "")
-        {
-          val = 1;
-          msj+="Escalabilidad - ";
-        }
       if (document.getElementById("logical_host1").value == "")
         {
           val = 1;
@@ -3771,13 +3830,17 @@ var Cont_subred=0;
         <%if params[:edit]=="true"%>
           document.getElementById("mi_company").value = document.getElementById("company_id").value
         <%end%>
+        
+        document.getElementById("building_id_1").value = document.getElementById("my_building_id_1").value
+        document.getElementById("building_name_1").value = document.getElementById("my_building_name_1").value
+        document.getElementById("building_distance_1").value = document.getElementById("my_building_distance_1").value          
 
         document.getElementById("my_company_id").value=document.getElementById("company_id").value  
         document.getElementById("name").value=document.getElementById("company_name").value
         document.getElementById("nit").value=document.getElementById("company_nit").value
-        document.getElementById("mision").value=document.getElementById("company_mision").value
-        document.getElementById("vision").value=document.getElementById("company_vision").value
-        
+        document.getElementById("email").value=document.getElementById("company_email").value
+        document.getElementById("phone").value=document.getElementById("company_phone").value
+        document.getElementById("cell").value=document.getElementById("company_cell").value        
         
         document.getElementById("my_request_id").value = document.getElementById("request_id").value 
         document.getElementById("my_request_title").value = document.getElementById("request_title").value
@@ -3857,12 +3920,24 @@ var Cont_subred=0;
         document.getElementById("my_logical_host2").value = document.getElementById("logical_host2").value;
         document.getElementById("my_logical_host3").value = document.getElementById("logical_host3").value;  
         document.getElementById("my_logical_host4").value = document.getElementById("logical_host4").value;        
-        document.getElementById("my_logical_scalability").value = document.getElementById("logical_scalability").value;
+        //document.getElementById("my_logical_scalability").value = document.getElementById("logical_scalability").value;
         
         if( document.getElementById("logical_redundancy").checked == true){
             document.getElementById("my_logical_redundancy").value = "true";
         } else {
             document.getElementById("my_logical_redundancy").value = "false";
+        }
+        
+        if( document.getElementById("logical_security").checked == true){
+            document.getElementById("my_logical_security").value = "true";
+        } else {
+            document.getElementById("my_logical_security").value = "false";
+        }        
+        
+        if( document.getElementById("logical_scalability").checked == true){
+            document.getElementById("my_logical_scalability").value = "true";
+        } else {
+            document.getElementById("my_logical_scalability").value = "false";
         }
         
         <%if params[:edit]=="true"%>
