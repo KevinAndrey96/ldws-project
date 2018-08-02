@@ -1,27 +1,137 @@
+<%
+    cont=0
+    swdistri=0
+    swaccess=0
+    swcore=0
+%>
+<% if @Sw_status == 0 %>
+    <p>ERROR, no hay switches disponibles</p>
+<%else%>
+<% 
+totalcomputers=@total_of_computers
+
+while totalcomputers>0  do
+#@Myeq=Equipment.where('ports < ?',totalcomputers).order(:ports).last
+
+@Myeq=Equipment.where('ports < ? and power = ? and etype = ?',totalcomputers, @eco,"Switch").order(:ports).last
+
+begin
+  
+#Calcular Cantidad
+
+while true
+  if @Myeq.ports*cont>totalcomputers
+    break
+  else
+    cont+=1
+  end
+end
+cont-=1
+
+#Roptar Puertos
+totalcomputers-=@Myeq.ports*cont
+
+
+rescue
+#Añadir switch final
+
+#@Myeq=Equipment.where('ports > ?',totalcomputers).order(:ports).first
+
+  @Myeq=Equipment.where('ports >= ? and power = ? and etype = ?',totalcomputers,@eco,"Switch").order(:ports).first
+  cont+=1
+  totalcomputers-=@Myeq.ports*cont
+
+
+end
+
+
+end
+%>
+<!--<td><%=cont-(cont*0.2).ceil%></td>-->
+
+
+  
+  <% swaccess=cont-1 %>
+
+</tr>
+<%end%>
+
+<tr>
+  
+  <%if @logical.redundancy? %>
+    
+    <% swdistri=2 %>
+  <%else%>
+    <% swdistri=1 %>
+  <%end%>
+  
+</tr>
+<tr>
+  
+  <%if @logical.redundancy? %>
+    
+    <% swcore=2 %>
+  <%else%>
+    
+    <% swcore=1 %>
+  <%end%>
+</tr>
+
+
 <div class="container-fluid">
     <center><h1>Diagrama de red</h1></center>
-    <center><%= wicked_pdf_image_tag 'Router.png' %></center>
     
     <center>
-        
-        <%= wicked_pdf_image_tag 'Switch.png' %>
-        <%= wicked_pdf_image_tag 'Ap.png' %>
-        <%= wicked_pdf_image_tag 'Switch.png' %>
-        
+        <%= wicked_pdf_image_tag 'Router.png' %>
     </center>
+    <hr>
     <center>
-        <%= wicked_pdf_image_tag 'Distribucion.png' %>
-        <%= wicked_pdf_image_tag 'Blanco.png' %>
-        <%= wicked_pdf_image_tag 'Blanco.png' %>
-        <%= wicked_pdf_image_tag 'Distribucion.png' %>
+    <%
+        if swcore == 1
+        %>
+            <%= wicked_pdf_image_tag 'Core.png' %>
+            <%= wicked_pdf_image_tag 'Ap.png' %>
+            <%= wicked_pdf_image_tag 'Blanco.png' %>
+        <%
+        else
+        %>
+            <%= wicked_pdf_image_tag 'Core.png' %>
+            <%= wicked_pdf_image_tag 'Ap.png' %>
+            <%= wicked_pdf_image_tag 'Core.png' %>
+        <%
+        end
+    %>
     </center>
+    <hr>
     <center>
-        <%= wicked_pdf_image_tag 'Distribucion.png' %>
-        <%= wicked_pdf_image_tag 'Distribucion.png' %>
-        <%= wicked_pdf_image_tag 'Blanco.png' %>
-        <%= wicked_pdf_image_tag 'Blanco.png' %>
-        <%= wicked_pdf_image_tag 'Blanco.png' %>
-        <%= wicked_pdf_image_tag 'Distribucion.png' %>
-        <%= wicked_pdf_image_tag 'Distribucion.png' %>
+    <%
+        if swdistri == 1
+        %>
+            <%= wicked_pdf_image_tag 'Distribucion.png' %>
+            <%= wicked_pdf_image_tag 'Blanco.png' %>
+            <%= wicked_pdf_image_tag 'Blanco.png' %>
+            <%= wicked_pdf_image_tag 'Blanco.png' %>
+        <%
+        else
+        %>
+            <%= wicked_pdf_image_tag 'Distribucion.png' %>
+            <%= wicked_pdf_image_tag 'Blanco.png' %>
+            <%= wicked_pdf_image_tag 'Blanco.png' %>
+            <%= wicked_pdf_image_tag 'Distribucion.png' %>
+        <%
+        end
+    %>
+    </center>
+    <hr>
+    <center>
+    <%
+        aux = swaccess
+        while aux>0
+            aux-=1
+            %>
+                <%= wicked_pdf_image_tag 'Acceso.png' %>
+            <%
+        end
+    %>
     </center>
 </div>
