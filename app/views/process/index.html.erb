@@ -1596,9 +1596,9 @@ input[type="button"]:focus {
                           <div class="col-sm-3">
                             <div class="form-group"><br>
                                 <%if params[:edit]=="true" && @logical.scalability? %>
-                                  <label><input type="checkbox" class="" value="" name="logical[scalability]" id="logical_scalability" checked>Escalabilidad</label>
+                                  <input type="text" class="form-control" value="" name="logical[scalability]" id="logical_scalability" checked placeholder="Escalabilidad"><label></label>
                                 <%else%>
-                                  <label><input type="checkbox" class="" value="" name="logical[scalability]" id="logical_scalability">Escalabilidad</label>
+                                  <input type="text" class="form-control" value="" name="logical[scalability]" id="logical_scalability" placeholder="Escalabilidad"><label></label>
                                 <%end%>  
                             </div>
                           </div>
@@ -1810,7 +1810,7 @@ input[type="button"]:focus {
                                 </div>
                                 <div class="col-sm-2">
                                   <div class="form-group">
-                                    <label>Computadores</label>
+                                    <label>Usuarios</label>
                                     <input min="2" type="number"  onkeyup="this.value = minmax(this.value, 2, 10000)" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="physical[computers]" id="<%=@comp %>" placeholder="Núm." value="<%= physical.computers %>">
                                   </div>
                                 </div>
@@ -1870,7 +1870,7 @@ input[type="button"]:focus {
                                 </div>
                                 <div class="col-sm-2">
                                   <div class="form-group">
-                                    <label>Computadores</label>
+                                    <label>Usuarios</label>
                                     <input min="2"  onkeyup="this.value = minmax(this.value, 2, 10000)" type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="physical[computers]" id="<%=@comp %>" placeholder="Núm.">
                                   </div>
                                 </div>
@@ -1915,7 +1915,7 @@ input[type="button"]:focus {
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
-                                  <label>Computadores</label>
+                                  <label>Usuarios</label>
                                   <input min="2" type="number" onkeyup="this.value = minmax(this.value, 2, 10000)"  onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="physical[computers]" id="physical_computers_1" placeholder="Núm.">
                                 </div>
                               </div>
@@ -1955,7 +1955,7 @@ input[type="button"]:focus {
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
-                                  <label>Computadores</label>
+                                  <label>Usuarios</label>
                                   <input min="2" type="number" onkeyup="this.value = minmax(this.value, 2, 10000)"  onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="physical[computers]" id="physical_computers_2" placeholder="Núm.">
                                 </div>
                               </div>
@@ -1999,7 +1999,7 @@ input[type="button"]:focus {
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
-                                  <label>Computadores</label>
+                                  <label>Usuarios</label>
                                   <input min="2" type="number" onkeyup="this.value = minmax(this.value, 2, 10000)"  onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="physical[computers]" id="physical_computers_3" placeholder="Núm.">
                                 </div>
                               </div>
@@ -2043,7 +2043,7 @@ input[type="button"]:focus {
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
-                                  <label>Computadores</label>
+                                  <label>Usuarios</label>
                                   <input min="2" type="number" onkeyup="this.value = minmax(this.value, 2, 10000)"  onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="physical[computers]" id="physical_computers_4" placeholder="Núm.">
                                 </div>
                               </div>
@@ -2087,7 +2087,7 @@ input[type="button"]:focus {
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
-                                  <label>Computadores</label>
+                                  <label>Usuarios</label>
                                   <input min="2" type="number" onkeyup="this.value = minmax(this.value, 2, 10000)"  onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="physical[computers]" id="physical_computers_5" placeholder="Núm.">
                                 </div>
                               </div>
@@ -2131,7 +2131,7 @@ input[type="button"]:focus {
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
-                                  <label>Computadores</label>
+                                  <label>Usuarios</label>
                                   <input min="2" type="number" onkeyup="this.value = minmax(this.value, 2, 10000)"  onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="physical[computers]" id="physical_computers_6" placeholder="Núm.">
                                 </div>
                               </div>
@@ -2175,7 +2175,7 @@ input[type="button"]:focus {
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
-                                  <label>Computadores</label>
+                                  <label>Usuarios</label>
                                   <input min="2" type="number" onkeyup="this.value = minmax(this.value, 2, 10000)"  onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="physical[computers]" id="physical_computers_7" placeholder="Núm.">
                                 </div>
                               </div>
@@ -2219,7 +2219,7 @@ input[type="button"]:focus {
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
-                                  <label>Computadores</label>
+                                  <label>Usuarios</label>
                                   <input min="2" type="number" onkeyup="this.value = minmax(this.value, 2, 10000)"  onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="physical[computers]" id="physical_computers_8" placeholder="Núm.">
                                 </div>
                               </div>
@@ -2263,7 +2263,7 @@ input[type="button"]:focus {
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
-                                  <label>Computadores</label>
+                                  <label>Usuarios</label>
                                   <input min="2" type="number" onkeyup="this.value = minmax(this.value, 2, 10000)"  onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="physical[computers]" id="physical_computers_9" placeholder="Núm.">
                                 </div>
                               </div>
@@ -2307,7 +2307,7 @@ input[type="button"]:focus {
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
-                                  <label>Computadores</label>
+                                  <label>Usuarios</label>
                                   <input min="2" type="number" onkeyup="this.value = minmax(this.value, 2, 10000)"  onkeydown="javascript: return event.keyCode == 69 ? false : true" class="form-control" name="physical[computers]" id="physical_computers_10" placeholder="Núm.">
                                 </div>
                               </div>
@@ -3726,7 +3726,7 @@ $('#request_observation').hide();
         if (document.getElementById("physical_computers_"+i).value == "")
           {
             val = 1;
-            msj+="Num. computadores piso "+i+" - ";
+            msj+="Num. Usuarios piso "+i+" - ";
           }
         if (document.getElementById("physical_printers_"+i).value == "")
           {
@@ -3770,7 +3770,7 @@ $('#request_observation').hide();
         if (document.getElementById("subnet_computers_"+j).value == "")
           {
             val = 1;
-            msj+="Computadores sub red "+j+" - ";
+            msj+="Usuarios sub red "+j+" - ";
           }       
       }  
         
