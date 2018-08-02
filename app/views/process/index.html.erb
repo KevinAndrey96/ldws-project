@@ -1481,9 +1481,9 @@ input[type="button"]:focus {
                             <div class="form-group">
                                 <label>Número de Celular:</label>
                                 <%if params[:new]=="false" || params[:edit]=="true"%>
-                                  <input readonly min="0"  maxlength="9" max="999999999" type="number" onkeydown="Cel()" class="form-control" name="company[cell]" id="company_cell"  placeholder="Número de celular" value="<%=@company.cell%>">
+                                  <input readonly min="0"  maxlength="9" max="9999999999" type="number" onkeydown="Cel()" class="form-control" name="company[cell]" id="company_cell"  placeholder="Número de celular" value="<%=@company.cell%>">
                                 <%else%>
-                                  <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true; "  onKeyPress="if(this.value.length==9) return false;" min="0" max="999999999"  class="form-control" name="company[cell]" id="company_cell"  placeholder="Número de celular">
+                                  <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true; "  onKeyPress="if(this.value.length==9) return false;" min="0" max="9999999999"  class="form-control" name="company[cell]" id="company_cell"  placeholder="Número de celular">
                                 <%end%>
                                 
                                 <script>
