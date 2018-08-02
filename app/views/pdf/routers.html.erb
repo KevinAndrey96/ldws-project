@@ -33,6 +33,29 @@
           R1(config-router)#network <%= @logical.host1 %>.<%= @logical.host2 %>.<%= @logical.host3 %>.<%= @logical.host4 %><br>
           R1(config-router)#no auto-summary<br>
           R1(config-router)#end<br>
+          <h2>Configuraciones de seguridad</h2>
+          <%
+          if @logical.security?
+          %>
+          <i>Comandos para ingresar en modo privilegiado</i>
+          <pre>
+            R1(config)#enable secret cisco
+          </pre>
+          <i>Comandos para ingresar contraseña al ingreso por telnet</i>
+          <pre>
+            R1(config)#line vty 0 4
+            R1(config-line)#password class0
+            R1(config-line)#login
+            R1(config-line)#exit
+          </pre>
+          <i>Comandos para ingresar contraseña al ingreso por consola</i>
+          <pre>
+            R1(config)#line console 0
+            R1(config-line)#password class1
+          </pre>
+          <%
+          end
+          %>
         </p>
       </div>
     </div>

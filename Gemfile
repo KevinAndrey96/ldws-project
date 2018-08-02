@@ -53,6 +53,7 @@ group :production do
   gem 'rails_12factor'
 end
 
+# Custom Gems LDWS
 gem 'devise'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'bootstrap', '~> 4.1.1'
@@ -65,3 +66,4 @@ gem 'local_time'
 gem 'devise-i18n'
 gem 'will_paginate', '~> 3.1.0'
 gem 'erd'
+gem 'rdoc'

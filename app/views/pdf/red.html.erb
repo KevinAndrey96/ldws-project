@@ -5,6 +5,26 @@
   <%= wicked_pdf_stylesheet_link_tag "pdf" -%>
   <%= wicked_pdf_javascript_include_tag "number_pages" %>
 </head>
+<style>
+  page-break-inside: avoid !important;
+  margin: 4px 0 4px 0;
+  @media print {
+    table tbody tr td:before,
+    table tbody tr td:after {
+        content : "" ;
+        height : 4px ;
+        display : block ;
+    }
+    
+}
+table, tr, td, th, tbody, thead, tfoot {
+    page-break-inside: avoid !important;
+}
+.avoid
+{
+  page-break-inside:avoid !important; page-break-after:auto !important; overflow: hidden; display:block !important; width:100% 
+}
+</style>
 <%
     cont=0
     swdistri=0
@@ -194,12 +214,12 @@ end
                     <tr>
                         <td><center><%=aux%></center></td>
                         <td><center>3</center></td>
-                        <td><center>F.O. Multimodo</center></td>
+                        <td><center>UTP</center></td>
                     </tr>
                     <tr>
                         <td><center><%=aux%></center></td>
                         <td><center>4</center></td>
-                        <td><center>F.O. Multimodo</center></td>
+                        <td><center>UTP</center></td>
                     </tr>
                     <% 
                         end 
@@ -219,7 +239,7 @@ end
                     <tr>
                         <td><center><%=aux%></center></td>
                         <td><center>3</center></td>
-                        <td><center>F.O. Multimodo</center></td>
+                        <td><center>UTP</center></td>
                     </tr>
                     <% 
                         end 
@@ -229,8 +249,13 @@ end
                 
             </tbody>
         </table>
-    
+    <% subnit=0 %>
     <h2>Velocidades</h2>
+        <% 
+            @subnets.order(computers: :desc, name: :asc).each do |subnet|
+                subnit+=subnet.computers
+            end 
+        %>
         <table border="1" width="100%">
             <thead>
                 <tr>
@@ -244,23 +269,24 @@ end
                     <tr>
                         <td><center>3</center></td>
                         <td><center>1</center></td>
-                        <td><center>10GBASE-SR</center></td>
+                        <td><center><%=subnit+1%> GBASE-SR</center></td>
                     </tr>
                     <tr>
                         <td><center>4</center></td>
                         <td><center>1</center></td>
-                        <td><center>10GBASE-SR</center></td>
+                        <td><center><%=subnit+1%> GBASE-SR</center></td>
                     </tr>
                     <tr>
                         <td><center>3</center></td>
                         <td><center>2</center></td>
-                        <td><center>10GBASE-SR</center></td>
+                        <td><center><%=subnit+1%> GBASE-SR</center></td>
                     </tr>
                     <tr>
                         <td><center>4</center></td>
                         <td><center>2</center></td>
-                        <td><center>10GBASE-SR</center></td>
+                        <td><center><%=subnit+1%> GBASE-SR</center></td>
                     </tr>
+                    
                     <%
                     iddes=id
                     aux = idor
@@ -270,12 +296,12 @@ end
                     <tr>
                         <td><center><%=aux%></center></td>
                         <td><center>3</center></td>
-                        <td><center>10GBASE-SR</center></td>
+                        <td><center><%=subnit%> GBASE-SR</center></td>
                     </tr>
                     <tr>
                         <td><center><%=aux%></center></td>
                         <td><center>4</center></td>
-                        <td><center>10GBASE-SR</center></td>
+                        <td><center><%=subnit%> GBASE-SR</center></td>
                     </tr>
                     <% 
                         end 
@@ -284,7 +310,7 @@ end
                     <tr>
                         <td><center>2</center></td>
                         <td><center>1</center></td>
-                        <td><center>10GBASE-SR</center></td>
+                        <td><center><%=subnit+1%> GBASE-SR</center></td>
                     </tr>
                     <%
                     iddes=id
@@ -295,7 +321,7 @@ end
                     <tr>
                         <td><center><%=aux%></center></td>
                         <td><center>3</center></td>
-                        <td><center>10GBASE-SR</center></td>
+                        <td><center><%=subnit%> GBASE-SR</center></td>
                     </tr>
                     <% 
                         end 

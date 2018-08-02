@@ -1,0 +1,1360 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class PdfController - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script src="./js/jquery.js"></script>
+<script src="./js/darkfish.js"></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link"><a href="ApplicationController.html">ApplicationController</a>
+  
+</div>
+
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-i-cotizacion">#cotizacion</a>
+    
+    <li ><a href="#method-i-direccionamiento">#direccionamiento</a>
+    
+    <li ><a href="#method-i-empresa">#empresa</a>
+    
+    <li ><a href="#method-i-final">#final</a>
+    
+    <li ><a href="#method-i-red">#red</a>
+    
+    <li ><a href="#method-i-routers">#routers</a>
+    
+    <li ><a href="#method-i-switches">#switches</a>
+    
+    <li ><a href="#method-i-topologia">#topologia</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-PdfController">
+  <h1 id="class-PdfController" class="class">
+    class PdfController
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-cotizacion" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">cotizacion</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="cotizacion-source">
+            <pre><span class="ruby-comment"># File app/controllers/pdf_controller.rb, line 213</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">cotizacion</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:request_id</span>]
+    <span class="ruby-ivar">@request</span>=<span class="ruby-constant">Request</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:request_id</span>])
+    <span class="ruby-ivar">@company</span>=<span class="ruby-constant">Company</span>.<span class="ruby-identifier">find</span>(<span class="ruby-ivar">@request</span>.<span class="ruby-identifier">company_id</span>)
+    <span class="ruby-ivar">@physical</span>=<span class="ruby-constant">Physical</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:request_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">id</span>)
+    <span class="ruby-ivar">@logical</span>=<span class="ruby-constant">Logical</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:request_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">id</span>)
+    
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@Logical</span>=<span class="ruby-constant">Logical</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:request_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">id</span>).<span class="ruby-identifier">first</span>
+  <span class="ruby-comment">#totalcomputers=@physical.sum(:computers)</span>
+  <span class="ruby-ivar">@Sw_status</span> = <span class="ruby-value">1</span>
+  <span class="ruby-ivar">@total_of_computers</span> = <span class="ruby-ivar">@physical</span>.<span class="ruby-identifier">sum</span>(<span class="ruby-value">:computers</span>)
+  
+  <span class="ruby-comment">#Potencias</span>
+  <span class="ruby-ivar">@eco</span>=<span class="ruby-value">0</span>
+  <span class="ruby-ivar">@opt</span>=<span class="ruby-value">0</span>
+  
+  <span class="ruby-comment">#Verificamos existencias</span>
+  <span class="ruby-ivar">@eq</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Switch&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>).<span class="ruby-identifier">count</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+    <span class="ruby-ivar">@eq</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Switch&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">2</span>).<span class="ruby-identifier">count</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+      <span class="ruby-ivar">@eq</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Switch&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">3</span>).<span class="ruby-identifier">count</span>  
+      <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+        <span class="ruby-ivar">@Sw_status</span>=<span class="ruby-value">0</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-ivar">@eco</span>=<span class="ruby-value">3</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-ivar">@eco</span>=<span class="ruby-value">2</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@eco</span>=<span class="ruby-value">1</span>
+  <span class="ruby-keyword">end</span>
+  
+  <span class="ruby-comment">#Código de Routers</span>
+  
+  <span class="ruby-ivar">@R_status</span> = <span class="ruby-value">1</span>
+  
+  <span class="ruby-ivar">@eco_r</span>=<span class="ruby-value">0</span>
+  <span class="ruby-ivar">@opt_r</span>=<span class="ruby-value">0</span>
+  
+  <span class="ruby-ivar">@eq_r</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Router&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>).<span class="ruby-identifier">count</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_r</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+    <span class="ruby-ivar">@eq_r</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Router&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">2</span>).<span class="ruby-identifier">count</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_r</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+      <span class="ruby-ivar">@eq_r</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Router&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">3</span>).<span class="ruby-identifier">count</span>  
+      <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_r</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+        <span class="ruby-ivar">@R_status</span>=<span class="ruby-value">0</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-ivar">@eco_r</span>=<span class="ruby-value">3</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-ivar">@eco_r</span>=<span class="ruby-value">2</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@eco_r</span>=<span class="ruby-value">1</span>
+  <span class="ruby-keyword">end</span>
+  
+  <span class="ruby-comment">#Código de Racks</span>
+  <span class="ruby-ivar">@Ra_status</span> = <span class="ruby-value">1</span>
+  
+  <span class="ruby-ivar">@eco_ra</span>=<span class="ruby-value">0</span>
+  
+  <span class="ruby-ivar">@eq_ra</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Rack&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>).<span class="ruby-identifier">count</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_ra</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+    <span class="ruby-ivar">@eq_ra</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Rack&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">2</span>).<span class="ruby-identifier">count</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_ra</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+      <span class="ruby-ivar">@eq_ra</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Rack&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">3</span>).<span class="ruby-identifier">count</span>  
+      <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_ra</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+        <span class="ruby-ivar">@Ra_status</span>=<span class="ruby-value">0</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-ivar">@eco_ra</span>=<span class="ruby-value">3</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-ivar">@eco_ra</span>=<span class="ruby-value">2</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@eco_ra</span>=<span class="ruby-value">1</span>
+  <span class="ruby-keyword">end</span>
+  
+  <span class="ruby-comment">#Código de Cable</span>
+  <span class="ruby-ivar">@Ca_status</span> = <span class="ruby-value">1</span>
+  
+  <span class="ruby-ivar">@eco_ca</span>=<span class="ruby-value">0</span>
+  
+  <span class="ruby-ivar">@eq_ca</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Cable&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>).<span class="ruby-identifier">count</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_ca</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+    <span class="ruby-ivar">@eq_ca</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Cable&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">2</span>).<span class="ruby-identifier">count</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_ca</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+      <span class="ruby-ivar">@eq_ca</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Cable&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">3</span>).<span class="ruby-identifier">count</span>  
+      <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_ca</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+        <span class="ruby-ivar">@Ca_status</span>=<span class="ruby-value">0</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-ivar">@eco_ca</span>=<span class="ruby-value">3</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-ivar">@eco_ca</span>=<span class="ruby-value">2</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@eco_ca</span>=<span class="ruby-value">1</span>
+  <span class="ruby-keyword">end</span>
+  
+  <span class="ruby-comment">#Cantidad de cable</span>
+  <span class="ruby-ivar">@physical</span>=<span class="ruby-constant">Physical</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:request_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:request_id</span>]) 
+  <span class="ruby-ivar">@physical</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">physical</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">cont</span>=<span class="ruby-value">0</span>
+  <span class="ruby-ivar">@cable</span> = <span class="ruby-value">0</span>
+   <span class="ruby-identifier">i</span> = <span class="ruby-value">0</span> 
+   <span class="ruby-keyword">while</span> <span class="ruby-identifier">i</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">physical</span>.<span class="ruby-identifier">large</span> 
+       <span class="ruby-identifier">j</span> = <span class="ruby-value">0</span> 
+       <span class="ruby-ivar">@aux</span>=<span class="ruby-value">0</span> 
+     <span class="ruby-keyword">while</span> <span class="ruby-identifier">j</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">physical</span>.<span class="ruby-identifier">width</span> 
+    
+         <span class="ruby-keyword">if</span> <span class="ruby-identifier">j</span> <span class="ruby-operator">!=</span> <span class="ruby-value">0</span> 
+           <span class="ruby-keyword">if</span> <span class="ruby-identifier">i</span><span class="ruby-operator">%</span><span class="ruby-value">2</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> 
+            <span class="ruby-keyword">if</span> <span class="ruby-identifier">cont</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">physical</span>.<span class="ruby-identifier">computers</span>
+              <span class="ruby-identifier">cont</span><span class="ruby-operator">+=</span><span class="ruby-value">1</span>
+               <span class="ruby-keyword">if</span> <span class="ruby-identifier">i</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> 
+                <span class="ruby-ivar">@cable</span> = (<span class="ruby-value">0.5</span><span class="ruby-operator">+</span>(<span class="ruby-identifier">physical</span>.<span class="ruby-identifier">height</span><span class="ruby-operator">*</span><span class="ruby-value">2</span>)<span class="ruby-operator">+</span>((<span class="ruby-identifier">j</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>))<span class="ruby-operator">+</span><span class="ruby-value">2</span>)<span class="ruby-operator">+</span><span class="ruby-ivar">@cable</span> 
+               <span class="ruby-keyword">else</span> 
+                <span class="ruby-ivar">@cable</span> = (<span class="ruby-value">0.5</span><span class="ruby-operator">+</span>(<span class="ruby-identifier">physical</span>.<span class="ruby-identifier">height</span><span class="ruby-operator">*</span><span class="ruby-value">2</span>)<span class="ruby-operator">+</span>((<span class="ruby-identifier">i</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>)<span class="ruby-operator">+</span>(<span class="ruby-identifier">j</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>))<span class="ruby-operator">+</span><span class="ruby-value">2</span>)<span class="ruby-operator">+</span><span class="ruby-ivar">@cable</span> 
+               <span class="ruby-keyword">end</span> 
+            <span class="ruby-keyword">end</span>
+          <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">end</span>
+       <span class="ruby-identifier">j</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span> 
+     <span class="ruby-keyword">end</span> 
+     <span class="ruby-identifier">i</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span> 
+   <span class="ruby-keyword">end</span> 
+ <span class="ruby-keyword">end</span>
+   <span class="ruby-comment">#Código de Canaleta</span>
+  <span class="ruby-ivar">@Can_status</span> = <span class="ruby-value">1</span>
+  
+  <span class="ruby-ivar">@eco_can</span>=<span class="ruby-value">0</span>
+  <span class="ruby-ivar">@opt_can</span>=<span class="ruby-value">0</span>
+  
+  <span class="ruby-ivar">@eq_can</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Canaleta&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>).<span class="ruby-identifier">count</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_can</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+    <span class="ruby-ivar">@eq_can</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Canaleta&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">2</span>).<span class="ruby-identifier">count</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_can</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+      <span class="ruby-ivar">@eq_can</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Canaleta&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">3</span>).<span class="ruby-identifier">count</span>  
+      <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_can</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+        <span class="ruby-ivar">@Can_status</span>=<span class="ruby-value">0</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-ivar">@eco_can</span>=<span class="ruby-value">3</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-ivar">@eco_can</span>=<span class="ruby-value">2</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@eco_can</span>=<span class="ruby-value">1</span>
+  <span class="ruby-keyword">end</span>
+  
+  <span class="ruby-comment">#Código de Tomas</span>
+  <span class="ruby-ivar">@T_status</span> = <span class="ruby-value">1</span>
+  
+  <span class="ruby-ivar">@eco_t</span>=<span class="ruby-value">0</span>
+  <span class="ruby-ivar">@opt_t</span>=<span class="ruby-value">0</span>
+  
+  <span class="ruby-ivar">@eq_t</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Toma&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>).<span class="ruby-identifier">count</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_t</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+    <span class="ruby-ivar">@eq_t</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Toma&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">2</span>).<span class="ruby-identifier">count</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_t</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+      <span class="ruby-ivar">@eq_t</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Toma&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">3</span>).<span class="ruby-identifier">count</span>  
+      <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_t</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+        <span class="ruby-ivar">@T_status</span>=<span class="ruby-value">0</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-ivar">@eco_t</span>=<span class="ruby-value">3</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-ivar">@eco_t</span>=<span class="ruby-value">2</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@eco_t</span>=<span class="ruby-value">1</span>
+  <span class="ruby-keyword">end</span>
+  
+  
+  <span class="ruby-comment">#Código de Conectores</span>
+  <span class="ruby-ivar">@Co_status</span> = <span class="ruby-value">1</span>
+  
+  <span class="ruby-ivar">@eco_con</span>=<span class="ruby-value">0</span>
+  
+  <span class="ruby-ivar">@eq_co</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Conector&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>).<span class="ruby-identifier">count</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_co</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+    <span class="ruby-ivar">@eq_co</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Conector&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">2</span>).<span class="ruby-identifier">count</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_co</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+      <span class="ruby-ivar">@eq_co</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Conector&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">3</span>).<span class="ruby-identifier">count</span>  
+      <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_co</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+        <span class="ruby-ivar">@Co_status</span>=<span class="ruby-value">0</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-ivar">@eco_con</span>=<span class="ruby-value">3</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-ivar">@eco_con</span>=<span class="ruby-value">2</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@eco_con</span>=<span class="ruby-value">1</span>
+  <span class="ruby-keyword">end</span>
+  
+  <span class="ruby-comment">#Código de AP</span>
+  <span class="ruby-ivar">@Ap_status</span> = <span class="ruby-value">1</span>
+  
+  <span class="ruby-ivar">@eco_ap</span>=<span class="ruby-value">0</span>
+  <span class="ruby-ivar">@opt_ap</span>=<span class="ruby-value">0</span>
+  
+  <span class="ruby-ivar">@eq_ap</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;AP&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>).<span class="ruby-identifier">count</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_ap</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+    <span class="ruby-ivar">@eq_ap</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;AP&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">2</span>).<span class="ruby-identifier">count</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_ap</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+      <span class="ruby-ivar">@eq_ap</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;AP&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">3</span>).<span class="ruby-identifier">count</span>  
+      <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_ap</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+        <span class="ruby-ivar">@Ap_status</span>=<span class="ruby-value">0</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-ivar">@eco_ap</span>=<span class="ruby-value">3</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-ivar">@eco_ap</span>=<span class="ruby-value">2</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@eco_ap</span>=<span class="ruby-value">1</span>
+  <span class="ruby-keyword">end</span>
+  
+  
+  <span class="ruby-comment">#Estandar</span>
+      
+  <span class="ruby-comment">#totalcomputers=@physical.sum(:computers)</span>
+  <span class="ruby-ivar">@Sw_status</span> = <span class="ruby-value">1</span>
+  <span class="ruby-ivar">@total_of_computers</span> = <span class="ruby-ivar">@physical</span>.<span class="ruby-identifier">sum</span>(<span class="ruby-value">:computers</span>)
+  
+  <span class="ruby-comment">#Potencias</span>
+  <span class="ruby-ivar">@est</span>=<span class="ruby-value">0</span>
+  
+  <span class="ruby-comment">#Verificamos existencias</span>
+  <span class="ruby-ivar">@eq</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Switch&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">2</span>).<span class="ruby-identifier">count</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+    <span class="ruby-ivar">@eq</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Switch&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">3</span>).<span class="ruby-identifier">count</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+      <span class="ruby-ivar">@eq</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Switch&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>).<span class="ruby-identifier">count</span>  
+      <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+        <span class="ruby-ivar">@Sw_status</span>=<span class="ruby-value">0</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-ivar">@est</span>=<span class="ruby-value">1</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-ivar">@est</span>=<span class="ruby-value">3</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@est</span>=<span class="ruby-value">2</span>
+  <span class="ruby-keyword">end</span>
+  
+  <span class="ruby-comment">#Código de Routers</span>
+  
+  <span class="ruby-ivar">@R_status</span> = <span class="ruby-value">1</span>
+  
+  <span class="ruby-ivar">@est_r</span>=<span class="ruby-value">0</span>
+  
+  <span class="ruby-ivar">@eq_r</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Router&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">2</span>).<span class="ruby-identifier">count</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_r</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+    <span class="ruby-ivar">@eq_r</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Router&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">3</span>).<span class="ruby-identifier">count</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_r</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+      <span class="ruby-ivar">@eq_r</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Router&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>).<span class="ruby-identifier">count</span>  
+      <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_r</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+        <span class="ruby-ivar">@R_status</span>=<span class="ruby-value">0</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-ivar">@est_r</span>=<span class="ruby-value">1</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-ivar">@est_r</span>=<span class="ruby-value">3</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@est_r</span>=<span class="ruby-value">2</span>
+  <span class="ruby-keyword">end</span>
+  
+  <span class="ruby-comment">#Código de Racks</span>
+  <span class="ruby-ivar">@Ra_status</span> = <span class="ruby-value">1</span>
+  
+  <span class="ruby-ivar">@est_ra</span>=<span class="ruby-value">0</span>
+  <span class="ruby-ivar">@est_ra</span>=<span class="ruby-value">0</span>
+  <span class="ruby-ivar">@opt_ra</span>=<span class="ruby-value">0</span>
+  
+  <span class="ruby-ivar">@eq_ra</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Rack&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">2</span>).<span class="ruby-identifier">count</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_ra</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+    <span class="ruby-ivar">@eq_ra</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Rack&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">3</span>).<span class="ruby-identifier">count</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_ra</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+      <span class="ruby-ivar">@eq_ra</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Rack&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>).<span class="ruby-identifier">count</span>  
+      <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_ra</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+        <span class="ruby-ivar">@Ra_status</span>=<span class="ruby-value">0</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-ivar">@est_ra</span>=<span class="ruby-value">1</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-ivar">@est_ra</span>=<span class="ruby-value">3</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@est_ra</span>=<span class="ruby-value">2</span>
+  <span class="ruby-keyword">end</span>
+  
+  <span class="ruby-comment">#Código de Cable</span>
+  <span class="ruby-ivar">@Ca_status</span> = <span class="ruby-value">1</span>
+  
+  <span class="ruby-ivar">@est_ca</span>=<span class="ruby-value">0</span>
+  
+  <span class="ruby-ivar">@eq_ca</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Cable&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">2</span>).<span class="ruby-identifier">count</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_ca</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+    <span class="ruby-ivar">@eq_ca</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Cable&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">3</span>).<span class="ruby-identifier">count</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_ca</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+      <span class="ruby-ivar">@eq_ca</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Cable&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>).<span class="ruby-identifier">count</span>  
+      <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_ca</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+        <span class="ruby-ivar">@Ca_status</span>=<span class="ruby-value">0</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-ivar">@est_ca</span>=<span class="ruby-value">1</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-ivar">@est_ca</span>=<span class="ruby-value">3</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@est_ca</span>=<span class="ruby-value">2</span>
+  <span class="ruby-keyword">end</span>
+  
+  <span class="ruby-comment">#Cantidad de cable</span>
+  <span class="ruby-ivar">@physical</span>=<span class="ruby-constant">Physical</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:request_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:request_id</span>]) 
+  <span class="ruby-ivar">@physical</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">physical</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">cont</span>=<span class="ruby-value">0</span>
+  <span class="ruby-ivar">@cable</span> = <span class="ruby-value">0</span>
+   <span class="ruby-identifier">i</span> = <span class="ruby-value">0</span> 
+   <span class="ruby-keyword">while</span> <span class="ruby-identifier">i</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">physical</span>.<span class="ruby-identifier">large</span> 
+       <span class="ruby-identifier">j</span> = <span class="ruby-value">0</span> 
+       <span class="ruby-ivar">@aux</span>=<span class="ruby-value">0</span> 
+     <span class="ruby-keyword">while</span> <span class="ruby-identifier">j</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">physical</span>.<span class="ruby-identifier">width</span> 
+    
+         <span class="ruby-keyword">if</span> <span class="ruby-identifier">j</span> <span class="ruby-operator">!=</span> <span class="ruby-value">0</span> 
+           <span class="ruby-keyword">if</span> <span class="ruby-identifier">i</span><span class="ruby-operator">%</span><span class="ruby-value">2</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> 
+            <span class="ruby-keyword">if</span> <span class="ruby-identifier">cont</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">physical</span>.<span class="ruby-identifier">computers</span>
+              <span class="ruby-identifier">cont</span><span class="ruby-operator">+=</span><span class="ruby-value">1</span>
+               <span class="ruby-keyword">if</span> <span class="ruby-identifier">i</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> 
+                <span class="ruby-ivar">@cable</span> = (<span class="ruby-value">0.5</span><span class="ruby-operator">+</span>(<span class="ruby-identifier">physical</span>.<span class="ruby-identifier">height</span><span class="ruby-operator">*</span><span class="ruby-value">2</span>)<span class="ruby-operator">+</span>((<span class="ruby-identifier">j</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>))<span class="ruby-operator">+</span><span class="ruby-value">2</span>)<span class="ruby-operator">+</span><span class="ruby-ivar">@cable</span> 
+               <span class="ruby-keyword">else</span> 
+                <span class="ruby-ivar">@cable</span> = (<span class="ruby-value">0.5</span><span class="ruby-operator">+</span>(<span class="ruby-identifier">physical</span>.<span class="ruby-identifier">height</span><span class="ruby-operator">*</span><span class="ruby-value">2</span>)<span class="ruby-operator">+</span>((<span class="ruby-identifier">i</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>)<span class="ruby-operator">+</span>(<span class="ruby-identifier">j</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>))<span class="ruby-operator">+</span><span class="ruby-value">2</span>)<span class="ruby-operator">+</span><span class="ruby-ivar">@cable</span> 
+               <span class="ruby-keyword">end</span> 
+            <span class="ruby-keyword">end</span>
+          <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">end</span>
+       <span class="ruby-identifier">j</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span> 
+     <span class="ruby-keyword">end</span> 
+     <span class="ruby-identifier">i</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span> 
+   <span class="ruby-keyword">end</span> 
+ <span class="ruby-keyword">end</span>
+   <span class="ruby-comment">#Código de Canaleta</span>
+  <span class="ruby-ivar">@Can_status</span> = <span class="ruby-value">1</span>
+  
+  <span class="ruby-ivar">@est_can</span>=<span class="ruby-value">0</span>
+  <span class="ruby-ivar">@est_can</span>=<span class="ruby-value">0</span>
+  <span class="ruby-ivar">@opt_can</span>=<span class="ruby-value">0</span>
+  
+  <span class="ruby-ivar">@eq_can</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Canaleta&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">2</span>).<span class="ruby-identifier">count</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_can</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+    <span class="ruby-ivar">@eq_can</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Canaleta&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">3</span>).<span class="ruby-identifier">count</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_can</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+      <span class="ruby-ivar">@eq_can</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Canaleta&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>).<span class="ruby-identifier">count</span>  
+      <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_can</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+        <span class="ruby-ivar">@Can_status</span>=<span class="ruby-value">0</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-ivar">@est_can</span>=<span class="ruby-value">1</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-ivar">@est_can</span>=<span class="ruby-value">3</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@est_can</span>=<span class="ruby-value">2</span>
+  <span class="ruby-keyword">end</span>
+  
+  <span class="ruby-comment">#Código de Canaleta</span>
+  <span class="ruby-ivar">@T_status</span> = <span class="ruby-value">1</span>
+  
+  <span class="ruby-ivar">@est_t</span>=<span class="ruby-value">0</span>
+  <span class="ruby-ivar">@est_t</span>=<span class="ruby-value">0</span>
+  <span class="ruby-ivar">@opt_t</span>=<span class="ruby-value">0</span>
+  
+  <span class="ruby-ivar">@eq_t</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Toma&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">2</span>).<span class="ruby-identifier">count</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_t</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+    <span class="ruby-ivar">@eq_t</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Toma&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">3</span>).<span class="ruby-identifier">count</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_t</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+      <span class="ruby-ivar">@eq_t</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Toma&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>).<span class="ruby-identifier">count</span>  
+      <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_t</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+        <span class="ruby-ivar">@T_status</span>=<span class="ruby-value">0</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-ivar">@est_t</span>=<span class="ruby-value">1</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-ivar">@est_t</span>=<span class="ruby-value">3</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@est_t</span>=<span class="ruby-value">2</span>
+  <span class="ruby-keyword">end</span>
+  
+  <span class="ruby-comment">#Código de Conectores</span>
+  <span class="ruby-ivar">@Co_status</span> = <span class="ruby-value">1</span>
+  
+  <span class="ruby-ivar">@eco_co</span>=<span class="ruby-value">0</span>
+  <span class="ruby-ivar">@opt_co</span>=<span class="ruby-value">0</span>
+  
+  <span class="ruby-ivar">@eq_co</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Conector&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">2</span>).<span class="ruby-identifier">count</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_co</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+    <span class="ruby-ivar">@eq_co</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Conector&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">3</span>).<span class="ruby-identifier">count</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_co</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+      <span class="ruby-ivar">@eq_co</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Conector&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>).<span class="ruby-identifier">count</span>  
+      <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_co</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+        <span class="ruby-ivar">@Co_status</span>=<span class="ruby-value">0</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-ivar">@est_co</span>=<span class="ruby-value">1</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-ivar">@est_co</span>=<span class="ruby-value">3</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@est_co</span>=<span class="ruby-value">2</span>
+  <span class="ruby-keyword">end</span>
+  
+  <span class="ruby-comment">#Código de AP</span>
+  <span class="ruby-ivar">@Ap_status</span> = <span class="ruby-value">1</span>
+  
+  <span class="ruby-ivar">@opt_ap</span>=<span class="ruby-value">0</span>
+  
+  <span class="ruby-ivar">@eq_ap</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;AP&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">2</span>).<span class="ruby-identifier">count</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_ap</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+    <span class="ruby-ivar">@eq_ap</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;AP&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">3</span>).<span class="ruby-identifier">count</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_ap</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+      <span class="ruby-ivar">@eq_ap</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;AP&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>).<span class="ruby-identifier">count</span>  
+      <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_ap</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+        <span class="ruby-ivar">@Ap_status</span>=<span class="ruby-value">0</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-ivar">@est_ap</span>=<span class="ruby-value">1</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-ivar">@est_ap</span>=<span class="ruby-value">3</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@est_ap</span>=<span class="ruby-value">2</span>
+  <span class="ruby-keyword">end</span>
+  
+  
+  
+  
+  
+  <span class="ruby-comment"># Optima</span>
+  
+  
+  
+  
+  
+  
+      
+  <span class="ruby-comment">#totalcomputers=@physical.sum(:computers)</span>
+  <span class="ruby-ivar">@Sw_status</span> = <span class="ruby-value">1</span>
+  <span class="ruby-ivar">@total_of_computers</span> = <span class="ruby-ivar">@physical</span>.<span class="ruby-identifier">sum</span>(<span class="ruby-value">:computers</span>)
+  
+  <span class="ruby-comment">#Potencias</span>
+  <span class="ruby-ivar">@opt</span>=<span class="ruby-value">0</span>
+  
+  <span class="ruby-comment">#Verificamos existencias</span>
+  <span class="ruby-ivar">@eq</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Switch&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">3</span>).<span class="ruby-identifier">count</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+    <span class="ruby-ivar">@eq</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Switch&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">2</span>).<span class="ruby-identifier">count</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+      <span class="ruby-ivar">@eq</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Switch&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>).<span class="ruby-identifier">count</span>  
+      <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+        <span class="ruby-ivar">@Sw_status</span>=<span class="ruby-value">0</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-ivar">@opt</span>=<span class="ruby-value">1</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-ivar">@opt</span>=<span class="ruby-value">2</span>
+      
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@opt</span>=<span class="ruby-value">3</span>
+  <span class="ruby-keyword">end</span>
+  
+  <span class="ruby-comment">#Código de Routers</span>
+  
+  <span class="ruby-ivar">@R_status</span> = <span class="ruby-value">1</span>
+  
+  <span class="ruby-ivar">@opt_r</span>=<span class="ruby-value">0</span>
+  
+  <span class="ruby-ivar">@eq_r</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Router&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">3</span>).<span class="ruby-identifier">count</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_r</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+    <span class="ruby-ivar">@eq_r</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Router&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">2</span>).<span class="ruby-identifier">count</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_r</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+      <span class="ruby-ivar">@eq_r</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Router&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>).<span class="ruby-identifier">count</span>  
+      <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_r</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+        <span class="ruby-ivar">@R_status</span>=<span class="ruby-value">0</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-ivar">@opt_r</span>=<span class="ruby-value">1</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-ivar">@opt_r</span>=<span class="ruby-value">2</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@opt_r</span>=<span class="ruby-value">3</span>
+  <span class="ruby-keyword">end</span>
+  
+  <span class="ruby-comment">#Código de Racks</span>
+  <span class="ruby-ivar">@Ra_status</span> = <span class="ruby-value">1</span>
+  
+  <span class="ruby-ivar">@opt_ra</span>=<span class="ruby-value">0</span>
+  <span class="ruby-ivar">@opt_ra</span>=<span class="ruby-value">0</span>
+  <span class="ruby-ivar">@opt_ra</span>=<span class="ruby-value">0</span>
+  
+  <span class="ruby-ivar">@eq_ra</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Rack&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">3</span>).<span class="ruby-identifier">count</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_ra</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+    <span class="ruby-ivar">@eq_ra</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Rack&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">2</span>).<span class="ruby-identifier">count</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_ra</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+      <span class="ruby-ivar">@eq_ra</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Rack&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>).<span class="ruby-identifier">count</span>  
+      <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_ra</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+        <span class="ruby-ivar">@Ra_status</span>=<span class="ruby-value">0</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-ivar">@opt_ra</span>=<span class="ruby-value">1</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-ivar">@opt_ra</span>=<span class="ruby-value">2</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@opt_ra</span>=<span class="ruby-value">3</span>
+  <span class="ruby-keyword">end</span>
+  
+  <span class="ruby-comment">#Código de Cable</span>
+  <span class="ruby-ivar">@Ca_status</span> = <span class="ruby-value">1</span>
+  
+  <span class="ruby-ivar">@opt_ca</span>=<span class="ruby-value">0</span>
+  
+  <span class="ruby-ivar">@eq_ca</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Cable&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">3</span>).<span class="ruby-identifier">count</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_ca</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+    <span class="ruby-ivar">@eq_ca</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Cable&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">2</span>).<span class="ruby-identifier">count</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_ca</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+      <span class="ruby-ivar">@eq_ca</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Cable&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>).<span class="ruby-identifier">count</span>  
+      <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_ca</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+        <span class="ruby-ivar">@Ca_status</span>=<span class="ruby-value">0</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-ivar">@opt_ca</span>=<span class="ruby-value">1</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-ivar">@opt_ca</span>=<span class="ruby-value">2</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@opt_ca</span>=<span class="ruby-value">3</span>
+  <span class="ruby-keyword">end</span>
+  
+  <span class="ruby-comment">#Cantidad de cable</span>
+  <span class="ruby-ivar">@physical</span>=<span class="ruby-constant">Physical</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:request_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:request_id</span>]) 
+  <span class="ruby-ivar">@cable</span> = <span class="ruby-value">0</span>
+  <span class="ruby-ivar">@physical</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">physical</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">physical</span>.<span class="ruby-identifier">conference_hall?</span>
+      <span class="ruby-ivar">@cable</span><span class="ruby-operator">+=</span><span class="ruby-value">2</span><span class="ruby-operator">*</span><span class="ruby-identifier">physical</span>.<span class="ruby-identifier">height</span><span class="ruby-operator">+</span><span class="ruby-identifier">physical</span>.<span class="ruby-identifier">width</span><span class="ruby-operator">+</span><span class="ruby-identifier">physical</span>.<span class="ruby-identifier">large</span><span class="ruby-operator">+</span><span class="ruby-value">4</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">cont</span>=<span class="ruby-value">0</span>
+  <span class="ruby-ivar">@cable</span> = <span class="ruby-ivar">@cable</span> <span class="ruby-operator">+</span>(<span class="ruby-value">0.5</span><span class="ruby-operator">+</span>(<span class="ruby-identifier">physical</span>.<span class="ruby-identifier">height</span><span class="ruby-operator">*</span><span class="ruby-value">2</span>)<span class="ruby-operator">+</span><span class="ruby-value">2</span>) 
+   <span class="ruby-identifier">i</span> = <span class="ruby-value">0</span> 
+   <span class="ruby-keyword">while</span> <span class="ruby-identifier">i</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">physical</span>.<span class="ruby-identifier">large</span> 
+       <span class="ruby-identifier">j</span> = <span class="ruby-value">0</span> 
+       <span class="ruby-ivar">@aux</span>=<span class="ruby-value">0</span> 
+     <span class="ruby-keyword">while</span> <span class="ruby-identifier">j</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">physical</span>.<span class="ruby-identifier">width</span> 
+    
+         <span class="ruby-keyword">if</span> <span class="ruby-identifier">j</span> <span class="ruby-operator">!=</span> <span class="ruby-value">0</span> 
+           <span class="ruby-keyword">if</span> <span class="ruby-identifier">i</span><span class="ruby-operator">%</span><span class="ruby-value">2</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> 
+            <span class="ruby-keyword">if</span> <span class="ruby-identifier">cont</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">physical</span>.<span class="ruby-identifier">computers</span>
+              <span class="ruby-identifier">cont</span><span class="ruby-operator">+=</span><span class="ruby-value">1</span>
+               <span class="ruby-keyword">if</span> <span class="ruby-identifier">i</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> 
+                <span class="ruby-ivar">@cable</span> = (<span class="ruby-value">0.5</span><span class="ruby-operator">+</span>(<span class="ruby-identifier">physical</span>.<span class="ruby-identifier">height</span><span class="ruby-operator">*</span><span class="ruby-value">2</span>)<span class="ruby-operator">+</span>((<span class="ruby-identifier">j</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>))<span class="ruby-operator">+</span><span class="ruby-value">2</span>)<span class="ruby-operator">+</span><span class="ruby-ivar">@cable</span> 
+               <span class="ruby-keyword">else</span> 
+                <span class="ruby-ivar">@cable</span> = (<span class="ruby-value">0.5</span><span class="ruby-operator">+</span>(<span class="ruby-identifier">physical</span>.<span class="ruby-identifier">height</span><span class="ruby-operator">*</span><span class="ruby-value">2</span>)<span class="ruby-operator">+</span>((<span class="ruby-identifier">i</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>)<span class="ruby-operator">+</span>(<span class="ruby-identifier">j</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>))<span class="ruby-operator">+</span><span class="ruby-value">2</span>)<span class="ruby-operator">+</span><span class="ruby-ivar">@cable</span> 
+               <span class="ruby-keyword">end</span> 
+            <span class="ruby-keyword">end</span>
+          <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">end</span>
+       <span class="ruby-identifier">j</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span> 
+     <span class="ruby-keyword">end</span> 
+     <span class="ruby-identifier">i</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span> 
+   <span class="ruby-keyword">end</span> 
+ <span class="ruby-keyword">end</span>
+ 
+   <span class="ruby-comment">#Código de Canaleta</span>
+  <span class="ruby-ivar">@Can_status</span> = <span class="ruby-value">1</span>
+  
+  <span class="ruby-ivar">@opt_can</span>=<span class="ruby-value">0</span>
+  <span class="ruby-ivar">@opt_can</span>=<span class="ruby-value">0</span>
+  <span class="ruby-ivar">@opt_can</span>=<span class="ruby-value">0</span>
+  
+  <span class="ruby-ivar">@eq_can</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Canaleta&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">3</span>).<span class="ruby-identifier">count</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_can</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+    <span class="ruby-ivar">@eq_can</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Canaleta&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">2</span>).<span class="ruby-identifier">count</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_can</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+      <span class="ruby-ivar">@eq_can</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Canaleta&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>).<span class="ruby-identifier">count</span>  
+      <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_can</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+        <span class="ruby-ivar">@Can_status</span>=<span class="ruby-value">0</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-ivar">@opt_can</span>=<span class="ruby-value">1</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-ivar">@opt_can</span>=<span class="ruby-value">2</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@opt_can</span>=<span class="ruby-value">3</span>
+  <span class="ruby-keyword">end</span>
+  
+  <span class="ruby-comment">#Código de Canaleta</span>
+  <span class="ruby-ivar">@T_status</span> = <span class="ruby-value">1</span>
+  
+  <span class="ruby-ivar">@opt_t</span>=<span class="ruby-value">0</span>
+  <span class="ruby-ivar">@opt_t</span>=<span class="ruby-value">0</span>
+  <span class="ruby-ivar">@opt_t</span>=<span class="ruby-value">0</span>
+  
+  <span class="ruby-ivar">@eq_t</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Toma&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">3</span>).<span class="ruby-identifier">count</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_t</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+    <span class="ruby-ivar">@eq_t</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Toma&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">2</span>).<span class="ruby-identifier">count</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_t</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+      <span class="ruby-ivar">@eq_t</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Toma&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>).<span class="ruby-identifier">count</span>  
+      <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_t</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+        <span class="ruby-ivar">@T_status</span>=<span class="ruby-value">0</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-ivar">@opt_t</span>=<span class="ruby-value">1</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-ivar">@opt_t</span>=<span class="ruby-value">2</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@opt_t</span>=<span class="ruby-value">3</span>
+  <span class="ruby-keyword">end</span>
+  
+  
+  <span class="ruby-comment">#Código de Conectores</span>
+  <span class="ruby-ivar">@Co_status</span> = <span class="ruby-value">1</span>
+  
+  <span class="ruby-ivar">@eco_co</span>=<span class="ruby-value">0</span>
+  <span class="ruby-ivar">@opt_co</span>=<span class="ruby-value">0</span>
+  
+  <span class="ruby-ivar">@eq_co</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Conector&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">3</span>).<span class="ruby-identifier">count</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_co</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+    <span class="ruby-ivar">@eq_co</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Conector&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">2</span>).<span class="ruby-identifier">count</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_co</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+      <span class="ruby-ivar">@eq_co</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Conector&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>).<span class="ruby-identifier">count</span>  
+      <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_co</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+        <span class="ruby-ivar">@Co_status</span>=<span class="ruby-value">0</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-ivar">@opt_co</span>=<span class="ruby-value">1</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-ivar">@opt_co</span>=<span class="ruby-value">2</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@opt_co</span>=<span class="ruby-value">3</span>
+  <span class="ruby-keyword">end</span>
+  
+  <span class="ruby-comment">#Código de AP</span>
+  <span class="ruby-ivar">@Ap_status</span> = <span class="ruby-value">1</span>
+  
+  <span class="ruby-ivar">@opt_ap</span>=<span class="ruby-value">0</span>
+  
+  <span class="ruby-ivar">@eq_ap</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;AP&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">3</span>).<span class="ruby-identifier">count</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_ap</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+    <span class="ruby-ivar">@eq_ap</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;AP&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span><span class="ruby-value">2</span>).<span class="ruby-identifier">count</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_ap</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+      <span class="ruby-ivar">@eq_ap</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;AP&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>).<span class="ruby-identifier">count</span>  
+      <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq_ap</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+        <span class="ruby-ivar">@Ap_status</span>=<span class="ruby-value">0</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-ivar">@opt_ap</span>=<span class="ruby-value">1</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-ivar">@opt_ap</span>=<span class="ruby-value">2</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@opt_ap</span>=<span class="ruby-value">3</span>
+  <span class="ruby-keyword">end</span>
+  
+  
+  
+  
+  
+  <span class="ruby-identifier">render</span>  <span class="ruby-value">:pdf</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Reporte&quot;</span>, <span class="ruby-value">:template</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;pdf/cotizacion.html.erb&#39;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-direccionamiento" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">direccionamiento</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="direccionamiento-source">
+            <pre><span class="ruby-comment"># File app/controllers/pdf_controller.rb, line 75</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">direccionamiento</span>
+  
+  
+  
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:request_id</span>]
+    <span class="ruby-ivar">@request</span>=<span class="ruby-constant">Request</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:request_id</span>])
+    <span class="ruby-ivar">@company</span>=<span class="ruby-constant">Company</span>.<span class="ruby-identifier">find</span>(<span class="ruby-ivar">@request</span>.<span class="ruby-identifier">company_id</span>)
+    
+    <span class="ruby-ivar">@physical</span>=<span class="ruby-constant">Physical</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:request_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">id</span>)
+    <span class="ruby-ivar">@logical</span>=<span class="ruby-constant">Logical</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:request_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">id</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@id_empresa</span>=<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>]
+  <span class="ruby-ivar">@request</span>=<span class="ruby-constant">Request</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:company_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@company</span>.<span class="ruby-identifier">id</span>).<span class="ruby-identifier">first</span> 
+  <span class="ruby-ivar">@company</span>=<span class="ruby-constant">Company</span>.<span class="ruby-identifier">find</span>(<span class="ruby-ivar">@company</span>.<span class="ruby-identifier">id</span>) 
+  <span class="ruby-ivar">@physical</span>=<span class="ruby-constant">Physical</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:request_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">id</span>) 
+  <span class="ruby-ivar">@logical</span>=<span class="ruby-constant">Logical</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:request_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">id</span>).<span class="ruby-identifier">last</span> 
+  <span class="ruby-ivar">@subnets</span>=<span class="ruby-constant">Subnet</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:logical_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@logical</span>.<span class="ruby-identifier">id</span>) 
+  <span class="ruby-ivar">@sizeofs</span>=<span class="ruby-constant">Subnet</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:logical_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@logical</span>.<span class="ruby-identifier">id</span>).<span class="ruby-identifier">size</span> 
+  <span class="ruby-ivar">@totalcomputers</span>=<span class="ruby-ivar">@physical</span>.<span class="ruby-identifier">sum</span>(<span class="ruby-value">:computers</span>) 
+  <span class="ruby-ivar">@totalcomputers2</span>=<span class="ruby-ivar">@physical</span>.<span class="ruby-identifier">sum</span>(<span class="ruby-value">:computers</span>)
+  <span class="ruby-ivar">@totalcomputers3</span>=<span class="ruby-ivar">@physical</span>.<span class="ruby-identifier">sum</span>(<span class="ruby-value">:computers</span>)
+  
+  <span class="ruby-identifier">totalcomputers</span>=<span class="ruby-ivar">@physical</span>.<span class="ruby-identifier">sum</span>(<span class="ruby-value">:computers</span>)
+  <span class="ruby-identifier">default</span>=<span class="ruby-identifier">totalcomputers</span><span class="ruby-operator">-</span><span class="ruby-ivar">@subnets</span>.<span class="ruby-identifier">sum</span>(<span class="ruby-value">:computers</span>) 
+  <span class="ruby-ivar">@subaux</span>=<span class="ruby-constant">Subnet</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;default&quot;</span>, <span class="ruby-value">:logical_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@logical</span>.<span class="ruby-identifier">id</span>).<span class="ruby-identifier">count</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">default</span><span class="ruby-operator">&gt;</span><span class="ruby-value">0</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@subaux</span><span class="ruby-operator">==</span><span class="ruby-value">0</span>
+    <span class="ruby-ivar">@su</span>=<span class="ruby-constant">Subnet</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;default&quot;</span>, <span class="ruby-value">:description</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Sub red Default&quot;</span>, <span class="ruby-value">:computers</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">default</span>, <span class="ruby-value">:logical_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@logical</span>.<span class="ruby-identifier">id</span>)
+    <span class="ruby-ivar">@su</span>.<span class="ruby-identifier">save</span> 
+  <span class="ruby-keyword">end</span>
+  
+  <span class="ruby-comment">#response = HTTParty.get(&#39;http://api.stackexchange.com/2.2/questions?site=stackoverflow&#39;)</span>
+  <span class="ruby-comment">#response = HTTParty.get(&quot;http://instanceshape.com/admin/VLSM/index.php?Host=192.168.1.24&amp;sub[uno]=15&amp;sub[dos]=56&amp;sub[tres]=36&quot;)</span>
+  <span class="ruby-identifier">require</span> <span class="ruby-string">&#39;uri&#39;</span>
+  <span class="ruby-identifier">require</span> <span class="ruby-string">&#39;net/http&#39;</span>
+  
+  <span class="ruby-comment">#Direccionamiento normal</span>
+  
+  <span class="ruby-comment">#myurl=&quot;https://instanceshape.com/admin/VLSM/index.php?Host=&quot;+@logical.host1.to_s+&quot;.&quot;+@logical.host2.to_s+&quot;.&quot;+@logical.host3.to_s+&quot;.&quot;+@logical.host4.to_s</span>
+  <span class="ruby-identifier">myurl</span>=<span class="ruby-string">&quot;https://instanceshape.com/admin/VLSM/index.php?Host=&quot;</span><span class="ruby-operator">+</span><span class="ruby-ivar">@logical</span>.<span class="ruby-identifier">host1</span>.<span class="ruby-identifier">to_s</span><span class="ruby-operator">+</span><span class="ruby-string">&quot;.&quot;</span><span class="ruby-operator">+</span><span class="ruby-ivar">@logical</span>.<span class="ruby-identifier">host2</span>.<span class="ruby-identifier">to_s</span><span class="ruby-operator">+</span><span class="ruby-string">&quot;.&quot;</span><span class="ruby-operator">+</span><span class="ruby-ivar">@logical</span>.<span class="ruby-identifier">host3</span>.<span class="ruby-identifier">to_s</span><span class="ruby-operator">+</span><span class="ruby-string">&quot;.0&quot;</span>;
+  <span class="ruby-ivar">@subnets</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">subs</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">myurl</span><span class="ruby-operator">+=</span><span class="ruby-string">&quot;&amp;sub[&quot;</span><span class="ruby-operator">+</span><span class="ruby-identifier">subs</span>.<span class="ruby-identifier">name</span><span class="ruby-operator">+</span><span class="ruby-string">&quot;]=&quot;</span><span class="ruby-operator">+</span><span class="ruby-identifier">subs</span>.<span class="ruby-identifier">computers</span>.<span class="ruby-identifier">to_s</span>
+  <span class="ruby-keyword">end</span>  
+  <span class="ruby-identifier">url</span> = <span class="ruby-constant">URI</span>(<span class="ruby-identifier">myurl</span>)
+  <span class="ruby-identifier">http</span> = <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">url</span>.<span class="ruby-identifier">host</span>, <span class="ruby-identifier">url</span>.<span class="ruby-identifier">port</span>)
+  <span class="ruby-identifier">http</span>.<span class="ruby-identifier">use_ssl</span> = <span class="ruby-keyword">true</span>
+  <span class="ruby-identifier">http</span>.<span class="ruby-identifier">verify_mode</span> = <span class="ruby-constant">OpenSSL</span><span class="ruby-operator">::</span><span class="ruby-constant">SSL</span><span class="ruby-operator">::</span><span class="ruby-constant">VERIFY_NONE</span>
+  <span class="ruby-identifier">request</span> = <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span><span class="ruby-operator">::</span><span class="ruby-constant">Get</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">url</span>)
+  <span class="ruby-identifier">response</span> = <span class="ruby-identifier">http</span>.<span class="ruby-identifier">request</span>(<span class="ruby-identifier">request</span>)
+  <span class="ruby-identifier">puts</span> <span class="ruby-identifier">response</span>.<span class="ruby-identifier">read_body</span>
+  <span class="ruby-identifier">require</span> <span class="ruby-string">&#39;json&#39;</span>
+  <span class="ruby-ivar">@h</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span> <span class="ruby-identifier">response</span>.<span class="ruby-identifier">read_body</span>
+  
+  <span class="ruby-comment">#Direccionamiento Escalabilidad</span>
+  
+  <span class="ruby-comment">#myurl=&quot;https://instanceshape.com/admin/VLSM/index.php?Host=&quot;+@logical.host1.to_s+&quot;.&quot;+@logical.host2.to_s+&quot;.&quot;+@logical.host3.to_s+&quot;.&quot;+@logical.host4.to_s</span>
+  <span class="ruby-identifier">myurl</span>=<span class="ruby-string">&quot;https://instanceshape.com/admin/VLSM/index.php?Host=&quot;</span><span class="ruby-operator">+</span><span class="ruby-ivar">@logical</span>.<span class="ruby-identifier">host1</span>.<span class="ruby-identifier">to_s</span><span class="ruby-operator">+</span><span class="ruby-string">&quot;.&quot;</span><span class="ruby-operator">+</span><span class="ruby-ivar">@logical</span>.<span class="ruby-identifier">host2</span>.<span class="ruby-identifier">to_s</span><span class="ruby-operator">+</span><span class="ruby-string">&quot;.&quot;</span><span class="ruby-operator">+</span><span class="ruby-ivar">@logical</span>.<span class="ruby-identifier">host3</span>.<span class="ruby-identifier">to_s</span><span class="ruby-operator">+</span><span class="ruby-string">&quot;.0&quot;</span>
+  <span class="ruby-ivar">@subnets</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">subs</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">myurl</span><span class="ruby-operator">+=</span><span class="ruby-string">&quot;&amp;sub[&quot;</span><span class="ruby-operator">+</span><span class="ruby-identifier">subs</span>.<span class="ruby-identifier">name</span><span class="ruby-operator">+</span><span class="ruby-string">&quot;]=&quot;</span><span class="ruby-operator">+</span>(<span class="ruby-identifier">subs</span>.<span class="ruby-identifier">computers</span><span class="ruby-operator">+</span>(<span class="ruby-identifier">subs</span>.<span class="ruby-identifier">computers</span><span class="ruby-operator">*</span><span class="ruby-ivar">@logical</span>.<span class="ruby-identifier">scalability</span><span class="ruby-operator">/</span><span class="ruby-value">100</span>)).<span class="ruby-identifier">to_s</span>
+  <span class="ruby-keyword">end</span>  
+  <span class="ruby-identifier">url</span> = <span class="ruby-constant">URI</span>(<span class="ruby-identifier">myurl</span>)
+  <span class="ruby-identifier">http</span> = <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">url</span>.<span class="ruby-identifier">host</span>, <span class="ruby-identifier">url</span>.<span class="ruby-identifier">port</span>)
+  <span class="ruby-identifier">http</span>.<span class="ruby-identifier">use_ssl</span> = <span class="ruby-keyword">true</span>
+  <span class="ruby-identifier">http</span>.<span class="ruby-identifier">verify_mode</span> = <span class="ruby-constant">OpenSSL</span><span class="ruby-operator">::</span><span class="ruby-constant">SSL</span><span class="ruby-operator">::</span><span class="ruby-constant">VERIFY_NONE</span>
+  <span class="ruby-identifier">request</span> = <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span><span class="ruby-operator">::</span><span class="ruby-constant">Get</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">url</span>)
+  <span class="ruby-identifier">response</span> = <span class="ruby-identifier">http</span>.<span class="ruby-identifier">request</span>(<span class="ruby-identifier">request</span>)
+  <span class="ruby-identifier">puts</span> <span class="ruby-identifier">response</span>.<span class="ruby-identifier">read_body</span>
+  <span class="ruby-identifier">require</span> <span class="ruby-string">&#39;json&#39;</span>
+  <span class="ruby-ivar">@g</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span> <span class="ruby-identifier">response</span>.<span class="ruby-identifier">read_body</span>
+  
+  
+  <span class="ruby-identifier">render</span>  <span class="ruby-value">:pdf</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Reporte&quot;</span>, <span class="ruby-value">:template</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;pdf/direccionamiento.html.erb&#39;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-empresa" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">empresa</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="empresa-source">
+            <pre><span class="ruby-comment"># File app/controllers/pdf_controller.rb, line 4</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">empresa</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:request_id</span>]
+    <span class="ruby-ivar">@request</span>=<span class="ruby-constant">Request</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:request_id</span>]) 
+    <span class="ruby-ivar">@company</span>=<span class="ruby-constant">Company</span>.<span class="ruby-identifier">find</span>(<span class="ruby-ivar">@request</span>.<span class="ruby-identifier">company_id</span>)
+    <span class="ruby-ivar">@physical</span>=<span class="ruby-constant">Physical</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:request_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">id</span>)
+    <span class="ruby-ivar">@logical</span>=<span class="ruby-constant">Logical</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:request_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">id</span>).<span class="ruby-identifier">first</span>
+    <span class="ruby-ivar">@subnets</span>=<span class="ruby-constant">Subnet</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:logical_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@logical</span>.<span class="ruby-identifier">id</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@sizeofs</span>=<span class="ruby-constant">Subnet</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:logical_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@logical</span>.<span class="ruby-identifier">id</span>).<span class="ruby-identifier">size</span> 
+  
+  <span class="ruby-comment">#totalcomputers=@physical.sum(:computers)</span>
+  <span class="ruby-ivar">@Sw_status</span> = <span class="ruby-value">1</span>
+  <span class="ruby-ivar">@total_of_computers</span> = <span class="ruby-ivar">@physical</span>.<span class="ruby-identifier">sum</span>(<span class="ruby-value">:computers</span>)
+  
+  <span class="ruby-comment">#Potencias</span>
+  <span class="ruby-ivar">@eco</span>=<span class="ruby-value">0</span>
+  <span class="ruby-comment">#Verificamos existencias</span>
+  <span class="ruby-ivar">@eq</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Switch&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>).<span class="ruby-identifier">count</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+    <span class="ruby-ivar">@eq</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Switch&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">2</span>).<span class="ruby-identifier">count</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+      <span class="ruby-ivar">@eq</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Switch&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">3</span>).<span class="ruby-identifier">count</span>  
+      <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+        <span class="ruby-ivar">@Sw_status</span>=<span class="ruby-value">0</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-ivar">@eco</span>=<span class="ruby-value">3</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-ivar">@eco</span>=<span class="ruby-value">2</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@eco</span>=<span class="ruby-value">1</span>
+  <span class="ruby-keyword">end</span>
+  
+  <span class="ruby-ivar">@servidores</span>=<span class="ruby-value">0</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">web?</span>
+    <span class="ruby-ivar">@servidores</span><span class="ruby-operator">+=</span><span class="ruby-value">1</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">bd?</span>
+    <span class="ruby-ivar">@servidores</span><span class="ruby-operator">+=</span><span class="ruby-value">1</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">aplications?</span>
+    <span class="ruby-ivar">@servidores</span><span class="ruby-operator">+=</span><span class="ruby-value">1</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">proxy?</span>
+    <span class="ruby-ivar">@servidores</span><span class="ruby-operator">+=</span><span class="ruby-value">1</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">voip?</span>
+    <span class="ruby-ivar">@servidores</span><span class="ruby-operator">+=</span><span class="ruby-value">1</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">video_conference?</span>
+    <span class="ruby-ivar">@servidores</span><span class="ruby-operator">+=</span><span class="ruby-value">1</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">active_dir?</span>
+    <span class="ruby-ivar">@servidores</span><span class="ruby-operator">+=</span><span class="ruby-value">1</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">dhcp?</span>
+    <span class="ruby-ivar">@servidores</span><span class="ruby-operator">+=</span><span class="ruby-value">1</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">dns?</span>
+    <span class="ruby-ivar">@servidores</span><span class="ruby-operator">+=</span><span class="ruby-value">1</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">ftp?</span>
+    <span class="ruby-ivar">@servidores</span><span class="ruby-operator">+=</span><span class="ruby-value">1</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">email?</span>
+    <span class="ruby-ivar">@servidores</span><span class="ruby-operator">+=</span><span class="ruby-value">1</span>
+  <span class="ruby-keyword">end</span>
+ 
+  <span class="ruby-identifier">render</span>  <span class="ruby-value">:pdf</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Reporte&quot;</span>, <span class="ruby-value">:template</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;pdf/empresa.html.erb&#39;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-final" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">final</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="final-source">
+            <pre><span class="ruby-comment"># File app/controllers/pdf_controller.rb, line 987</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">final</span>
+  <span class="ruby-identifier">render</span>  <span class="ruby-value">:pdf</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Reporte&quot;</span>, <span class="ruby-value">:template</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;pdf/final.html.erb&#39;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-red" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">red</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="red-source">
+            <pre><span class="ruby-comment"># File app/controllers/pdf_controller.rb, line 894</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">red</span>
+ <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:request_id</span>]
+    <span class="ruby-ivar">@request</span>=<span class="ruby-constant">Request</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:request_id</span>]) 
+    <span class="ruby-ivar">@company</span>=<span class="ruby-constant">Company</span>.<span class="ruby-identifier">find</span>(<span class="ruby-ivar">@request</span>.<span class="ruby-identifier">company_id</span>)
+    <span class="ruby-ivar">@physical</span>=<span class="ruby-constant">Physical</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:request_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">id</span>)
+    <span class="ruby-ivar">@logical</span>=<span class="ruby-constant">Logical</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:request_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">id</span>).<span class="ruby-identifier">first</span>
+    <span class="ruby-ivar">@subnets</span>=<span class="ruby-constant">Subnet</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:logical_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@logical</span>.<span class="ruby-identifier">id</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@sizeofs</span>=<span class="ruby-constant">Subnet</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:logical_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@logical</span>.<span class="ruby-identifier">id</span>).<span class="ruby-identifier">size</span> 
+  
+  <span class="ruby-comment">#totalcomputers=@physical.sum(:computers)</span>
+  <span class="ruby-ivar">@Sw_status</span> = <span class="ruby-value">1</span>
+  <span class="ruby-ivar">@total_of_computers</span> = <span class="ruby-ivar">@physical</span>.<span class="ruby-identifier">sum</span>(<span class="ruby-value">:computers</span>)
+  
+  <span class="ruby-comment">#Potencias</span>
+  <span class="ruby-ivar">@eco</span>=<span class="ruby-value">0</span>
+  <span class="ruby-comment">#Verificamos existencias</span>
+  <span class="ruby-ivar">@eq</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Switch&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>).<span class="ruby-identifier">count</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+    <span class="ruby-ivar">@eq</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Switch&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">2</span>).<span class="ruby-identifier">count</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+      <span class="ruby-ivar">@eq</span>=<span class="ruby-constant">Equipment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:etype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Switch&quot;</span>, <span class="ruby-value">:power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">3</span>).<span class="ruby-identifier">count</span>  
+      <span class="ruby-keyword">if</span> <span class="ruby-ivar">@eq</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+        <span class="ruby-ivar">@Sw_status</span>=<span class="ruby-value">0</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-ivar">@eco</span>=<span class="ruby-value">3</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-ivar">@eco</span>=<span class="ruby-value">2</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@eco</span>=<span class="ruby-value">1</span>
+  <span class="ruby-keyword">end</span>
+  
+  <span class="ruby-ivar">@id_empresa</span>=<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>]
+  <span class="ruby-comment">#@request=Request.where(:company_id =&gt; @company.id).first </span>
+  <span class="ruby-comment">#@company=Company.find(@company.id) </span>
+  <span class="ruby-comment">#@physical=Physical.where(:request_id =&gt; @request.id) </span>
+  <span class="ruby-comment">#@logical=Logical.where(:request_id =&gt; @request.id).last </span>
+  <span class="ruby-comment">#@subnets=Subnet.where(:logical_id =&gt; @logical.id) </span>
+  <span class="ruby-comment">#@sizeofs=Subnet.where(:logical_id =&gt; @logical.id).size </span>
+  <span class="ruby-comment">#@totalcomputers=@physical.sum(:computers) </span>
+  <span class="ruby-ivar">@totalcomputers2</span>=<span class="ruby-ivar">@physical</span>.<span class="ruby-identifier">sum</span>(<span class="ruby-value">:computers</span>)
+  <span class="ruby-ivar">@totalcomputers3</span>=<span class="ruby-ivar">@physical</span>.<span class="ruby-identifier">sum</span>(<span class="ruby-value">:computers</span>)
+  
+  <span class="ruby-identifier">totalcomputers</span>=<span class="ruby-ivar">@physical</span>.<span class="ruby-identifier">sum</span>(<span class="ruby-value">:computers</span>)
+  <span class="ruby-identifier">default</span>=<span class="ruby-identifier">totalcomputers</span><span class="ruby-operator">-</span><span class="ruby-ivar">@subnets</span>.<span class="ruby-identifier">sum</span>(<span class="ruby-value">:computers</span>) 
+  <span class="ruby-ivar">@subaux</span>=<span class="ruby-constant">Subnet</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;default&quot;</span>, <span class="ruby-value">:logical_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@logical</span>.<span class="ruby-identifier">id</span>).<span class="ruby-identifier">count</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">default</span><span class="ruby-operator">&gt;</span><span class="ruby-value">0</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@subaux</span><span class="ruby-operator">==</span><span class="ruby-value">0</span>
+    <span class="ruby-ivar">@su</span>=<span class="ruby-constant">Subnet</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;default&quot;</span>, <span class="ruby-value">:description</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Sub red Default&quot;</span>, <span class="ruby-value">:computers</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">default</span>, <span class="ruby-value">:logical_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@logical</span>.<span class="ruby-identifier">id</span>)
+    <span class="ruby-ivar">@su</span>.<span class="ruby-identifier">save</span> 
+  <span class="ruby-keyword">end</span>
+  
+  <span class="ruby-comment">#response = HTTParty.get(&#39;http://api.stackexchange.com/2.2/questions?site=stackoverflow&#39;)</span>
+  <span class="ruby-comment">#response = HTTParty.get(&quot;http://instanceshape.com/admin/VLSM/index.php?Host=192.168.1.24&amp;sub[uno]=15&amp;sub[dos]=56&amp;sub[tres]=36&quot;)</span>
+  <span class="ruby-identifier">require</span> <span class="ruby-string">&#39;uri&#39;</span>
+  <span class="ruby-identifier">require</span> <span class="ruby-string">&#39;net/http&#39;</span>
+  
+  <span class="ruby-comment">#Direccionamiento normal</span>
+  
+  <span class="ruby-comment">#myurl=&quot;https://instanceshape.com/admin/VLSM/index.php?Host=&quot;+@logical.host1.to_s+&quot;.&quot;+@logical.host2.to_s+&quot;.&quot;+@logical.host3.to_s+&quot;.&quot;+@logical.host4.to_s</span>
+  <span class="ruby-identifier">myurl</span>=<span class="ruby-string">&quot;https://instanceshape.com/admin/VLSM/index.php?Host=&quot;</span><span class="ruby-operator">+</span><span class="ruby-ivar">@logical</span>.<span class="ruby-identifier">host1</span>.<span class="ruby-identifier">to_s</span><span class="ruby-operator">+</span><span class="ruby-string">&quot;.&quot;</span><span class="ruby-operator">+</span><span class="ruby-ivar">@logical</span>.<span class="ruby-identifier">host2</span>.<span class="ruby-identifier">to_s</span><span class="ruby-operator">+</span><span class="ruby-string">&quot;.&quot;</span><span class="ruby-operator">+</span><span class="ruby-ivar">@logical</span>.<span class="ruby-identifier">host3</span>.<span class="ruby-identifier">to_s</span><span class="ruby-operator">+</span><span class="ruby-string">&quot;.0&quot;</span>;
+  <span class="ruby-ivar">@subnets</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">subs</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">myurl</span><span class="ruby-operator">+=</span><span class="ruby-string">&quot;&amp;sub[&quot;</span><span class="ruby-operator">+</span><span class="ruby-identifier">subs</span>.<span class="ruby-identifier">name</span><span class="ruby-operator">+</span><span class="ruby-string">&quot;]=&quot;</span><span class="ruby-operator">+</span><span class="ruby-identifier">subs</span>.<span class="ruby-identifier">computers</span>.<span class="ruby-identifier">to_s</span>
+  <span class="ruby-keyword">end</span>  
+  <span class="ruby-identifier">url</span> = <span class="ruby-constant">URI</span>(<span class="ruby-identifier">myurl</span>)
+  <span class="ruby-identifier">http</span> = <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">url</span>.<span class="ruby-identifier">host</span>, <span class="ruby-identifier">url</span>.<span class="ruby-identifier">port</span>)
+  <span class="ruby-identifier">http</span>.<span class="ruby-identifier">use_ssl</span> = <span class="ruby-keyword">true</span>
+  <span class="ruby-identifier">http</span>.<span class="ruby-identifier">verify_mode</span> = <span class="ruby-constant">OpenSSL</span><span class="ruby-operator">::</span><span class="ruby-constant">SSL</span><span class="ruby-operator">::</span><span class="ruby-constant">VERIFY_NONE</span>
+  <span class="ruby-identifier">request</span> = <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span><span class="ruby-operator">::</span><span class="ruby-constant">Get</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">url</span>)
+  <span class="ruby-identifier">response</span> = <span class="ruby-identifier">http</span>.<span class="ruby-identifier">request</span>(<span class="ruby-identifier">request</span>)
+  <span class="ruby-identifier">puts</span> <span class="ruby-identifier">response</span>.<span class="ruby-identifier">read_body</span>
+  <span class="ruby-identifier">require</span> <span class="ruby-string">&#39;json&#39;</span>
+  <span class="ruby-ivar">@h</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span> <span class="ruby-identifier">response</span>.<span class="ruby-identifier">read_body</span>
+  
+  <span class="ruby-comment">#Direccionamiento Escalabilidad</span>
+  
+  <span class="ruby-comment">#myurl=&quot;https://instanceshape.com/admin/VLSM/index.php?Host=&quot;+@logical.host1.to_s+&quot;.&quot;+@logical.host2.to_s+&quot;.&quot;+@logical.host3.to_s+&quot;.&quot;+@logical.host4.to_s</span>
+  <span class="ruby-identifier">myurl</span>=<span class="ruby-string">&quot;https://instanceshape.com/admin/VLSM/index.php?Host=&quot;</span><span class="ruby-operator">+</span><span class="ruby-ivar">@logical</span>.<span class="ruby-identifier">host1</span>.<span class="ruby-identifier">to_s</span><span class="ruby-operator">+</span><span class="ruby-string">&quot;.&quot;</span><span class="ruby-operator">+</span><span class="ruby-ivar">@logical</span>.<span class="ruby-identifier">host2</span>.<span class="ruby-identifier">to_s</span><span class="ruby-operator">+</span><span class="ruby-string">&quot;.&quot;</span><span class="ruby-operator">+</span><span class="ruby-ivar">@logical</span>.<span class="ruby-identifier">host3</span>.<span class="ruby-identifier">to_s</span><span class="ruby-operator">+</span><span class="ruby-string">&quot;.0&quot;</span>
+  <span class="ruby-ivar">@subnets</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">subs</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">myurl</span><span class="ruby-operator">+=</span><span class="ruby-string">&quot;&amp;sub[&quot;</span><span class="ruby-operator">+</span><span class="ruby-identifier">subs</span>.<span class="ruby-identifier">name</span><span class="ruby-operator">+</span><span class="ruby-string">&quot;]=&quot;</span><span class="ruby-operator">+</span>(<span class="ruby-identifier">subs</span>.<span class="ruby-identifier">computers</span><span class="ruby-operator">+</span>(<span class="ruby-identifier">subs</span>.<span class="ruby-identifier">computers</span><span class="ruby-operator">*</span><span class="ruby-ivar">@logical</span>.<span class="ruby-identifier">scalability</span><span class="ruby-operator">/</span><span class="ruby-value">100</span>)).<span class="ruby-identifier">to_s</span>
+  <span class="ruby-keyword">end</span>  
+  <span class="ruby-identifier">url</span> = <span class="ruby-constant">URI</span>(<span class="ruby-identifier">myurl</span>)
+  <span class="ruby-identifier">http</span> = <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">url</span>.<span class="ruby-identifier">host</span>, <span class="ruby-identifier">url</span>.<span class="ruby-identifier">port</span>)
+  <span class="ruby-identifier">http</span>.<span class="ruby-identifier">use_ssl</span> = <span class="ruby-keyword">true</span>
+  <span class="ruby-identifier">http</span>.<span class="ruby-identifier">verify_mode</span> = <span class="ruby-constant">OpenSSL</span><span class="ruby-operator">::</span><span class="ruby-constant">SSL</span><span class="ruby-operator">::</span><span class="ruby-constant">VERIFY_NONE</span>
+  <span class="ruby-identifier">request</span> = <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span><span class="ruby-operator">::</span><span class="ruby-constant">Get</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">url</span>)
+  <span class="ruby-identifier">response</span> = <span class="ruby-identifier">http</span>.<span class="ruby-identifier">request</span>(<span class="ruby-identifier">request</span>)
+  <span class="ruby-identifier">puts</span> <span class="ruby-identifier">response</span>.<span class="ruby-identifier">read_body</span>
+  <span class="ruby-identifier">require</span> <span class="ruby-string">&#39;json&#39;</span>
+  <span class="ruby-ivar">@g</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span> <span class="ruby-identifier">response</span>.<span class="ruby-identifier">read_body</span>
+  <span class="ruby-identifier">render</span>  <span class="ruby-value">:pdf</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Reporte&quot;</span>, <span class="ruby-value">:template</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;pdf/red.html.erb&#39;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-routers" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">routers</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="routers-source">
+            <pre><span class="ruby-comment"># File app/controllers/pdf_controller.rb, line 171</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">routers</span>
+  <span class="ruby-comment">#if params[:id]</span>
+   <span class="ruby-comment"># @company=Company.find(params[:id])</span>
+  <span class="ruby-comment">#  @request=Request.where(:company_id =&gt; params[:id]).first</span>
+  <span class="ruby-comment">#elsif params[:request_id]</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:request_id</span>]
+    <span class="ruby-ivar">@request</span>=<span class="ruby-constant">Request</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:request_id</span>])
+    <span class="ruby-ivar">@company</span>=<span class="ruby-constant">Company</span>.<span class="ruby-identifier">find</span>(<span class="ruby-ivar">@request</span>.<span class="ruby-identifier">company_id</span>)
+    <span class="ruby-ivar">@physical</span>=<span class="ruby-constant">Physical</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:request_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">id</span>)
+    <span class="ruby-ivar">@logical</span>=<span class="ruby-constant">Logical</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:request_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">id</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@id_empresa</span>=<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>]
+  <span class="ruby-ivar">@request</span>=<span class="ruby-constant">Request</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:company_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@company</span>.<span class="ruby-identifier">id</span>).<span class="ruby-identifier">first</span> 
+  <span class="ruby-ivar">@company</span>=<span class="ruby-constant">Company</span>.<span class="ruby-identifier">find</span>(<span class="ruby-ivar">@company</span>.<span class="ruby-identifier">id</span>) 
+  <span class="ruby-ivar">@physical</span>=<span class="ruby-constant">Physical</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:request_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">id</span>) 
+  <span class="ruby-ivar">@logical</span>=<span class="ruby-constant">Logical</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:request_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">id</span>).<span class="ruby-identifier">first</span> 
+  <span class="ruby-ivar">@subnets</span>=<span class="ruby-constant">Subnet</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:logical_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@logical</span>.<span class="ruby-identifier">id</span>) 
+  <span class="ruby-ivar">@sizeofs</span>=<span class="ruby-constant">Subnet</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:logical_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@logical</span>.<span class="ruby-identifier">id</span>).<span class="ruby-identifier">size</span> 
+  <span class="ruby-ivar">@totalcomputers</span>=<span class="ruby-ivar">@physical</span>.<span class="ruby-identifier">sum</span>(<span class="ruby-value">:computers</span>) 
+  <span class="ruby-ivar">@totalcomputers2</span>=<span class="ruby-ivar">@physical</span>.<span class="ruby-identifier">sum</span>(<span class="ruby-value">:computers</span>)
+  <span class="ruby-ivar">@totalcomputers3</span>=<span class="ruby-ivar">@physical</span>.<span class="ruby-identifier">sum</span>(<span class="ruby-value">:computers</span>)
+  <span class="ruby-identifier">render</span>  <span class="ruby-value">:pdf</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Reporte&quot;</span>, <span class="ruby-value">:template</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;pdf/routers.html.erb&#39;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-switches" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">switches</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="switches-source">
+            <pre><span class="ruby-comment"># File app/controllers/pdf_controller.rb, line 147</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">switches</span>
+  <span class="ruby-comment">#if params[:id]</span>
+   <span class="ruby-comment"># @company=Company.find(params[:id])</span>
+  <span class="ruby-comment">#  @request=Request.where(:company_id =&gt; params[:id]).first</span>
+  <span class="ruby-comment">#elsif params[:request_id]</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:request_id</span>]
+    <span class="ruby-ivar">@request</span>=<span class="ruby-constant">Request</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:request_id</span>])
+    <span class="ruby-ivar">@company</span>=<span class="ruby-constant">Company</span>.<span class="ruby-identifier">find</span>(<span class="ruby-ivar">@request</span>.<span class="ruby-identifier">company_id</span>)
+    <span class="ruby-ivar">@physical</span>=<span class="ruby-constant">Physical</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:request_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">id</span>)
+    <span class="ruby-ivar">@logical</span>=<span class="ruby-constant">Logical</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:request_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">id</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@id_empresa</span>=<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>]
+  <span class="ruby-ivar">@request</span>=<span class="ruby-constant">Request</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:company_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@company</span>.<span class="ruby-identifier">id</span>).<span class="ruby-identifier">first</span> 
+  <span class="ruby-ivar">@company</span>=<span class="ruby-constant">Company</span>.<span class="ruby-identifier">find</span>(<span class="ruby-ivar">@company</span>.<span class="ruby-identifier">id</span>) 
+  <span class="ruby-ivar">@physical</span>=<span class="ruby-constant">Physical</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:request_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">id</span>) 
+  <span class="ruby-ivar">@logical</span>=<span class="ruby-constant">Logical</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:request_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">id</span>).<span class="ruby-identifier">first</span> 
+  <span class="ruby-ivar">@subnets</span>=<span class="ruby-constant">Subnet</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:logical_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@logical</span>.<span class="ruby-identifier">id</span>) 
+  <span class="ruby-ivar">@sizeofs</span>=<span class="ruby-constant">Subnet</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:logical_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@logical</span>.<span class="ruby-identifier">id</span>).<span class="ruby-identifier">size</span> 
+  <span class="ruby-ivar">@totalcomputers</span>=<span class="ruby-ivar">@physical</span>.<span class="ruby-identifier">sum</span>(<span class="ruby-value">:computers</span>) 
+  <span class="ruby-ivar">@totalcomputers2</span>=<span class="ruby-ivar">@physical</span>.<span class="ruby-identifier">sum</span>(<span class="ruby-value">:computers</span>)
+  <span class="ruby-ivar">@totalcomputers3</span>=<span class="ruby-ivar">@physical</span>.<span class="ruby-identifier">sum</span>(<span class="ruby-value">:computers</span>)
+ 
+  <span class="ruby-identifier">render</span>  <span class="ruby-value">:pdf</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Reporte&quot;</span>, <span class="ruby-value">:template</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;pdf/switches.html.erb&#39;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-topologia" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">topologia</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="topologia-source">
+            <pre><span class="ruby-comment"># File app/controllers/pdf_controller.rb, line 194</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">topologia</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:request_id</span>]
+    <span class="ruby-ivar">@request</span>=<span class="ruby-constant">Request</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:request_id</span>])
+    <span class="ruby-ivar">@company</span>=<span class="ruby-constant">Company</span>.<span class="ruby-identifier">find</span>(<span class="ruby-ivar">@request</span>.<span class="ruby-identifier">company_id</span>)
+    <span class="ruby-ivar">@physical</span>=<span class="ruby-constant">Physical</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:request_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">id</span>)
+    <span class="ruby-ivar">@logical</span>=<span class="ruby-constant">Logical</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:request_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">id</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@id_empresa</span>=<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>]
+  <span class="ruby-ivar">@request</span>=<span class="ruby-constant">Request</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:company_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@company</span>.<span class="ruby-identifier">id</span>).<span class="ruby-identifier">first</span> 
+  <span class="ruby-ivar">@company</span>=<span class="ruby-constant">Company</span>.<span class="ruby-identifier">find</span>(<span class="ruby-ivar">@company</span>.<span class="ruby-identifier">id</span>) 
+  <span class="ruby-ivar">@physical</span>=<span class="ruby-constant">Physical</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:request_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">id</span>) 
+  <span class="ruby-ivar">@logical</span>=<span class="ruby-constant">Logical</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:request_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">id</span>).<span class="ruby-identifier">first</span> 
+  <span class="ruby-ivar">@subnets</span>=<span class="ruby-constant">Subnet</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:logical_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@logical</span>.<span class="ruby-identifier">id</span>) 
+  <span class="ruby-ivar">@sizeofs</span>=<span class="ruby-constant">Subnet</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:logical_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@logical</span>.<span class="ruby-identifier">id</span>).<span class="ruby-identifier">size</span> 
+  <span class="ruby-ivar">@totalcomputers</span>=<span class="ruby-ivar">@physical</span>.<span class="ruby-identifier">sum</span>(<span class="ruby-value">:computers</span>) 
+  <span class="ruby-ivar">@totalcomputers2</span>=<span class="ruby-ivar">@physical</span>.<span class="ruby-identifier">sum</span>(<span class="ruby-value">:computers</span>)
+  <span class="ruby-ivar">@totalcomputers3</span>=<span class="ruby-ivar">@physical</span>.<span class="ruby-identifier">sum</span>(<span class="ruby-value">:computers</span>)
+  <span class="ruby-identifier">render</span>  <span class="ruby-value">:pdf</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Reporte&quot;</span>, <span class="ruby-value">:template</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;pdf/topologia.html.erb&#39;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.3.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+
