@@ -69,7 +69,7 @@ bootstrap.min.css:8
     </select>
   </div>
   <div class="field">
-    <h3 id="equipment_brand1">Marca</h3>
+    <h3 id="equipment_brand1">Descripción</h3>
     <%= f.text_field :brand, :class => "form-control" , :required => "true"%>
   </div>
   
@@ -127,6 +127,7 @@ bootstrap.min.css:8
           document.getElementById("equipment_slots1").style.display="inline-block";
           
           document.getElementById("equipment_power1").innerHTML="Potencia";
+          document.getElementById("equipment_brand1").innerHTML="Descripción";
         }break;
       case "Router":
         {
@@ -143,6 +144,7 @@ bootstrap.min.css:8
           document.getElementById("equipment_slots1").style.display="inline-block";
           
           document.getElementById("equipment_power1").innerHTML="Potencia";
+          document.getElementById("equipment_brand1").innerHTML="Marca";
         }break;
       case "Rack":
         {
@@ -159,6 +161,7 @@ bootstrap.min.css:8
           document.getElementById("equipment_slots1").style.display="inline-block";
           
           document.getElementById("equipment_power1").innerHTML="Calidad";
+          document.getElementById("equipment_brand1").innerHTML="Marca";
         }break;
       case "Cable":
       {
@@ -175,6 +178,7 @@ bootstrap.min.css:8
           document.getElementById("equipment_slots1").style.display="none";
           
           document.getElementById("equipment_power1").innerHTML="Calidad";
+          document.getElementById("equipment_brand1").innerHTML="Marca";
       }break;
       case "Canaleta":
       {
@@ -191,6 +195,7 @@ bootstrap.min.css:8
           document.getElementById("equipment_slots1").style.display="none";
           
           document.getElementById("equipment_power1").innerHTML="Calidad";
+          document.getElementById("equipment_brand1").innerHTML="Marca";
       }break;
       case "Toma":
       {
@@ -207,6 +212,7 @@ bootstrap.min.css:8
           document.getElementById("equipment_slots1").style.display="none";
           
           document.getElementById("equipment_power1").innerHTML="Calidad";
+          document.getElementById("equipment_brand1").innerHTML="Marca";
       }break;
       case "Conector":
       {
@@ -223,6 +229,7 @@ bootstrap.min.css:8
           document.getElementById("equipment_slots1").style.display="none";
           
           document.getElementById("equipment_power1").innerHTML="Calidad";
+          document.getElementById("equipment_brand1").innerHTML="Marca";
       }break;
       case "AP":
         {
@@ -239,6 +246,7 @@ bootstrap.min.css:8
           document.getElementById("equipment_slots1").style.display="none";
           
           document.getElementById("equipment_power1").innerHTML="Potencia";
+          document.getElementById("equipment_brand1").innerHTML="Marca";
         }break;
     }
     
