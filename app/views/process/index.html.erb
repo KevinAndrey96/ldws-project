@@ -4397,7 +4397,22 @@
     <input type="hidden" id="building_2" name="building_2" value="">
     <input type="hidden" id="building_id_2" name="building_id_2" value="">
     <input type="hidden" id="building_name_2" name="building_name_2" value="">
-    <input type="hidden" id="building_distance_2" name="building_distance_2" value="">    
+    <input type="hidden" id="building_distance_2" name="building_distance_2" value="">   
+    
+    <input type="hidden" id="building_3" name="building_3" value="">
+    <input type="hidden" id="building_id_3" name="building_id_3" value="">
+    <input type="hidden" id="building_name_3" name="building_name_3" value="">
+    <input type="hidden" id="building_distance_3" name="building_distance_3" value="">   
+    
+    <input type="hidden" id="building_4" name="building_4" value="">
+    <input type="hidden" id="building_id_4" name="building_id_4" value="">
+    <input type="hidden" id="building_name_4" name="building_name_4" value="">
+    <input type="hidden" id="building_distance_4" name="building_distance_4" value="">   
+    
+    <input type="hidden" id="building_5" name="building_5" value="">
+    <input type="hidden" id="building_id_5" name="building_id_5" value="">
+    <input type="hidden" id="building_name_5" name="building_name_5" value="">
+    <input type="hidden" id="building_distance_5" name="building_distance_5" value="">   
     
     <input type="hidden" id="ctype" name="ctype" value="">   
 </form>
@@ -5401,19 +5416,19 @@ $('#request_observation').hide();
         }
         
         if(Count_building >= 3 ){
-          document.getElementById("building_id_3").value = parseInt(document.getElementById("building_id_3").value) + 2
+          document.getElementById("building_id_3").value = parseInt(document.getElementById("building_id_1").value) + 2
           document.getElementById("building_name_3").value = document.getElementById("my_building_name_3").value
           document.getElementById("building_distance_3").value = document.getElementById("my_building_distance_3").value 
         }
         
         if(Count_building >= 4 ){
-          document.getElementById("building_id_4").value = parseInt(document.getElementById("building_id_4").value) + 3
+          document.getElementById("building_id_4").value = parseInt(document.getElementById("building_id_1").value) + 3
           document.getElementById("building_name_4").value = document.getElementById("my_building_name_4").value
           document.getElementById("building_distance_4").value = document.getElementById("my_building_distance_4").value 
         }
         
         if(Count_building >= 5 ){
-          document.getElementById("building_id_5").value = parseInt(document.getElementById("building_id_5").value) + 1
+          document.getElementById("building_id_5").value = parseInt(document.getElementById("building_id_1").value) + 4
           document.getElementById("building_name_5").value = document.getElementById("my_building_name_5").value
           document.getElementById("building_distance_5").value = document.getElementById("my_building_distance_5").value 
         }
