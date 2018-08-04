@@ -4969,6 +4969,10 @@ $('#request_observation').hide();
         document.getElementById("subnet_id").value = Math.round(Math.random()*10000);
         document.getElementById("physicals_id").value = Math.round(Math.random()*10000);
         document.getElementById("my_building_id_1").value = Math.round(Math.random()*10000);
+        document.getElementById("my_building_id_2").value = Math.round(Math.random()*10000);
+        document.getElementById("my_building_id_3").value = Math.round(Math.random()*10000);
+        document.getElementById("my_building_id_4").value = Math.round(Math.random()*10000);
+        document.getElementById("my_building_id_5").value = Math.round(Math.random()*10000);
         
         document.getElementById("company_id_request").value = document.getElementById("company_id").value;
         document.getElementById("logical_id_subnet").value = document.getElementById("logical_id").value;
@@ -5402,37 +5406,36 @@ $('#request_observation').hide();
         //Tipo de construccion
         document.getElementById("ctype").value = document.getElementById("my_ctype").value
 
-        //Edificio 1
         if(Count_building >= 1 ){
           document.getElementById("building_id_1").value = document.getElementById("my_building_id_1").value
           document.getElementById("building_name_1").value = document.getElementById("my_building_name_1").value
           document.getElementById("building_distance_1").value = document.getElementById("my_building_distance_1").value   
         }
-        
+
         if(Count_building >= 2 ){
-          document.getElementById("building_id_2").value = parseInt(document.getElementById("building_id_1").value) + 1
+          document.getElementById("building_id_2").value = document.getElementById("my_building_id_2").value
           document.getElementById("building_name_2").value = document.getElementById("my_building_name_2").value
           document.getElementById("building_distance_2").value = document.getElementById("my_building_distance_2").value  
         }
-        
+
         if(Count_building >= 3 ){
-          document.getElementById("building_id_3").value = parseInt(document.getElementById("building_id_1").value) + 2
+          document.getElementById("building_id_3").value = document.getElementById("my_building_id_3").value
           document.getElementById("building_name_3").value = document.getElementById("my_building_name_3").value
           document.getElementById("building_distance_3").value = document.getElementById("my_building_distance_3").value 
         }
-        
+
         if(Count_building >= 4 ){
-          document.getElementById("building_id_4").value = parseInt(document.getElementById("building_id_1").value) + 3
+          document.getElementById("building_id_4").value = document.getElementById("my_building_id_4").value
           document.getElementById("building_name_4").value = document.getElementById("my_building_name_4").value
           document.getElementById("building_distance_4").value = document.getElementById("my_building_distance_4").value 
         }
-        
+
         if(Count_building >= 5 ){
-          document.getElementById("building_id_5").value = parseInt(document.getElementById("building_id_1").value) + 4
+          document.getElementById("building_id_5").value = document.getElementById("my_building_id_5").value
           document.getElementById("building_name_5").value = document.getElementById("my_building_name_5").value
           document.getElementById("building_distance_5").value = document.getElementById("my_building_distance_5").value 
         }
-        
+
         document.getElementById("my_company_id").value=document.getElementById("company_id").value  
         document.getElementById("name").value=document.getElementById("company_name").value
         document.getElementById("nit").value=document.getElementById("company_nit").value
