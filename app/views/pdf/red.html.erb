@@ -31,6 +31,8 @@ table, tr, td, th, tbody, thead, tfoot {
     swaccess=0
     swcore=0
     id=0
+    estandar="40Gbit ethernet"
+    estandarutp="1000Base-T"
 %>
 <% if @Sw_status == 0 %>
     <p>ERROR, no hay switches disponibles</p>
@@ -106,26 +108,35 @@ end
 </tr>
 
 
+
+
+
+
+
+
+
+
+
+<!-- Inicio gráfico -->
+<%
+if @request.ctype=="Campus"
+    %>
+    
 <div class="container-fluid">
     <center><h1>Diagrama de red</h1></center>
+    <h4><%=@request.ctype%></h4>
     
-    <center>
-        <img src="https://instanceshape.com/admin/VLSM/Images/Router.png">
-    </center>
+    <!--<center><img src="https://instanceshape.com/admin/VLSM/Images/Router.png"></center>
     <hr>
     <center>
     <%
         if swcore == 1
         %>
-            1<img src="https://instanceshape.com/admin/VLSM/Images/Core.png">
-            <img src="https://instanceshape.com/admin/VLSM/Images/Ap.png">
-            <img src="https://instanceshape.com/admin/VLSM/Images/Blanco.png">
+            1<img src="https://instanceshape.com/admin/VLSM/Images/Core.png"><img src="https://instanceshape.com/admin/VLSM/Images/Ap.png"><img src="https://instanceshape.com/admin/VLSM/Images/Blanco.png">
         <%
         else
         %>
-            1<img src="https://instanceshape.com/admin/VLSM/Images/Core.png">
-            <img src="https://instanceshape.com/admin/VLSM/Images/Ap.png">
-            <img src="https://instanceshape.com/admin/VLSM/Images/Core.png">2
+            1<img src="https://instanceshape.com/admin/VLSM/Images/Core.png"><img src="https://instanceshape.com/admin/VLSM/Images/Ap.png"><img src="https://instanceshape.com/admin/VLSM/Images/Core.png">2
         <%
         end
     %>
@@ -135,20 +146,27 @@ end
     <%
         if swdistri == 1
         %>
-            2<img src="https://instanceshape.com/admin/VLSM/Images/Distribucion.png">
-            <img src="https://instanceshape.com/admin/VLSM/Images/Blanco.png">
-            <img src="https://instanceshape.com/admin/VLSM/Images/Blanco.png">
-            <img src="https://instanceshape.com/admin/VLSM/Images/Blanco.png">
+            2<img src="https://instanceshape.com/admin/VLSM/Images/Distribucion.png"><img src="https://instanceshape.com/admin/VLSM/Images/Blanco.png"><img src="https://instanceshape.com/admin/VLSM/Images/Blanco.png">            <img src="https://instanceshape.com/admin/VLSM/Images/Blanco.png">
         <%
         else
         %>
-            3<img src="https://instanceshape.com/admin/VLSM/Images/Distribucion.png">
-            <img src="https://instanceshape.com/admin/VLSM/Images/Blanco.png">
-            <img src="https://instanceshape.com/admin/VLSM/Images/Blanco.png">
-            <img src="https://instanceshape.com/admin/VLSM/Images/Distribucion.png">4
+            3<img src="https://instanceshape.com/admin/VLSM/Images/Distribucion.png"><img src="https://instanceshape.com/admin/VLSM/Images/Blanco.png"><img src="https://instanceshape.com/admin/VLSM/Images/Blanco.png"><img src="https://instanceshape.com/admin/VLSM/Images/Distribucion.png">4
         <%
         end
     %>
+    </center>-->
+    <center>
+        <%
+        if @logical.redundancy?
+            %>
+                <img src="https://instanceshape.com/admin/VLSM/Images/redundante.png">
+            <%
+        else
+            %>
+                <img src="https://instanceshape.com/admin/VLSM/Images/no-redundante.png">
+            <%
+        end
+        %>
     </center>
     <hr>
     <center>
@@ -173,74 +191,36 @@ end
     </center>
 </div>
 <hr><hr>
-<div class="container-fluid">
-    <h2>Cableado</h2>
+<div class="content">
+        <h2>Cableado y velocidad</h2>
         <table border="1" width="100%">
-            <thead>
-                <tr>
-                    <th>Id Origen</th>
-                    <th>Id Destino</th>
-                    <th>Cable usado</th>
-                </tr>
-            </thead>
+            <thead><tr><th>Id Origen</th><th>Id Destino</th><th>Cable usado</th><th>Velocidad</th></tr></thead>
             <tbody>
                 <% if @logical.redundancy? %>
-                    <tr>
-                        <td><center>3</center></td>
-                        <td><center>1</center></td>
-                        <td><center>F.O. Multimodo</center></td>
-                    </tr>
-                    <tr>
-                        <td><center>4</center></td>
-                        <td><center>1</center></td>
-                        <td><center>F.O. Multimodo</center></td>
-                    </tr>
-                    <tr>
-                        <td><center>3</center></td>
-                        <td><center>2</center></td>
-                        <td><center>F.O. Multimodo</center></td>
-                    </tr>
-                    <tr>
-                        <td><center>4</center></td>
-                        <td><center>2</center></td>
-                        <td><center>F.O. Multimodo</center></td>
-                    </tr>
+                    <tr><td><center>1</center></td><td><center>3</center></td><td><center>F.O. Multimodo</center></td><td><center><%=estandar%></center></td></tr>
+                    <tr><td><center>1</center></td><td><center>4</center></td><td><center>F.O. Multimodo</center></td><td><center><%=estandar%></center></td></tr>
+                    <tr><td><center>2</center></td><td><center>3</center></td><td><center>F.O. Multimodo</center></td><td><center><%=estandar%></center></td></tr>
+                    <tr><td><center>2</center></td><td><center>4</center></td><td><center>F.O. Multimodo</center></td><td><center><%=estandar%></center></td></tr>
                     <%
                     iddes=id
                     aux = idor
                     while aux<iddes
                     aux+=1
                     %>
-                    <tr>
-                        <td><center><%=aux%></center></td>
-                        <td><center>3</center></td>
-                        <td><center>UTP</center></td>
-                    </tr>
-                    <tr>
-                        <td><center><%=aux%></center></td>
-                        <td><center>4</center></td>
-                        <td><center>UTP</center></td>
-                    </tr>
+                    <tr><td><center>3</center></td><td><center><%=aux%></center></td><td><center>UTP</center></td><td><center><%=estandarutp%></center></td></tr>
+                    <tr><td><center>4</center></td><td><center><%=aux%></center></td><td><center>UTP</center></td><td><center><%=estandarutp%></center></td></tr>
                     <% 
                         end 
                     %>
                 <% else %>
-                    <tr>
-                        <td><center>2</center></td>
-                        <td><center>1</center></td>
-                        <td><center>F.O. Multimodo</center></td>
-                    </tr>
+                    <tr><td><center>1</center></td><td><center>2</center></td><td><center>F.O. Multimodo</center></td><td><center><%=estandar%></center></td></tr>
                     <%
                     iddes=id
                     aux = idor
                     while aux<iddes
                     aux+=1
                     %>
-                    <tr>
-                        <td><center><%=aux%></center></td>
-                        <td><center>2</center></td>
-                        <td><center>UTP</center></td>
-                    </tr>
+                    <tr><td><center>2</center></td><td><center><%=aux%></center></td><td><center>UTP</center></td><td><center><%=estandarutp%></center></td></tr>
                     <% 
                         end 
                     %>
@@ -249,43 +229,85 @@ end
                 
             </tbody>
         </table>
-    <% subnit=0 %>
-    <h2>Velocidades</h2>
-        <% 
-            @subnets.order(computers: :desc, name: :asc).each do |subnet|
-                subnit+=subnet.computers
-            end 
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+<!---- Inicio campus aquí -->
+    <%
+else
+    %>
+    <div class="container-fluid">
+    <center><h1>Diagrama de red</h1></center>
+    <h4><%=@request.ctype%></h4>
+    <center>
+        <%
+        if @logical.redundancy?
+            %>
+                <img src="https://instanceshape.com/admin/VLSM/Images/campus_redundante.png">
+            <%
+        else
+            %>
+                <img src="https://instanceshape.com/admin/VLSM/Images/campus_no-redundante.png">
+            <%
+        end
         %>
+    </center>
+    <hr>
+    <center>
+    <%
+    idor=0
+    if @logical.redundancy?
+        id=2
+        idor=2
+    else
+        id=1
+        idor=1
+    end
+        aux = swaccess
+        while aux>0
+        id+=1
+            aux-=1
+            %>
+                <%= id %><img src="https://instanceshape.com/admin/VLSM/Images/Acceso.png">
+            <%
+        end
+    %>
+    </center>
+</div>
+<hr><hr>
+<div class="content">
+        <h2>Cableado y velocidad</h2>
         <table border="1" width="100%">
-            <thead>
-                <tr>
-                    <th>Id Origen</th>
-                    <th>Id Destino</th>
-                    <th>Velocidad</th>
-                </tr>
-            </thead>
+            <thead><tr><th>Id Origen</th><th>Id Destino</th><th>Cable usado</th><th>Velocidad</th></tr></thead>
             <tbody>
                 <% if @logical.redundancy? %>
-                    <tr>
-                        <td><center>3</center></td>
-                        <td><center>1</center></td>
-                        <td><center><%=subnit+1%> GBASE-SR</center></td>
-                    </tr>
-                    <tr>
-                        <td><center>4</center></td>
-                        <td><center>1</center></td>
-                        <td><center><%=subnit+1%> GBASE-SR</center></td>
-                    </tr>
-                    <tr>
-                        <td><center>3</center></td>
-                        <td><center>2</center></td>
-                        <td><center><%=subnit+1%> GBASE-SR</center></td>
-                    </tr>
-                    <tr>
-                        <td><center>4</center></td>
-                        <td><center>2</center></td>
-                        <td><center><%=subnit+1%> GBASE-SR</center></td>
-                    </tr>
                     
                     <%
                     iddes=id
@@ -293,36 +315,77 @@ end
                     while aux<iddes
                     aux+=1
                     %>
-                    <tr>
-                        <td><center><%=aux%></center></td>
-                        <td><center>3</center></td>
-                        <td><center><%=subnit%> GBASE-SR</center></td>
-                    </tr>
-                    <tr>
-                        <td><center><%=aux%></center></td>
-                        <td><center>4</center></td>
-                        <td><center><%=subnit%> GBASE-SR</center></td>
-                    </tr>
+                    <tr><td><center>1</center></td><td><center><%=aux%></center></td><td><center>UTP</center></td><td><center><%=estandarutp%></center></td></tr>
+                    <tr><td><center>2</center></td><td><center><%=aux%></center></td><td><center>UTP</center></td><td><center><%=estandarutp%></center></td></tr>
                     <% 
                         end 
                     %>
                 <% else %>
-                    <tr>
-                        <td><center>2</center></td>
-                        <td><center>1</center></td>
-                        <td><center><%=subnit+1%> GBASE-SR</center></td>
-                    </tr>
+                    <!--<tr><td><center>1</center></td><td><center>2</center></td><td><center>F.O. Multimodo</center></td></tr>-->
                     <%
                     iddes=id
                     aux = idor
                     while aux<iddes
                     aux+=1
                     %>
-                    <tr>
-                        <td><center><%=aux%></center></td>
-                        <td><center>2</center></td>
-                        <td><center><%=subnit%> GBASE-SR</center></td>
-                    </tr>
+                    <tr><td><center>1</center></td><td><center><%=aux%></center></td><td><center>UTP</center></td><td><center><%=estandarutp%></center></td></tr>
+                    <% 
+                        end 
+                    %>
+                <% end %>
+                
+                
+            </tbody>
+        </table>
+    </div>
+    <%
+end
+%>
+
+
+
+
+
+
+
+<div class="container-fluid">
+    
+    <% subnit=0 %>
+    <h2>Velocidades</h2>
+        <% 
+            @subnets.order(computers: :desc, name: :asc).each do |subnet|
+                subnit+=subnet.computers
+            end 
+            
+        %>
+        <table border="1" width="100%">
+            <thead><tr><th>Id Origen</th><th>Id Destino</th><th>Velocidad</th></tr></thead>
+            <tbody>
+                <% if @logical.redundancy? %>
+                    <tr><td><center>1</center></td><td><center>3</center></td><td><center><%=estandar%></center></td></tr>
+                    <tr><td><center>1</center></td><td><center>4</center></td><td><center><%=estandar%></center></td></tr>
+                    <tr><td><center>2</center></td><td><center>3</center></td><td><center><%=estandar%></center></td></tr>
+                    <tr><td><center>2</center></td><td><center>4</center></td><td><center><%=estandar%></center></td></tr>
+                    <%
+                    iddes=id
+                    aux = idor
+                    while aux<iddes
+                    aux+=1
+                    %>
+                    <tr><td><center>3</center></td><td><center><%=aux%></center></td><td><center><%=estandarutp%></center></td></tr>
+                    <tr><td><center>4</center></td><td><center><%=aux%></center></td><td><center><%=estandarutp%></center></td></tr>
+                    <% 
+                        end 
+                    %>
+                <% else %>
+                    <tr><td><center>1</center></td><td><center>2</center></td><td><center><%=estandar%></center></td></tr>
+                    <%
+                    iddes=id
+                    aux = idor
+                    while aux<iddes
+                    aux+=1
+                    %>
+                    <tr><td><center>2</center></td><td><center><%=aux%></center></td><td><center><%=estandarutp%></center></td></tr>
                     <% 
                         end 
                     %>
@@ -331,22 +394,13 @@ end
         </table>
     
     <h2>Direccionamiento</h2>
-        <table class="table table-responsive"  border="1" width= "100%">
-          <thead>
-            <tr>
-              <th>Nombre</th>
-              <th>Dirección de host</th>
-            </tr>
-          </thead>
-          <tbody>
-            
-            <% @subnets.order(computers: :desc, name: :asc).each do |subnet| %>
-              <tr>
-                <td><center><%=subnet.name%></center></td>
-                <td><center><%= @h[subnet.name]["firstHost"]%>/<%= @h[subnet.name]["cidr"]%></center></td>
-              </tr>
-            <% end %>
-          </tbody>
-          </table>
+    <table class="table table-responsive"  border="1" width= "100%">
+      <thead><tr><th>Nombre</th><th>Dirección de host</th></tr></thead>
+      <tbody>
+        <% @subnets.order(computers: :desc, name: :asc).each do |subnet| %>
+          <tr><td><center><%=subnet.name%></center></td><td><center><%= @h[subnet.name]["firstHost"]%>/<%= @h[subnet.name]["cidr"]%></center></td></tr>
+        <% end %>
+      </tbody>
+    </table>
     
 </div>

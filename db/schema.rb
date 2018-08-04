@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180802051902) do
+ActiveRecord::Schema.define(version: 20180804053211) do
 
   create_table "binnacles", force: :cascade do |t|
     t.integer  "user_id"
@@ -110,6 +110,7 @@ ActiveRecord::Schema.define(version: 20180802051902) do
     t.boolean  "email"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.string   "ctype"
   end
 
   add_index "requests", ["company_id"], name: "index_requests_on_company_id"
