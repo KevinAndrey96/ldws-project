@@ -236,42 +236,42 @@ class ProcessController < ApplicationController
         @three=Physical.create(:request_id => params[:my_request_id], :height => params[:my_physical_height_41], :width => params[:my_physical_width_41],:large => params[:my_physical_large_41],      :computers => params[:my_physical_computers_41], :printers => params[:my_physical_printers_41], :conference_hall => params[:my_physical_conference_hall_41], :building_id => params[:building_id_5])
         @three.save
       end
-if params[:fisico_42]=="true"
-  @three=Physical.create(:request_id => params[:my_request_id], :height => params[:my_physical_height_42], :width => params[:my_physical_width_42],:large => params[:my_physical_large_42],      :computers => params[:my_physical_computers_42], :printers => params[:my_physical_printers_42], :conference_hall => params[:my_physical_conference_hall_42], :building_id => params[:building_id_5])
-  @three.save
-end
-if params[:fisico_43]=="true"
-  @three=Physical.create(:request_id => params[:my_request_id], :height => params[:my_physical_height_43], :width => params[:my_physical_width_43],:large => params[:my_physical_large_43],      :computers => params[:my_physical_computers_43], :printers => params[:my_physical_printers_43], :conference_hall => params[:my_physical_conference_hall_43], :building_id => params[:building_id_5])
-  @three.save
-end
-if params[:fisico_44]=="true"
-  @three=Physical.create(:request_id => params[:my_request_id], :height => params[:my_physical_height_44], :width => params[:my_physical_width_44],:large => params[:my_physical_large_44],      :computers => params[:my_physical_computers_44], :printers => params[:my_physical_printers_44], :conference_hall => params[:my_physical_conference_hall_44], :building_id => params[:building_id_5])
-  @three.save
-end
-if params[:fisico_45]=="true"
-  @three=Physical.create(:request_id => params[:my_request_id], :height => params[:my_physical_height_45], :width => params[:my_physical_width_45],:large => params[:my_physical_large_45],      :computers => params[:my_physical_computers_45], :printers => params[:my_physical_printers_45], :conference_hall => params[:my_physical_conference_hall_45], :building_id => params[:building_id_5])
-  @three.save
-end
-if params[:fisico_46]=="true"
-  @three=Physical.create(:request_id => params[:my_request_id], :height => params[:my_physical_height_46], :width => params[:my_physical_width_46],:large => params[:my_physical_large_46],      :computers => params[:my_physical_computers_46], :printers => params[:my_physical_printers_46], :conference_hall => params[:my_physical_conference_hall_46], :building_id => params[:building_id_5])
-  @three.save
-end
-if params[:fisico_47]=="true"
-  @three=Physical.create(:request_id => params[:my_request_id], :height => params[:my_physical_height_47], :width => params[:my_physical_width_47],:large => params[:my_physical_large_47],      :computers => params[:my_physical_computers_47], :printers => params[:my_physical_printers_47], :conference_hall => params[:my_physical_conference_hall_47], :building_id => params[:building_id_5])
-  @three.save
-end
-if params[:fisico_48]=="true"
-  @three=Physical.create(:request_id => params[:my_request_id], :height => params[:my_physical_height_48], :width => params[:my_physical_width_48],:large => params[:my_physical_large_48],      :computers => params[:my_physical_computers_48], :printers => params[:my_physical_printers_48], :conference_hall => params[:my_physical_conference_hall_48], :building_id => params[:building_id_5])
-  @three.save
-end
-if params[:fisico_49]=="true"
-  @three=Physical.create(:request_id => params[:my_request_id], :height => params[:my_physical_height_49], :width => params[:my_physical_width_49],:large => params[:my_physical_large_49],      :computers => params[:my_physical_computers_49], :printers => params[:my_physical_printers_49], :conference_hall => params[:my_physical_conference_hall_49], :building_id => params[:building_id_5])
-  @three.save
-end
-if params[:fisico_50]=="true"
-  @three=Physical.create(:request_id => params[:my_request_id], :height => params[:my_physical_height_50], :width => params[:my_physical_width_50],:large => params[:my_physical_large_50],      :computers => params[:my_physical_computers_50], :printers => params[:my_physical_printers_50], :conference_hall => params[:my_physical_conference_hall_50], :building_id => params[:building_id_5])
-  @three.save
-end
+      if params[:fisico_42]=="true"
+        @three=Physical.create(:request_id => params[:my_request_id], :height => params[:my_physical_height_42], :width => params[:my_physical_width_42],:large => params[:my_physical_large_42],      :computers => params[:my_physical_computers_42], :printers => params[:my_physical_printers_42], :conference_hall => params[:my_physical_conference_hall_42], :building_id => params[:building_id_5])
+        @three.save
+      end
+      if params[:fisico_43]=="true"
+        @three=Physical.create(:request_id => params[:my_request_id], :height => params[:my_physical_height_43], :width => params[:my_physical_width_43],:large => params[:my_physical_large_43],      :computers => params[:my_physical_computers_43], :printers => params[:my_physical_printers_43], :conference_hall => params[:my_physical_conference_hall_43], :building_id => params[:building_id_5])
+        @three.save
+      end
+      if params[:fisico_44]=="true"
+        @three=Physical.create(:request_id => params[:my_request_id], :height => params[:my_physical_height_44], :width => params[:my_physical_width_44],:large => params[:my_physical_large_44],      :computers => params[:my_physical_computers_44], :printers => params[:my_physical_printers_44], :conference_hall => params[:my_physical_conference_hall_44], :building_id => params[:building_id_5])
+        @three.save
+      end
+      if params[:fisico_45]=="true"
+        @three=Physical.create(:request_id => params[:my_request_id], :height => params[:my_physical_height_45], :width => params[:my_physical_width_45],:large => params[:my_physical_large_45],      :computers => params[:my_physical_computers_45], :printers => params[:my_physical_printers_45], :conference_hall => params[:my_physical_conference_hall_45], :building_id => params[:building_id_5])
+        @three.save
+      end
+      if params[:fisico_46]=="true"
+        @three=Physical.create(:request_id => params[:my_request_id], :height => params[:my_physical_height_46], :width => params[:my_physical_width_46],:large => params[:my_physical_large_46],      :computers => params[:my_physical_computers_46], :printers => params[:my_physical_printers_46], :conference_hall => params[:my_physical_conference_hall_46], :building_id => params[:building_id_5])
+        @three.save
+      end
+      if params[:fisico_47]=="true"
+        @three=Physical.create(:request_id => params[:my_request_id], :height => params[:my_physical_height_47], :width => params[:my_physical_width_47],:large => params[:my_physical_large_47],      :computers => params[:my_physical_computers_47], :printers => params[:my_physical_printers_47], :conference_hall => params[:my_physical_conference_hall_47], :building_id => params[:building_id_5])
+        @three.save
+      end
+      if params[:fisico_48]=="true"
+        @three=Physical.create(:request_id => params[:my_request_id], :height => params[:my_physical_height_48], :width => params[:my_physical_width_48],:large => params[:my_physical_large_48],      :computers => params[:my_physical_computers_48], :printers => params[:my_physical_printers_48], :conference_hall => params[:my_physical_conference_hall_48], :building_id => params[:building_id_5])
+        @three.save
+      end
+      if params[:fisico_49]=="true"
+        @three=Physical.create(:request_id => params[:my_request_id], :height => params[:my_physical_height_49], :width => params[:my_physical_width_49],:large => params[:my_physical_large_49],      :computers => params[:my_physical_computers_49], :printers => params[:my_physical_printers_49], :conference_hall => params[:my_physical_conference_hall_49], :building_id => params[:building_id_5])
+        @three.save
+      end
+      if params[:fisico_50]=="true"
+        @three=Physical.create(:request_id => params[:my_request_id], :height => params[:my_physical_height_50], :width => params[:my_physical_width_50],:large => params[:my_physical_large_50],      :computers => params[:my_physical_computers_50], :printers => params[:my_physical_printers_50], :conference_hall => params[:my_physical_conference_hall_50], :building_id => params[:building_id_5])
+        @three.save
+      end
       
       
       
