@@ -5361,7 +5361,7 @@ $('#request_observation').hide();
 
     function Example()
     {
-      if (validate == 1){
+      if (validate() == 1){
         $("#compañia").trigger("click");
         $('#next').hide();
         $('#next_company').show();
@@ -5388,26 +5388,35 @@ $('#request_observation').hide();
         document.getElementById("ctype").value = document.getElementById("my_ctype").value
 
         //Edificio 1
-        document.getElementById("building_id_1").value = document.getElementById("my_building_id_1").value
-        document.getElementById("building_id_1").value = document.getElementById("my_building_id_1").value
-        document.getElementById("building_name_1").value = document.getElementById("my_building_name_1").value
-        document.getElementById("building_distance_1").value = document.getElementById("my_building_distance_1").value   
+        if(Count_building >= 1 ){
+          document.getElementById("building_id_1").value = document.getElementById("my_building_id_1").value
+          document.getElementById("building_name_1").value = document.getElementById("my_building_name_1").value
+          document.getElementById("building_distance_1").value = document.getElementById("my_building_distance_1").value   
+        }
         
-        document.getElementById("building_id_2").value = parseInt(document.getElementById("building_id_1").value) + 1
-        document.getElementById("building_name_2").value = document.getElementById("my_building_name_2").value
-        document.getElementById("building_distance_2").value = document.getElementById("my_building_distance_2").value  
-   
-        document.getElementById("building_id_3").value = parseInt(document.getElementById("building_id_3").value) + 2
-        document.getElementById("building_name_3").value = document.getElementById("my_building_name_3").value
-        document.getElementById("building_distance_3").value = document.getElementById("my_building_distance_3").value 
+        if(Count_building >= 2 ){
+          document.getElementById("building_id_2").value = parseInt(document.getElementById("building_id_1").value) + 1
+          document.getElementById("building_name_2").value = document.getElementById("my_building_name_2").value
+          document.getElementById("building_distance_2").value = document.getElementById("my_building_distance_2").value  
+        }
         
-        document.getElementById("building_id_4").value = parseInt(document.getElementById("building_id_4").value) + 3
-        document.getElementById("building_name_4").value = document.getElementById("my_building_name_4").value
-        document.getElementById("building_distance_4").value = document.getElementById("my_building_distance_4").value 
-
-        document.getElementById("building_id_5").value = parseInt(document.getElementById("building_id_5").value) + 1
-        document.getElementById("building_name_5").value = document.getElementById("my_building_name_5").value
-        document.getElementById("building_distance_5").value = document.getElementById("my_building_distance_5").value 
+        if(Count_building >= 3 ){
+          document.getElementById("building_id_3").value = parseInt(document.getElementById("building_id_3").value) + 2
+          document.getElementById("building_name_3").value = document.getElementById("my_building_name_3").value
+          document.getElementById("building_distance_3").value = document.getElementById("my_building_distance_3").value 
+        }
+        
+        if(Count_building >= 4 ){
+          document.getElementById("building_id_4").value = parseInt(document.getElementById("building_id_4").value) + 3
+          document.getElementById("building_name_4").value = document.getElementById("my_building_name_4").value
+          document.getElementById("building_distance_4").value = document.getElementById("my_building_distance_4").value 
+        }
+        
+        if(Count_building >= 5 ){
+          document.getElementById("building_id_5").value = parseInt(document.getElementById("building_id_5").value) + 1
+          document.getElementById("building_name_5").value = document.getElementById("my_building_name_5").value
+          document.getElementById("building_distance_5").value = document.getElementById("my_building_distance_5").value 
+        }
         
         document.getElementById("my_company_id").value=document.getElementById("company_id").value  
         document.getElementById("name").value=document.getElementById("company_name").value
