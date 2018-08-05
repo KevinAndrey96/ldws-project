@@ -8,9 +8,21 @@ class ProcessController < ApplicationController
       id=params[:id]
       @request=Request.find(id)
       @company=Company.find(@request.company.id)
-      @physicals=Physical.where(:request_id => id)
+      @physicals1=Physical.where(:request_id => id)
       @logical=Logical.where(:request_id => id).first
       @subnets=Subnet.where(:logical_id => @logical.id)
+      @buildings=Building.where(:request_id => id).order('id desc')
+      
+      @cont_building=Building.where(:request_id => id).count
+      
+      @physicals1=Physical.where(:request_id => id, :building_id => Building.where(:request_id => id).first(1).last.id)
+      @physicals2=Physical.where(:request_id => id, :building_id => Building.where(:request_id => id).first(2).last.id)
+      @physicals3=Physical.where(:request_id => id, :building_id => Building.where(:request_id => id).first(3).last.id)
+      @physicals4=Physical.where(:request_id => id, :building_id => Building.where(:request_id => id).first(4).last.id)
+      @physicals5=Physical.where(:request_id => id, :building_id => Building.where(:request_id => id).first(5).last.id)
+      #Physical.where(:request_id => 8949, :building_id => Building.where(:request_id => 8949).first(2).last.id)
+      #Physical.where(:request_id => 8949, :building_id => Building.where(:request_id => 8949).first(2).last.id)
+      
     end
       
   end

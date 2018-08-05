@@ -65,10 +65,37 @@
       </div>
       <%
       if @logical.security?
-        
-      else
-        
-      end
+        %>
+        <h2>Configuraciones de seguridad</h2>
+        <i>Comandos para ingresar en modo privilegiado</i>
+        <pre>
+          Switch1>enable
+          Switch1# configure terminal
+          Switch1(config)#enable secret [‘aqui iria la contraseña dinamica’]
+          Switch1(config)# exit
+          Switch1# exit
+        </pre>
+        <i>Comandos para ingresar contraseña al ingreso por telnet</i>
+        <pre>
+          Switch1>enable
+          Switch1# configure terminal
+          Switch1(config)# line vty 0 4
+          Switch1(config)# password [‘aqui iria la contraseña dinamica’]
+          Switch1(config)# login
+          Switch1(config)# exit
+          Switch1# exit
+        </pre>
+        <i>Comandos para ingresar contraseña al ingreso por consola</i>
+        <pre>
+          Switch1>enable
+          Switch1# configure terminal
+          Switch1(config)#line console 0 
+          Switch1(config-line)#password [‘aqui iria la contraseña dinamica’]
+          Switch1(config)# exit
+          Switch1# exit
+        </pre>
+      <%
+        end
       %>
       <div class="row">
         
