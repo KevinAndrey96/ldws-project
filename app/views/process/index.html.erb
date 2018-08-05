@@ -5521,7 +5521,7 @@ $('#request_observation').hide();
         document.getElementById("my_logical_host2").value = document.getElementById("logical_host2").value;
         document.getElementById("my_logical_host3").value = document.getElementById("logical_host3").value;  
         document.getElementById("my_logical_host4").value = document.getElementById("logical_host4").value;        
-        //document.getElementById("my_logical_scalability").value = document.getElementById("logical_scalability").value;
+        document.getElementById("my_logical_scalability").value = document.getElementById("logical_scalability").value;
         
         if( document.getElementById("logical_redundancy").checked == true){
             document.getElementById("my_logical_redundancy").value = "true";
@@ -5533,12 +5533,6 @@ $('#request_observation').hide();
             document.getElementById("my_logical_security").value = "true";
         } else {
             document.getElementById("my_logical_security").value = "false";
-        }        
-        
-        if( document.getElementById("logical_scalability").checked == true){
-            document.getElementById("my_logical_scalability").value = "true";
-        } else {
-            document.getElementById("my_logical_scalability").value = "false";
         }
         
         <%if params[:edit]=="true"%>
