@@ -350,10 +350,15 @@
                           <div class="col-sm-11">
                             <div class="form-group">
                               <label>Tipo de construcción:</label>
+                              <%if params[:edit]=="true"%>
+                              <input class="form-control" type="text" value="<%=@request.ctype%>" readonly>
+                              <%else%>
                               <select class="form-control" id="my_ctype" onchange="tipoConstruccion()">
                                 <option value="Enterprise">Enterprise</option>
                                 <option value="Campus">Campus</option>
                               </select>
+                              <%end%>
+                              
                             </div>
                           </div>   
                           <div id="edificio_1"><div class="col-sm-11"><div class="form-group"><label>Edificio:</label><input type="hidden" name="building[id]" id="my_building_id_1" value="">
@@ -935,22 +940,30 @@
                           
                           <div id="edificio_2">
                             <div class="col-sm-6">
+                              <% if @cont_building >=2 %>
                               <div class="form-group">
+                                <%else%>
+                              <div class="form-group" style="display:none">
+                              <%end%>
                                 <label>Edificio:</label>
                                 <input type="hidden" name="building[id]" id="my_building_id_2" value="">
-                                <%if params[:edit]=="true"%>
-                                  <input type="text" class="form-control" name="building[name]" id="my_building_name_2" placeholder="Nombre" value="<%=%>">                           
+                                <%if params[:edit]=="true" && @cont_building >=2%>
+                                  <input type="text" class="form-control" name="building[name]" id="my_building_name_2" placeholder="Nombre" value="<%=@buildings.first(2).last.name%>">
                                 <%else%>
                                   <input type="text" class="form-control" name="building[name]" id="my_building_name_2" placeholder="Nombre">
                                 <%end%>
                               </div>
                             </div>    
                             <div style="" class="col-sm-5">
+                              <% if @cont_building >=2 %>
                               <div class="form-group">
+                                <%else%>
+                              <div class="form-group" style="display:none">
+                              <%end%>
                                 <label>Distancia:</label>
                                 <input type="hidden" name="building[distance]" id="building_distance" value="">
-                                <%if params[:edit]=="true"%>
-                                  <input type="number" class="form-control" name="building[distance]" id="my_building_distance_2" placeholder="Distancia" value="<%=0%>">                           
+                                <%if params[:edit]=="true" && @cont_building >=2%>
+                                  <input type="number" class="form-control" name="building[distance]" id="my_building_distance_2" placeholder="Distancia" value="<%=@buildings.first(2).last.distance%>">                           
                                 <%else%>
                                   <input type="number" class="form-control" name="building[distance]" id="my_building_distance_2" placeholder="Distancia" value="">
                                 <%end%>
@@ -968,7 +981,7 @@
 
                           <%if params[:edit]=="true"%>
                             <%cont_2=10%>
-                            <% @physicals.each do |physical| %>
+                            <% @physicals2.each do |physical| %>
                               <%cont_2+=1%>
                               
                               <%@num="physical_"+cont_2.to_s%>
@@ -1526,22 +1539,30 @@
 
                           <div id="edificio_3">
                             <div class="col-sm-6">
+                              <% if @cont_building >=3 %>
                               <div class="form-group">
+                                <%else%>
+                              <div class="form-group" style="display:none">
+                              <%end%>
                                 <label>Edificio:</label>
                                 <input type="hidden" name="building[id]" id="my_building_id_3" value="">
-                                <%if params[:edit]=="true"%>
-                                  <input type="text" class="form-control" name="building[name]" id="my_building_name_3" placeholder="Nombre" value="<%=%>">                           
+                                <%if params[:edit]=="true" && @cont_building >=3%>
+                                  <input type="text" class="form-control" name="building[name]" id="my_building_name_3" placeholder="Nombre" value="<%=@buildings.first(3).last.name%>">
                                 <%else%>
                                   <input type="text" class="form-control" name="building[name]" id="my_building_name_3" placeholder="Nombre">
                                 <%end%>
                               </div>
                             </div>    
                             <div style="" class="col-sm-5">
+                              <% if @cont_building >=3 %>
                               <div class="form-group">
+                                <%else%>
+                              <div class="form-group" style="display:none">
+                              <%end%>
                                 <label>Distancia:</label>
                                 <input type="hidden" name="building[distance]" id="building_distance" value="">
-                                <%if params[:edit]=="true"%>
-                                  <input type="number" class="form-control" name="building[distance]" id="my_building_distance_3" placeholder="Distancia" value="<%=0%>">                           
+                                <%if params[:edit]=="true" && @cont_building >=3%>
+                                  <input type="number" class="form-control" name="building[distance]" id="my_building_distance_3" placeholder="Distancia" value="<%=@buildings.first(3).last.distance%>">                           
                                 <%else%>
                                   <input type="number" class="form-control" name="building[distance]" id="my_building_distance_3" placeholder="Distancia" value="">
                                 <%end%>
@@ -1559,7 +1580,7 @@
 
                           <%if params[:edit]=="true"%>
                             <%cont_3=20%>
-                            <% @physicals.each do |physical| %>
+                            <% @physicals3.each do |physical| %>
                               <%cont_3+=1%>
                               
                               <%@num="physical_"+cont_3.to_s%>
@@ -2119,22 +2140,30 @@
                   
                           <div id="edificio_4">
                             <div class="col-sm-6">
+                              <% if @cont_building >=4 %>
                               <div class="form-group">
+                                <%else%>
+                              <div class="form-group" style="display:none">
+                              <%end%>
                                 <label>Edificio:</label>
                                 <input type="hidden" name="building[id]" id="my_building_id_4" value="">
-                                <%if params[:edit]=="true"%>
-                                  <input type="text" class="form-control" name="building[name]" id="my_building_name_4" placeholder="Nombre" value="<%=%>">                           
+                                <%if params[:edit]=="true" && @cont_building >=4%>
+                                  <input type="text" class="form-control" name="building[name]" id="my_building_name_4" placeholder="Nombre" value="<%=@buildings.first(4).last.name%>">
                                 <%else%>
                                   <input type="text" class="form-control" name="building[name]" id="my_building_name_4" placeholder="Nombre">
                                 <%end%>
                               </div>
                             </div>    
                             <div style="" class="col-sm-5">
+                              <% if @cont_building >=4 %>
                               <div class="form-group">
+                                <%else%>
+                              <div class="form-group" style="display:none">
+                              <%end%>
                                 <label>Distancia:</label>
                                 <input type="hidden" name="building[distance]" id="building_distance" value="">
-                                <%if params[:edit]=="true"%>
-                                  <input type="number" class="form-control" name="building[distance]" id="my_building_distance_4" placeholder="Distancia" value="<%=0%>">                           
+                                <%if params[:edit]=="true" && @cont_building >=4%>
+                                  <input type="number" class="form-control" name="building[distance]" id="my_building_distance_4" placeholder="Distancia" value="<%=@buildings.first(4).last.distance%>">
                                 <%else%>
                                   <input type="number" class="form-control" name="building[distance]" id="my_building_distance_4" placeholder="Distancia" value="">
                                 <%end%>
@@ -2152,7 +2181,7 @@
 
                           <%if params[:edit]=="true"%>
                             <%cont_4=30%>
-                            <% @physicals.each do |physical| %>
+                            <% @physicals4.each do |physical| %>
                               <%cont_4+=1%>
                               
                               <%@num="physical_"+cont_4.to_s%>
@@ -2711,22 +2740,31 @@
     
                           <div id="edificio_5">
                             <div class="col-sm-6">
+                              <% if @cont_building >=5 %>
                               <div class="form-group">
+                                <%else%>
+                              <div class="form-group" style="display:none">
+                              <%end%>
                                 <label>Edificio:</label>
                                 <input type="hidden" name="building[id]" id="my_building_id_5" value="">
-                                <%if params[:edit]=="true"%>
-                                  <input type="text" class="form-control" name="building[name]" id="my_building_name_5" placeholder="Nombre" value="<%=%>">                           
+                                <%if params[:edit]=="true" && @cont_building>=5%>
+                                  <input type="text" class="form-control" name="building[name]" id="my_building_name_5" placeholder="Nombre" value="<%=@buildings.first(5).last.name%>">
                                 <%else%>
                                   <input type="text" class="form-control" name="building[name]" id="my_building_name_5" placeholder="Nombre">
                                 <%end%>
                               </div>
                             </div>    
                             <div style="" class="col-sm-5">
+                              <% if @cont_building >=5 %>
                               <div class="form-group">
+                                <%else%>
+                              <div class="form-group" style="display:none">
+                              <%end%>
                                 <label>Distancia:</label>
                                 <input type="hidden" name="building[distance]" id="building_distance" value="">
-                                <%if params[:edit]=="true"%>
-                                  <input type="number" class="form-control" name="building[distance]" id="my_building_distance_5" placeholder="Distancia" value="<%=0%>">                           
+                                <%if params[:edit]=="true" && @cont_building>=5%>
+                                
+                                  <input type="number" class="form-control" name="building[distance]" id="my_building_distance_5" placeholder="Distancia" value="<%=@buildings.first(5).last.distance%>">                           
                                 <%else%>
                                   <input type="number" class="form-control" name="building[distance]" id="my_building_distance_5" placeholder="Distancia" value="">
                                 <%end%>
@@ -2744,7 +2782,7 @@
 
                           <%if params[:edit]=="true"%>
                             <%cont_5=40%>
-                            <% @physicals.each do |physical| %>
+                            <% @physicals5.each do |physical| %>
                               <%cont_5+=1%>
                               
                               <%@num="physical_"+cont_5.to_s%>
@@ -4565,7 +4603,7 @@ $('#request_observation').hide();
           <% end %>  
     });
     
-     $( "#add_4" ).click(function() {
+    $( "#add_4" ).click(function() {
           <%if params[:edit]=="true"%>
  
           <% else %>
@@ -4580,7 +4618,7 @@ $('#request_observation').hide();
           <% end %>  
     });   
   
-      $( "#add_5" ).click(function() {
+    $( "#add_5" ).click(function() {
           <%if params[:edit]=="true"%>
            
           <% else %>
@@ -4748,7 +4786,7 @@ $('#request_observation').hide();
         
         <%if params[:edit]=="true"%>
           <%cont=0%>
-          <% @physicals.each do |physical| %>
+          <% @physicals1.each do |physical| %>
             <%cont+=1%>
             <%@delete="delete_physical_"+cont.to_s%>
             <%@val="fisico_"+cont.to_s%>
@@ -4832,7 +4870,7 @@ $('#request_observation').hide();
       
         <%if params[:edit]=="true"%>
           <%cont_otro=0%>
-          <% @physicals.each do |physical| %>
+          <% @physicals1.each do |physical| %>
             <%cont_otro+=1%>
             <%@delete="delete_subnet_"+cont_otro.to_s%>
             <%@val="subnet_"+cont_otro.to_s%>
@@ -5559,7 +5597,7 @@ $('#request_observation').hide();
         
         <%if params[:edit]=="true"%>
         <%cont_algo=0%>
-          <% @physicals.each do |physical| %>
+          <% @physicals1.each do |physical| %>
             <%cont_algo+=1%>
             <%@mi="mi_fisico_"+cont_algo.to_s%> 
             <%if cont_algo >= 1%>
@@ -6303,7 +6341,7 @@ $('#request_observation').hide();
         }        
         <%if params[:edit]=="true"%>
         <%cont_algo=0%>
-          <% @physicals.each do |physical| %>
+          <% @physicals1.each do |physical| %>
             <%cont_algo+=1%>
             <%@mi="mi_subnet_"+cont_algo.to_s%> 
             <%if cont_algo >= 1%>
