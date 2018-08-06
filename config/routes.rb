@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :switches
+  resources :the_switches
+  resources :ports
   resources :buildings
   get 'pdf/cotizacion'
 

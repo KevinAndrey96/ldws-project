@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @switch.name %>
+</p>
+
+<p>
+  <strong>Reference:</strong>
+  <%= @switch.reference %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @switch.price %>
+</p>
+
+<p>
+  <strong>Nports:</strong>
+  <%= @switch.nports %>
+</p>
+
+<p>
+  <strong>Port:</strong>
+  <%= @switch.port %>
+</p>
+
+<%= link_to 'Edit', edit_switch_path(@switch) %> |
+<%= link_to 'Back', switches_path %>

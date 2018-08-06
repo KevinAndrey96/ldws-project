@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Switches:</strong>
+  <%= @the_switch.switches %>
+</p>
+
+<p>
+  <strong>Ports:</strong>
+  <%= @the_switch.ports.id %>
+</p>
+
+<%= link_to 'Editar', edit_the_switch_path(@the_switch) %> |
+<%= link_to 'Atrás', the_switches_path %>

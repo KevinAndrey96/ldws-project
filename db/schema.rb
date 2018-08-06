@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180804053211) do
+ActiveRecord::Schema.define(version: 20180806043705) do
 
   create_table "binnacles", force: :cascade do |t|
     t.integer  "user_id"
@@ -91,6 +91,13 @@ ActiveRecord::Schema.define(version: 20180804053211) do
   add_index "physicals", ["building_id"], name: "index_physicals_on_building_id"
   add_index "physicals", ["request_id"], name: "index_physicals_on_request_id"
 
+  create_table "ports", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "speed"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "requests", force: :cascade do |t|
     t.string   "title"
     t.integer  "company_id"
@@ -125,6 +132,26 @@ ActiveRecord::Schema.define(version: 20180804053211) do
   end
 
   add_index "subnets", ["logical_id"], name: "index_subnets_on_logical_id"
+
+  create_table "switches", force: :cascade do |t|
+    t.string   "name"
+    t.string   "reference"
+    t.integer  "price"
+    t.integer  "nports"
+    t.integer  "port"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "the_switches", force: :cascade do |t|
+    t.integer  "switches_id"
+    t.integer  "ports_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "the_switches", ["ports_id"], name: "index_the_switches_on_ports_id"
+  add_index "the_switches", ["switches_id"], name: "index_the_switches_on_switches_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",     null: false

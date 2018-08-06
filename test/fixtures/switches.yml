@@ -1,0 +1,29 @@
+# == Schema Information
+#
+# Table name: switches
+#
+#  id         :integer          not null, primary key
+#  name       :string
+#  reference  :string
+#  price      :integer
+#  nports     :integer
+#  port       :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  reference: MyString
+  price: 1
+  nports: 1
+  port: 1
+
+two:
+  name: MyString
+  reference: MyString
+  price: 1
+  nports: 1
+  port: 1
