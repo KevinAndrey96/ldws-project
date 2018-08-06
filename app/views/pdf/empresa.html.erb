@@ -198,32 +198,80 @@
                   <strong>Ftp: </strong>Si<br>
                   <% end %>
                 </div>
+                
+                
+                
+                
                 <div class="row">
-                  <h2>Aspectos Físicos</h2>
-                  <strong>NÚMERO DE PISOS: </strong><%= @physical.count %><br>
-                  <% cont=0 %>
-                  <% @physical.each do |physical_data| %>
-                  <div class="col-xs-6">
-                    <%cont+=1%>
-                    <br>
-                    <strong>ALTURA PISO <%= cont%>: </strong><%= physical_data.height %> m<br>
-                    <strong>ANCHO PISO <%= cont%>: </strong><%= physical_data.width %> m<br>
-                    <strong>LARGO PISO <%= cont%>: </strong><%= physical_data.large %> m<br>
-                    <strong># EXTENSIONES DE PISO:</strong><%= physical_data.computers %><br>
-                    <% if physical_data.conference_hall %>
-                      <strong>SALA DE JUNTAS: </strong>Si<br>
-                    <% else %>
-                      <strong>SALA DE JUNTAS: </strong>No<br>
-                    <% end %>
-                    
-                  </div>
                   <br>
-                  <% end %>
+                  
                   <% if @logical.redundancy? %>
                     <strong>ENLACES REDUNDANTES: </strong>Si<br>
                   <% else %>
                     <strong>ENLACES REDUNDANTES: </strong>No<br>
                   <% end%>
+                  <br>
+                </div>
+                
+                
+                <div class="row">
+                  <h2>Aspectos Físicos</h2>
+                  <strong>Tipo de solicitud: <%=@request.ctype%></strong><br>
+                  <%
+                  if @request.ctype == "Campus"
+                    @buildings=Building.where(:request_id => @request.id).order('id desc')
+                    %>
+                      <strong>Edificios en el campus: <%=@buildings.count%></strong><br>
+                    <%
+                      aux=0
+                      @buildings.each do |building|
+                        aux+=1
+                        %>
+                        <h3>Edificio <%=aux%>, <%=building.name%></h3>
+                        <%
+                        @phys=Physical.where(:request_id => @request.id, :building_id => building.id)
+                        cont=0
+                        @phys.each do |physical_data|
+                          %>
+                          <div class="col-xs-6">
+                          <%cont+=1%>
+                          <br>
+                          <strong>ALTURA PISO <%= cont%>: </strong><%= physical_data.height %> m<br>
+                          <strong>ANCHO PISO <%= cont%>: </strong><%= physical_data.width %> m<br>
+                          <strong>LARGO PISO <%= cont%>: </strong><%= physical_data.large %> m<br>
+                          <strong># EXTENSIONES DE PISO:</strong><%= physical_data.computers %><br>
+                          <% if physical_data.conference_hall %>
+                            <strong>SALA DE JUNTAS: </strong>Si<br>
+                          <% else %>
+                            <strong>SALA DE JUNTAS: </strong>No<br>
+                          <% end %>
+                          
+                        </div>
+                          <%
+                        end
+                      end
+                  elsif @request.ctype == "Enterprise"
+                  %>
+                    <strong>NÚMERO DE PISOS: </strong><%= @physical.count %><br>
+                    <% cont=0 %>
+                    <% @physical.each do |physical_data| %>
+                    <div class="col-xs-6">
+                      <%cont+=1%>
+                      <br>
+                      <strong>ALTURA PISO <%= cont%>: </strong><%= physical_data.height %> m<br>
+                      <strong>ANCHO PISO <%= cont%>: </strong><%= physical_data.width %> m<br>
+                      <strong>LARGO PISO <%= cont%>: </strong><%= physical_data.large %> m<br>
+                      <strong># EXTENSIONES DE PISO:</strong><%= physical_data.computers %><br>
+                      <% if physical_data.conference_hall %>
+                        <strong>SALA DE JUNTAS: </strong>Si<br>
+                      <% else %>
+                        <strong>SALA DE JUNTAS: </strong>No<br>
+                      
+                    </div>
+                  <%
+                  end
+                end 
+                   %>
                   
                 </div>
   </div>

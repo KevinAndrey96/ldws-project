@@ -940,11 +940,6 @@
                           
                           <div id="edificio_2">
                             <div class="col-sm-6">
-                              <% if @cont_building >=2 %>
-                              <div class="form-group">
-                                <%else%>
-                              <div class="form-group" style="display:none">
-                              <%end%>
                                 <label>Edificio:</label>
                                 <input type="hidden" name="building[id]" id="my_building_id_2" value="">
                                 <%if params[:edit]=="true" && @cont_building >=2%>
@@ -952,14 +947,8 @@
                                 <%else%>
                                   <input type="text" class="form-control" name="building[name]" id="my_building_name_2" placeholder="Nombre">
                                 <%end%>
-                              </div>
                             </div>    
                             <div style="" class="col-sm-5">
-                              <% if @cont_building >=2 %>
-                              <div class="form-group">
-                                <%else%>
-                              <div class="form-group" style="display:none">
-                              <%end%>
                                 <label>Distancia:</label>
                                 <input type="hidden" name="building[distance]" id="building_distance" value="">
                                 <%if params[:edit]=="true" && @cont_building >=2%>
@@ -967,7 +956,6 @@
                                 <%else%>
                                   <input type="number" class="form-control" name="building[distance]" id="my_building_distance_2" placeholder="Distancia" value="">
                                 <%end%>
-                              </div>
                             </div> 
                             <div id="delete_edificio_2"  class="col-sm-1">
                               <div class="form-group"><br><br>
@@ -1539,11 +1527,6 @@
 
                           <div id="edificio_3">
                             <div class="col-sm-6">
-                              <% if @cont_building >=3 %>
-                              <div class="form-group">
-                                <%else%>
-                              <div class="form-group" style="display:none">
-                              <%end%>
                                 <label>Edificio:</label>
                                 <input type="hidden" name="building[id]" id="my_building_id_3" value="">
                                 <%if params[:edit]=="true" && @cont_building >=3%>
@@ -1551,14 +1534,8 @@
                                 <%else%>
                                   <input type="text" class="form-control" name="building[name]" id="my_building_name_3" placeholder="Nombre">
                                 <%end%>
-                              </div>
                             </div>    
                             <div style="" class="col-sm-5">
-                              <% if @cont_building >=3 %>
-                              <div class="form-group">
-                                <%else%>
-                              <div class="form-group" style="display:none">
-                              <%end%>
                                 <label>Distancia:</label>
                                 <input type="hidden" name="building[distance]" id="building_distance" value="">
                                 <%if params[:edit]=="true" && @cont_building >=3%>
@@ -1566,7 +1543,6 @@
                                 <%else%>
                                   <input type="number" class="form-control" name="building[distance]" id="my_building_distance_3" placeholder="Distancia" value="">
                                 <%end%>
-                              </div>
                             </div> 
                             <div id="delete_edificio_3"  class="col-sm-1">
                               <div class="form-group"><br><br>
@@ -2140,11 +2116,6 @@
                   
                           <div id="edificio_4">
                             <div class="col-sm-6">
-                              <% if @cont_building >=4 %>
-                              <div class="form-group">
-                                <%else%>
-                              <div class="form-group" style="display:none">
-                              <%end%>
                                 <label>Edificio:</label>
                                 <input type="hidden" name="building[id]" id="my_building_id_4" value="">
                                 <%if params[:edit]=="true" && @cont_building >=4%>
@@ -2152,14 +2123,8 @@
                                 <%else%>
                                   <input type="text" class="form-control" name="building[name]" id="my_building_name_4" placeholder="Nombre">
                                 <%end%>
-                              </div>
                             </div>    
                             <div style="" class="col-sm-5">
-                              <% if @cont_building >=4 %>
-                              <div class="form-group">
-                                <%else%>
-                              <div class="form-group" style="display:none">
-                              <%end%>
                                 <label>Distancia:</label>
                                 <input type="hidden" name="building[distance]" id="building_distance" value="">
                                 <%if params[:edit]=="true" && @cont_building >=4%>
@@ -2167,7 +2132,6 @@
                                 <%else%>
                                   <input type="number" class="form-control" name="building[distance]" id="my_building_distance_4" placeholder="Distancia" value="">
                                 <%end%>
-                              </div>
                             </div> 
                             <div id="delete_edificio_4"  class="col-sm-1">
                               <div class="form-group"><br><br>
@@ -2737,14 +2701,8 @@
                             </div>  
                           <%end%>                           
 
-    
                           <div id="edificio_5">
                             <div class="col-sm-6">
-                              <% if @cont_building >=5 %>
-                              <div class="form-group">
-                                <%else%>
-                              <div class="form-group" style="display:none">
-                              <%end%>
                                 <label>Edificio:</label>
                                 <input type="hidden" name="building[id]" id="my_building_id_5" value="">
                                 <%if params[:edit]=="true" && @cont_building>=5%>
@@ -2752,14 +2710,8 @@
                                 <%else%>
                                   <input type="text" class="form-control" name="building[name]" id="my_building_name_5" placeholder="Nombre">
                                 <%end%>
-                              </div>
                             </div>    
                             <div style="" class="col-sm-5">
-                              <% if @cont_building >=5 %>
-                              <div class="form-group">
-                                <%else%>
-                              <div class="form-group" style="display:none">
-                              <%end%>
                                 <label>Distancia:</label>
                                 <input type="hidden" name="building[distance]" id="building_distance" value="">
                                 <%if params[:edit]=="true" && @cont_building>=5%>
@@ -2768,7 +2720,6 @@
                                 <%else%>
                                   <input type="number" class="form-control" name="building[distance]" id="my_building_distance_5" placeholder="Distancia" value="">
                                 <%end%>
-                              </div>
                             </div> 
                             <div id="delete_edificio_5"  class="col-sm-1">
                               <div class="form-group"><br><br>
@@ -4508,21 +4459,65 @@ var Contador_4=31;//contador pisos - edificio 4
 var Contador_5=41;//contador pisos - edificio 5
 var Cont=1;
 var Cont_fisico=0;
+var Cont_fisico_2=0;
+var Cont_fisico_3=0;
+var Cont_fisico_4=0;
+var Cont_fisico_5=0;
 var Cont_subred=0;
+var Contador_building = 0;
 
 
 $('#request_observation').hide();
 
     <%if params[:edit]=="true"%>
       <% @physicals1.each do |physical| %>
-        Cont_fisico= Cont_fisico+1;
+        Cont_fisico = Cont_fisico+1;
+      <% end %> 
+    <% end %>
+
+    <%if params[:edit]=="true"%>
+      <% @physicals2.each do |physical| %>
+        Cont_fisico_2 = Cont_fisico_2+1;
       <% end %> 
     <% end %>
     
+    <%if params[:edit]=="true"%>
+      <% @physicals3.each do |physical| %>
+        Cont_fisico_3 = Cont_fisico_3+1;
+      <% end %> 
+    <% end %>
+    
+    <%if params[:edit]=="true"%>
+      <% @physicals4.each do |physical| %>
+        Cont_fisico_4 = Cont_fisico_4+1;
+      <% end %> 
+    <% end %>
+    
+    <%if params[:edit]=="true"%>
+      <% @physicals5.each do |physical| %>
+        Cont_fisico_5 = Cont_fisico_5+1;
+      <% end %> 
+    <% end %>    
+    
+    <%if params[:edit]=="true"%>
+      <% @buildings.each do |building| %>
+        Contador_building = Contador_building+1;
+      <% end %> 
+    <% end %>      
     //Añadir edificio
     $( "#add_building" ).click(function() {
           <%if params[:edit]=="true"%>
-            
+              $('#delete_edificio_'+Contador_building).hide();
+              if (Contador_building+1 > 5){
+                alert("Ya ha agregado el maximo de edificios");
+              } else {
+                $('#delete_edificio_'+Contador_building).hide();
+                alert(Contador_building);
+                $('#physical_'+Contador_building+'1').show();
+                Contador_building= Contador_building+1;
+                $('#edificio_'+Contador_building).show();
+                document.getElementById("building_"+Contador_building).value= "true";       
+              }            
           <% else %>
               if (Count_building+1 > 5){
                 alert("Solo se pueden agregar 5 edificios");
@@ -4784,6 +4779,32 @@ $('#request_observation').hide();
         
         $('#add_building').hide();
         
+        <%if params[:edit]=="true" && @cont_building != 0%>
+          $('#add_building').show();
+          <%contb=0%>
+          <% @buildings.each do |building| %>
+            <%contb+=1%>
+            <%@delete="delete_edificio_"+contb.to_s%>
+            <%@val="building_"+contb.to_s%>
+            $('#'+'<%=@delete%>').hide(); 
+            document.getElementById('<%=@val%>').value= "true";
+          <% end %>  
+          
+          $('#'+'<%=@delete%>').show();
+          
+          <% while contb < 10 %>
+            <%contb+=1%>
+            <%@num="edificio_"+contb.to_s%> 
+            $('#'+'<%=@num%>').hide();
+          <% end %>
+          
+        <%else%>
+          $('#edificio_2').hide();
+          $('#edificio_3').hide();
+          $('#edificio_4').hide();
+          $('#edificio_5').hide();
+        <% end %>
+        
         <%if params[:edit]=="true"%>
           <%cont=0%>
           <% @physicals1.each do |physical| %>
@@ -4803,7 +4824,7 @@ $('#request_observation').hide();
           <% end %>
           
         <%else%>
-          //building_1 
+         
           $('#physical_2').hide();
           $('#physical_3').hide();
           $('#physical_4').hide();
@@ -4814,8 +4835,6 @@ $('#request_observation').hide();
           $('#physical_9').hide();
           $('#physical_10').hide();
           
-          //building_2
-          $('#edificio_2').hide();
           $('#physical_11').hide();
           $('#physical_12').hide();
           $('#physical_13').hide();
@@ -4827,8 +4846,6 @@ $('#request_observation').hide();
           $('#physical_19').hide();
           $('#physical_20').hide();
           
-          //building_3
-          $('#edificio_3').hide();
           $('#physical_21').hide();
           $('#physical_22').hide();
           $('#physical_23').hide();
@@ -4840,8 +4857,6 @@ $('#request_observation').hide();
           $('#physical_29').hide();
           $('#physical_30').hide();
           
-          //building_4
-          $('#edificio_4').hide();
           $('#physical_31').hide();
           $('#physical_32').hide();
           $('#physical_33').hide();
@@ -4853,8 +4868,6 @@ $('#request_observation').hide();
           $('#physical_39').hide();
           $('#physical_40').hide();
           
-          //building_5
-          $('#edificio_5').hide();
           $('#physical_41').hide();
           $('#physical_42').hide();
           $('#physical_43').hide();
