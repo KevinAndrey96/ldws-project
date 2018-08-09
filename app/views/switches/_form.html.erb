@@ -10,28 +10,43 @@
       </ul>
     </div>
   <% end %>
-
+  <div class="row">
+<div class="col-sm-offset-4 col-sm-4">
   <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <label>Nombre</label>
+    <%= f.text_field :name, :class => "form-control" %>
   </div>
   <div class="field">
-    <%= f.label :reference %><br>
-    <%= f.text_field :reference %>
+    <label>Referencia</label>
+    <%= f.text_field :reference, :class => "form-control" %>
   </div>
   <div class="field">
-    <%= f.label :price %><br>
-    <%= f.number_field :price %>
+    <label>Precio</label>
+    <%= f.number_field :price, :class => "form-control" %>
   </div>
-  <div class="field">
-    <%= f.label :nports %><br>
-    <%= f.number_field :nports %>
-  </div>
-  <div class="field">
-    <%= f.label :port %><br>
-    <%= f.number_field :port %>
-  </div>
+  
+  <% 
+  aux=0
+  @ports.each do |port|
+    aux+=1
+  %>
+  <center><div class="field">
+    <label><%=port.name%> - <%=port.speed%> Gbps</label><br>
+    <input type="hidden" name="idpuerto<%=aux%>" value="<%=port.id%>">
+    <label>Número de puertos<input type="number" name="puerto<%=aux%>" placeholder="Número de puertos" class="form-control" value="0"></label>
+  </div></center>
+  <%
+  end
+  %>
+  
+  <input type="hidden" name="numerodepuertos" value="<%=aux%>">
+  
   <div class="actions">
-    <%= f.submit %>
+    <center><input type="submit" class="btn btn-default" value="Agregar"></center>
   </div>
 <% end %>
+</div>
+<div class="col-sm-4">
+  
+</div>
+</div>

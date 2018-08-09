@@ -1,29 +1,36 @@
-<p id="notice"><%= notice %></p>
+<br><br><br>
+<div class="col-md-offset-5">
+  <p>
+    <strong>Nombre:</strong>
+    <%= @switch.name %>
+  </p>
+  
+  <p>
+    <strong>Referencia:</strong>
+    <%= @switch.reference %>
+  </p>
+  
+  <p>
+    <strong>Precio:</strong>
+    <%= @switch.price %>
+  </p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @switch.name %>
-</p>
+  <%
+  @the_switches.each do |the_switch|
+    port=Port.find(the_switch.ports_id)
+    %>
+    
+      Puertos <%=port.name%> - <%=port.speed%> Gbps: <strong><%=the_switch.numberports%></strong><br>
+      
+    
+    <%
+  end
+  %>
+  <br>
+</div>
+<!--<%= link_to 'Editar', edit_switch_path(@switch) %> |-->
+<center>
+  
+  <%= link_to 'Volver', switches_path %> 
+</center>
 
-<p>
-  <strong>Reference:</strong>
-  <%= @switch.reference %>
-</p>
-
-<p>
-  <strong>Price:</strong>
-  <%= @switch.price %>
-</p>
-
-<p>
-  <strong>Nports:</strong>
-  <%= @switch.nports %>
-</p>
-
-<p>
-  <strong>Port:</strong>
-  <%= @switch.port %>
-</p>
-
-<%= link_to 'Edit', edit_switch_path(@switch) %> |
-<%= link_to 'Back', switches_path %>

@@ -11,6 +11,6 @@
 
 class Port < ActiveRecord::Base
      validates :name, uniqueness: true
-     has_many :switch_ports
-     has_many :switches, :through => :switch_ports
+     has_many :the_switches
+     has_many :switches, :through => :the_switches
 end

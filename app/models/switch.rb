@@ -13,6 +13,6 @@
 #
 
 class Switch < ActiveRecord::Base
-    has_many :switch_ports
-    has_many :ports, :through => :switch_ports
+    has_many :the_switches
+    has_many :ports, :through => :the_switches
 end

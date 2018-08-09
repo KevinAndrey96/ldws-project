@@ -7,6 +7,7 @@
 #  ports_id    :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  numberports :integer
 #
 # Indexes
 #
@@ -15,6 +16,6 @@
 #
 
 class TheSwitch < ActiveRecord::Base
-  belongs_to :switches
-  belongs_to :ports
+  belongs_to :switch
+  belongs_to :port
 end

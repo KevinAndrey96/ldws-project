@@ -4,8 +4,6 @@ class CreateSwitches < ActiveRecord::Migration
       t.string :name
       t.string :reference
       t.integer :price
-      t.integer :nports
-      t.integer :port
 
       t.timestamps null: false
     end

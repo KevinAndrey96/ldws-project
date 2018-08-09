@@ -64,7 +64,7 @@
                                 <%if params[:new]=="false" || params[:edit]=="true"%>
                                   <input readonly min="0"  maxlength="9" max="9999999999" type="number" onkeydown="Cel()" class="form-control" name="company[cell]" id="company_cell"  placeholder="Número de celular" value="<%=@company.cell%>">
                                 <%else%>
-                                  <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true; "  onKeyPress="if(this.value.length==9) return false;" min="0" max="9999999999"  class="form-control" name="company[cell]" id="company_cell"  placeholder="Número de celular">
+                                  <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true; "  onKeyPress="if(this.value.length==10) return false;" min="0" max="9999999999"  class="form-control" name="company[cell]" id="company_cell"  placeholder="Número de celular">
                                 <%end%>
                                 
                                 <script>
@@ -5820,7 +5820,7 @@ $('#request_observation').hide();
               document.getElementById("my_physical_conference_hall_3").value = "false";
           }
         }
-        
+
         if(Contador >= 4 || Cont_fisico >= 4){
           document.getElementById("my_physical_height_4").value = document.getElementById("physical_height_4").value  
           document.getElementById("my_physical_width_4").value = document.getElementById("physical_width_4").value  

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180806043705) do
+ActiveRecord::Schema.define(version: 20180808032049) do
 
   create_table "binnacles", force: :cascade do |t|
     t.integer  "user_id"
@@ -148,6 +148,7 @@ ActiveRecord::Schema.define(version: 20180806043705) do
     t.integer  "ports_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "numberports"
   end
 
   add_index "the_switches", ["ports_id"], name: "index_the_switches_on_ports_id"
