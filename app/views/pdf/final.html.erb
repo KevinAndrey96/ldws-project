@@ -77,13 +77,13 @@
               %>
               <td>Switches de acceso</td>
         <%
-        if @request.ctype=="Enterprise"
+        if @request.ctype=="Campus"
             if @logical.redundancy?
                 aux=2
             else
                 aux=1
             end  
-        elsif @request.ctype=="Campus"
+        elsif @request.ctype=="Enterprise"
             if @logical.redundancy?
                 aux=4
             else

@@ -233,7 +233,7 @@ end
             end
         end
         cable = Cable.where(:ctype => "UTP").order('RANDOM()').first
-        if @request.ctype=="Enterprise"
+        if @request.ctype=="Campus"
             if @logical.redundancy?
                 aux=2
                 aux2=aux
@@ -254,7 +254,7 @@ end
                     <%
                 end
             end  
-        elsif @request.ctype=="Campus"
+        elsif @request.ctype=="Enterprise"
             if @logical.redundancy?
                 aux=4
                 aux2=aux

@@ -29,13 +29,13 @@ table, tr, td, th, tbody, thead, tfoot {
     <tbody>
         <%
         contadordeprecio=0
-        if @request.ctype=="Enterprise"
+        if @request.ctype=="Campus"
             if @logical.redundancy?
                 aux=2
             else
                 aux=1
             end  
-        elsif @request.ctype=="Campus"
+        elsif @request.ctype=="Enterprise"
             if @logical.redundancy?
                 aux=4
             else
@@ -257,13 +257,13 @@ table, tr, td, th, tbody, thead, tfoot {
         
         <%
         switchesconta=0
-        if @request.ctype=="Enterprise"
+        if @request.ctype=="Campus"
             if @logical.redundancy?
                 aux=2
             else
                 aux=1
             end  
-        elsif @request.ctype=="Campus"
+        elsif @request.ctype=="Enterprise"
             if @logical.redundancy?
                 aux=4
             else
@@ -310,7 +310,7 @@ table, tr, td, th, tbody, thead, tfoot {
         end
         %>
               <%
-              if @request.ctype=="Enterprise"
+              if @request.ctype=="Campus"
                   if @logical.redundancy?
                       aux=2
                       switchesconta+=aux
@@ -318,7 +318,7 @@ table, tr, td, th, tbody, thead, tfoot {
                       aux=1
                       switchesconta+=aux
                   end  
-              elsif @request.ctype=="Campus"
+              elsif @request.ctype=="Enterprise"
                   if @logical.redundancy?
                       aux=4
                       switchesconta+=aux
