@@ -144,7 +144,7 @@ table, tr, td, th, tbody, thead, tfoot {
           <%
             @Myeq=Equipment.where('power = ? and etype = ?',@eco_ca,"Cable").order("RANDOM()").first
              cablevertical=@physical.sum(:height)+@physical.count*2
-            cont=@cable+switchesconta+1+cablevertical
+            cont=@cable+@cantidad_switches_aux+cablevertical+1
           %>
               <tr>
                 <td><div class="avoid"><%=@Myeq.brand%></div></td>
