@@ -305,10 +305,12 @@ class PdfController < ApplicationController
     end
     
     #Cantidad de cable
+    #Cantidad de cable
     @physical=Physical.where(:request_id => params[:request_id]) 
     @physical.each do |physical|
     cont=0
     @cable = 0
+    @canaleta = 1
      i = 0 
      while i < physical.large 
          j = 0 
@@ -318,10 +320,12 @@ class PdfController < ApplicationController
            if j != 0 
              if i%2 == 0 
               if cont < physical.computers
+                @canaleta = 1+@canaleta
                 cont+=1
                  if i == 0 
                   @cable = (0.5+(physical.height*2)+((j+1))+2)+@cable 
                  else 
+                  @canaleta = (i+1)+@canaleta 
                   @cable = (0.5+(physical.height*2)+((i+1)+(j+1))+2)+@cable 
                  end 
               end
