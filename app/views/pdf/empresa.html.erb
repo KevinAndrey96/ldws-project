@@ -33,7 +33,9 @@
         <br>
       </div>
     </div>
-    
+    <%
+    contalo=0
+    %>
     
     <!--Tabla Normal -->
     <div class="row">
@@ -125,8 +127,10 @@
             @cantidad_switches_aux=i
             
         end
+        contalo+=@cantidad_switches_aux
         %>
      <td><%=@cantidad_switches_aux%></td>
+     
               <%
               if @request.ctype=="Enterprise"
                   if @logical.redundancy?
@@ -135,12 +139,14 @@
                       <tr><td>Switches de Core</td>
                       <td><%=aux%></td></tr>
                       <%
+                      contalo+=aux
                   else
                       aux=1
                       %>
                       <tr><td>Switches de Core</td>
                       <td><%=aux%></td></tr>
                       <%
+                      contalo+=aux
                   end  
               elsif @request.ctype=="Campus"
                   if @logical.redundancy?
@@ -151,6 +157,7 @@
                       <tr><td>Switches de Distribución</td>
                       <td><%=aux/2%></td></tr>
                       <%
+                      contalo+=aux
                   else
                       aux=2
                       %>
@@ -159,6 +166,7 @@
                       <tr><td>Switches de Distribución</td>
                       <td><%=aux/2%></td></tr>
                       <%
+                      contalo+=aux
                   end
               end
               %>
@@ -176,7 +184,7 @@
               <td><strong>Total</strong></td>
               <td>
                 
-                <% @Total= @physical.sum(:printers)+@physical.sum(:computers)+@servidores+1+cont+@physical.count %>
+                <% @Total= @physical.sum(:printers)+@physical.sum(:computers)+@servidores+1+cont+@physical.count+contalo %>
                 <strong><%= @Total %></strong>
               </td>
             </tr>
