@@ -1264,9 +1264,6 @@ end
 
 
 
-
-
-
 <head>
   <meta charset="UTF-8">
 </head>
@@ -1292,6 +1289,78 @@ table, tr, td, th, tbody, thead, tfoot {
 </style>
   <%total_value=0%>
   <%mslots=0%>
+  <div class="content">
+    <h2>Tabla de Switches</h2>
+    <table border="1" width="100%"><thead><tr><th>Información</th><th>Referencia</th><th>Precio</th></tr></thead>
+    <tbody>
+        <%
+        contadordeprecio=0
+        if @request.ctype=="Enterprise"
+            if @logical.redundancy?
+                aux=2
+            else
+                aux=1
+            end  
+        elsif @request.ctype=="Campus"
+            if @logical.redundancy?
+                aux=4
+            else
+                aux=2
+            end
+        end
+        i=0
+        while aux>0
+            i+=1
+            aux-=1
+            the_switch = TheSwitch.where('numberports >= 1 and ports_id = 5').order('numberports asc')
+            switch=Switch.find(the_switch.first.switches_id)
+            port=Port.find(the_switch.first.ports_id)
+            %>
+                <tr></td><td><%=switch.name%></td><td><%=switch.reference%></td><td><%=switch.price%> USD</td></tr>
+            <%
+            contadordeprecio+=switch.price
+        end
+        
+        superi=i
+        
+        aux=0
+        @physical.each do |physical|
+            aux+=1
+            begin
+            the_switch = TheSwitch.where('numberports > ? and ports_id = 1', physical.computers).order('numberports desc')
+            %>
+                <!--<%=the_switch.first.numberports%> -->
+            <%
+            rescue
+            the_switch = TheSwitch.where('numberports < ? and ports_id = 1', physical.computers).order('numberports desc')
+            %>
+                <!--<%=the_switch.first.numberports%> -->
+            <%
+            end
+            cantidad_switches=(physical.computers.to_f/the_switch.first.numberports.to_f).to_f.ceil
+            
+            switch=Switch.find(the_switch.first.switches_id)
+            port=Port.find(the_switch.first.ports_id)
+            oux=cantidad_switches
+            while oux>0
+            oux-=1
+            i+=1
+            %>
+                <tr><td><%=switch.name%></td><td><%=switch.reference%></td><td><%=switch.price%> USD</td></tr>
+            <%
+            contadordeprecio+=switch.price
+            end
+            @cantidad_switches_aux=i
+            switchesconta=@cantidad_switches_aux
+        end
+        
+        
+        
+        %>
+        <tr><td colspan="2"><strong>Total: </strong><td><strong><%=contadordeprecio%> USD</strong></td></td></tr>
+    </tr></tbody>
+    </table>
+</div>
   
   <div class="row">
     <h2>Cotización económica</h2>
@@ -1341,7 +1410,7 @@ table, tr, td, th, tbody, thead, tfoot {
           <%
             @Myeq=Equipment.where('power = ? and etype = ?',@eco_ca,"Cable").order("RANDOM()").first
              cablevertical=@physical.sum(:height)+@physical.count*2
-            cont=@cable+switchesconta+1+cablevertical
+            cont=@cable+@cantidad_switches_aux+cablevertical+1
           %>
               <tr>
                 <td><div class="avoid"><%=@Myeq.brand%></div></td>
@@ -1382,10 +1451,10 @@ table, tr, td, th, tbody, thead, tfoot {
                   cont=cont*2
                 end
                 %>
-                <td><div class="avoid"><%=cont.ceil%> m</div></td>
+                <td><div class="avoid"><%=@canaleta.ceil%> m</div></td>
                 <td><div class="avoid"><%=@Myeq.price%></div></td>
-                <td><div class="avoid"><%=@Myeq.price*cont.ceil%></div></td>
-                <%total_value+=@Myeq.price*cont.ceil%>
+                <td><div class="avoid"><%=@Myeq.price*@canaleta.ceil%></div></td>
+                <%total_value+=@Myeq.price*@canaleta.ceil%>
               </tr>
               <%
             
@@ -1813,7 +1882,7 @@ table, tr, td, th, tbody, thead, tfoot {
                 <td><div class="avoid"><%=@canaleta.ceil%> m</div></td>
                 <td><div class="avoid"><%=@Myeq.price%></div></td>
                 <td><div class="avoid"><%=@Myeq.price*@canaleta.ceil%></div></td>
-                <%total_value+=@Myeq.price*cont.ceil%>
+                <%total_value+=@Myeq.price*@canaleta.ceil%>
               </tr>
               <%
             
@@ -2102,10 +2171,10 @@ table, tr, td, th, tbody, thead, tfoot {
                   cont=cont*2
                 end
                 %>
-                <td><div class="avoid"><%=cont.ceil%> m</div></td>
+                <td><div class="avoid"><%=@canaleta.ceil%> m</div></td>
                 <td><div class="avoid"><%=@Myeq.price%></div></td>
-                <td><div class="avoid"><%=@Myeq.price*cont.ceil%></div></td>
-                <%total_value+=@Myeq.price*cont.ceil%>
+                <td><div class="avoid"><%=@Myeq.price*@canaleta.ceil%></div></td>
+                <%total_value+=@Myeq.price*@canaleta.ceil%>
               </tr>
               <%
             
@@ -2292,74 +2361,4 @@ table, tr, td, th, tbody, thead, tfoot {
       </tbody>
     </table>
   </div>
-  <div class="content">
-    <h2>Tabla de Switches</h2>
-    <table border="1" width="100%"><thead><tr><th>Información</th><th>Referencia</th><th>Precio</th></tr></thead>
-    <tbody>
-        <%
-        contadordeprecio=0
-        if @request.ctype=="Enterprise"
-            if @logical.redundancy?
-                aux=2
-            else
-                aux=1
-            end  
-        elsif @request.ctype=="Campus"
-            if @logical.redundancy?
-                aux=4
-            else
-                aux=2
-            end
-        end
-        i=0
-        while aux>0
-            i+=1
-            aux-=1
-            the_switch = TheSwitch.where('numberports >= 1 and ports_id = 5').order('numberports asc')
-            switch=Switch.find(the_switch.first.switches_id)
-            port=Port.find(the_switch.first.ports_id)
-            %>
-                <tr></td><td><%=switch.name%></td><td><%=switch.reference%></td><td><%=switch.price%> USD</td></tr>
-            <%
-            contadordeprecio+=switch.price
-        end
-        
-        superi=i
-        
-        aux=0
-        @physical.each do |physical|
-            aux+=1
-            begin
-            the_switch = TheSwitch.where('numberports > ? and ports_id = 1', physical.computers).order('numberports desc')
-            %>
-                <!--<%=the_switch.first.numberports%> -->
-            <%
-            rescue
-            the_switch = TheSwitch.where('numberports < ? and ports_id = 1', physical.computers).order('numberports desc')
-            %>
-                <!--<%=the_switch.first.numberports%> -->
-            <%
-            end
-            cantidad_switches=(physical.computers.to_f/the_switch.first.numberports.to_f).to_f.ceil
-            
-            switch=Switch.find(the_switch.first.switches_id)
-            port=Port.find(the_switch.first.ports_id)
-            oux=cantidad_switches
-            while oux>0
-            oux-=1
-            i+=1
-            %>
-                <tr><td><%=switch.name%></td><td><%=switch.reference%></td><td><%=switch.price%> USD</td></tr>
-            <%
-            contadordeprecio+=switch.price
-            end
-            @cantidad_switches_aux=i
-        end
-        
-        
-        
-        %>
-        <tr><td colspan="2"><strong>Total: </strong><td><strong><%=contadordeprecio%> USD</strong></td></td></tr>
-    </tr></tbody>
-    </table>
-</div>
+  

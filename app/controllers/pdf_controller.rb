@@ -1179,6 +1179,7 @@ class PdfController < ApplicationController
     end
     
     #Cantidad de cable
+    #Cantidad de cable
     @physical=Physical.where(:request_id => params[:request_id]) 
     @physical.each do |physical|
     cont=0
@@ -1528,6 +1529,9 @@ class PdfController < ApplicationController
     
     
     
+    
+    
+        
     #totalcomputers=@physical.sum(:computers)
     @Sw_status = 1
     @total_of_computers = @physical.sum(:computers)
@@ -1749,6 +1753,8 @@ class PdfController < ApplicationController
     else
       @opt_ap=3
     end
+    
+    
    #Finaliza Cotización
     render  :pdf => "Reporte", :template => 'pdf/final.html.erb'
   end
