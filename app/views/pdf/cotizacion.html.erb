@@ -185,10 +185,10 @@ table, tr, td, th, tbody, thead, tfoot {
                   cont=cont*2
                 end
                 %>
-                <td><div class="avoid"><%=cont.ceil%> m</div></td>
+                <td><div class="avoid"><%=@canaleta.ceil%> m</div></td>
                 <td><div class="avoid"><%=@Myeq.price%></div></td>
-                <td><div class="avoid"><%=@Myeq.price*cont.ceil%></div></td>
-                <%total_value+=@Myeq.price*cont.ceil%>
+                <td><div class="avoid"><%=@Myeq.price*@canaleta.ceil%></div></td>
+                <%total_value+=@Myeq.price*@canaleta.ceil%>
               </tr>
               <%
             
@@ -616,7 +616,7 @@ table, tr, td, th, tbody, thead, tfoot {
                 <td><div class="avoid"><%=@canaleta.ceil%> m</div></td>
                 <td><div class="avoid"><%=@Myeq.price%></div></td>
                 <td><div class="avoid"><%=@Myeq.price*@canaleta.ceil%></div></td>
-                <%total_value+=@Myeq.price*cont.ceil%>
+                <%total_value+=@Myeq.price*@canaleta.ceil%>
               </tr>
               <%
             
@@ -905,10 +905,10 @@ table, tr, td, th, tbody, thead, tfoot {
                   cont=cont*2
                 end
                 %>
-                <td><div class="avoid"><%=cont.ceil%> m</div></td>
+                <td><div class="avoid"><%=@canaleta.ceil%> m</div></td>
                 <td><div class="avoid"><%=@Myeq.price%></div></td>
-                <td><div class="avoid"><%=@Myeq.price*cont.ceil%></div></td>
-                <%total_value+=@Myeq.price*cont.ceil%>
+                <td><div class="avoid"><%=@Myeq.price*@canaleta.ceil%></div></td>
+                <%total_value+=@Myeq.price*@canaleta.ceil%>
               </tr>
               <%
             
