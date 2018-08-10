@@ -5,7 +5,7 @@ class SwitchesController < ApplicationController
   # GET /switches
   # GET /switches.json
   def index
-    @switches = Switch.group(:name)
+    @switches = Switch.all
     
   end
 
