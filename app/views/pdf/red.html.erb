@@ -28,8 +28,114 @@ aux=0
     <%
 end
 %>
+
+
+
+
+
 <div class="content">
     <h2>Tabla de Switches</h2>
+    <table border="1" width="100%"><thead><tr><th>Id</th><th>Nombre</th><th>Información</th></thead>
+    <tbody>
+        <%
+        if @request.ctype=="Enterprise"
+            if @logical.redundancy?
+                aux=2
+            else
+                aux=1
+            end  
+        elsif @request.ctype=="Campus"
+            if @logical.redundancy?
+                aux=4
+            else
+                aux=2
+            end
+        end
+        i=0
+        while aux>0
+            i+=1
+            aux-=1
+            the_switch = TheSwitch.where('numberports >= 1 and ports_id = 5').order('numberports asc')
+            switch=Switch.find(the_switch.first.switches_id)
+            port=Port.find(the_switch.first.ports_id)
+            @ts=TheSwitch.where(:switches_id => switch.id)
+            %>
+                <tr><td><%=i%></td><td><%=switch.name%></td>
+                <td>
+                    <%
+                    @ts.each do |tese|
+                    %>
+                        <%=tese.numberports%> P
+                    <% 
+                    pp=Port.find(tese.ports_id)
+                    %>
+                    - <%=pp.name%>,
+                    <%
+                    
+                    end
+                    %>
+                </td>
+                </tr>
+            <%
+        end
+        
+        superi=i
+        
+        aux=0
+        @physical.each do |physical|
+            aux+=1
+            begin
+            the_switch = TheSwitch.where('numberports > ? and ports_id = 1', physical.computers).order('numberports desc')
+            %>
+                <!--<%=the_switch.first.numberports%> -->
+            <%
+            rescue
+            the_switch = TheSwitch.where('numberports < ? and ports_id = 1', physical.computers).order('numberports desc')
+            %>
+                <!--<%=the_switch.first.numberports%> -->
+            <%
+            end
+            cantidad_switches=(physical.computers.to_f/the_switch.first.numberports.to_f).to_f.ceil
+            
+            switch=Switch.find(the_switch.first.switches_id)
+            port=Port.find(the_switch.first.ports_id)
+            oux=cantidad_switches
+            while oux>0
+            oux-=1
+            i+=1
+            @ts=TheSwitch.where(:switches_id => switch.id)
+            %>
+                <tr><td><%=i%></td><td><%=switch.name%></td>
+                <td>
+                    <%
+                    @ts.each do |tese|
+                    %>
+                        <%=tese.numberports%> P
+                    <% 
+                    pp=Port.find(tese.ports_id)
+                    %>
+                    - <%=pp.name%> a <%=pp.speed%> Gbps,
+                    <%
+                    
+                    end
+                    %>
+                </td>
+                </tr>
+            <%
+            end
+            @cantidad_switches_aux=i
+        end
+        
+        
+        
+        %>
+        
+    </tr></tbody>
+    </table>
+</div>
+
+<div class="content" style="display:none">
+    <h2>Tabla de puertos de conexión switches</h2>
     <table border="1" width="100%"><thead><tr><th>Id</th><th>Información</th><th>Puertos</th><th>Tipo de puerto</th><th>Velocidad</th></tr></thead>
     <tbody>
         <%
@@ -96,9 +202,12 @@ end
     </tr></tbody>
     </table>
 </div>
+
+
+
 <div class="content">
     <h2>Tabla de Cableado</h2>
-    <table border="1" width="100%"><thead><tr><th>Id Origen</th><th>Id Destino</th><th>Cable usado</th><th>Tipo de cable</th><th>Estructura</th><th>Conector</th><th>Precio Conector</th><th>Categoria</th><th>Precio categoria</th><th>Estandar Ethernet</th><th>Velocidad estandar ethernet</th><th>Distancia estandar ethernet</th></tr></thead>
+    <table border="1" width="100%"><thead><tr><th>Id Origen</th><th>Id Destino</th><th>Nombre de cable</th><th>Tipo de cable</th><th>Categoria de cable</th><th>Estructura</th><th>Conector</th><th>Precio Conector</th><th>Categoria</th><th>Precio categoria</th><th>Estandar Ethernet</th><th>Velocidad</th><th>Distancia estandar ethernet</th></tr></thead>
     <tbody>
         <%
         cable = Cable.where(:name => "Fibra Optica", :ethernet_id => 6).order('RANDOM()').first
@@ -112,14 +221,14 @@ end
             if @logical.redundancy?
                 aux=4
                 %>
-                    <tr><td>1</td><td>3</td><td><%=cable.name%></td><td><%=cable.ctype%></td><td><%=cable.structure%></td><td><%=cable.connector.name%></td><td><%=cable.connector.price%> USD</td><td><%=cable.category.name%></td><td><%=cable.category.price%> USD</td><td><%=cable.ethernet.name%></td><td><%=cable.ethernet.speed%> Gbps</td><td><%=cable.ethernet.distance%> m</td></tr>
-                    <tr><td>1</td><td>4</td><td><%=cable.name%></td><td><%=cable.ctype%></td><td><%=cable.structure%></td><td><%=cable.connector.name%></td><td><%=cable.connector.price%> USD</td><td><%=cable.category.name%></td><td><%=cable.category.price%> USD</td><td><%=cable.ethernet.name%></td><td><%=cable.ethernet.speed%> Gbps</td><td><%=cable.ethernet.distance%> m</td></tr>
-                    <tr><td>2</td><td>3</td><td><%=cable.name%></td><td><%=cable.ctype%></td><td><%=cable.structure%></td><td><%=cable.connector.name%></td><td><%=cable.connector.price%> USD</td><td><%=cable.category.name%></td><td><%=cable.category.price%> USD</td><td><%=cable.ethernet.name%></td><td><%=cable.ethernet.speed%> Gbps</td><td><%=cable.ethernet.distance%> m</td></tr>
-                    <tr><td>2</td><td>4</td><td><%=cable.name%></td><td><%=cable.ctype%></td><td><%=cable.structure%></td><td><%=cable.connector.name%></td><td><%=cable.connector.price%> USD</td><td><%=cable.category.name%></td><td><%=cable.category.price%> USD</td><td><%=cable.ethernet.name%></td><td><%=cable.ethernet.speed%> Gbps</td><td><%=cable.ethernet.distance%> m</td></tr>
+                    <tr><td>1</td><td>3</td><td><%=cable.name%></td><td><%=cable.ctype%></td><td><%=cable.category.name%></td><td><%=cable.structure%></td><td><%=cable.connector.name%></td><td><%=cable.connector.price%> USD</td><td><%=cable.category.name%></td><td><%=cable.category.price%> USD</td><td><%=cable.ethernet.name%></td><td><%=cable.ethernet.speed%> Gbps</td><td><%=cable.ethernet.distance%> m</td></tr>
+                    <tr><td>1</td><td>4</td><td><%=cable.name%></td><td><%=cable.ctype%></td><td><%=cable.category.name%></td><td><%=cable.structure%></td><td><%=cable.connector.name%></td><td><%=cable.connector.price%> USD</td><td><%=cable.category.name%></td><td><%=cable.category.price%> USD</td><td><%=cable.ethernet.name%></td><td><%=cable.ethernet.speed%> Gbps</td><td><%=cable.ethernet.distance%> m</td></tr>
+                    <tr><td>2</td><td>3</td><td><%=cable.name%></td><td><%=cable.ctype%></td><td><%=cable.category.name%></td><td><%=cable.structure%></td><td><%=cable.connector.name%></td><td><%=cable.connector.price%> USD</td><td><%=cable.category.name%></td><td><%=cable.category.price%> USD</td><td><%=cable.ethernet.name%></td><td><%=cable.ethernet.speed%> Gbps</td><td><%=cable.ethernet.distance%> m</td></tr>
+                    <tr><td>2</td><td>4</td><td><%=cable.name%></td><td><%=cable.ctype%></td><td><%=cable.category.name%></td><td><%=cable.structure%></td><td><%=cable.connector.name%></td><td><%=cable.connector.price%> USD</td><td><%=cable.category.name%></td><td><%=cable.category.price%> USD</td><td><%=cable.ethernet.name%></td><td><%=cable.ethernet.speed%> Gbps</td><td><%=cable.ethernet.distance%> m</td></tr>
                 <%
             else
                 %>
-                    <tr><td>1</td><td>2</td><td><%=cable.name%></td><td><%=cable.ctype%></td><td><%=cable.structure%></td><td><%=cable.connector.name%></td><td><%=cable.connector.price%> USD</td><td><%=cable.category.name%></td><td><%=cable.category.price%> USD</td><td><%=cable.ethernet.name%></td><td><%=cable.ethernet.speed%> Gbps</td><td><%=cable.ethernet.distance%> m</td></tr>
+                    <tr><td>1</td><td>2</td><td><%=cable.name%></td><td><%=cable.ctype%></td><td><%=cable.category.name%></td><td><%=cable.structure%></td><td><%=cable.connector.name%></td><td><%=cable.connector.price%> USD</td><td><%=cable.category.name%></td><td><%=cable.category.price%> USD</td><td><%=cable.ethernet.name%></td><td><%=cable.ethernet.speed%> Gbps</td><td><%=cable.ethernet.distance%> m</td></tr>
                 <%
             end
         end
@@ -131,8 +240,8 @@ end
                 while aux2<@cantidad_switches_aux
                     aux2+=1
                     %>
-                        <tr><td>1</td><td><%=aux2%></td><td><%=cable.name%></td><td><%=cable.ctype%></td><td><%=cable.structure%></td><td><%=cable.connector.name%></td><td><%=cable.connector.price%> USD</td><td><%=cable.category.name%></td><td><%=cable.category.price%> USD</td><td><%=cable.ethernet.name%></td><td><%=cable.ethernet.speed%> Gbps</td><td><%=cable.ethernet.distance%> m</td></tr>
-                        <tr><td>2</td><td><%=aux2%></td><td><%=cable.name%></td><td><%=cable.ctype%></td><td><%=cable.structure%></td><td><%=cable.connector.name%></td><td><%=cable.connector.price%> USD</td><td><%=cable.category.name%></td><td><%=cable.category.price%> USD</td><td><%=cable.ethernet.name%></td><td><%=cable.ethernet.speed%> Gbps</td><td><%=cable.ethernet.distance%> m</td></tr>
+                        <tr><td>1</td><td><%=aux2%></td><td><%=cable.name%></td><td><%=cable.ctype%></td><td><%=cable.category.name%></td><td><%=cable.structure%></td><td><%=cable.connector.name%></td><td><%=cable.connector.price%> USD</td><td><%=cable.category.name%></td><td><%=cable.category.price%> USD</td><td><%=cable.ethernet.name%></td><td><%=cable.ethernet.speed%> Gbps</td><td><%=cable.ethernet.distance%> m</td></tr>
+                        <tr><td>2</td><td><%=aux2%></td><td><%=cable.name%></td><td><%=cable.ctype%></td><td><%=cable.category.name%></td><td><%=cable.structure%></td><td><%=cable.connector.name%></td><td><%=cable.connector.price%> USD</td><td><%=cable.category.name%></td><td><%=cable.category.price%> USD</td><td><%=cable.ethernet.name%></td><td><%=cable.ethernet.speed%> Gbps</td><td><%=cable.ethernet.distance%> m</td></tr>
                     <%
                 end
             else
@@ -141,7 +250,7 @@ end
                 while aux2<@cantidad_switches_aux
                     aux2+=1
                     %>
-                        <tr><td>1</td><td><%=aux2%></td><td><%=cable.name%></td><td><%=cable.ctype%></td><td><%=cable.structure%></td><td><%=cable.connector.name%></td><td><%=cable.connector.price%> USD</td><td><%=cable.category.name%></td><td><%=cable.category.price%> USD</td><td><%=cable.ethernet.name%></td><td><%=cable.ethernet.speed%> Gbps</td><td><%=cable.ethernet.distance%> m</td></tr>
+                        <tr><td>1</td><td><%=aux2%></td><td><%=cable.name%></td><td><%=cable.ctype%></td><td><%=cable.category.name%></td><td><%=cable.structure%></td><td><%=cable.connector.name%></td><td><%=cable.connector.price%> USD</td><td><%=cable.category.name%></td><td><%=cable.category.price%> USD</td><td><%=cable.ethernet.name%></td><td><%=cable.ethernet.speed%> Gbps</td><td><%=cable.ethernet.distance%> m</td></tr>
                     <%
                 end
             end  
@@ -152,8 +261,8 @@ end
                 while aux2<@cantidad_switches_aux
                     aux2+=1
                     %>
-                        <tr><td>3</td><td><%=aux2%></td><td><%=cable.name%></td><td><%=cable.ctype%></td><td><%=cable.structure%></td><td><%=cable.connector.name%></td><td><%=cable.connector.price%> USD</td><td><%=cable.category.name%></td><td><%=cable.category.price%> USD</td><td><%=cable.ethernet.name%></td><td><%=cable.ethernet.speed%> Gbps</td><td><%=cable.ethernet.distance%> m</td></tr>
-                        <tr><td>4</td><td><%=aux2%></td><td><%=cable.name%></td><td><%=cable.ctype%></td><td><%=cable.structure%></td><td><%=cable.connector.name%></td><td><%=cable.connector.price%> USD</td><td><%=cable.category.name%></td><td><%=cable.category.price%> USD</td><td><%=cable.ethernet.name%></td><td><%=cable.ethernet.speed%> Gbps</td><td><%=cable.ethernet.distance%> m</td></tr>
+                        <tr><td>3</td><td><%=aux2%></td><td><%=cable.name%></td><td><%=cable.ctype%></td><td><%=cable.category.name%></td><td><%=cable.structure%></td><td><%=cable.connector.name%></td><td><%=cable.connector.price%> USD</td><td><%=cable.category.name%></td><td><%=cable.category.price%> USD</td><td><%=cable.ethernet.name%></td><td><%=cable.ethernet.speed%> Gbps</td><td><%=cable.ethernet.distance%> m</td></tr>
+                        <tr><td>4</td><td><%=aux2%></td><td><%=cable.name%></td><td><%=cable.ctype%></td><td><%=cable.category.name%></td><td><%=cable.structure%></td><td><%=cable.connector.name%></td><td><%=cable.connector.price%> USD</td><td><%=cable.category.name%></td><td><%=cable.category.price%> USD</td><td><%=cable.ethernet.name%></td><td><%=cable.ethernet.speed%> Gbps</td><td><%=cable.ethernet.distance%> m</td></tr>
                     <%
                 end
             else
@@ -162,7 +271,7 @@ end
                 while aux2<@cantidad_switches_aux
                     aux2+=1
                     %>
-                        <tr><td>2</td><td><%=aux2%></td><td><%=cable.name%></td><td><%=cable.ctype%></td><td><%=cable.structure%></td><td><%=cable.connector.name%></td><td><%=cable.connector.price%> USD</td><td><%=cable.category.name%></td><td><%=cable.category.price%> USD</td><td><%=cable.ethernet.name%></td><td><%=cable.ethernet.speed%> Gbps</td><td><%=cable.ethernet.distance%> m</td></tr>
+                        <tr><td>2</td><td><%=aux2%></td><td><%=cable.name%></td><td><%=cable.ctype%></td><td><%=cable.category.name%></td><td><%=cable.structure%></td><td><%=cable.connector.name%></td><td><%=cable.connector.price%> USD</td><td><%=cable.category.name%></td><td><%=cable.category.price%> USD</td><td><%=cable.ethernet.name%></td><td><%=cable.ethernet.speed%> Gbps</td><td><%=cable.ethernet.distance%> m</td></tr>
                     <%
                 end
             end
