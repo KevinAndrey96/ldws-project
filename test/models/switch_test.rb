@@ -6,8 +6,6 @@
 #  name       :string
 #  reference  :string
 #  price      :integer
-#  nports     :integer
-#  port       :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #

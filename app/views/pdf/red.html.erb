@@ -11,12 +11,12 @@ aux=0
     <p>Edificio <%=physical.building.name%><br><%=physical.computers%> computadores</p>
     <%
     begin
-    the_switch = TheSwitch.where('numberports > ? and ports_id = 1', physical.computers)
+    the_switch = TheSwitch.where('numberports > ? and ports_id = 1', physical.computers).order('numberports desc')
     %>
         <!--<%=the_switch.first.numberports%> -->
     <%
     rescue
-    the_switch = TheSwitch.where('numberports < ? and ports_id = 1', physical.computers)
+    the_switch = TheSwitch.where('numberports < ? and ports_id = 1', physical.computers).order('numberports desc')
     %>
         <!--<%=the_switch.first.numberports%> -->
     <%
@@ -33,21 +33,29 @@ end
     <table border="1" width="100%"><thead><tr><th>Id</th><th>Información</th><th>Puertos</th><th>Tipo de puerto</th><th>Velocidad</th></tr></thead>
     <tbody>
         <%
-        if @logical.redundancy?
-            aux=4
-        else
-            aux=2
-        end 
+        if @request.ctype=="Enterprise"
+            if @logical.redundancy?
+                aux=2
+            else
+                aux=1
+            end  
+        elsif @request.ctype=="Campus"
+            if @logical.redundancy?
+                aux=4
+            else
+                aux=2
+            end
+        end
         i=0
         while aux>0
-        i+=1
-        aux-=1
-        the_switch = TheSwitch.where('numberports >= 1 and ports_id = 5')
-        switch=Switch.find(the_switch.first.switches_id)
-        port=Port.find(the_switch.first.ports_id)
-        %>
-            <tr><td><%=i%></td><td><%=switch.name%></td><td><%=the_switch.first.numberports%></td><td><%=port.name%></td><td><%=port.speed%> Gbps</td></tr>
-        <%
+            i+=1
+            aux-=1
+            the_switch = TheSwitch.where('numberports >= 1 and ports_id = 5').order('numberports asc')
+            switch=Switch.find(the_switch.first.switches_id)
+            port=Port.find(the_switch.first.ports_id)
+            %>
+                <tr><td><%=i%></td><td><%=switch.name%></td><td><%=the_switch.first.numberports%></td><td><%=port.name%></td><td><%=port.speed%> Gbps</td></tr>
+            <%
         end
         
         superi=i
@@ -56,26 +64,29 @@ end
         @physical.each do |physical|
             aux+=1
             begin
-            the_switch = TheSwitch.where('numberports > ? and ports_id = 1', physical.computers)
+            the_switch = TheSwitch.where('numberports > ? and ports_id = 1', physical.computers).order('numberports desc')
             %>
                 <!--<%=the_switch.first.numberports%> -->
             <%
             rescue
-            the_switch = TheSwitch.where('numberports < ? and ports_id = 1', physical.computers)
+            the_switch = TheSwitch.where('numberports < ? and ports_id = 1', physical.computers).order('numberports desc')
             %>
                 <!--<%=the_switch.first.numberports%> -->
             <%
             end
             cantidad_switches=(physical.computers.to_f/the_switch.first.numberports.to_f).to_f.ceil
+            
             switch=Switch.find(the_switch.first.switches_id)
             port=Port.find(the_switch.first.ports_id)
-            while cantidad_switches>0
-            cantidad_switches-=1
+            oux=cantidad_switches
+            while oux>0
+            oux-=1
             i+=1
             %>
                 <tr><td><%=i%></td><td><%=switch.name%></td><td><%=the_switch.first.numberports%></td><td><%=port.name%></td><td><%=port.speed%> Gbps</td></tr>
             <%
             end
+            @cantidad_switches_aux=i
         end
         
         
@@ -85,24 +96,94 @@ end
     </tr></tbody>
     </table>
 </div>
+<div class="content">
+    <h2>Tabla de Cableado</h2>
+    <table border="1" width="100%"><thead><tr><th>Id Origen</th><th>Id Destino</th><th>Cable usado</th><th>Tipo de cable</th><th>Estructura</th><th>Conector</th><th>Precio Conector</th><th>Categoria</th><th>Precio categoria</th><th>Estandar Ethernet</th><th>Velocidad estandar ethernet</th><th>Distancia estandar ethernet</th></tr></thead>
+    <tbody>
+        <%
+        cable = Cable.where(:name => "Fibra Optica", :ethernet_id => 6).order('RANDOM()').first
+        if @request.ctype=="Enterprise"
+            if @logical.redundancy?
+                aux=2
+            else
+                aux=1
+            end  
+        elsif @request.ctype=="Campus"
+            if @logical.redundancy?
+                aux=4
+                %>
+                    <tr><td>1</td><td>3</td><td><%=cable.name%></td><td><%=cable.ctype%></td><td><%=cable.structure%></td><td><%=cable.connector.name%></td><td><%=cable.connector.price%> USD</td><td><%=cable.category.name%></td><td><%=cable.category.price%> USD</td><td><%=cable.ethernet.name%></td><td><%=cable.ethernet.speed%> Gbps</td><td><%=cable.ethernet.distance%> m</td></tr>
+                    <tr><td>1</td><td>4</td><td><%=cable.name%></td><td><%=cable.ctype%></td><td><%=cable.structure%></td><td><%=cable.connector.name%></td><td><%=cable.connector.price%> USD</td><td><%=cable.category.name%></td><td><%=cable.category.price%> USD</td><td><%=cable.ethernet.name%></td><td><%=cable.ethernet.speed%> Gbps</td><td><%=cable.ethernet.distance%> m</td></tr>
+                    <tr><td>2</td><td>3</td><td><%=cable.name%></td><td><%=cable.ctype%></td><td><%=cable.structure%></td><td><%=cable.connector.name%></td><td><%=cable.connector.price%> USD</td><td><%=cable.category.name%></td><td><%=cable.category.price%> USD</td><td><%=cable.ethernet.name%></td><td><%=cable.ethernet.speed%> Gbps</td><td><%=cable.ethernet.distance%> m</td></tr>
+                    <tr><td>2</td><td>4</td><td><%=cable.name%></td><td><%=cable.ctype%></td><td><%=cable.structure%></td><td><%=cable.connector.name%></td><td><%=cable.connector.price%> USD</td><td><%=cable.category.name%></td><td><%=cable.category.price%> USD</td><td><%=cable.ethernet.name%></td><td><%=cable.ethernet.speed%> Gbps</td><td><%=cable.ethernet.distance%> m</td></tr>
+                <%
+            else
+                %>
+                    <tr><td>1</td><td>2</td><td><%=cable.name%></td><td><%=cable.ctype%></td><td><%=cable.structure%></td><td><%=cable.connector.name%></td><td><%=cable.connector.price%> USD</td><td><%=cable.category.name%></td><td><%=cable.category.price%> USD</td><td><%=cable.ethernet.name%></td><td><%=cable.ethernet.speed%> Gbps</td><td><%=cable.ethernet.distance%> m</td></tr>
+                <%
+            end
+        end
+        cable = Cable.where(:ctype => "UTP").order('RANDOM()').first
+        if @request.ctype=="Enterprise"
+            if @logical.redundancy?
+                aux=2
+                aux2=aux
+                while aux2<@cantidad_switches_aux
+                    aux2+=1
+                    %>
+                        <tr><td>1</td><td><%=aux2%></td><td><%=cable.name%></td><td><%=cable.ctype%></td><td><%=cable.structure%></td><td><%=cable.connector.name%></td><td><%=cable.connector.price%> USD</td><td><%=cable.category.name%></td><td><%=cable.category.price%> USD</td><td><%=cable.ethernet.name%></td><td><%=cable.ethernet.speed%> Gbps</td><td><%=cable.ethernet.distance%> m</td></tr>
+                        <tr><td>2</td><td><%=aux2%></td><td><%=cable.name%></td><td><%=cable.ctype%></td><td><%=cable.structure%></td><td><%=cable.connector.name%></td><td><%=cable.connector.price%> USD</td><td><%=cable.category.name%></td><td><%=cable.category.price%> USD</td><td><%=cable.ethernet.name%></td><td><%=cable.ethernet.speed%> Gbps</td><td><%=cable.ethernet.distance%> m</td></tr>
+                    <%
+                end
+            else
+                aux=1
+                aux2=aux
+                while aux2<@cantidad_switches_aux
+                    aux2+=1
+                    %>
+                        <tr><td>1</td><td><%=aux2%></td><td><%=cable.name%></td><td><%=cable.ctype%></td><td><%=cable.structure%></td><td><%=cable.connector.name%></td><td><%=cable.connector.price%> USD</td><td><%=cable.category.name%></td><td><%=cable.category.price%> USD</td><td><%=cable.ethernet.name%></td><td><%=cable.ethernet.speed%> Gbps</td><td><%=cable.ethernet.distance%> m</td></tr>
+                    <%
+                end
+            end  
+        elsif @request.ctype=="Campus"
+            if @logical.redundancy?
+                aux=4
+                aux2=aux
+                while aux2<@cantidad_switches_aux
+                    aux2+=1
+                    %>
+                        <tr><td>3</td><td><%=aux2%></td><td><%=cable.name%></td><td><%=cable.ctype%></td><td><%=cable.structure%></td><td><%=cable.connector.name%></td><td><%=cable.connector.price%> USD</td><td><%=cable.category.name%></td><td><%=cable.category.price%> USD</td><td><%=cable.ethernet.name%></td><td><%=cable.ethernet.speed%> Gbps</td><td><%=cable.ethernet.distance%> m</td></tr>
+                        <tr><td>4</td><td><%=aux2%></td><td><%=cable.name%></td><td><%=cable.ctype%></td><td><%=cable.structure%></td><td><%=cable.connector.name%></td><td><%=cable.connector.price%> USD</td><td><%=cable.category.name%></td><td><%=cable.category.price%> USD</td><td><%=cable.ethernet.name%></td><td><%=cable.ethernet.speed%> Gbps</td><td><%=cable.ethernet.distance%> m</td></tr>
+                    <%
+                end
+            else
+                aux=2
+                aux2=aux
+                while aux2<@cantidad_switches_aux
+                    aux2+=1
+                    %>
+                        <tr><td>2</td><td><%=aux2%></td><td><%=cable.name%></td><td><%=cable.ctype%></td><td><%=cable.structure%></td><td><%=cable.connector.name%></td><td><%=cable.connector.price%> USD</td><td><%=cable.category.name%></td><td><%=cable.category.price%> USD</td><td><%=cable.ethernet.name%></td><td><%=cable.ethernet.speed%> Gbps</td><td><%=cable.ethernet.distance%> m</td></tr>
+                    <%
+                end
+            end
+        end
+        %>
+        
+    </tr></tbody>
+    </table>
+</div>
+
+
+
+
+
+
+
+
+
 <div class="container-fluid">
     <center><h1>Diagrama de red</h1></center>
     <center><h4><%=@request.ctype%></h4></center>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!-- Inicio gráfico -->
 <% if @request.ctype=="Campus" %>
     <center>

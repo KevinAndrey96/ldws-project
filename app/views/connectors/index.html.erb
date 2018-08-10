@@ -139,73 +139,34 @@
   }  
 </style>
 
-<br><br>
-
 <div class="row">
   <div class="col-md-10 col-md-offset-1">
-    <h2>Inventario de equipos y dispositivos</h2>
-    
+    <h2>Conectores</h2>
   </div>
 </div>
 
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Precio</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
 
-<div class="row">
-  <div class="col-md-10 col-md-offset-1">
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Tipo</th>
-          <th>Marca</th>
-          <th>Referencia</th>
-          <th>Puertos</th>
-          <th>Slots</th>
-          <th>Potencia/Calidad</th>
-          <th>Precio</th>
-          <th colspan="3"><center>Opciones</center></th>
-        </tr>
-      </thead>
-    
-      <tbody>
-        <% @equipment.each do |equipment| %>
-          <tr>
-            <td><%= equipment.etype %></td>
-            <td><%= equipment.brand %></td>
-            <td><%= equipment.reference %></td>
-            <td><%= equipment.ports %></td>
-            <td><%= equipment.slots %></td>
-            <% if equipment.power == 1 %>
-              <td>Baja</td>
-            <% elsif equipment.power == 2 %>
-              <td>Media</td>
-            <% elsif equipment.power == 3 %>
-              <td>Alta</td>
-            <%end%>
-            <td><%= equipment.price %></td>
-            <!--<td><center><%= link_to 'Editar', edit_equipment_path(equipment) %></center></td>-->
-            <td><center><%= link_to 'Eliminar', equipment, method: :delete, data: { confirm: '¿Está seguro?' } %></center></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>    
-  </div>
-</div>  
-
+  <tbody>
+    <% @connectors.each do |connector| %>
+      <tr>
+        <td><%= connector.name %></td>
+        <td><%= connector.price %></td>
+        <td><%= link_to 'Ver', connector %></td>
+        <td><%= link_to 'Editar', edit_connector_path(connector) %></td>
+        <td><%= link_to 'Eliminar', connector, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
 <br>
-<center><%= link_to 'Agregar equipo', new_equipment_path, :class => "btn btn-default" %></center>
 
-<hr>
-<center>
-  <%= link_to 'Switches', switches_path, :class => "btn btn-default" %>
-  <%= link_to 'Puertos', ports_path, :class => "btn btn-default" %>
-  <%= link_to 'Cables', cables_path, :class => "btn btn-default" %>
-  <%= link_to 'Categorias', categories_path, :class => "btn btn-default" %>
-  <%= link_to 'Conectores', connectors_path, :class => "btn btn-default" %>
-  <%= link_to 'Ethernet', ethernets_path, :class => "btn btn-default" %>
-</center>
-
-
-
-<script>
-  localStorage.clear();
-</script>
+<%= link_to 'Nuevo Conector', new_connector_path %>

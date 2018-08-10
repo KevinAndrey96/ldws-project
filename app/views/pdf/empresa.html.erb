@@ -74,75 +74,97 @@
               cont=0
               %>
               <td>Switches de acceso</td>
-              
-              
-              <% if @Sw_status == 0 %>
-            <td colspan="5">No disponible</td>
-          <%else%>
-          <% 
-          totalcomputers=@total_of_computers
-          
-          while totalcomputers>0  do
-            #@Myeq=Equipment.where('ports < ?',totalcomputers).order(:ports).last
-            
-            @Myeq=Equipment.where('ports < ? and power = ? and etype = ?',totalcomputers, @eco,"Switch").order(:ports).last
-            
+        <%
+        if @request.ctype=="Enterprise"
+            if @logical.redundancy?
+                aux=2
+            else
+                aux=1
+            end  
+        elsif @request.ctype=="Campus"
+            if @logical.redundancy?
+                aux=4
+            else
+                aux=2
+            end
+        end
+        i=0
+        while aux>0
+            i+=1
+            aux-=1
+            the_switch = TheSwitch.where('numberports >= 1 and ports_id = 5').order('numberports asc')
+            switch=Switch.find(the_switch.first.switches_id)
+            port=Port.find(the_switch.first.ports_id)
+        end
+        
+        superi=i
+        
+        aux=0
+        @physical.each do |physical|
+            aux+=1
             begin
-              
-            #Calcular Cantidad
-            
-            while true
-              if @Myeq.ports*cont>totalcomputers
-                break
-              else
-                cont+=1
-              end
-            end
-            cont-=1
-            
-            #Roptar Puertos
-            totalcomputers-=@Myeq.ports*cont
-            
-            
+            the_switch = TheSwitch.where('numberports > ? and ports_id = 1', physical.computers).order('numberports desc')
+            %>
+                <!--<%=the_switch.first.numberports%> -->
+            <%
             rescue
-            #Añadir switch final
-            
-            #@Myeq=Equipment.where('ports > ?',totalcomputers).order(:ports).first
-            
-              @Myeq=Equipment.where('ports > ? and power = ? and etype = ?',totalcomputers,@eco,"Switch").order(:ports).first
-              cont+=1
-              totalcomputers-=@Myeq.ports*cont
-            
+            the_switch = TheSwitch.where('numberports < ? and ports_id = 1', physical.computers).order('numberports desc')
+            %>
+                <!--<%=the_switch.first.numberports%> -->
+            <%
             end
+            cantidad_switches=(physical.computers.to_f/the_switch.first.numberports.to_f).to_f.ceil
             
-          
-          end
-          %>
-            <!--<td><%=cont-(cont*0.2).ceil%></td>-->
+            switch=Switch.find(the_switch.first.switches_id)
+            port=Port.find(the_switch.first.ports_id)
+            oux=cantidad_switches
+            while oux>0
+            oux-=1
+            i+=1
+            end
+            @cantidad_switches_aux=i
             
-            
-              <td><%=cont-1%></td>
-            
-            </tr>
-          <%end%>
-          
-            <tr>
-              <td>Switches de distribución</td>
-              <%if @logical.redundancy? %>
-                <td>2</td>
-              <%else%>
-                <td>1</td>
-              <%end%>
+        end
+        %>
+     <td><%=@cantidad_switches_aux%></td>
+              <%
+              if @request.ctype=="Enterprise"
+                  if @logical.redundancy?
+                      aux=2
+                      %>
+                      <tr><td>Switches de Core</td>
+                      <td><%=aux%></td></tr>
+                      <%
+                  else
+                      aux=1
+                      %>
+                      <tr><td>Switches de Core</td>
+                      <td><%=aux%></td></tr>
+                      <%
+                  end  
+              elsif @request.ctype=="Campus"
+                  if @logical.redundancy?
+                      aux=4
+                      %>
+                      <tr><td>Switches de Core</td>
+                      <td><%=aux/2%></td></tr>
+                      <tr><td>Switches de Distribución</td>
+                      <td><%=aux/2%></td></tr>
+                      <%
+                  else
+                      aux=2
+                      %>
+                      <tr><td>Switches de Core</td>
+                      <td><%=aux/2%></td></tr>
+                      <tr><td>Switches de Distribución</td>
+                      <td><%=aux/2%></td></tr>
+                      <%
+                  end
+              end
+              %>
               
             </tr>
-            <tr>
-              <td>Switches de core</td>
-              <%if @logical.redundancy? %>
-                <td>2</td>
-              <%else%>
-                <td>1</td>
-              <%end%>
-            </tr>
+          
             <tr>
               <td>Puntos de acceso inalambrico</td>
               <td>
@@ -273,3 +295,5 @@
                   <%end %>
                 </div>
   </div>
+  
+  

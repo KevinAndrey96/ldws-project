@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @cable.name %>
+</p>
+
+<p>
+  <strong>Ctype:</strong>
+  <%= @cable.ctype %>
+</p>
+
+<p>
+  <strong>Structure:</strong>
+  <%= @cable.structure %>
+</p>
+
+<p>
+  <strong>Connector:</strong>
+  <%= @cable.connector %>
+</p>
+
+<p>
+  <strong>Ethernet:</strong>
+  <%= @cable.ethernet %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @cable.category %>
+</p>
+
+<%= link_to 'Edit', edit_cable_path(@cable) %> |
+<%= link_to 'Back', cables_path %>

@@ -206,7 +206,7 @@ class PdfController < ApplicationController
       @request=Request.find(params[:request_id])
       @company=Company.find(@request.company_id)
       @physical=Physical.where(:request_id => @request.id)
-      @logical=Logical.where(:request_id => @request.id)
+      @logical=Logical.where(:request_id => @request.id).first
       
     end
     @Logical=Logical.where(:request_id => @request.id).first
@@ -883,7 +883,7 @@ class PdfController < ApplicationController
     render  :pdf => "Reporte", :template => 'pdf/cotizacion.html.erb'
   end
   def red
-   if params[:request_id]
+    if params[:request_id]
       @request=Request.find(params[:request_id]) 
       @company=Company.find(@request.company_id)
       @physical=Physical.where(:request_id => @request.id).order('computers desc')
@@ -894,30 +894,7 @@ class PdfController < ApplicationController
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     @id_empresa=params[:id]
-    #@request=Request.where(:company_id => @company.id).first 
-    #@company=Company.find(@company.id) 
-    #@physical=Physical.where(:request_id => @request.id) 
-    #@logical=Logical.where(:request_id => @request.id).last 
-    #@subnets=Subnet.where(:logical_id => @logical.id) 
-    #@sizeofs=Subnet.where(:logical_id => @logical.id).size 
-    #@totalcomputers=@physical.sum(:computers) 
     @totalcomputers2=@physical.sum(:computers)
     @totalcomputers3=@physical.sum(:computers)
     
@@ -1202,6 +1179,7 @@ class PdfController < ApplicationController
     @physical.each do |physical|
     cont=0
     @cable = 0
+    @canaleta = 1
      i = 0 
      while i < physical.large 
          j = 0 
@@ -1211,10 +1189,12 @@ class PdfController < ApplicationController
            if j != 0 
              if i%2 == 0 
               if cont < physical.computers
+                @canaleta = 1+@canaleta
                 cont+=1
                  if i == 0 
                   @cable = (0.5+(physical.height*2)+((j+1))+2)+@cable 
                  else 
+                  @canaleta = (i+1)+@canaleta 
                   @cable = (0.5+(physical.height*2)+((i+1)+(j+1))+2)+@cable 
                  end 
               end
@@ -1544,9 +1524,6 @@ class PdfController < ApplicationController
     
     
     
-    
-    
-        
     #totalcomputers=@physical.sum(:computers)
     @Sw_status = 1
     @total_of_computers = @physical.sum(:computers)
@@ -1768,12 +1745,7 @@ class PdfController < ApplicationController
     else
       @opt_ap=3
     end
-   
    #Finaliza Cotización
-   
     render  :pdf => "Reporte", :template => 'pdf/final.html.erb'
   end
-  
-  
-  
 end

@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :cables
+  resources :categories
+  resources :ethernets
+  resources :connectors
   resources :switches
   resources :the_switches
   resources :ports

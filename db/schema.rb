@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180808032049) do
+ActiveRecord::Schema.define(version: 20180810045820) do
 
   create_table "binnacles", force: :cascade do |t|
     t.integer  "user_id"
@@ -35,6 +35,28 @@ ActiveRecord::Schema.define(version: 20180808032049) do
 
   add_index "buildings", ["request_id"], name: "index_buildings_on_request_id"
 
+  create_table "cables", force: :cascade do |t|
+    t.string   "name"
+    t.string   "ctype"
+    t.string   "structure"
+    t.integer  "connector_id"
+    t.integer  "ethernet_id"
+    t.integer  "category_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "cables", ["category_id"], name: "index_cables_on_category_id"
+  add_index "cables", ["connector_id"], name: "index_cables_on_connector_id"
+  add_index "cables", ["ethernet_id"], name: "index_cables_on_ethernet_id"
+
+  create_table "categories", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "companies", force: :cascade do |t|
     t.string   "name"
     t.integer  "user_id"
@@ -48,6 +70,13 @@ ActiveRecord::Schema.define(version: 20180808032049) do
 
   add_index "companies", ["user_id"], name: "index_companies_on_user_id"
 
+  create_table "connectors", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "equipment", force: :cascade do |t|
     t.string   "brand"
     t.string   "etype"
@@ -58,6 +87,14 @@ ActiveRecord::Schema.define(version: 20180808032049) do
     t.datetime "updated_at", null: false
     t.integer  "slots"
     t.integer  "power"
+  end
+
+  create_table "ethernets", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "speed"
+    t.integer  "distance"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "logicals", force: :cascade do |t|
@@ -137,8 +174,6 @@ ActiveRecord::Schema.define(version: 20180808032049) do
     t.string   "name"
     t.string   "reference"
     t.integer  "price"
-    t.integer  "nports"
-    t.integer  "port"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

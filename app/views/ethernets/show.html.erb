@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @ethernet.name %>
+</p>
+
+<p>
+  <strong>Speed:</strong>
+  <%= @ethernet.speed %>
+</p>
+
+<p>
+  <strong>Distance:</strong>
+  <%= @ethernet.distance %>
+</p>
+
+<%= link_to 'Edit', edit_ethernet_path(@ethernet) %> |
+<%= link_to 'Back', ethernets_path %>

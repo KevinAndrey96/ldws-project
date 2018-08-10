@@ -29,7 +29,6 @@
         <h2>Resumen de solicitud</h2>
         <strong>Título. </strong><%= @request.title %><br>
         <strong>Descripción. </strong><%= @request.description %><br>
-        <strong>Observaciones. </strong><%= @request.observation %><br>
         <strong>Alcances: </strong><pre><%= @request.objective %></pre><br>
         <br>
       </div>
@@ -75,75 +74,97 @@
               cont=0
               %>
               <td>Switches de acceso</td>
-              
-              
-              <% if @Sw_status == 0 %>
-            <td colspan="5">No disponible</td>
-          <%else%>
-          <% 
-          totalcomputers=@total_of_computers
-          
-          while totalcomputers>0  do
-            #@Myeq=Equipment.where('ports < ?',totalcomputers).order(:ports).last
-            
-            @Myeq=Equipment.where('ports < ? and power = ? and etype = ?',totalcomputers, @eco,"Switch").order(:ports).last
-            
+        <%
+        if @request.ctype=="Enterprise"
+            if @logical.redundancy?
+                aux=2
+            else
+                aux=1
+            end  
+        elsif @request.ctype=="Campus"
+            if @logical.redundancy?
+                aux=4
+            else
+                aux=2
+            end
+        end
+        i=0
+        while aux>0
+            i+=1
+            aux-=1
+            the_switch = TheSwitch.where('numberports >= 1 and ports_id = 5').order('numberports asc')
+            switch=Switch.find(the_switch.first.switches_id)
+            port=Port.find(the_switch.first.ports_id)
+        end
+        
+        superi=i
+        
+        aux=0
+        @physical.each do |physical|
+            aux+=1
             begin
-              
-            #Calcular Cantidad
-            
-            while true
-              if @Myeq.ports*cont>totalcomputers
-                break
-              else
-                cont+=1
-              end
-            end
-            cont-=1
-            
-            #Roptar Puertos
-            totalcomputers-=@Myeq.ports*cont
-            
-            
+            the_switch = TheSwitch.where('numberports > ? and ports_id = 1', physical.computers).order('numberports desc')
+            %>
+                <!--<%=the_switch.first.numberports%> -->
+            <%
             rescue
-            #Añadir switch final
-            
-            #@Myeq=Equipment.where('ports > ?',totalcomputers).order(:ports).first
-            
-              @Myeq=Equipment.where('ports > ? and power = ? and etype = ?',totalcomputers,@eco,"Switch").order(:ports).first
-              cont+=1
-              totalcomputers-=@Myeq.ports*cont
-            
+            the_switch = TheSwitch.where('numberports < ? and ports_id = 1', physical.computers).order('numberports desc')
+            %>
+                <!--<%=the_switch.first.numberports%> -->
+            <%
             end
+            cantidad_switches=(physical.computers.to_f/the_switch.first.numberports.to_f).to_f.ceil
             
-          
-          end
-          %>
-            <!--<td><%=cont-(cont*0.2).ceil%></td>-->
+            switch=Switch.find(the_switch.first.switches_id)
+            port=Port.find(the_switch.first.ports_id)
+            oux=cantidad_switches
+            while oux>0
+            oux-=1
+            i+=1
+            end
+            @cantidad_switches_aux=i
             
-            
-              <td><%=cont-1%></td>
-            
-            </tr>
-          <%end%>
-          
-            <tr>
-              <td>Switches de distribución</td>
-              <%if @logical.redundancy? %>
-                <td>2</td>
-              <%else%>
-                <td>1</td>
-              <%end%>
+        end
+        %>
+     <td><%=@cantidad_switches_aux%></td>
+              <%
+              if @request.ctype=="Enterprise"
+                  if @logical.redundancy?
+                      aux=2
+                      %>
+                      <tr><td>Switches de Core</td>
+                      <td><%=aux%></td></tr>
+                      <%
+                  else
+                      aux=1
+                      %>
+                      <tr><td>Switches de Core</td>
+                      <td><%=aux%></td></tr>
+                      <%
+                  end  
+              elsif @request.ctype=="Campus"
+                  if @logical.redundancy?
+                      aux=4
+                      %>
+                      <tr><td>Switches de Core</td>
+                      <td><%=aux/2%></td></tr>
+                      <tr><td>Switches de Distribución</td>
+                      <td><%=aux/2%></td></tr>
+                      <%
+                  else
+                      aux=2
+                      %>
+                      <tr><td>Switches de Core</td>
+                      <td><%=aux/2%></td></tr>
+                      <tr><td>Switches de Distribución</td>
+                      <td><%=aux/2%></td></tr>
+                      <%
+                  end
+              end
+              %>
               
             </tr>
-            <tr>
-              <td>Switches de core</td>
-              <%if @logical.redundancy? %>
-                <td>2</td>
-              <%else%>
-                <td>1</td>
-              <%end%>
-            </tr>
+          
             <tr>
               <td>Puntos de acceso inalambrico</td>
               <td>
@@ -199,38 +220,96 @@
                   <strong>Ftp: </strong>Si<br>
                   <% end %>
                 </div>
+                
+                
+                
+                
                 <div class="row">
-                  <h2>Aspectos Físicos</h2>
-                  <strong>NÚMERO DE PISOS: </strong><%= @physical.count %><br>
-                  <% cont=0 %>
-                  <% @physical.each do |physical_data| %>
-                  <div class="col-xs-6">
-                    <%cont+=1%>
-                    <br>
-                    <strong>ALTURA PISO <%= cont%>: </strong><%= physical_data.height %> m<br>
-                    <strong>ANCHO PISO <%= cont%>: </strong><%= physical_data.width %> m<br>
-                    <strong>LARGO PISO <%= cont%>: </strong><%= physical_data.large %> m<br>
-                    <strong># EXTENSIONES DE PISO:</strong><%= physical_data.computers %><br>
-                    <% if physical_data.conference_hall %>
-                      <strong>SALA DE JUNTAS: </strong>Si<br>
-                    <% else %>
-                      <strong>SALA DE JUNTAS: </strong>No<br>
-                    <% end %>
-                    
-                  </div>
                   <br>
-                  <% end %>
+                  
                   <% if @logical.redundancy? %>
                     <strong>ENLACES REDUNDANTES: </strong>Si<br>
                   <% else %>
                     <strong>ENLACES REDUNDANTES: </strong>No<br>
                   <% end%>
-                  
+                  <br>
+                </div>
+                
+                
+                <div class="row">
+                  <h2>Aspectos Físicos</h2>
+                  <strong>Tipo de solicitud: <%=@request.ctype%></strong><br>
+                  <%
+                  if @request.ctype == "Campus"
+                    @buildings=Building.where(:request_id => @request.id).order('id desc')
+                    %>
+                      <strong>Edificios en el campus: <%=@buildings.count%></strong><br>
+                    <%
+                      aux=0
+                      @buildings.each do |building|
+                        aux+=1
+                        %>
+                        <h3>Edificio <%=aux%>, <%=building.name%></h3>
+                        <%
+                        @phys=Physical.where(:request_id => @request.id, :building_id => building.id)
+                        cont=0
+                        @phys.each do |physical_data|
+                          %>
+                          <div class="col-xs-6">
+                          <%cont+=1%>
+                          <br>
+                          <strong>ALTURA PISO <%= cont%>: </strong><%= physical_data.height %> m<br>
+                          <strong>ANCHO PISO <%= cont%>: </strong><%= physical_data.width %> m<br>
+                          <strong>LARGO PISO <%= cont%>: </strong><%= physical_data.large %> m<br>
+                          <strong># EXTENSIONES DE PISO:</strong><%= physical_data.computers %><br>
+                          <% if physical_data.conference_hall %>
+                            <strong>SALA DE JUNTAS: </strong>Si<br>
+                          <% else %>
+                            <strong>SALA DE JUNTAS: </strong>No<br>
+                          <% end %>
+                          
+                        </div>
+                          <%
+                        end
+                      end
+                  elsif @request.ctype == "Enterprise"
+                  %>
+                    <strong>NÚMERO DE PISOS: </strong><%= @physical.count %><br>
+                    <% cont=0 %>
+                    <% @physical.each do |physical_data| %>
+                    <div class="col-xs-6">
+                      <%cont+=1%>
+                      <br>
+                      <strong>ALTURA PISO <%= cont%>: </strong><%= physical_data.height %> m<br>
+                      <strong>ANCHO PISO <%= cont%>: </strong><%= physical_data.width %> m<br>
+                      <strong>LARGO PISO <%= cont%>: </strong><%= physical_data.large %> m<br>
+                      <strong># EXTENSIONES DE PISO:</strong><%= physical_data.computers %><br>
+                      <% if physical_data.conference_hall %>
+                        <strong>SALA DE JUNTAS: </strong>Si<br>
+                      <% else %>
+                        <strong>SALA DE JUNTAS: </strong>No<br>
+                      
+                    </div>
+                  <%end%>
+                  <%end %>
+                  <%end %>
                 </div>
   </div>
   
-  <!-- Direccionamiento -->
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <body onload='number_pages'>
   <div id="content">
     <div class="container-fluid">
   <div class="row">
@@ -269,6 +348,7 @@
   <br>
   <hr>
   <br>
+  <% if @logical.scalability? %>
   <div class="row">
     <h1>Direccionamiento con escalabilidad</h1>
     <h2>Host: <%=@g["Datos"]["Host"]%> - Máscara de red: <%=@g["Datos"]["Mascara"]%></h2>
@@ -302,13 +382,51 @@
       </tbody>
     </table>
   </div>
-  
+  <% end %>
   </div>
   </div>
-  
-  <!-- Switches -->
-  
-    <div id="content">
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!Doctype html>
+<html>
+<head>
+  <meta charset='utf-8' />
+  <%= wicked_pdf_stylesheet_link_tag "pdf" -%>
+  <%= wicked_pdf_javascript_include_tag "number_pages" %>
+</head>
+<body onload='number_pages'>
+  <div id="content">
     <div class="container-fluid">
       <div class="row">
         <h1>Scripts de Switches</h1>
@@ -365,12 +483,85 @@
           copy running-config startup-config<br>
         </p>
       </div>
+      <%
+      if @logical.security?
+        %>
+        <h2>Configuraciones de seguridad</h2>
+        <i>Comandos para ingresar en modo privilegiado</i>
+        <pre>
+          Switch1>enable
+          Switch1# configure terminal
+          Switch1(config)#enable secret [‘aqui iria la contraseña dinamica’]
+          Switch1(config)# exit
+          Switch1# exit
+        </pre>
+        <i>Comandos para ingresar contraseña al ingreso por telnet</i>
+        <pre>
+          Switch1>enable
+          Switch1# configure terminal
+          Switch1(config)# line vty 0 4
+          Switch1(config)# password [‘aqui iria la contraseña dinamica’]
+          Switch1(config)# login
+          Switch1(config)# exit
+          Switch1# exit
+        </pre>
+        <i>Comandos para ingresar contraseña al ingreso por consola</i>
+        <pre>
+          Switch1>enable
+          Switch1# configure terminal
+          Switch1(config)#line console 0 
+          Switch1(config-line)#password [‘aqui iria la contraseña dinamica’]
+          Switch1(config)# exit
+          Switch1# exit
+        </pre>
+      <%
+        end
+      %>
+      <div class="row">
+        
+      </div>
     </div>
   </div>
-  
-  <!-- Fin Switches e inicio routers -->
-  
-    <div id="content">
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!Doctype html>
+<html>
+<head>
+  <meta charset='utf-8' />
+  <%= wicked_pdf_stylesheet_link_tag "pdf" -%>
+  <%= wicked_pdf_javascript_include_tag "number_pages" %>
+</head>
+<body onload='number_pages'>
+  <div id="content">
     <div class="container-fluid">
       <div class="row">
         <h2>Configuración de DHCP</h2>
@@ -397,10 +588,11 @@
           R1(config-router)#network <%= @logical.host1 %>.<%= @logical.host2 %>.<%= @logical.host3 %>.<%= @logical.host4 %><br>
           R1(config-router)#no auto-summary<br>
           R1(config-router)#end<br>
-          <h2>Configuraciones de seguridad</h2>
+          
           <%
           if @logical.security?
           %>
+          <h2>Configuraciones de seguridad</h2>
           <i>Comandos para ingresar en modo privilegiado</i>
           <pre>
             R1(config)#enable secret cisco
@@ -424,14 +616,79 @@
       </div>
     </div>
   </div>
-  
-  <!-- fin routers e inicio topología -->
-  
-    <% totalcomputers=@physical.sum(:computers) %>
-    <% totalcomputers2=@physical.sum(:computers) %>
-    <% totalcomputers3=@physical.sum(:computers) %>
-    <% computers_number2=0%>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<% totalcomputers=@physical.sum(:computers) %>
+<% totalcomputers2=@physical.sum(:computers) %>
+<% totalcomputers3=@physical.sum(:computers) %>
+<% computers_number2=0%>
+<!Doctype html>
+<style>
+  .rotar {
+    /*-ms-transform: rotate(90deg); /* IE 9 */
+    /*-webkit-transform: rotate(90deg); /* Safari 3-8 */
+   /* transform: rotate(90deg);
+    position: fixed;
+    bottom: 200px;
+    right: 30px;
+    left: 10px;
+    width: 20px;*/
     
+  }  
+  
+</style>
+<html>
+<head>
+  <meta charset='utf-8' />
+  <%= wicked_pdf_stylesheet_link_tag "pdf" -%>
+  <%= wicked_pdf_javascript_include_tag "number_pages" %>
+</head>
+<body onload='number_pages'>
+  
+  
   <div id="content">
     <div class="container-fluid">
       <h2>Diagrama de red</h2>
@@ -522,15 +779,16 @@
         <tbody>
           <%cont=0%>
           <%@cable = 0%>
+          <%@canaleta = 1%>
           <% i = 0 %>
           <% while i < physical.large %>
             <tr>
               <% j = 0 %>
-              
               <% @aux=0 %>
             <% while j < physical.width %>
             
                 <% if j == 0 %>
+                
                   <% if i == 0%>
                     <td><center><img class="img-responsive" height="30" src="https://mymsystech.com.co/440-medium_default/rack-3bumen-r2c-9u.jpg"></center></td>
                   <% end %>
@@ -544,22 +802,20 @@
                   <% if i%2 == 0 %>
                     <%if cont < physical.computers%>
                       <td><center><img class="img-responsive" height="30" src="http://img.planospara.com/mesa-para-computador-en-mesas-2d-muebles-equipamiento-42531.jpg"></center></td>
+                      <%@canaleta = 1+@canaleta%>
                       <% computers_number2+=1%>
                       <%cont+=1%>
                       <% if i == 0 %>
                         <%@cable = (0.5+(physical.height*2)+((j+1))+2)+@cable %>
                       <% else %>
+                        <%@canaleta = (i+1)+@canaleta%>
                         <%@cable = (0.5+(physical.height*2)+((i+1)+(j+1))+2)+@cable %>
                       <% end %>
                     <%else%>
                       <td><center><img class="img-responsive" height="30" src="http://www.construmatica.com/construpedia/images/thumb/5/58/Baldosas_by_Patrick_Hoesly.jpg/300px-Baldosas_by_Patrick_Hoesly.jpg"></center></td>
-                      
                     <%end%>
-                    
-                    
                   <% else %>
                     <td><center><img class="img-responsive" height="30" src="http://www.construmatica.com/construpedia/images/thumb/5/58/Baldosas_by_Patrick_Hoesly.jpg/300px-Baldosas_by_Patrick_Hoesly.jpg"></center></td>
-                    
                   <%end%>
                 <%end%>
               <% j += 1 %>
@@ -659,6 +915,7 @@
         <%@computers_number = @avalaible_area-((physical.large/2)*(physical.width-1))%>
 
         <%@cable = @cable+(0.5+(physical.height*2)+2) %> <!--Suma cable AP-->
+        <strong>Canaleta: </strong> <%=@canaleta %>m<br>
         <strong>Alto: </strong> <%=physical.height %> m<br>
         <strong>Cantidad de cable: </strong> <%=@cable %>m<br>
         <strong>Area total de piso: </strong> <%=@meters %>m²<br>
@@ -684,10 +941,348 @@
     </div>
   </div>
   
-  <!-- fin tolología e inicio cotización -->
   
-    <%total_value=0%>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!Doctype html><html><head>  <meta charset='utf-8' />  <%= wicked_pdf_stylesheet_link_tag "pdf" -%>  <%= wicked_pdf_javascript_include_tag "number_pages" %></head><style>  page-break-inside: avoid !important;  margin: 4px 0 4px 0;  @media print {    table tbody tr td:before,    table tbody tr td:after {        content : "" ;        height : 4px ;        display : block ;    }}table, tr, td, th, tbody, thead, tfoot {    page-break-inside: avoid !important;}.avoid{  page-break-inside:avoid !important; page-break-after:auto !important; overflow: hidden; display:block !important; width:100% }</style>
+<h1>Datos importantes, información de red</h1>
+<h2>Lista de pisos ordenados por número de computadores</h2>
+<%
+contador_de_switches=0
+aux=0
+@physical.each do |physical|
+    aux+=1
+    %>
+    <h3>Piso <%=aux%> (<%=physical.height%>m x <%=physical.width%>m x <%=physical.large%>m)</h3>
+    <p>Edificio <%=physical.building.name%><br><%=physical.computers%> computadores</p>
+    <%
+    begin
+    the_switch = TheSwitch.where('numberports > ? and ports_id = 1', physical.computers).order('numberports desc')
+    %>
+        <!--<%=the_switch.first.numberports%> -->
+    <%
+    rescue
+    the_switch = TheSwitch.where('numberports < ? and ports_id = 1', physical.computers).order('numberports desc')
+    %>
+        <!--<%=the_switch.first.numberports%> -->
+    <%
+    end
+    cantidad_switches=(physical.computers.to_f/the_switch.first.numberports.to_f).to_f.ceil
+    contador_de_switches+=cantidad_switches.ceil
+    %>
+    <strong>Se usaran <%=cantidad_switches.ceil%> switches de <%=the_switch.first.numberports%> puertos</strong>
+    <%
+end
+%>
+<div class="content">
+    <h2>Tabla de Switches</h2>
+    <table border="1" width="100%"><thead><tr><th>Id</th><th>Información</th><th>Puertos</th><th>Tipo de puerto</th><th>Velocidad</th></tr></thead>
+    <tbody>
+        <%
+        if @request.ctype=="Enterprise"
+            if @logical.redundancy?
+                aux=2
+            else
+                aux=1
+            end  
+        elsif @request.ctype=="Campus"
+            if @logical.redundancy?
+                aux=4
+            else
+                aux=2
+            end
+        end
+        i=0
+        while aux>0
+            i+=1
+            aux-=1
+            the_switch = TheSwitch.where('numberports >= 1 and ports_id = 5').order('numberports asc')
+            switch=Switch.find(the_switch.first.switches_id)
+            port=Port.find(the_switch.first.ports_id)
+            %>
+                <tr><td><%=i%></td><td><%=switch.name%></td><td><%=the_switch.first.numberports%></td><td><%=port.name%></td><td><%=port.speed%> Gbps</td></tr>
+            <%
+        end
+        
+        superi=i
+        
+        aux=0
+        @physical.each do |physical|
+            aux+=1
+            begin
+            the_switch = TheSwitch.where('numberports > ? and ports_id = 1', physical.computers).order('numberports desc')
+            %>
+                <!--<%=the_switch.first.numberports%> -->
+            <%
+            rescue
+            the_switch = TheSwitch.where('numberports < ? and ports_id = 1', physical.computers).order('numberports desc')
+            %>
+                <!--<%=the_switch.first.numberports%> -->
+            <%
+            end
+            cantidad_switches=(physical.computers.to_f/the_switch.first.numberports.to_f).to_f.ceil
+            
+            switch=Switch.find(the_switch.first.switches_id)
+            port=Port.find(the_switch.first.ports_id)
+            oux=cantidad_switches
+            while oux>0
+            oux-=1
+            i+=1
+            %>
+                <tr><td><%=i%></td><td><%=switch.name%></td><td><%=the_switch.first.numberports%></td><td><%=port.name%></td><td><%=port.speed%> Gbps</td></tr>
+            <%
+            end
+            @cantidad_switches_aux=i
+        end
+        
+        
+        
+        %>
+        
+    </tr></tbody>
+    </table>
+</div>
+<div class="content">
+    <h2>Tabla de Cableado</h2>
+    <table border="1" width="100%"><thead><tr><th>Id Origen</th><th>Id Destino</th><th>Cable usado</th><th>Tipo de cable</th><th>Estructura</th><th>Conector</th><th>Precio Conector</th><th>Categoria</th><th>Precio categoria</th><th>Estandar Ethernet</th><th>Velocidad estandar ethernet</th><th>Distancia estandar ethernet</th></tr></thead>
+    <tbody>
+        <%
+        cable = Cable.where(:name => "Fibra Optica", :ethernet_id => 6).order('RANDOM()').first
+        if @request.ctype=="Enterprise"
+            if @logical.redundancy?
+                aux=2
+            else
+                aux=1
+            end  
+        elsif @request.ctype=="Campus"
+            if @logical.redundancy?
+                aux=4
+                %>
+                    <tr><td>1</td><td>3</td><td><%=cable.name%></td><td><%=cable.ctype%></td><td><%=cable.structure%></td><td><%=cable.connector.name%></td><td><%=cable.connector.price%> USD</td><td><%=cable.category.name%></td><td><%=cable.category.price%> USD</td><td><%=cable.ethernet.name%></td><td><%=cable.ethernet.speed%> Gbps</td><td><%=cable.ethernet.distance%> m</td></tr>
+                    <tr><td>1</td><td>4</td><td><%=cable.name%></td><td><%=cable.ctype%></td><td><%=cable.structure%></td><td><%=cable.connector.name%></td><td><%=cable.connector.price%> USD</td><td><%=cable.category.name%></td><td><%=cable.category.price%> USD</td><td><%=cable.ethernet.name%></td><td><%=cable.ethernet.speed%> Gbps</td><td><%=cable.ethernet.distance%> m</td></tr>
+                    <tr><td>2</td><td>3</td><td><%=cable.name%></td><td><%=cable.ctype%></td><td><%=cable.structure%></td><td><%=cable.connector.name%></td><td><%=cable.connector.price%> USD</td><td><%=cable.category.name%></td><td><%=cable.category.price%> USD</td><td><%=cable.ethernet.name%></td><td><%=cable.ethernet.speed%> Gbps</td><td><%=cable.ethernet.distance%> m</td></tr>
+                    <tr><td>2</td><td>4</td><td><%=cable.name%></td><td><%=cable.ctype%></td><td><%=cable.structure%></td><td><%=cable.connector.name%></td><td><%=cable.connector.price%> USD</td><td><%=cable.category.name%></td><td><%=cable.category.price%> USD</td><td><%=cable.ethernet.name%></td><td><%=cable.ethernet.speed%> Gbps</td><td><%=cable.ethernet.distance%> m</td></tr>
+                <%
+            else
+                %>
+                    <tr><td>1</td><td>2</td><td><%=cable.name%></td><td><%=cable.ctype%></td><td><%=cable.structure%></td><td><%=cable.connector.name%></td><td><%=cable.connector.price%> USD</td><td><%=cable.category.name%></td><td><%=cable.category.price%> USD</td><td><%=cable.ethernet.name%></td><td><%=cable.ethernet.speed%> Gbps</td><td><%=cable.ethernet.distance%> m</td></tr>
+                <%
+            end
+        end
+        cable = Cable.where(:ctype => "UTP").order('RANDOM()').first
+        if @request.ctype=="Enterprise"
+            if @logical.redundancy?
+                aux=2
+                aux2=aux
+                while aux2<@cantidad_switches_aux
+                    aux2+=1
+                    %>
+                        <tr><td>1</td><td><%=aux2%></td><td><%=cable.name%></td><td><%=cable.ctype%></td><td><%=cable.structure%></td><td><%=cable.connector.name%></td><td><%=cable.connector.price%> USD</td><td><%=cable.category.name%></td><td><%=cable.category.price%> USD</td><td><%=cable.ethernet.name%></td><td><%=cable.ethernet.speed%> Gbps</td><td><%=cable.ethernet.distance%> m</td></tr>
+                        <tr><td>2</td><td><%=aux2%></td><td><%=cable.name%></td><td><%=cable.ctype%></td><td><%=cable.structure%></td><td><%=cable.connector.name%></td><td><%=cable.connector.price%> USD</td><td><%=cable.category.name%></td><td><%=cable.category.price%> USD</td><td><%=cable.ethernet.name%></td><td><%=cable.ethernet.speed%> Gbps</td><td><%=cable.ethernet.distance%> m</td></tr>
+                    <%
+                end
+            else
+                aux=1
+                aux2=aux
+                while aux2<@cantidad_switches_aux
+                    aux2+=1
+                    %>
+                        <tr><td>1</td><td><%=aux2%></td><td><%=cable.name%></td><td><%=cable.ctype%></td><td><%=cable.structure%></td><td><%=cable.connector.name%></td><td><%=cable.connector.price%> USD</td><td><%=cable.category.name%></td><td><%=cable.category.price%> USD</td><td><%=cable.ethernet.name%></td><td><%=cable.ethernet.speed%> Gbps</td><td><%=cable.ethernet.distance%> m</td></tr>
+                    <%
+                end
+            end  
+        elsif @request.ctype=="Campus"
+            if @logical.redundancy?
+                aux=4
+                aux2=aux
+                while aux2<@cantidad_switches_aux
+                    aux2+=1
+                    %>
+                        <tr><td>3</td><td><%=aux2%></td><td><%=cable.name%></td><td><%=cable.ctype%></td><td><%=cable.structure%></td><td><%=cable.connector.name%></td><td><%=cable.connector.price%> USD</td><td><%=cable.category.name%></td><td><%=cable.category.price%> USD</td><td><%=cable.ethernet.name%></td><td><%=cable.ethernet.speed%> Gbps</td><td><%=cable.ethernet.distance%> m</td></tr>
+                        <tr><td>4</td><td><%=aux2%></td><td><%=cable.name%></td><td><%=cable.ctype%></td><td><%=cable.structure%></td><td><%=cable.connector.name%></td><td><%=cable.connector.price%> USD</td><td><%=cable.category.name%></td><td><%=cable.category.price%> USD</td><td><%=cable.ethernet.name%></td><td><%=cable.ethernet.speed%> Gbps</td><td><%=cable.ethernet.distance%> m</td></tr>
+                    <%
+                end
+            else
+                aux=2
+                aux2=aux
+                while aux2<@cantidad_switches_aux
+                    aux2+=1
+                    %>
+                        <tr><td>2</td><td><%=aux2%></td><td><%=cable.name%></td><td><%=cable.ctype%></td><td><%=cable.structure%></td><td><%=cable.connector.name%></td><td><%=cable.connector.price%> USD</td><td><%=cable.category.name%></td><td><%=cable.category.price%> USD</td><td><%=cable.ethernet.name%></td><td><%=cable.ethernet.speed%> Gbps</td><td><%=cable.ethernet.distance%> m</td></tr>
+                    <%
+                end
+            end
+        end
+        %>
+        
+    </tr></tbody>
+    </table>
+</div>
+
+
+
+
+
+
+
+
+
+<div class="container-fluid">
+    <center><h1>Diagrama de red</h1></center>
+    <center><h4><%=@request.ctype%></h4></center>
+<!-- Inicio gráfico -->
+<% if @request.ctype=="Campus" %>
+    <center>
+        <%
+        if @logical.redundancy?
+            %><img src="https://instanceshape.com/admin/VLSM/Images/redundante.png"><%
+        else
+            %><img src="https://instanceshape.com/admin/VLSM/Images/no-redundante.png"><%
+        end
+        %>
+    </center>
+<% else %>
+    <center>
+        <%
+        if @logical.redundancy?
+            %><img src="https://instanceshape.com/admin/VLSM/Images/campus_redundante.png"><%
+        else
+            %><img src="https://instanceshape.com/admin/VLSM/Images/campus_no-redundante.png"><%
+        end
+        %>
+    </center>
+<%end%>
+<center>
+    <%
+    i=superi
+    aux=contador_de_switches
+    while aux>0
+    aux-=1
+    i+=1
+    %>
+        <%=i%><img src="https://instanceshape.com/admin/VLSM/Images/Acceso.png">
+    <%
+    end
+    %>
+</center>
+</div>
+<!--Direccionamiento-->
+<hr>
+    <div class="container-fluid">
+    <h2>Direccionamiento</h2>
+    <table class="table table-responsive"  border="1" width= "100%">
+      <thead><tr><th>Nombre</th><th>Dirección de host</th></tr></thead>
+      <tbody>
+        <% @subnets.order(computers: :desc, name: :asc).each do |subnet| %>
+          <tr><td><center><%=subnet.name%></center></td><td><center><%= @h[subnet.name]["firstHost"]%>/<%= @h[subnet.name]["cidr"]%></center></td></tr>
+        <% end %>
+      </tbody>
+    </table>
+    
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+</head>
+<style>
+  page-break-inside: avoid !important;
+  margin: 4px 0 4px 0;
+  @media print {
+    table tbody tr td:before,
+    table tbody tr td:after {
+        content : "" ;
+        height : 4px ;
+        display : block ;
+    }
+    
+}
+table, tr, td, th, tbody, thead, tfoot {
+    page-break-inside: avoid !important;
+}
+.avoid
+{
+  page-break-inside:avoid !important; page-break-after:auto !important; overflow: hidden; display:block !important; width:100% 
+}
+</style>
+  <%total_value=0%>
   <%mslots=0%>
+  
   <div class="row">
     <h2>Cotización económica</h2>
     <table class="table table-responsive"  border="1" width= "100%">
@@ -701,77 +1296,7 @@
         </tr>
       </thead>
       <tbody>
-        <!-- Switches -->
-        <tr>
-          <td colspan="5"><strong>Switches</strong></div></td>
-        </tr>
-        <tr>
-          <% if @Sw_status == 0 %>
-            <td colspan="5">No hay switches disponibles para cotizar</div></td>
-          <%else%>
-          <% 
-          totalcomputers=@total_of_computers
-          auxiliar=0
-          
-          while totalcomputers>0  do
-            #@Myeq=Equipment.where('ports < ?',totalcomputers).order(:ports).last
-            @Myeq=Equipment.where('ports < ? and power = ? and etype = ?',totalcomputers, @eco,"Switch").order(:ports).last
-            
-            begin
-              
-            #Calcular Cantidad
-            cont=1
-            while true
-              if @Myeq.ports*cont>totalcomputers
-                break
-              else
-                cont+=1
-              end
-            end
-            cont-=1
-            
-            #Restar Puertos
-            totalcomputers-=@Myeq.ports*cont
-            
-            
-            rescue
-            #Añadir switch final
-            
-            #@Myeq=Equipment.where('ports > ?',totalcomputers).order(:ports).first
-            @Myeq=Equipment.where('ports > ? and power = ? and etype = ?',totalcomputers,@eco,"Switch").order(:ports).first
-            cont=1
-            totalcomputers-=@Myeq.ports*cont
-            
-            end
-            mslots+=@Myeq.slots*cont
-            %>
-            
-            <tr>
-              <td><div class="avoid"><%=@Myeq.brand%></div></td>
-              <td><div class="avoid">Switch marca <%=@Myeq.brand%> de <%=@Myeq.ports%> puertos, referencia: [<%=@Myeq.reference %>], el equipo tiene una potencia <%=@Myeq.power %>/3</div></td>
-              <% 
-              if @Logical.redundancy? && cont==1
-                cont=cont*2
-              end
-              cont+=1
-              auxiliar+=1
-              if auxiliar==1
-                switchesconta=cont
-              end
-              %>
-              <td><div class="avoid"><%=cont%> u</div></td>
-              <td><div class="avoid"><%=@Myeq.price%></div></td>
-              <td><div class="avoid"><%=@Myeq.price*cont%></div></td>
-              <%total_value+=@Myeq.price*cont%>
-            </tr>
-            <%
-          
-          end
-          %>
-            
-          <%end%>
-          
-        </tr>
+        
         <!-- Routers -->
         <tr>
           <td colspan="5"><strong>Routers</strong></div></td>
@@ -837,7 +1362,7 @@
           <%else%>
           <%
             @Myeq=Equipment.where('power = ? and etype = ?',@eco_can,"Canaleta").order("RANDOM()").first
-            cont=@cable
+            cont=3451
           %>
               <tr>
                 <td><div class="avoid"><%=@Myeq.brand%></div></td>
@@ -884,7 +1409,143 @@
             
         %>
         
-          <!-- Conectores -->
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <%
+        switchesconta=0
+        if @request.ctype=="Enterprise"
+            if @logical.redundancy?
+                aux=2
+            else
+                aux=1
+            end  
+        elsif @request.ctype=="Campus"
+            if @logical.redundancy?
+                aux=4
+            else
+                aux=2
+            end
+        end
+        i=0
+        while aux>0
+            i+=1
+            aux-=1
+            the_switch = TheSwitch.where('numberports >= 1 and ports_id = 5').order('numberports asc')
+            switch=Switch.find(the_switch.first.switches_id)
+            port=Port.find(the_switch.first.ports_id)
+        end
+        
+        superi=i
+        
+        aux=0
+        @physical.each do |physical|
+            aux+=1
+            begin
+            the_switch = TheSwitch.where('numberports > ? and ports_id = 1', physical.computers).order('numberports desc')
+            %>
+                <!--<%=the_switch.first.numberports%> -->
+            <%
+            rescue
+            the_switch = TheSwitch.where('numberports < ? and ports_id = 1', physical.computers).order('numberports desc')
+            %>
+                <!--<%=the_switch.first.numberports%> -->
+            <%
+            end
+            cantidad_switches=(physical.computers.to_f/the_switch.first.numberports.to_f).to_f.ceil
+            
+            switch=Switch.find(the_switch.first.switches_id)
+            port=Port.find(the_switch.first.ports_id)
+            oux=cantidad_switches
+            while oux>0
+            oux-=1
+            i+=1
+            end
+            @cantidad_switches_aux=i
+            switchesconta=i
+            
+        end
+        %>
+              <%
+              if @request.ctype=="Enterprise"
+                  if @logical.redundancy?
+                      aux=2
+                      switchesconta+=aux
+                  else
+                      aux=1
+                      switchesconta+=aux
+                  end  
+              elsif @request.ctype=="Campus"
+                  if @logical.redundancy?
+                      aux=4
+                      switchesconta+=aux
+                  else
+                      aux=2
+                      switchesconta+=aux
+                  end
+              end
+              %>
+              
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <!-- Conectores -->
         <%cont=@total_of_computers*2+switchesconta*2+2+2%>
         <% 
           if @Logical.redundancy? 
@@ -1063,75 +1724,7 @@
         </tr>
       </thead>
       <tbody>
-        <!-- Switches -->
-        <tr>
-          <td colspan="5"><strong>Switches</strong></div></td>
-        </tr>
-        <tr>
-          <% if @Sw_status == 0 %>
-            <td colspan="5">No hay switches disponibles para cotizar</div></td>
-          <%else%>
-          <% 
-          totalcomputers=@total_of_computers
-          
-          while totalcomputers>0  do
-            #@Myeq=Equipment.where('ports < ?',totalcomputers).order(:ports).last
-            
-            @Myeq=Equipment.where('ports < ? and power = ? and etype = ?',totalcomputers, @est,"Switch").order(:ports).last
-            
-            begin
-              
-            #Calcular Cantidad
-            cont=1
-            while true
-              if @Myeq.ports*cont>totalcomputers
-                break
-              else
-                cont+=1
-              end
-            end
-            cont-=1
-            
-            #Restar Puertos
-            totalcomputers-=@Myeq.ports*cont
-            
-            
-            rescue
-            #Añadir switch final
-            
-            #@Myeq=Equipment.where('ports > ?',totalcomputers).order(:ports).first
-            
-              @Myeq=Equipment.where('ports > ? and power = ? and etype = ?',totalcomputers,@est,"Switch").order(:ports).first
-              cont=1
-              totalcomputers-=@Myeq.ports*cont
-            
-            end
-            
-            mslots+=@Myeq.slots*cont
-            
-            %>
-            
-            <tr>
-              <td><div class="avoid"><%=@Myeq.brand%></div></td>
-              <td><div class="avoid">Switch marca <%=@Myeq.brand%> de <%=@Myeq.ports%> puertos, referencia: [<%=@Myeq.reference %>], el equipo tiene una potencia <%=@Myeq.power %>/3</div></td>
-              <% 
-              if @Logical.redundancy? && cont == 1
-                cont=cont*2
-              end
-              cont+=1
-              %>
-              <td><div class="avoid"><%=cont%> u</div></td>
-              <td><div class="avoid"><%=@Myeq.price%></div></td>
-              <td><div class="avoid"><%=@Myeq.price*cont%></div></td>
-              <%total_value+=@Myeq.price*cont%>
-            </tr>
-            <%
-          
-          end
-          %>
-            
-          <%end%>
-        </tr>
+        
         <!-- Routers -->
         <tr>
           <td colspan="5"><strong>Routers</strong></div></td>
@@ -1207,9 +1800,9 @@
                   cont=cont*2
                 end
                 %>
-                <td><div class="avoid"><%=cont.ceil%> m</div></td>
+                <td><div class="avoid"><%=@canaleta.ceil%> m</div></td>
                 <td><div class="avoid"><%=@Myeq.price%></div></td>
-                <td><div class="avoid"><%=@Myeq.price*cont.ceil%></div></td>
+                <td><div class="avoid"><%=@Myeq.price*@canaleta.ceil%></div></td>
                 <%total_value+=@Myeq.price*cont.ceil%>
               </tr>
               <%
@@ -1422,76 +2015,7 @@
         </tr>
       </thead>
       <tbody>
-        <!-- Switches -->
-        <tr>
-          <td colspan="5"><strong>Switches</strong></div></td>
-        </tr>
-        <tr>
-          <% if @Sw_status == 0 %>
-            <td colspan="5">No hay switches disponibles para cotizar</div></td>
-          <%else%>
-          <% 
-          totalcomputers=@total_of_computers
-          
-          while totalcomputers>0  do
-            #@Myeq=Equipment.where('ports < ?',totalcomputers).order(:ports).last
-            
-            @Myeq=Equipment.where('ports < ? and power = ? and etype = ?',totalcomputers, @opt,"Switch").order(:ports).last
-            
-            begin
-              
-            #Calcular Cantidad
-            cont=1
-            while true
-              if @Myeq.ports*cont>totalcomputers
-                break
-              else
-                cont+=1
-              end
-            end
-            cont-=1
-            
-            #Roptar Puertos
-            totalcomputers-=@Myeq.ports*cont
-            
-            
-            rescue
-            #Añadir switch final
-            
-            #@Myeq=Equipment.where('ports > ?',totalcomputers).order(:ports).first
-            
-              @Myeq=Equipment.where('ports > ? and power = ? and etype = ?',totalcomputers,@opt,"Switch").order(:ports).first
-              cont=1
-              totalcomputers-=@Myeq.ports*cont
-            
-            end
-            
-            mslots+=@Myeq.slots*cont
-            
-            %>
-            
-            <tr>
-              <td><div class="avoid"><%=@Myeq.brand%></div></td>
-              <td><div class="avoid">Switch marca <%=@Myeq.brand%> de <%=@Myeq.ports%> puertos, referencia: [<%=@Myeq.reference %>], el equipo tiene una potencia <%=@Myeq.power %>/3</div></td>
-              <% 
-              if @Logical.redundancy? && cont == 1
-                cont=cont*2
-              end
-              cont+=1
-              %>
-              
-              <td><div class="avoid"><%=cont%> u</div></td>
-              <td><div class="avoid"><%=@Myeq.price%></div></td>
-              <td><div class="avoid"><%=@Myeq.price*cont%></div></td>
-              <%total_value+=@Myeq.price*cont%>
-            </tr>
-            <%
-          
-          end
-          %>
-            
-          <%end%>
-        </tr>
+        
         <!-- Routers -->
         <tr>
           <td colspan="5"><strong>Routers</strong></div></td>
@@ -1758,5 +2282,74 @@
       </tbody>
     </table>
   </div>
-  
-  <!-- fin cotización -->
+  <div class="content">
+    <h2>Tabla de Switches</h2>
+    <table border="1" width="100%"><thead><tr><th>Información</th><th>Referencia</th><th>Precio</th></tr></thead>
+    <tbody>
+        <%
+        contadordeprecio=0
+        if @request.ctype=="Enterprise"
+            if @logical.redundancy?
+                aux=2
+            else
+                aux=1
+            end  
+        elsif @request.ctype=="Campus"
+            if @logical.redundancy?
+                aux=4
+            else
+                aux=2
+            end
+        end
+        i=0
+        while aux>0
+            i+=1
+            aux-=1
+            the_switch = TheSwitch.where('numberports >= 1 and ports_id = 5').order('numberports asc')
+            switch=Switch.find(the_switch.first.switches_id)
+            port=Port.find(the_switch.first.ports_id)
+            %>
+                <tr></td><td><%=switch.name%></td><td><%=switch.reference%></td><td><%=switch.price%> USD</td></tr>
+            <%
+            contadordeprecio+=switch.price
+        end
+        
+        superi=i
+        
+        aux=0
+        @physical.each do |physical|
+            aux+=1
+            begin
+            the_switch = TheSwitch.where('numberports > ? and ports_id = 1', physical.computers).order('numberports desc')
+            %>
+                <!--<%=the_switch.first.numberports%> -->
+            <%
+            rescue
+            the_switch = TheSwitch.where('numberports < ? and ports_id = 1', physical.computers).order('numberports desc')
+            %>
+                <!--<%=the_switch.first.numberports%> -->
+            <%
+            end
+            cantidad_switches=(physical.computers.to_f/the_switch.first.numberports.to_f).to_f.ceil
+            
+            switch=Switch.find(the_switch.first.switches_id)
+            port=Port.find(the_switch.first.ports_id)
+            oux=cantidad_switches
+            while oux>0
+            oux-=1
+            i+=1
+            %>
+                <tr><td><%=switch.name%></td><td><%=switch.reference%></td><td><%=switch.price%> USD</td></tr>
+            <%
+            contadordeprecio+=switch.price
+            end
+            @cantidad_switches_aux=i
+        end
+        
+        
+        
+        %>
+        <tr><td colspan="2"><strong>Total: </strong><td><strong><%=contadordeprecio%> USD</strong></td></td></tr>
+    </tr></tbody>
+    </table>
+</div>
