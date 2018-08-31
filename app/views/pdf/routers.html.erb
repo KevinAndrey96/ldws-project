@@ -59,6 +59,24 @@
           %>
         </p>
       </div>
+      
+      <div class="row">
+        <h2>Otras configuraciones</h2>
+        <% vlan_number=0%>
+        <% @subnets.each do |vlan| %>
+        <%vlan_number+=1%>
+          <% if vlan.name != "default" %>
+            
+            <p>
+              interface < GigabitEthernet9/0>.<%=vlan_number*10%><br>
+              encapsulation dot1Q <%=vlan_number*10%><br>
+              ip address <%= @h[vlan.name]["firstHost"]%> <%= @h[vlan.name]["mask"]%><br>
+              no shutdown<br>
+              exit<br>
+            </p>
+          <%end%>
+        <%end%>
+      </div>
     </div>
   </div>
 </body>
