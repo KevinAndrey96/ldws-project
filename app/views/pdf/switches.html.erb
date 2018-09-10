@@ -97,9 +97,44 @@
       <%
         end
       %>
+      
       <div class="row">
+        <h2>Enrutamiento de VLANS</h2>
+        <% vlan_number=0%>
+        <% inicio=1%>
+        <% final=8%>
+        <p>//Configuración en SW de Acceso</p>
+        <% @subnets.each do |vlan| %>
         
+        <%vlan_number+=1%>
+          <% 
+          if vlan_number=1
+            next
+          end
+          if vlan.name != "default" 
+          if final>24
+            inicio=1
+            final=24
+          end
+          %>
+            <pre>
+              interface range fastEthernet0/<%=inicio%>-<%=final%>
+              switchport mode access
+              switchport access vlan <%=vlan_number*10%>
+              exit
+            </pre>
+            <% inicio+=8%>
+            <% final+=8%>
+          <%end%>
+        <%end%>
+        <pre>
+          interface range gigabitEthernet1/1-2
+          switchport mode trunk
+          switchport trunk native vlan <%=vlan_number*10%>
+          exit
+        </pre>
       </div>
+      
     </div>
   </div>
 </body>
