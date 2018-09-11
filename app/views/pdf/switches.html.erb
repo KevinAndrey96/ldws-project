@@ -135,6 +135,36 @@
         </pre>
       </div>
       
+      <div class="row">
+        <pre>
+          <% @subnets.each do |vlan| %>
+        
+        <%vlan_number+=1%>
+          <% 
+          
+          if vlan.name != "default" 
+          if final>24
+            inicio=1
+            final=24
+          end
+          %>
+            <pre>
+              /////////////////////////////////////////////////////
+              interface vlan <%=vlan_number*10%>
+              ip address <%=@h[vlan.name]["subnet"]%> <%=@h[vlan.name]["mask"]%>
+              no shutdown
+              exit
+            </pre>
+            <% inicio+=8%>
+            <% final+=8%>
+          <%end%>
+        <%end%>
+        
+          
+
+        </pre>
+      </div>
+      
     </div>
   </div>
 </body>
