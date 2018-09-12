@@ -5569,7 +5569,7 @@ $('#request_observation').hide();
           cantidad_impresoras = cantidad_impresoras + parseInt(document.getElementById('physical_printers_50').value);           
     
         cantidad_equipos = cantidad_pisos + cantidad_impresoras
-        alert(cantidad_equipos);
+        
         var min = 0;
         var max = 0;
         //CLASE C
@@ -5734,7 +5734,7 @@ $('#request_observation').hide();
       
       if(usuarios<cantidad_equipos){
         val = 1;
-        msj+="El numero de equipos no debe ser menor al numero de usuarios en las subrede";
+        msj+="El numero de equipos no debe ser menor al numero de usuarios en las subredes";
       }
       
       if (val==1)
