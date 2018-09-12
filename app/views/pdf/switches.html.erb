@@ -111,7 +111,7 @@
           if vlan_number=1
             next
           end
-          if vlan.name != "default" 
+          
           if final>24
             inicio=1
             final=24
@@ -126,7 +126,7 @@
             <% inicio+=8%>
             <% final+=8%>
           <%end%>
-        <%end%>
+        
         <pre>
           interface range gigabitEthernet1/1-2
           switchport mode trunk
@@ -134,35 +134,99 @@
           exit
         </pre>
       </div>
+      <hr>
       
+<%
+contador_de_switches=0
+aux=0
+@physical.each do |physical|
+  aux+=1
+  %>
+  <!--<h3>Piso <%=aux%> (<%=physical.height%>m x <%=physical.width%>m x <%=physical.large%>m)</h3>
+  <p>Edificio <%=physical.building.name%><br><%=physical.computers%> computadores</p>-->
+  <%
+  begin
+  the_switch = TheSwitch.where('numberports > ? and ports_id = 1', physical.computers).order('numberports desc')
+  %>
+      <!--<%=the_switch.first.numberports%> -->
+  <%
+  rescue
+  the_switch = TheSwitch.where('numberports < ? and ports_id = 1', physical.computers).order('numberports desc')
+  %>
+      <!--<%=the_switch.first.numberports%> -->
+  <%
+  end
+  cantidad_switches=(physical.computers.to_f/the_switch.first.numberports.to_f).to_f.ceil
+  contador_de_switches+=cantidad_switches.ceil
+  %>
+  
+  /////////////////////////////////////////////////////////////<br>
+  interface range GIgabitEthernet1/1-<%=the_switch.first.numberports%><br>
+  channel-protocol pagp <br>
+  channel-group 1 mode desirable<br>
+  
+  <%
+  
+  
+  %>
+  <!--<strong>Se usaran <%=cantidad_switches.ceil%> switches de <%=the_switch.first.numberports%> puertos</strong>-->
+  <%
+end
+%>
+      
+      
+      
+      <!--<h2><%=contador_de_switches%> switches de acceso</h2>-->
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+<hr>
+      <%vlan_number=0%>
       <div class="row">
-        <pre>
           <% @subnets.each do |vlan| %>
         
         <%vlan_number+=1%>
           <% 
           
-          if vlan.name != "default" 
+          
           if final>24
             inicio=1
             final=24
           end
           %>
-            <pre>
-              /////////////////////////////////////////////////////
-              interface vlan <%=vlan_number*10%>
-              ip address <%=@h[vlan.name]["subnet"]%> <%=@h[vlan.name]["mask"]%>
-              no shutdown
-              exit
-            </pre>
+            <p>
+              /////////////////////////////////////////////////////<br>
+              interface vlan <%=vlan_number*10%><br>
+              ip address <%=@h[vlan.name]["subnet"]%> <%=@h[vlan.name]["mask"]%><br>
+              no shutdown<br>
+              exit<br>
+            </p>
             <% inicio+=8%>
             <% final+=8%>
           <%end%>
-        <%end%>
-        
-          
-
-        </pre>
       </div>
       
     </div>

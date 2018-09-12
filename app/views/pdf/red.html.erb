@@ -334,7 +334,7 @@ end
     <div class="container-fluid">
     <h2>Direccionamiento</h2>
     <table class="table table-responsive"  border="1" width= "100%">
-      <thead><tr><th>Nombre</th><th>Dirección de host</th></tr></thead>
+      <thead><tr><th>Nombre</th><th>Dirección de subred</th></tr></thead>
       <tbody>
         <% @subnets.order(computers: :desc, name: :asc).each do |subnet| %>
           <tr><td><center><%=subnet.name%></center></td><td><center><%= @h[subnet.name]["firstHost"]%>/<%= @h[subnet.name]["cidr"]%></center></td></tr>

@@ -75,7 +75,7 @@
               <%
               cont=0
               %>
-              <td>Switches de acceso</td>
+              <!--<td>Switches de acceso</td>-->
         <%
         if @request.ctype=="Enterprise"
             if @logical.redundancy?
@@ -129,10 +129,10 @@
         end
         contalo+=@cantidad_switches_aux
         %>
-     <td><%=@cantidad_switches_aux%></td>
+     <!--<td><%=@cantidad_switches_aux-1%></td>-->
      
               <%
-              if @request.ctype=="Campus"
+              if @request.ctype=="Enterprise"
                   if @logical.redundancy?
                       aux=2
                       %>
@@ -148,7 +148,7 @@
                       <%
                       contalo+=aux
                   end  
-              elsif @request.ctype=="Enterprise"
+              elsif @request.ctype=="Campus"
                   if @logical.redundancy?
                       aux=4
                       %>
@@ -172,6 +172,68 @@
               %>
               
             </tr>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <tr>
+              <%
+              contador_de_switches=0
+              aux=0
+              @physical.each do |physical|
+                  aux+=1
+                  %>
+                  <!--<h3>Piso <%=aux%> (<%=physical.height%>m x <%=physical.width%>m x <%=physical.large%>m)</h3>
+                  <p>Edificio <%=physical.building.name%><br><%=physical.computers%> computadores</p>-->
+                  <%
+                  begin
+                  the_switch = TheSwitch.where('numberports > ? and ports_id = 1', physical.computers).order('numberports desc')
+                  %>
+                      <!--<%=the_switch.first.numberports%> -->
+                  <%
+                  rescue
+                  the_switch = TheSwitch.where('numberports < ? and ports_id = 1', physical.computers).order('numberports desc')
+                  %>
+                      <!--<%=the_switch.first.numberports%> -->
+                  <%
+                  end
+                  cantidad_switches=(physical.computers.to_f/the_switch.first.numberports.to_f).to_f.ceil
+                  contador_de_switches+=cantidad_switches.ceil
+                  %>
+                  <!--<strong>Se usaran <%=cantidad_switches.ceil%> switches de <%=the_switch.first.numberports%> puertos</strong>-->
+                  <%
+              end
+              %>
+              <td>Switches de Acceso</td>
+              <td><%=contador_de_switches%></td>
+            </tr>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
           
             <tr>
               <td>Puntos de acceso inalambrico</td>
