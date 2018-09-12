@@ -4478,6 +4478,7 @@ var Cont_fisico_4=30;
 var Cont_fisico_5=40;
 var Cont_subred=0;
 var Contador_building = 0;
+var cantidad_equipos = 0;
 
 
 $('#request_observation').hide();
@@ -5319,7 +5320,44 @@ $('#request_observation').hide();
       
       
         //Validar IP
+        var servicios = 0;
+        var cantidad_impresoras = 0;
         var cantidad_pisos = 0;
+
+        if( document.getElementById("request_web").checked == true)
+            servicios = servicios+1;
+
+        if( document.getElementById("request_bd").checked == true)
+            servicios = servicios+1;
+        
+        if( document.getElementById("request_aplications").checked == true)
+            servicios = servicios+1;
+        
+        if( document.getElementById("request_proxy").checked == true)
+            servicios = servicios+1;
+        
+        if( document.getElementById("request_voip").checked == true)
+            servicios = servicios+1;
+        
+        if( document.getElementById("request_video_conference").checked == true)
+            servicios = servicios+1;
+        
+        if( document.getElementById("request_active_dir").checked == true)
+            servicios = servicios+1;
+        
+        if( document.getElementById("request_dhcp").checked == true)
+            servicios = servicios+1;
+        
+        if( document.getElementById("request_dns").checked == true)
+            servicios = servicios+1;
+        
+        if( document.getElementById("request_ftp").checked == true)
+            servicios = servicios+1;
+        
+        if( document.getElementById("request_email").checked == true)
+            servicios = servicios+1;
+
+            
         if (document.getElementById('physical_computers_1').value != "")
           cantidad_pisos = cantidad_pisos + parseInt(document.getElementById('physical_computers_1').value);
         if (document.getElementById('physical_computers_2').value != "")
@@ -5424,8 +5462,114 @@ $('#request_observation').hide();
           cantidad_pisos = cantidad_pisos + parseInt(document.getElementById('physical_computers_49').value);
         if (document.getElementById('physical_computers_50').value != "")
           cantidad_pisos = cantidad_pisos + parseInt(document.getElementById('physical_computers_50').value);            
+
+        if (document.getElementById('physical_printers_1').value != "")
+          cantidad_impresoras = cantidad_impresoras + parseInt(document.getElementById('physical_printers_1').value);
+        if (document.getElementById('physical_printers_2').value != "")
+          cantidad_impresoras = cantidad_impresoras + parseInt(document.getElementById('physical_computers_2').value);
+        if (document.getElementById('physical_printers_3').value != "")
+          cantidad_impresoras = cantidad_impresoras + parseInt(document.getElementById('physical_printers_3').value);
+        if (document.getElementById('physical_printers_4').value != "")
+          cantidad_impresoras = cantidad_impresoras + parseInt(document.getElementById('physical_printers_4').value);        
+        if (document.getElementById('physical_printers_5').value != "")
+          cantidad_impresoras = cantidad_impresoras + parseInt(document.getElementById('physical_printers_5').value);
+        if (document.getElementById('physical_printers_6').value != "")
+          cantidad_impresoras = cantidad_impresoras + parseInt(document.getElementById('physical_printers_6').value);        
+        if (document.getElementById('physical_printers_7').value != "")
+          cantidad_impresoras = cantidad_impresoras + parseInt(document.getElementById('physical_printers_7').value);
+        if (document.getElementById('physical_printers_8').value != "")
+          cantidad_impresoras = cantidad_impresoras + parseInt(document.getElementById('physical_printers_8').value);        
+        if (document.getElementById('physical_printers_9').value != "")
+          cantidad_impresoras = cantidad_impresoras + parseInt(document.getElementById('physical_printers_9').value);
+        if (document.getElementById('physical_printers_10').value != "")
+          cantidad_impresoras = cantidad_impresoras + parseInt(document.getElementById('physical_printers_10').value);    
           
+        if (document.getElementById('physical_printers_11').value != "")
+          cantidad_impresoras = cantidad_impresoras + parseInt(document.getElementById('physical_printers_11').value);
+        if (document.getElementById('physical_printers_12').value != "")
+          cantidad_impresoras = cantidad_impresoras + parseInt(document.getElementById('physical_printers_12').value);
+        if (document.getElementById('physical_printers_13').value != "")
+          cantidad_impresoras = cantidad_impresoras + parseInt(document.getElementById('physical_printers_13').value);
+        if (document.getElementById('physical_printers_14').value != "")
+          cantidad_impresoras = cantidad_impresoras + parseInt(document.getElementById('physical_printers_14').value);        
+        if (document.getElementById('physical_printers_15').value != "")
+          cantidad_impresoras = cantidad_impresoras + parseInt(document.getElementById('physical_printers_15').value);
+        if (document.getElementById('physical_printers_16').value != "")
+          cantidad_impresoras = cantidad_impresoras + parseInt(document.getElementById('physical_printers_16').value);        
+        if (document.getElementById('physical_printers_17').value != "")
+          cantidad_impresoras = cantidad_impresoras + parseInt(document.getElementById('physical_printers_17').value);
+        if (document.getElementById('physical_printers_18').value != "")
+          cantidad_impresoras = cantidad_impresoras + parseInt(document.getElementById('physical_printers_18').value);        
+        if (document.getElementById('physical_printers_19').value != "")
+          cantidad_impresoras = cantidad_impresoras + parseInt(document.getElementById('physical_printers_19').value);
+        if (document.getElementById('physical_printers_20').value != "")
+          cantidad_impresoras = cantidad_impresoras + parseInt(document.getElementById('physical_printers_20').value);   
+
+        if (document.getElementById('physical_printers_21').value != "")
+          cantidad_impresoras = cantidad_impresoras + parseInt(document.getElementById('physical_printers_21').value);
+        if (document.getElementById('physical_printers_22').value != "")
+          cantidad_impresoras = cantidad_impresoras + parseInt(document.getElementById('physical_printers_22').value);
+        if (document.getElementById('physical_printers_23').value != "")
+          cantidad_impresoras = cantidad_impresoras + parseInt(document.getElementById('physical_printers_23').value);
+        if (document.getElementById('physical_printers_24').value != "")
+          cantidad_impresoras = cantidad_impresoras + parseInt(document.getElementById('physical_printers_24').value);        
+        if (document.getElementById('physical_printers_25').value != "")
+          cantidad_impresoras = cantidad_impresoras + parseInt(document.getElementById('physical_printers_25').value);
+        if (document.getElementById('physical_printers_26').value != "")
+          cantidad_impresoras = cantidad_impresoras + parseInt(document.getElementById('physical_printers_26').value);        
+        if (document.getElementById('physical_printers_27').value != "")
+          cantidad_impresoras = cantidad_impresoras + parseInt(document.getElementById('physical_printers_27').value);
+        if (document.getElementById('physical_printers_28').value != "")
+          cantidad_impresoras = cantidad_impresoras + parseInt(document.getElementById('physical_printers_28').value);        
+        if (document.getElementById('physical_printers_29').value != "")
+          cantidad_impresoras = cantidad_impresoras + parseInt(document.getElementById('physical_printers_29').value);
+        if (document.getElementById('physical_printers_30').value != "")
+          cantidad_impresoras = cantidad_impresoras + parseInt(document.getElementById('physical_printers_30').value);   
+
+        if (document.getElementById('physical_printers_31').value != "")
+          cantidad_impresoras = cantidad_impresoras + parseInt(document.getElementById('physical_printers_31').value);
+        if (document.getElementById('physical_printers_32').value != "")
+          cantidad_impresoras = cantidad_impresoras + parseInt(document.getElementById('physical_printers_32').value);
+        if (document.getElementById('physical_printers_33').value != "")
+          cantidad_impresoras = cantidad_impresoras + parseInt(document.getElementById('physical_printers_33').value);
+        if (document.getElementById('physical_printers_34').value != "")
+          cantidad_impresoras = cantidad_impresoras + parseInt(document.getElementById('physical_printers_34').value);        
+        if (document.getElementById('physical_printers_35').value != "")
+          cantidad_impresoras = cantidad_impresoras + parseInt(document.getElementById('physical_printers_35').value);
+        if (document.getElementById('physical_printers_36').value != "")
+          cantidad_impresoras = cantidad_impresoras + parseInt(document.getElementById('physical_printers_36').value);        
+        if (document.getElementById('physical_printers_37').value != "")
+          cantidad_impresoras = cantidad_impresoras + parseInt(document.getElementById('physical_printers_37').value);
+        if (document.getElementById('physical_printers_38').value != "")
+          cantidad_impresoras = cantidad_impresoras + parseInt(document.getElementById('physical_printers_38').value);        
+        if (document.getElementById('physical_printers_39').value != "")
+          cantidad_impresoras = cantidad_impresoras + parseInt(document.getElementById('physical_printers_39').value);
+        if (document.getElementById('physical_printers_40').value != "")
+          cantidad_impresoras = cantidad_impresoras + parseInt(document.getElementById('physical_printers_40').value);   
+
+        if (document.getElementById('physical_printers_41').value != "")
+          cantidad_impresoras = cantidad_impresoras + parseInt(document.getElementById('physical_printers_41').value);
+        if (document.getElementById('physical_printers_42').value != "")
+          cantidad_impresoras = cantidad_impresoras + parseInt(document.getElementById('physical_printers_42').value);
+        if (document.getElementById('physical_printers_43').value != "")
+          cantidad_impresoras = cantidad_impresoras + parseInt(document.getElementById('physical_printers_43').value);
+        if (document.getElementById('physical_printers_44').value != "")
+          cantidad_impresoras = cantidad_impresoras + parseInt(document.getElementById('physical_printers_44').value);        
+        if (document.getElementById('physical_printers_45').value != "")
+          cantidad_impresoras = cantidad_impresoras + parseInt(document.getElementById('physical_printers_45').value);
+        if (document.getElementById('physical_printers_46').value != "")
+          cantidad_impresoras = cantidad_impresoras + parseInt(document.getElementById('physical_printers_46').value);        
+        if (document.getElementById('physical_printers_47').value != "")
+          cantidad_impresoras = cantidad_impresoras + parseInt(document.getElementById('physical_printers_47').value);
+        if (document.getElementById('physical_printers_48').value != "")
+          cantidad_impresoras = cantidad_impresoras + parseInt(document.getElementById('physical_printers_48').value);        
+        if (document.getElementById('physical_printers_49').value != "")
+          cantidad_impresoras = cantidad_impresoras + parseInt(document.getElementById('physical_printers_49').value);
+        if (document.getElementById('physical_printers_50').value != "")
+          cantidad_impresoras = cantidad_impresoras + parseInt(document.getElementById('physical_printers_50').value);           
     
+        cantidad_equipos = cantidad_pisos + cantidad_impresoras
+        alert(cantidad_equipos);
         var min = 0;
         var max = 0;
         //CLASE C
@@ -5566,7 +5710,8 @@ $('#request_observation').hide();
           val = 1;
           msj+="Host 4 - ";
         }
-
+      
+      var usuarios = 0;
       for (j = 1; j <= Cont; j++) {
         if (document.getElementById("subnet_name_"+j).value == "")
           {
@@ -5582,10 +5727,15 @@ $('#request_observation').hide();
           {
             val = 1;
             msj+="Usuarios sub red "+j+" - ";
+          } else {
+            usuarios = usuarios+document.getElementById("subnet_computers_"+j).value;
           }       
       }  
-        
-  
+      
+      if(usuarios<cantidad_equipos){
+        val = 1;
+        msj+="El numero de equipos no debe ser menor al numero de usuarios en las subrede";
+      }
       
       if (val==1)
       {
