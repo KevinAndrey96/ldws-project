@@ -5732,9 +5732,9 @@ $('#request_observation').hide();
           }       
       }  
       
-      if(usuarios<cantidad_equipos){
+      if(cantidad_equipos < usuarios){
         val = 1;
-        msj+="El numero de equipos no debe ser menor al numero de usuarios en las subredes";
+        window.alert("El numero de equipos debe ser mayor al numero de usuarios en las subredes");
       }
       
       if (val==1)
