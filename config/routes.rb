@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   get 'pdf/empresa'
   get 'pdf/direccionamiento'
   get 'pdf/red'
+  get 'pdf/red2'
   
   resources :subnets
   get 'pruebas/index'

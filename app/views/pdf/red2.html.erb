@@ -1,0 +1,539 @@
+<!Doctype html><html><head>  <meta charset='utf-8' />  <%= wicked_pdf_stylesheet_link_tag "pdf" -%>  <%= wicked_pdf_javascript_include_tag "number_pages" %></head><style>  page-break-inside: avoid !important;  margin: 4px 0 4px 0;  @media print {    table tbody tr td:before,    table tbody tr td:after {        content : "" ;        height : 4px ;        display : block ;    }}table, tr, td, th, tbody, thead, tfoot {    page-break-inside: avoid !important;}.avoid{  page-break-inside:avoid !important; page-break-after:auto !important; overflow: hidden; display:block !important; width:100% }</style>
+<h1>Datos importantes, información de red</h1>
+<h2>Lista de pisos ordenados por número de computadores</h2>
+
+<%
+totaldecomputadores=0
+contador_de_switches=0
+aux=0
+@physical.each do |physical|
+    totaldecomputadores+=physical.computers
+    aux+=1
+    %>
+    <h3>Piso <%=aux%> (<%=physical.height%>m x <%=physical.width%>m x <%=physical.large%>m)</h3>
+    <p>Edificio <%=physical.building.name%><br><%=physical.computers%> computadores</p>
+    <%
+    begin
+    
+    the_switch = TheSwitch.where('((((numberports > ? and numberports = 18) or (numberports > ? and numberports = 24) or (numberports > ? and numberports = 48)) or numberports = 48) and ports_id = 1)', physical.computers, physical.computers, physical.computers).order('numberports desc')
+    validacion2=TheSwitch.where('switches_id = ? and numberports <= 4 and ports_id = 2', the_switch.first.switches_id)
+    if(validacion2.count>0)
+        %>
+        <strong>Los switches son 100% compatibles, tienen <%=validacion2.first.numberports%> puertos SFP</strong><br>
+        <%
+    else
+        %>
+        <strong>Puede tener problemas con los switches ya que estos no tienen los puertos SFP recomendados (4 o menos)</strong><br>
+        <%
+    end
+    
+    
+    cantidad_switches=(physical.computers.to_f/the_switch.first.numberports.to_f).to_f.ceil
+    contador_de_switches+=cantidad_switches.ceil
+    
+    %>
+    <strong>Se usaran <%=cantidad_switches.ceil%> switches de <%=the_switch.first.numberports%> puertos</strong>
+    <%
+    rescue
+    #the_switch = TheSwitch.where('numberports < ? and ports_id = 1', physical.computers).order('numberports desc')
+    %>
+        NO HAY SWITCHES COMPATIBLES PARA ESTE PISO
+    <%
+    end
+    @cantidad_switches_aux=cantidad_switches
+end
+
+
+%>
+
+<div class="content">
+    <h2>Tabla de Switches</h2>
+    <table border="1" width="100%"><thead><tr><th>Id</th><th>Nombre</th><th>Información</th></thead>
+    <tbody>
+        <%
+        core=0
+        distribucion=0
+        if @request.ctype=="Enterprise"
+            if @logical.redundancy?
+                aux=2
+                
+                core=2
+                distribucion=0
+            else
+                aux=1
+                
+                core=1
+                distribucion=0
+            end  
+        elsif @request.ctype=="Campus"
+            if @logical.redundancy?
+                aux=4
+                
+                core=2
+                distribucion=2
+            else
+                aux=2
+                
+                core=1
+                distribucion=1
+            end
+        end
+        
+        
+        sfp=(totaldecomputadores.to_f/contador_de_switches.to_f).ceil
+        sfpp=((totaldecomputadores.to_f/contador_de_switches.to_f).ceil)
+        sfpp=(sfpp.to_f/10.to_f).ceil
+        %><tr><td colspan=3>Capa de CORE (<%=totaldecomputadores%> pc's / <%=contador_de_switches%> sw = garantizar minimo <%=sfp%> gbps velocidad SFP)</td></tr><%
+        i=0
+        seleccionado=""
+        
+        
+        while core>0
+            i+=1
+            core-=1
+            begin
+                the_switch = TheSwitch.where('numberports >= ? and ports_id = 2', sfp).order('numberports asc')
+                seleccionado="SFP"
+                if the_switch.count==0
+                    the_switch = TheSwitch.where('numberports >= ? and ports_id = 3', sfpp).order('numberports asc')
+                    seleccionado="SFPP"
+                end
+                switch=Switch.find(the_switch.first.switches_id)
+                port=Port.find(the_switch.first.ports_id)
+                @ts=TheSwitch.where(:switches_id => switch.id)
+                %>
+                    <tr><td><%=i%></td><td><%=switch.name%></td>
+                    <td>
+                        <%
+                        @ts.each do |tese|
+                        %>
+                            <%=tese.numberports%> P
+                        <% 
+                        pp=Port.find(tese.ports_id)
+                        %>
+                        - <%=pp.name%>,
+                        <%
+                        
+                        end
+                        %>
+                    </td>
+                    </tr>
+                <%
+            rescue
+                %><tr><td colspan=3>NO DISPONIBLE</td></tr><%
+            end    
+        end
+        
+        
+        
+         %><tr><td colspan=3>Capa de DISTRIBUCIÓN</td></tr><%
+        i=0
+        while distribucion>0
+            i+=1
+            distribucion-=1
+            the_switch = TheSwitch.where('numberports >= 1 and ports_id = 5').order('numberports asc')
+            switch=Switch.find(the_switch.first.switches_id)
+            port=Port.find(the_switch.first.ports_id)
+            @ts=TheSwitch.where(:switches_id => switch.id)
+            %>
+                <tr><td><%=i%></td><td><%=switch.name%></td>
+                <td>
+                    <%
+                    @ts.each do |tese|
+                    %>
+                        <%=tese.numberports%> P
+                    <% 
+                    pp=Port.find(tese.ports_id)
+                    %>
+                    - <%=pp.name%>,
+                    <%
+                    
+                    end
+                    %>
+                </td>
+                </tr>
+            <%
+        end
+        
+        
+        
+        superi=i
+        
+        aux=0
+        %><tr><td colspan=3>Capa de ACCESO</td></tr><%
+        @physical.each do |physical|
+            aux+=1
+            contador_de_switches=0
+            begin
+            
+            the_switch = TheSwitch.where('((((numberports > ? and numberports = 18) or (numberports > ? and numberports = 24) or (numberports > ? and numberports = 48)) or numberports = 48) and ports_id = 1)', physical.computers, physical.computers, physical.computers).order('numberports desc')
+            validacion2=TheSwitch.where('switches_id = ? and numberports <= 4 and ports_id = 2', the_switch.first.switches_id)
+            
+            cantidad_switches=(physical.computers.to_f/the_switch.first.numberports.to_f).to_f.ceil
+            contador_de_switches+=cantidad_switches.ceil
+            
+            %>
+            <strong>Se usaran <%=cantidad_switches.ceil%> switches de <%=the_switch.first.numberports%> puertos</strong>
+            <%
+            rescue
+            #the_switch = TheSwitch.where('numberports < ? and ports_id = 1', physical.computers).order('numberports desc')
+            %>
+                NO HAY SWITCHES COMPATIBLES PARA ESTE PISO
+            <%
+            end
+            cantidad_switches=(physical.computers.to_f/the_switch.first.numberports.to_f).to_f.ceil
+            
+            switch=Switch.find(the_switch.first.switches_id)
+            port=Port.find(the_switch.first.ports_id)
+            oux=cantidad_switches
+            while oux>0
+            oux-=1
+            i+=1
+            @ts=TheSwitch.where(:switches_id => switch.id)
+            %>
+                <tr><td><%=i%></td><td><%=switch.name%></td>
+                <td>
+                    <%
+                    @ts.each do |tese|
+                    %>
+                        <%=tese.numberports%> P
+                    <% 
+                    pp=Port.find(tese.ports_id)
+                    %>
+                    - <%=pp.name%> a <%=pp.speed%> Gbps,
+                    <%
+                    
+                    end
+                    %>
+                </td>
+                </tr>
+            <%
+            end
+            
+        end
+        
+        
+        
+        %>
+        
+    </tbody>
+    </table>
+</div>
+
+
+
+
+
+
+<div class="content">
+    <h2>Tabla de Cableado</h2>
+    <table border="1" width="100%"><thead><tr><th>Id Origen</th><th>Id Destino</th><th>Nombre de cable</th><th>Tipo de cable</th><th>Categoria de cable</th><th>Estructura</th><th>Conector</th><th>Precio Conector</th><th>Precio categoria</th><th>Estandar Ethernet</th><th>Velocidad</th><th>Distancia estandar ethernet</th><th>Total de cables</th></tr></thead>
+    <tbody>
+        <%
+        cable = Cable.where(:name => "Fibra Optica", :ethernet_id => 6).order('RANDOM()').first
+        %>
+            <tr><td>1</td><td>Router</td><td><%=cable.name%></td><td><%=cable.ctype%></td><td><%=cable.category.name%></td><td><%=cable.structure%></td><td><%=cable.connector.name%></td><td><%=cable.connector.price%> USD</td><td><%=cable.category.price%> USD</td><td><%=cable.ethernet.name%></td><td><%=cable.ethernet.speed%> Gbps</td><td><%=cable.ethernet.distance%> m</td><td>1</td></tr>
+            <tr><td>1</td><td>Server Farm</td><td><%=cable.name%></td><td><%=cable.ctype%></td><td><%=cable.category.name%></td><td><%=cable.structure%></td><td><%=cable.connector.name%></td><td><%=cable.connector.price%> USD</td><td><%=cable.category.price%> USD</td><td><%=cable.ethernet.name%></td><td><%=cable.ethernet.speed%> Gbps</td><td><%=cable.ethernet.distance%> m</td><td>1</td></tr>
+        <%
+        cable = Cable.where(:name => "Fibra Optica", :ethernet_id => 6).order('RANDOM()').first
+        if @request.ctype=="Enterprise"
+            if @logical.redundancy?
+                aux=2
+                %>
+                    <tr><td>1</td><td>2</td><td><%=cable.name%></td><td><%=cable.ctype%></td><td><%=cable.category.name%></td><td><%=cable.structure%></td><td><%=cable.connector.name%></td><td><%=cable.connector.price%> USD</td><td><%=cable.category.price%> USD</td><td><%=cable.ethernet.name%></td><td><%=cable.ethernet.speed%> Gbps</td><td><%=cable.ethernet.distance%> m</td><td>
+                    <%
+                    if seleccionado=="SFP"
+                       %>                       <%=sfp%>                       <%
+                    else
+                        %>                       <%=sfpp%>                       <%
+                    end
+                    %></td></tr>
+                <%
+                
+            else
+                aux=1
+            end  
+        elsif @request.ctype=="Campus"
+            if @logical.redundancy?
+                aux=4
+                %>
+                    <tr><td>1</td><td>2</td><td><%=cable.name%></td><td><%=cable.ctype%></td><td><%=cable.category.name%></td><td><%=cable.structure%></td><td><%=cable.connector.name%></td><td><%=cable.connector.price%> USD</td><td><%=cable.category.price%> USD</td><td><%=cable.ethernet.name%></td><td><%=cable.ethernet.speed%> Gbps</td><td><%=cable.ethernet.distance%> m</td><td>1</td></tr>
+                    <tr><td>1</td><td>3</td><td><%=cable.name%></td><td><%=cable.ctype%></td><td><%=cable.category.name%></td><td><%=cable.structure%></td><td><%=cable.connector.name%></td><td><%=cable.connector.price%> USD</td><td><%=cable.category.price%> USD</td><td><%=cable.ethernet.name%></td><td><%=cable.ethernet.speed%> Gbps</td><td><%=cable.ethernet.distance%> m</td><td>1</td></tr>
+                    <tr><td>3</td><td>4</td><td><%=cable.name%></td><td><%=cable.ctype%></td><td><%=cable.category.name%></td><td><%=cable.structure%></td><td><%=cable.connector.name%></td><td><%=cable.connector.price%> USD</td><td><%=cable.category.price%> USD</td><td><%=cable.ethernet.name%></td><td><%=cable.ethernet.speed%> Gbps</td><td><%=cable.ethernet.distance%> m</td><td>
+                    <%
+                    if seleccionado=="SFP"
+                       %>                       <%=sfp%>                       <%
+                    else
+                        %>                       <%=sfpp%>                       <%
+                    end
+                    %></td></tr>
+                <%
+            else
+                %>
+                    <tr><td>1</td><td>2</td><td><%=cable.name%></td><td><%=cable.ctype%></td><td><%=cable.category.name%></td><td><%=cable.structure%></td><td><%=cable.connector.name%></td><td><%=cable.connector.price%> USD</td><td><%=cable.category.price%> USD</td><td><%=cable.ethernet.name%></td><td><%=cable.ethernet.speed%> Gbps</td><td><%=cable.ethernet.distance%> m</td><td>1</td></tr>
+                <%
+            end
+        end
+        %><tr></tr><%
+        cable = Cable.where(:ctype => "UTP").order('RANDOM()').first
+        aux3=0
+        if seleccionado=="SFP"
+            aux3=(sfp.to_f/2).ceil
+           
+        else
+            aux3=(sfpp.to_f/2).ceil
+           
+        end
+        if @request.ctype=="Enterprise"
+            if @logical.redundancy?
+                aux=2
+                aux2=aux
+                while aux2<@cantidad_switches_aux+aux
+                    aux2+=1
+                    %>
+                        <tr><td>1</td><td><%=aux2%></td><td><%=cable.name%></td><td><%=cable.ctype%></td><td><%=cable.category.name%></td><td><%=cable.structure%></td><td><%=cable.connector.name%></td><td><%=cable.connector.price%> USD</td><td><%=cable.category.price%> USD</td><td><%=cable.ethernet.name%></td><td><%=cable.ethernet.speed%> Gbps</td><td><%=cable.ethernet.distance%> m</td><td><%=aux3%></td></tr>
+                    <%
+                end
+            else
+                aux=1
+                aux2=aux
+                while aux2<@cantidad_switches_aux+aux
+                    aux2+=1
+                    %>
+                        <tr><td>1</td><td><%=aux2%></td><td><%=cable.name%></td><td><%=cable.ctype%></td><td><%=cable.category.name%></td><td><%=cable.structure%></td><td><%=cable.connector.name%></td><td><%=cable.connector.price%> USD</td><td><%=cable.category.price%> USD</td><td><%=cable.ethernet.name%></td><td><%=cable.ethernet.speed%> Gbps</td><td><%=cable.ethernet.distance%> m</td><td><%=aux3%></td></tr>
+                    <%
+                end
+            end  
+        elsif @request.ctype=="Campus"
+            if @logical.redundancy?
+                aux=4
+                aux2=aux
+                while aux2<@cantidad_switches_aux+aux
+                    aux2+=1
+                    
+                    %>
+                        <tr><td>3</td><td><%=aux2%></td><td><%=cable.name%></td><td><%=cable.ctype%></td><td><%=cable.category.name%></td><td><%=cable.structure%></td><td><%=cable.connector.name%></td><td><%=cable.connector.price%> USD</td><td><%=cable.category.price%> USD</td><td><%=cable.ethernet.name%></td><td><%=cable.ethernet.speed%> Gbps</td><td><%=cable.ethernet.distance%> m</td><td><%=aux3%></td></tr>
+                    <%
+                end
+            else
+                aux=2
+                aux2=aux
+                while aux2<@cantidad_switches_aux+aux
+                    aux2+=1
+                    
+                    %>
+                        <tr><td>2</td><td><%=aux2%></td><td><%=cable.name%></td><td><%=cable.ctype%></td><td><%=cable.category.name%></td><td><%=cable.structure%></td><td><%=cable.connector.name%></td><td><%=cable.connector.price%> USD</td><td><%=cable.category.price%> USD</td><td><%=cable.ethernet.name%></td><td><%=cable.ethernet.speed%> Gbps</td><td><%=cable.ethernet.distance%> m</td><td><%=aux3%></td></tr>
+                    <%
+                end
+            end
+        end
+        %>
+        
+
+    
+    <!--<tr><td colspan=13>Conexiones a equipos (<%=totaldecomputadores%> en total)</td></tr>-->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <%
+    
+        
+        superi=i
+        aux-=1
+        @physical.each do |physical|
+            aux+=1
+            contador_de_switches=0
+            begin
+            
+            the_switch = TheSwitch.where('((((numberports > ? and numberports = 18) or (numberports > ? and numberports = 24) or (numberports > ? and numberports = 48)) or numberports = 48) and ports_id = 1)', physical.computers, physical.computers, physical.computers).order('numberports desc')
+            validacion2=TheSwitch.where('switches_id = ? and numberports <= 4 and ports_id = 2', the_switch.first.switches_id)
+            
+            cantidad_switches=(physical.computers.to_f/the_switch.first.numberports.to_f).to_f.ceil
+            contador_de_switches+=cantidad_switches.ceil
+            
+            %>
+            <strong>Se usaran <%=cantidad_switches.ceil%> switches de <%=the_switch.first.numberports%> puertos</strong>
+            <%
+            rescue
+            #the_switch = TheSwitch.where('numberports < ? and ports_id = 1', physical.computers).order('numberports desc')
+            %>
+                NO HAY SWITCHES COMPATIBLES PARA ESTE PISO
+            <%
+            end
+            cantidad_switches=(physical.computers.to_f/the_switch.first.numberports.to_f).to_f.ceil
+            
+            switch=Switch.find(the_switch.first.switches_id)
+            port=Port.find(the_switch.first.ports_id)
+            oux=cantidad_switches
+            aux5=aux#Id del switch que estamos manipulando
+            aux6=0#Total de cables que van del switch a equipos
+            aux7=totaldecomputadores#Auxiliar con total de equipos
+            
+            mis_puertos=0
+            while oux>0
+            oux-=1
+            i+=1
+            @ts=TheSwitch.where(:switches_id => switch.id)
+            
+            
+                    @ts.each do |tese|
+                    mis_puertos=tese.numberports
+                    pp=Port.find(tese.ports_id)
+                    if pp.name="RJ45-1"
+                        break
+                    end
+                    end
+                    
+            if mis_puertos<aux7
+                aux7-=mis_puertos
+                aux6=mis_puertos
+            else
+                aux6=aux7
+            end
+            
+            
+            aux5+=1
+            %>
+                <tr><td><%=aux5%></td><td>Equipo</td><td><%=cable.name%></td><td><%=cable.ctype%></td><td><%=cable.category.name%></td><td><%=cable.structure%></td><td><%=cable.connector.name%></td><td><%=cable.connector.price%> USD</td><td><%=cable.category.price%> USD</td><td><%=cable.ethernet.name%></td><td><%=cable.ethernet.speed%> Gbps</td><td><%=cable.ethernet.distance%> m</td><td><%=aux6%></td></tr>
+            <%
+            
+            end
+            
+        end
+        
+        
+        
+        %>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    </tbody>
+    </table>
+</div>
+
+
+
+
+
+
+
+
+
+<div class="container-fluid">
+    <center><h1>Diagrama de red</h1></center>
+    <center><h4><%=@request.ctype%></h4></center>
+<!-- Inicio gráfico -->
+<% if @request.ctype=="Campus" %>
+    <center>
+        <%
+        if @logical.redundancy?
+            %><img src="https://instanceshape.com/admin/VLSM/Images/redundante.png"><%
+        else
+            %><img src="https://instanceshape.com/admin/VLSM/Images/no-redundante.png"><%
+        end
+        %>
+    </center>
+<% else %>
+    <center>
+        <%
+        if @logical.redundancy?
+            %><img src="https://instanceshape.com/admin/VLSM/Images/campus_redundante.png"><%
+        else
+            %><img src="https://instanceshape.com/admin/VLSM/Images/campus_no-redundante.png"><%
+        end
+        %>
+    </center>
+<%end%>
+<center>
+    <%
+    #i=superi
+    i=aux
+    aux=contador_de_switches
+    while aux>0
+    aux-=1
+    i+=1
+    %>
+        <%=i%><img src="https://instanceshape.com/admin/VLSM/Images/Acceso.png">
+    <%
+    end
+    %>
+</center>
+</div>
+
+
+<!--Direccionamiento-->
+<!--
+<hr>
+    <div class="container-fluid">
+    <h2>Direccionamiento</h2>
+    <table class="table table-responsive"  border="1" width= "100%">
+      <thead><tr><th>Nombre</th><th>Dirección de subred</th></tr></thead>
+      <tbody>
+        <% @subnets.order(computers: :desc, name: :asc).each do |subnet| %>
+          <tr><td><center><%=subnet.name%></center></td><td><center><%= @h[subnet.name]["firstHost"]%>/<%= @h[subnet.name]["cidr"]%></center></td></tr>
+        <% end %>
+      </tbody>
+    </table>
+    
+</div>
+-->

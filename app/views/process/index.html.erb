@@ -179,9 +179,10 @@
                             <label>
                               <% if params[:edit]=="true" && @logical.scalability!=0 %>
                                 <input type="checkbox" onclick="escalable()" name="Escalabilidadtrue" id="Escalabilidadtrue" checked>Escalabilidad de la red</label>
-                                
+                                <p>Porcentaje de escalabilidad de la red a futuro</p>
                               <% else %>
                                 <input type="checkbox" onclick="escalable()" name="Escalabilidadtrue" id="Escalabilidadtrue">Escalabilidad de la red</label>
+                                <p>"Porcentaje de crecimiento de la red a futuro"</p>
                               <% end %>
                                 
                             <script>

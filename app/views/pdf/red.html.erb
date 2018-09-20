@@ -12,6 +12,7 @@ aux=0
     <%
     begin
     the_switch = TheSwitch.where('numberports > ? and ports_id = 1', physical.computers).order('numberports desc')
+    #the_switch = TheSwitch.where('(numberports = 18 or numberports = 24 or numberports = 48) and ports_id = 1').order('numberports desc')
     %>
         <!--<%=the_switch.first.numberports%> -->
     <%
@@ -29,6 +30,9 @@ aux=0
 end
 %>
 
+<%
+contador_de_switches=54
+%>
 
 
 
@@ -329,7 +333,10 @@ end
     %>
 </center>
 </div>
+
+
 <!--Direccionamiento-->
+<!--
 <hr>
     <div class="container-fluid">
     <h2>Direccionamiento</h2>
@@ -343,3 +350,4 @@ end
     </table>
     
 </div>
+-->
