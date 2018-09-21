@@ -164,9 +164,16 @@ end
             contador_de_switches=0
             begin
             
-            the_switch = TheSwitch.where('((((numberports > ? and numberports = 18) or (numberports > ? and numberports = 24) or (numberports > ? and numberports = 48)) or numberports = 48) and ports_id = 1)', physical.computers, physical.computers, physical.computers).order('numberports desc')
-            validacion2=TheSwitch.where('switches_id = ? and numberports <= 4 and ports_id = 2', the_switch.first.switches_id)
+            #the_switch = TheSwitch.where('((((numberports > ? and numberports = 18) or (numberports > ? and numberports = 24) or (numberports > ? and numberports = 48)) or numberports = 48) and ports_id = 1)', physical.computers, physical.computers, physical.computers).order('RANDOM()')
+            the_switch = TheSwitch.where('numberports <= 4 and numberports>0 and ports_id = 2')
+            #validacion2=TheSwitch.where('switches_id = ? and numberports <= 4 and ports_id = 2', the_switch.first.switches_id)
+            validacion2=TheSwitch.where('switches_id = ? and ((((numberports > ? and numberports = 18) or (numberports > ? and numberports = 24) or (numberports > ? and numberports = 48)) or numberports = 48) and ports_id = 1)', the_switch.first.id ,physical.computers, physical.computers, physical.computers).order('RANDOM()')
             
+            if(validacion2.count>0)
+                %>
+                <strong>Los switches son 100% compatibles, tienen <%=validacion2.first.numberports%> puertos SFP</strong><br>
+                <%
+            end
             cantidad_switches=(physical.computers.to_f/the_switch.first.numberports.to_f).to_f.ceil
             contador_de_switches+=cantidad_switches.ceil
             
