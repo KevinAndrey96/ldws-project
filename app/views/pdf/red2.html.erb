@@ -77,10 +77,14 @@ end
             end
         end
         
-        
-        sfp=(totaldecomputadores.to_f/contador_de_switches.to_f).ceil
-        sfpp=((totaldecomputadores.to_f/contador_de_switches.to_f).ceil)
-        sfpp=(sfpp.to_f/10.to_f).ceil
+        begin
+            sfp=(totaldecomputadores.to_f/contador_de_switches.to_f).ceil
+            sfpp=((totaldecomputadores.to_f/contador_de_switches.to_f).ceil)
+            sfpp=(sfpp.to_f/10.to_f).ceil
+        rescue
+            sfp=0
+            sfpp=0
+        end
         %><tr><td colspan=3>Capa de CORE (<%=totaldecomputadores%> pc's / <%=contador_de_switches%> sw = garantizar minimo <%=sfp%> gbps velocidad SFP)</td></tr><%
         i=0
         seleccionado=""
@@ -383,7 +387,6 @@ end
             validacion2=TheSwitch.where('switches_id = ? and ((((numberports > ? and numberports = 18) or (numberports > ? and numberports = 24) or (numberports > ? and numberports = 48)) or numberports = 48) and ports_id = 1)', the_switch.first.switches_id ,physical.computers, physical.computers, physical.computers).order('RANDOM()')
             
             if(validacion2.count>0)
-                
                 the_switch=TheSwitch.where('switches_id = ? and ((((numberports > ? and numberports = 18) or (numberports > ? and numberports = 24) or (numberports > ? and numberports = 48)) or numberports = 48) and ports_id = 1)', the_switch.first.switches_id ,physical.computers, physical.computers, physical.computers).order('RANDOM()')
             end
             cantidad_switches=(physical.computers.to_f/validacion2.first.numberports.to_f).to_f.ceil
