@@ -17,13 +17,12 @@ aux=0
         #the_switch = TheSwitch.where('((((numberports > ? and numberports = 18) or (numberports > ? and numberports = 24) or (numberports > ? and numberports = 48)) or numberports = 48) and ports_id = 1)', physical.computers, physical.computers, physical.computers).order('RANDOM()')
         the_switch = TheSwitch.where('numberports <= 4 and numberports>0 and ports_id = 2')
         #validacion2=TheSwitch.where('switches_id = ? and numberports <= 4 and ports_id = 2', the_switch.first.switches_id)
-        validacion2=TheSwitch.where('switches_id = ? and ((((numberports > ? and numberports = 18) or (numberports > ? and numberports = 24) or (numberports > ? and numberports = 48)) or numberports = 48) and ports_id = 1)', the_switch.first.id ,physical.computers, physical.computers, physical.computers).order('RANDOM()')
+        validacion2=TheSwitch.where('switches_id = ? and ((((numberports > ? and numberports = 18) or (numberports > ? and numberports = 24) or (numberports > ? and numberports = 48)) or numberports = 48) and ports_id = 1)', the_switch.first.switches_id ,physical.computers, physical.computers, physical.computers).order('RANDOM()')
         
         if validacion2.count>0
             %>
-            <strong>Los switches son 100% compatibles, tienen <%=validacion2.first.numberports%> puertos SFP</strong><br>
+            <strong>Los switches son 100% compatibles, tienen <%=the_switch.first.numberports%> puertos SFP</strong><br>
             <%
-            the_switch=TheSwitch.where('switches_id = ? and ((((numberports > ? and numberports = 18) or (numberports > ? and numberports = 24) or (numberports > ? and numberports = 48)) or numberports = 48) and ports_id = 1)', the_switch.first.id ,physical.computers, physical.computers, physical.computers).order('RANDOM()')
         end
 
     
@@ -31,7 +30,7 @@ aux=0
     contador_de_switches+=cantidad_switches.ceil
     
     %>
-    <strong>Se usaran <%=cantidad_switches.ceil%> switches de <%=the_switch.first.numberports%> puertos</strong>
+    <strong>Se usaran <%=cantidad_switches.ceil%> switches de <%=validacion2.first.numberports%> puertos</strong>
     <%
     rescue
     #the_switch = TheSwitch.where('numberports < ? and ports_id = 1', physical.computers).order('numberports desc')
@@ -168,10 +167,10 @@ end
             #the_switch = TheSwitch.where('((((numberports > ? and numberports = 18) or (numberports > ? and numberports = 24) or (numberports > ? and numberports = 48)) or numberports = 48) and ports_id = 1)', physical.computers, physical.computers, physical.computers).order('RANDOM()')
             the_switch = TheSwitch.where('numberports <= 4 and numberports>0 and ports_id = 2')
             #validacion2=TheSwitch.where('switches_id = ? and numberports <= 4 and ports_id = 2', the_switch.first.switches_id)
-            validacion2=TheSwitch.where('switches_id = ? and ((((numberports > ? and numberports = 18) or (numberports > ? and numberports = 24) or (numberports > ? and numberports = 48)) or numberports = 48) and ports_id = 1)', the_switch.first.id ,physical.computers, physical.computers, physical.computers).order('RANDOM()')
+            validacion2=TheSwitch.where('switches_id = ? and ((((numberports > ? and numberports = 18) or (numberports > ? and numberports = 24) or (numberports > ? and numberports = 48)) or numberports = 48) and ports_id = 1)', the_switch.first.switches_id ,physical.computers, physical.computers, physical.computers).order('RANDOM()')
             
             if(validacion2.count>0)
-               the_switch=TheSwitch.where('switches_id = ? and ((((numberports > ? and numberports = 18) or (numberports > ? and numberports = 24) or (numberports > ? and numberports = 48)) or numberports = 48) and ports_id = 1)', the_switch.first.id ,physical.computers, physical.computers, physical.computers).order('RANDOM()')
+               the_switch=TheSwitch.where('switches_id = ? and ((((numberports > ? and numberports = 18) or (numberports > ? and numberports = 24) or (numberports > ? and numberports = 48)) or numberports = 48) and ports_id = 1)', the_switch.first.switches_id ,physical.computers, physical.computers, physical.computers).order('RANDOM()')
             end
             cantidad_switches=(physical.computers.to_f/validacion2.first.numberports.to_f).to_f.ceil
             contador_de_switches+=cantidad_switches.ceil
@@ -381,13 +380,13 @@ end
             #the_switch = TheSwitch.where('((((numberports > ? and numberports = 18) or (numberports > ? and numberports = 24) or (numberports > ? and numberports = 48)) or numberports = 48) and ports_id = 1)', physical.computers, physical.computers, physical.computers).order('RANDOM()')
             the_switch = TheSwitch.where('numberports <= 4 and numberports>0 and ports_id = 2')
             #validacion2=TheSwitch.where('switches_id = ? and numberports <= 4 and ports_id = 2', the_switch.first.switches_id)
-            validacion2=TheSwitch.where('switches_id = ? and ((((numberports > ? and numberports = 18) or (numberports > ? and numberports = 24) or (numberports > ? and numberports = 48)) or numberports = 48) and ports_id = 1)', the_switch.first.id ,physical.computers, physical.computers, physical.computers).order('RANDOM()')
+            validacion2=TheSwitch.where('switches_id = ? and ((((numberports > ? and numberports = 18) or (numberports > ? and numberports = 24) or (numberports > ? and numberports = 48)) or numberports = 48) and ports_id = 1)', the_switch.first.switches_id ,physical.computers, physical.computers, physical.computers).order('RANDOM()')
             
             if(validacion2.count>0)
                 
-                the_switch=TheSwitch.where('switches_id = ? and ((((numberports > ? and numberports = 18) or (numberports > ? and numberports = 24) or (numberports > ? and numberports = 48)) or numberports = 48) and ports_id = 1)', the_switch.first.id ,physical.computers, physical.computers, physical.computers).order('RANDOM()')
+                the_switch=TheSwitch.where('switches_id = ? and ((((numberports > ? and numberports = 18) or (numberports > ? and numberports = 24) or (numberports > ? and numberports = 48)) or numberports = 48) and ports_id = 1)', the_switch.first.switches_id ,physical.computers, physical.computers, physical.computers).order('RANDOM()')
             end
-            cantidad_switches=(physical.computers.to_f/the_switch.first.numberports.to_f).to_f.ceil
+            cantidad_switches=(physical.computers.to_f/validacion2.first.numberports.to_f).to_f.ceil
             contador_de_switches+=cantidad_switches.ceil
             
             %>
