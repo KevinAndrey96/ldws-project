@@ -40,15 +40,15 @@
                             <div class="form-group">
                                 <label>Nit:</label>
                                 <%if params[:new]=="false" || params[:edit]=="true"%>
-                                  <input readonly min="0"  maxlength="9" max="999999999" type="number" onkeydown="Nit()" class="form-control" name="company[nit]" id="company_nit"  placeholder="Nit" value="<%=@company.nit%>">
+                                  <input readonly min="0"  maxlength="10" max="9999999999" type="number" onkeydown="Nit()" class="form-control" name="company[nit]" id="company_nit"  placeholder="Nit" value="<%=@company.nit%>">
                                 <%else%>
-                                  <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true; "  onKeyPress="if(this.value.length==9) return false;" min="0" max="999999999"  class="form-control" name="company[nit]" id="company_nit"  placeholder="Nit">
+                                  <input type="number" onkeydown="javascript: return event.keyCode == 69 ? false : true; "  onKeyPress="if(this.value.length==10) return false;" min="0" max="9999999999"  class="form-control" name="company[nit]" id="company_nit"  placeholder="Nit">
                                 <%end%>
                                 
                                 <script>
                                   function Nit(x)
                                   {
-                                    if(x.value.length==9) return false;
+                                    if(x.value.length==10) return false;
                                     //javascript: return event.keyCode == 69 ? false : true; 
                                   }
                                 </script>
@@ -5569,7 +5569,7 @@ $('#request_observation').hide();
         if (document.getElementById('physical_printers_50').value != "")
           cantidad_impresoras = cantidad_impresoras + parseInt(document.getElementById('physical_printers_50').value);           
     
-        cantidad_equipos = cantidad_pisos + cantidad_impresoras
+        cantidad_equipos = cantidad_pisos + cantidad_impresoras + servicios
         
         var min = 0;
         var max = 0;
@@ -5729,10 +5729,12 @@ $('#request_observation').hide();
             val = 1;
             msj+="Usuarios sub red "+j+" - ";
           } else {
-            usuarios = usuarios+document.getElementById("subnet_computers_"+j).value;
+            var value = parseInt(document.getElementById("subnet_computers_"+j).value);
+            usuarios = usuarios+value;
           }       
       }  
       
+
       if(cantidad_equipos < usuarios){
         val = 1;
         window.alert("El numero de equipos debe ser mayor al numero de usuarios en las subredes");
