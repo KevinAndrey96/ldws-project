@@ -15,9 +15,9 @@ aux=0
     <%
     begin
         #the_switch = TheSwitch.where('((((numberports > ? and numberports = 18) or (numberports > ? and numberports = 24) or (numberports > ? and numberports = 48)) or numberports = 48) and ports_id = 1)', physical.computers, physical.computers, physical.computers).order('RANDOM()')
-        the_switch = TheSwitch.where('switches_id = ? and numberports <= 4 and ports_id = 2', the_switch.first.switches_id)
+        the_switch = TheSwitch.where(' numberports <= 4 and ports_id = 2')
         #validacion2=TheSwitch.where('switches_id = ? and numberports <= 4 and ports_id = 2', the_switch.first.switches_id)
-        validacion2=TheSwitch.where('((((numberports > ? and numberports = 18) or (numberports > ? and numberports = 24) or (numberports > ? and numberports = 48)) or numberports = 48) and ports_id = 1)', physical.computers, physical.computers, physical.computers).order('RANDOM()')
+        validacion2=TheSwitch.where('switches_id = ? and ((((numberports > ? and numberports = 18) or (numberports > ? and numberports = 24) or (numberports > ? and numberports = 48)) or numberports = 48) and ports_id = 1)', the_switch.first.id ,physical.computers, physical.computers, physical.computers).order('RANDOM()')
         
         if(validacion2.count>0)
             %>
