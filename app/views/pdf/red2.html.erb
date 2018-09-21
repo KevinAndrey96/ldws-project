@@ -3,6 +3,7 @@
 <h2>Lista de pisos ordenados por número de computadores</h2>
 
 <%
+k=0
 totaldecomputadores=0
 contador_de_switches=0
 aux=0
@@ -105,6 +106,7 @@ if @cantidad_switches_aux!=nil
                     the_switch = TheSwitch.where('numberports >= ? and ports_id = 3', sfpp).order('numberports asc')
                     seleccionado="SFPP"
                 end
+                
                 switch=Switch.find(the_switch.first.switches_id)
                 port=Port.find(the_switch.first.ports_id)
                 @ts=TheSwitch.where(:switches_id => switch.id)
@@ -126,6 +128,7 @@ if @cantidad_switches_aux!=nil
                     </td>
                     </tr>
                 <%
+                
             rescue
                 %><tr><td colspan=3>NO DISPONIBLE</td></tr><%
             end    
@@ -134,7 +137,6 @@ if @cantidad_switches_aux!=nil
         
         
          %><tr><td colspan=3>Capa de DISTRIBUCIÓN</td></tr><%
-        i=0
         while distribucion>0
             i+=1
             distribucion-=1
@@ -220,6 +222,7 @@ if @cantidad_switches_aux!=nil
                 </td>
                 </tr>
             <%
+            k+=1
             end
             
         end
@@ -380,6 +383,8 @@ if @cantidad_switches_aux!=nil
     
         
         superi=i
+        j=aux
+        h=aux
         aux-=1
         @physical.each do |physical|
             aux+=1
@@ -439,8 +444,9 @@ if @cantidad_switches_aux!=nil
             
             
             aux5+=1
+            h+=1
             %>
-                <tr><td><%=aux5%></td><td>Equipo</td><td><%=cable.name%></td><td><%=cable.ctype%></td><td><%=cable.category.name%></td><td><%=cable.structure%></td><td><%=cable.connector.name%></td><td><%=cable.connector.price%> USD</td><td><%=cable.category.price%> USD</td><td><%=cable.ethernet.name%></td><td><%=cable.ethernet.speed%> Gbps</td><td><%=cable.ethernet.distance%> m</td><td><%=aux6%></td></tr>
+                <tr><td><%=h%></td><td>Equipo</td><td><%=cable.name%></td><td><%=cable.ctype%></td><td><%=cable.category.name%></td><td><%=cable.structure%></td><td><%=cable.connector.name%></td><td><%=cable.connector.price%> USD</td><td><%=cable.category.price%> USD</td><td><%=cable.ethernet.name%></td><td><%=cable.ethernet.speed%> Gbps</td><td><%=cable.ethernet.distance%> m</td><td><%=aux6%></td></tr>
             <%
             
             end
@@ -526,12 +532,15 @@ if @cantidad_switches_aux!=nil
     #i=superi
     i=aux
     aux=contador_de_switches
-    while aux>0
+    while k>0
+    k-=1
     aux-=1
     i+=1
+    j+=1
     %>
-        <%=i%><img src="https://instanceshape.com/admin/VLSM/Images/Acceso.png">
+        <%=j%><img src="https://instanceshape.com/admin/VLSM/Images/Acceso.png">
     <%
+    
     end
     %>
 </center>

@@ -241,18 +241,71 @@ end
   
   
   
-  
-  
   <div class="row">
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    <h1>Scripts</h1>
+ 
+       <%
+       i=0
+        oux=0
+        aux=0
+        
+        @physical.each do |physical|
+            aux+=1
+            contador_de_switches=0
+            begin
+            
+            #the_switch = TheSwitch.where('((((numberports > ? and numberports = 18) or (numberports > ? and numberports = 24) or (numberports > ? and numberports = 48)) or numberports = 48) and ports_id = 1)', physical.computers, physical.computers, physical.computers).order('RANDOM()')
+            the_switch = TheSwitch.where('numberports <= 4 and numberports>0 and ports_id = 2')
+            #validacion2=TheSwitch.where('switches_id = ? and numberports <= 4 and ports_id = 2', the_switch.first.switches_id)
+            validacion2=TheSwitch.where('switches_id = ? and ((((numberports > ? and numberports = 18) or (numberports > ? and numberports = 24) or (numberports > ? and numberports = 48)) or numberports = 48) and ports_id = 1)', the_switch.first.switches_id ,physical.computers, physical.computers, physical.computers).order('RANDOM()')
+            
+            if(validacion2.count>0)
+               the_switch=TheSwitch.where('switches_id = ? and ((((numberports > ? and numberports = 18) or (numberports > ? and numberports = 24) or (numberports > ? and numberports = 48)) or numberports = 48) and ports_id = 1)', the_switch.first.switches_id ,physical.computers, physical.computers, physical.computers).order('RANDOM()')
+            end
+            cantidad_switches=(physical.computers.to_f/validacion2.first.numberports.to_f).to_f.ceil
+            contador_de_switches+=cantidad_switches.ceil
+            
+            %>
+            
+            <%
+            rescue
+            #the_switch = TheSwitch.where('numberports < ? and ports_id = 1', physical.computers).order('numberports desc')
+            %>
+                NO HAY SWITCHES COMPATIBLES PARA ESTE PISO
+            <%
+            end
+            cantidad_switches=(physical.computers.to_f/the_switch.first.numberports.to_f).to_f.ceil
+            
+            switch=Switch.find(the_switch.first.switches_id)
+            port=Port.find(the_switch.first.ports_id)
+            oux=cantidad_switches
+            while oux>0
+            oux-=1
+            i+=1
+            @ts=TheSwitch.where(:switches_id => switch.id)
+            %>
+                <h4>Switch <%=i%> - <%=switch.name%></h4>
+                
+                    <%
+                    @ts.each do |tese|
+                    %>
+                        <%=tese.numberports%> P
+                    <% 
+                    pp=Port.find(tese.ports_id)
+                    %>
+                    - <%=pp.name%> a <%=pp.speed%> Gbps,
+                    <%
+                    
+                    end
+                    %>
+            <%
+            end
+            
+        end
+        
+        
+        
+        %>
   </div>
   
   

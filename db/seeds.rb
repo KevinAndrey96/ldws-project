@@ -137,7 +137,7 @@ Switch.create(name: "Huawei", reference: "4771", price: "500")
 
 aux=Port.count
 while aux>0
-    TheSwitch.create(switches_id: 1, ports_id: aux, numberports: 5)
+    TheSwitch.create(switches_id: 1, ports_id: aux, numberports: 5) 
     TheSwitch.create(switches_id: 2, ports_id: aux, numberports: 10)
     aux-=1
 end
