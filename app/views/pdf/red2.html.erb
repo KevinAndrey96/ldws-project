@@ -187,7 +187,7 @@ if @cantidad_switches_aux!=nil
             contador_de_switches+=cantidad_switches.ceil
             
             %>
-            <strong>Se usaran <%=cantidad_switches.ceil%> switches de <%=the_switch.first.numberports%> puertos</strong>
+            <!--<strong>Se usaran <%=cantidad_switches.ceil%> switches de <%=the_switch.first.numberports%> puertos</strong>-->
             <%
             rescue
             #the_switch = TheSwitch.where('numberports < ? and ports_id = 1', physical.computers).order('numberports desc')
